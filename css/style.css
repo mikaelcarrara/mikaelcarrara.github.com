@@ -19,9 +19,9 @@ em, strong, a, img, ul, li {
 header, footer, aside, nav, article, section {display:block}
 
 html {font-size: 62.5%}
+
 p {margin:0 0 20px 0}
 li {list-style-type:none}
-
 em {font-style:italic}
 small {font-size:80%}
 
@@ -29,16 +29,13 @@ small {font-size:80%}
 /* Body */
 
 body {
-	background:#fefefd;
 	font:14px Arial, "Helvetica Neue", Helvetica, Sans-serif;
   line-height:23px;
-	color:#333;
+	color:#687881;
 }
 
 a {
 	text-decoration:none;
-  cursor:pointer;
-  color:$orange;
 }
 
 a:hover img {
@@ -50,16 +47,33 @@ h1, h2, h3, h4, h5, h6 {
   margin:0;
 }
 
+h1 a {
+	font-size:21px;
+  font-weight:bold;
+  color:#7da5bd;
+}
+
+.headline {
+  font-size:12px;
+  color:#7da5bd;
+}
+
+a span {
+  color:#9fb762;
+}
+
 h2 {
   font:24px "Times New Roman", Times, serif;
+  color:#000;
 }
 
 
 /* Page */
 
 .holder {
-  width:80%;
-  padding:0 10% 0 10%;
+  width:86%;
+  padding:0 7% 0 7%;
+  margin:auto;
 }
 
 
@@ -71,7 +85,50 @@ header {
   background:#f1f8fc;
   border-bottom:5px solid #ecf6fb;
   padding:30px 0 0 0;
+  margin:0 0 40px 0;
   float:left;
 }
+
+
+/* Aside */
+
+aside {
+  width:250px;
+  background:green;
+  float:right;
+}
+
+
+/* Entry */
+
+#entry {
+  margin-right:310px;
+}
+
+
+/* Footer */
+
+footer {
+  width:100%;
+  border-top:5px solid #ecf6fb;
+  font-size:12px;
+  color:#7da5bd;
+  float:left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
