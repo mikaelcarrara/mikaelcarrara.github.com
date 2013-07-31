@@ -1,0 +1,51 @@
+@charset "utf-8";
+@import "variables";
+
+
+/* 	---------------------------------------------------
+General Styles
+---------------------------------------------------- */
+
+/* Reset */
+
+body, h1, h2, h3, h4,
+form, fieldset, input, label, p,
+em, strong, a, img, ul, li {
+	padding:0; margin:0; border:0;
+	vertical-align:baseline;
+	font-style:normal;
+}
+
+header, footer, aside, nav, article, section {display:block}
+
+html {font-size: 62.5%}
+p {margin:0 0 20px 0}
+li {list-style-type:none}
+
+em {font-style:italic}
+small {font-size:80%}
+
+
+/* Body */
+
+body {
+	background:#fefefd;
+	font:14px Arial, "Helvetica Neue", Helvetica, Sans-serif;
+  line-height:23px;
+	color:#333;
+}
+
+a {
+	text-decoration:none;
+  cursor:pointer;
+  color:$orange;
+}
+
+a:hover img {
+  opacity: .8;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal !important;
+  margin:0;
+}
