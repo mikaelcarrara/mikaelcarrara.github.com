@@ -36,6 +36,7 @@ body {
 
 a {
 	text-decoration:none;
+  color:#2296db;
 }
 
 a:hover img {
@@ -45,21 +46,6 @@ a:hover img {
 h1, h2, h3, h4, h5, h6 {
 	font-weight: normal !important;
   margin:0;
-}
-
-h1 a {
-	font-size:21px;
-  font-weight:bold;
-  color:#7da5bd;
-}
-
-.headline {
-  font-size:12px;
-  color:#7da5bd;
-}
-
-a span {
-  color:#9fb762;
 }
 
 h2 {
@@ -81,12 +67,32 @@ h2 {
 
 header {
   width:100%;
-  height:45px;
+  height:60px;
   background:#f1f8fc;
   border-bottom:5px solid #ecf6fb;
-  padding:30px 0 0 0;
+  padding:15px 0 0 0;
   margin:0 0 40px 0;
   float:left;
+}
+
+h1 a {
+	font-size:21px;
+  font-weight:bold;
+  color:#7da5bd;
+}
+
+h1 a:hover {
+  opacity: .8;
+}
+
+a span {
+  color:#9fb762;
+}
+
+.headline {
+  margin:1px 0 0 0;
+  font-size:12px;
+  color:#98c7e3;
 }
 
 
@@ -111,8 +117,10 @@ aside {
 footer {
   width:100%;
   border-top:5px solid #ecf6fb;
+  padding:15px 0 0 0;
   font-size:12px;
-  color:#7da5bd;
+  line-height:19px;
+  color:#98c7e3;
   float:left;
 }
 
