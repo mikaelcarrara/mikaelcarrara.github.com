@@ -29,9 +29,9 @@ small {font-size:80%}
 /* Body */
 
 body {
-	font:14px Arial, "Helvetica Neue", Helvetica, Sans-serif;
-  line-height:23px;
-	color:#687881;
+	font:17px 'Open Sans', sans-serif;
+  line-height:29px;
+	color:#555;
 }
 
 a {
@@ -49,7 +49,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h2 {
-  font:24px "Times New Roman", Times, serif;
+  font:34px "Prata", "Times New Roman", Times, serif;
   color:#000;
 }
 
@@ -57,7 +57,7 @@ h2 {
 /* Page */
 
 .holder {
-  padding:0 7% 0 7%;
+  padding:0 15% 0 15%;
 }
 
 
@@ -69,7 +69,7 @@ header {
   background:#f1f8fc;
   border-bottom:5px solid #ecf6fb;
   padding:15px 0 0 0;
-  margin:0 0 40px 0;
+  margin:0 0 35px 0;
   float:left;
 }
 
@@ -97,7 +97,6 @@ a span {
 /* Aside */
 
 aside {
-  width:250px;
   float:right;
 }
 
@@ -105,7 +104,6 @@ aside {
 /* Entry */
 
 #entry {
-  margin-right:310px;
   position:relative;
 }
 
@@ -127,20 +125,3 @@ footer {
   color:#98c7e3;
   float:left;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
