@@ -98,7 +98,6 @@ a span {
 
 aside {
   width:250px;
-  background:green;
   float:right;
 }
 
@@ -111,6 +110,7 @@ aside {
 }
 
 .meta {
+  font-size:12px;
   color:#a69369;
 }
 
@@ -121,6 +121,7 @@ footer {
   width:100%;
   border-top:5px solid #ecf6fb;
   padding:15px 0 0 0;
+  margin:10px 0 0 0;
   font-size:12px;
   line-height:19px;
   color:#98c7e3;
