@@ -74,7 +74,7 @@ header {
 }
 
 h1 a {
-	font-size:21px;
+	font-size:20px;
   font-weight:bold;
   color:#7da5bd;
 }
@@ -108,7 +108,7 @@ aside {
 }
 
 .meta {
-  font-size:12px;
+  font-size:14px;
   color:#a69369;
 }
 
@@ -118,10 +118,10 @@ aside {
 footer {
   width:100%;
   border-top:5px solid #ecf6fb;
-  padding:15px 0 0 0;
-  margin:10px 0 0 0;
-  font-size:12px;
-  line-height:19px;
+  padding:20px 0 0 0;
+  margin:10px 0 40px 0;
+  font-size:14px;
+  line-height:22px !important;
   color:#98c7e3;
   float:left;
 }
