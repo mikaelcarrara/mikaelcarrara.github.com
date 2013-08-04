@@ -125,3 +125,12 @@ footer {
   color:#98c7e3;
   float:left;
 }
+
+
+@media (max-width:686px) {
+
+  .holder {
+    padding:0 7% 0 7%;
+  }
+
+}
