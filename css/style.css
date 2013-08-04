@@ -65,10 +65,9 @@ h2 {
 
 header {
   width:100%;
-  height:62px;
   background:#f1f8fc;
   border-bottom:5px solid #ecf6fb;
-  padding:13px 0 0 0;
+  padding:15px 0 15px 0;
   margin:0 0 35px 0;
   line-height:22px !important;
   float:left;
@@ -90,7 +89,7 @@ a span {
 
 .headline {
   margin:2px 0 0 0;
-  font-size:13px;
+  font-size:14px;
   color:#98c7e3;
 }
 

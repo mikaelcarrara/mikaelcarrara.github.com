@@ -1,7 +1,11 @@
 .highlight {
+  width:94%;
   background:#042b37;
-  padding:5px 20px 5px 20px;
+  padding:5px 3% 5px 3%;
   margin:10px 0 30px 0;
+  font-size:14px;
+  line-height:23px;
+  float:left;
 }
 
 .highlight .c { color: #999988; font-style: italic } /* Comment */
