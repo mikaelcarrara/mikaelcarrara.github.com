@@ -1,0 +1,54 @@
+/**
+RESPONSIVE
+===========================
+*/
+
+
+/* Viewports */
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+@viewport {
+  zoom: 1.0;
+  width: extend-to-zoom;
+}
+
+@-ms-viewport {
+  width: extend-to-zoom;
+  zoom: 1.0;
+}
+
+
+/* Tablets */
+
+@media (max-width: 860px) {
+
+  .holder {
+    width: 700px;
+  }
+
+}
+
+
+/* Smartphones */
+
+@media (max-width: 686px) {
+
+  .holder {
+    width: 94% !important;
+  }
+
+  .content {
+    padding: 50px 0;
+  }
+
+  .column-01,
+  .column-02 {
+    width: 100% !important;
+    float: none;
+  }
+}

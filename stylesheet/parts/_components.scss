@@ -1,0 +1,27 @@
+/**
+COMPONENTS
+===========================
+*/
+
+
+/* CTA */
+
+.cta {
+  border-radius: 2px;
+  text-decoration: none;
+  color: $white;
+  font-weight: bold;
+  position: relative;
+  background: $green;
+  height: 50px;
+  line-height: 50px;
+  display: inline-block;
+  padding: 0 20px;
+  text-transform: uppercase;
+  text-align: center;
+
+  &:hover {
+    color: $white;
+    background: $blue;
+  }
+}
