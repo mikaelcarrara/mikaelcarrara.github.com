@@ -21,17 +21,17 @@ header {
   height: 70px;
   position: fixed;
   left: 0;
-  top: 0; }
+  top: 0;
+  box-shadow: 0 1px 4px #eee; }
   header h1 {
-    margin: 15px 0 0 0;
-    height: 40px;
-    line-height: 40px;
-    text-transform: uppercase;
+    margin: 14px 0 0 0;
     font-size: 18px;
-    background: #666;
-    padding: 0 15px;
-    color: #fff;
+    line-height: 21px;
     float: left; }
+    header h1 span {
+      font-weight: normal;
+      font-size: 14px;
+      color: #666; }
   header nav {
     float: right; }
   header ul {
@@ -69,19 +69,18 @@ CONTENT
 ===========================
 */
 .content {
-  padding: 100px 0 0 0; }
+  padding: 70px 0;
+  text-align: center; }
   .content h2 {
-    font-size: 24px;
-    color: #000;
-    margin: 0 0 30px 0;
-    text-transform: uppercase;
-    text-align: center;
-    color: #c63939; }
+    font-size: 40px;
+    letter-spacing: -2px;
+    margin: 60px 0 10px 0; }
   .content h3 {
-    margin: 0; }
-  .content h3,
-  .content li {
-    font-size: 14px; }
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 26px;
+    margin: 0;
+    display: none; }
   .content p {
     margin: 15px 0 0 0;
     color: #333;
@@ -113,7 +112,8 @@ footer {
   padding: 12px 0;
   position: fixed;
   bottom: 0;
-  left: 0; }
+  left: 0;
+  display: none; }
 
 /**
 FORMS
@@ -170,6 +170,22 @@ form input[type="checkbox"] {
 COMPONENTS
 ===========================
 */
+/* Screens list */
+.screens {
+  padding: 0;
+  margin: 30px 0 0 0; }
+  .screens li {
+    list-style-type: none;
+    display: inline-block;
+    margin: 0 10px 0 0;
+    vertical-align: top; }
+  .screens img {
+    width: 200px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #eee;
+    box-shadow: 0 1px 4px #eee; }
+
 /* CTA */
 .cta {
   border-radius: 2px;
@@ -241,7 +257,7 @@ body {
 
 /* Grid */
 .holder {
-  width: 700px;
+  width: 960px;
   margin: auto; }
 
 .column-01,

@@ -11,17 +11,23 @@ header {
   left: 0;
   top: 0;
   @extend %clearfix;
+  box-shadow: 0 1px 4px $light-gray-2;
   
   h1 {
-    margin: 15px 0 0 0;
-    height: 40px;
-    line-height: 40px;
-    text-transform: uppercase;
+    margin: 14px 0 0 0;
     font-size: $font-large;
-    background: $medium-gray;
-    padding: 0 15px;
-    color: $white;
+    line-height: 21px;
     float: left;
+    
+    strong {
+      
+    }
+    
+    span {
+      font-weight: normal;
+      font-size: $font-medium;
+      color: $medium-gray;
+    }
   }
 
   nav {
