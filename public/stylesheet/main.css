@@ -16,6 +16,7 @@ HEADER
 ===========================
 */
 header {
+  border-top: 5px solid #008082;
   width: 100%;
   background: white;
   height: 70px;
@@ -23,11 +24,19 @@ header {
   left: 0;
   top: 0;
   box-shadow: 0 1px 4px #eee; }
+  header img {
+    float: left;
+    margin-top: 10px;
+    margin-right: 15px;
+    height: 50px; }
   header h1 {
     margin: 14px 0 0 0;
     font-size: 18px;
     line-height: 21px;
+    color: #008082;
     float: left; }
+    header h1 strong {
+      letter-spacing: -1px; }
     header h1 span {
       font-weight: normal;
       font-size: 14px;
@@ -60,9 +69,6 @@ header {
   border-radius: 2px;
   padding: 4px 10px 5px 10px;
   color: rgba(102, 102, 102, 0.7); }
-  .cta-link:hover {
-    background: #3183b7;
-    color: #fff; }
 
 /**
 CONTENT
@@ -148,7 +154,7 @@ form input[type="submit"] {
   border-radius: 2px;
   height: 30px;
   line-height: 30px;
-  background: #698d64;
+  background: #008082;
   padding: 0 15px;
   text-transform: uppercase;
   color: #fff;
@@ -180,7 +186,7 @@ COMPONENTS
     margin: 0 10px 0 0;
     vertical-align: top; }
   .screens img {
-    width: 200px;
+    width: 60px;
     padding: 10px;
     background: #fff;
     border: 1px solid #eee;
@@ -193,16 +199,13 @@ COMPONENTS
   color: #fff;
   font-weight: bold;
   position: relative;
-  background: #698d64;
+  background: #008082;
   height: 50px;
   line-height: 50px;
   display: inline-block;
   padding: 0 20px;
   text-transform: uppercase;
   text-align: center; }
-  .cta:hover {
-    color: #fff;
-    background: #3183b7; }
 
 /**
 RESPONSIVE
@@ -221,16 +224,14 @@ body {
   width: extend-to-zoom;
   zoom: 1.0; }
 /* Tablets */
-@media (max-width: 860px) {
+@media (max-width: 960px) {
   .holder {
-    width: 700px; } }
+    width: 700px;
+    background: red; } }
 /* Smartphones */
 @media (max-width: 686px) {
   .holder {
     width: 94% !important; }
-
-  .content {
-    padding: 50px 0; }
 
   .column-01,
   .column-02 {
@@ -257,7 +258,7 @@ body {
 
 /* Grid */
 .holder {
-  width: 960px;
+  width: 90%;
   margin: auto; }
 
 .column-01,

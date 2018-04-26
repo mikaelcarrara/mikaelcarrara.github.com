@@ -18,7 +18,7 @@ COMPONENTS
   }
   
   img {
-    width: 200px;
+    width: 60px;
     padding: 10px;
     background: $white;
     border: 1px solid $light-gray-2;
@@ -35,16 +35,11 @@ COMPONENTS
   color: $white;
   font-weight: bold;
   position: relative;
-  background: $green;
+  background: $brand;
   height: 50px;
   line-height: 50px;
   display: inline-block;
   padding: 0 20px;
   text-transform: uppercase;
   text-align: center;
-
-  &:hover {
-    color: $white;
-    background: $blue;
-  }
 }
