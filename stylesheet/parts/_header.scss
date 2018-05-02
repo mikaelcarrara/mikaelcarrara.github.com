@@ -6,13 +6,14 @@ HEADER
 header {
   border-top: 5px solid $brand;
   width: 100%;
-  background: rgba($white, 1);
+  background: rgba($white, .95);
   height: 70px;
   position: fixed;
   left: 0;
   top: 0;
   @extend %clearfix;
   box-shadow: 0 1px 4px $light-gray-2;
+  z-index: 100;
   
   img {
     float: left;
@@ -41,6 +42,10 @@ header {
 
   nav {
     float: right;
+    
+    @media (max-width: 686px) {
+      display: none;
+    }
   }
 
   ul {
@@ -53,6 +58,11 @@ header {
     display: inline-block;
     margin-left: 40px;
     text-transform: uppercase;
+    
+    @media (max-width: 686px) {
+      margin-left: 0;
+      margin-right: 20px;
+    }
 
     a {
       line-height: 70px;

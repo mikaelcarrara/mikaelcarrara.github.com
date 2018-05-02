@@ -18,12 +18,13 @@ HEADER
 header {
   border-top: 5px solid #008082;
   width: 100%;
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
   height: 70px;
   position: fixed;
   left: 0;
   top: 0;
-  box-shadow: 0 1px 4px #eee; }
+  box-shadow: 0 1px 4px #eee;
+  z-index: 100; }
   header img {
     float: left;
     margin-top: 10px;
@@ -43,6 +44,9 @@ header {
       color: #666; }
   header nav {
     float: right; }
+    @media (max-width: 686px) {
+      header nav {
+        display: none; } }
   header ul {
     padding: 0;
     margin: 0; }
@@ -51,6 +55,10 @@ header {
     display: inline-block;
     margin-left: 40px;
     text-transform: uppercase; }
+    @media (max-width: 686px) {
+      header li {
+        margin-left: 0;
+        margin-right: 20px; } }
     header li a {
       line-height: 70px;
       text-decoration: none;
@@ -75,12 +83,14 @@ CONTENT
 ===========================
 */
 .content {
-  padding: 70px 0;
+  padding: 120px 0 40px 0;
   text-align: center; }
   .content h2 {
-    font-size: 40px;
+    font-size: 18px;
+    text-transform: uppercase;
     letter-spacing: -2px;
-    margin: 60px 0 10px 0; }
+    margin: 60px 0 10px 0;
+    display: none; }
   .content h3 {
     font-weight: normal;
     font-size: 14px;
@@ -177,20 +187,8 @@ COMPONENTS
 ===========================
 */
 /* Screens list */
-.screens {
-  padding: 0;
-  margin: 30px 0 0 0; }
-  .screens li {
-    list-style-type: none;
-    display: inline-block;
-    margin: 0 10px 0 0;
-    vertical-align: top; }
-  .screens img {
-    width: 60px;
-    padding: 10px;
-    background: #fff;
-    border: 1px solid #eee;
-    box-shadow: 0 1px 4px #eee; }
+.screens a img {
+  display: inline-block; }
 
 /* CTA */
 .cta {
@@ -223,16 +221,8 @@ body {
 @-ms-viewport {
   width: extend-to-zoom;
   zoom: 1.0; }
-/* Tablets */
-@media (max-width: 960px) {
-  .holder {
-    width: 700px;
-    background: red; } }
 /* Smartphones */
 @media (max-width: 686px) {
-  .holder {
-    width: 94% !important; }
-
   .column-01,
   .column-02 {
     width: 100% !important;
@@ -251,7 +241,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
-  background: #f7f7f7;
+  background: #fff;
   color: #333;
   font-size: 14px;
   margin: 0; }

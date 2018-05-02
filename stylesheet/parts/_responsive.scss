@@ -23,24 +23,12 @@ body {
 }
 
 
-/* Tablets */
-
-@media (max-width: 960px) {
-
-  .holder {
-    width: 700px;
-    background: red;
-  }
-
-}
-
-
 /* Smartphones */
 
 @media (max-width: 686px) {
 
   .holder {
-    width: 94% !important;
+
   }
 
   .column-01,
