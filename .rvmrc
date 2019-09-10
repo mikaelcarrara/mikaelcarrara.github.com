@@ -1,1 +1,1 @@
-rvm gemset use 2.0.0@mikaelcarrara.github.com --create
+rvm gemset use 2.6.0@mikaelcarrara.github.com --create
