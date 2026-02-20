@@ -1,7 +1,8 @@
 section {
   margin: 0 auto;
   box-sizing: border-box;
-  width: 65%;
+  width: 90%;
+  max-width: 1200px;
 }
 
 .columns {
@@ -14,6 +15,8 @@ section {
 .col-02 {
   width: 47%;
   box-sizing: border-box;
+  vertical-align: top;
+  position: relative;
 }
 
 .cols-border .col-01,
@@ -23,11 +26,8 @@ section {
   padding: var(--space-2xl);
 }
 
-@media (max-width: 1024px) {
 
-  section {
-    width: 90%;
-  }
+@media (max-width: 1024px) {
 
   .columns {
     display: block;

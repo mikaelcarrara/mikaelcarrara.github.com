@@ -1,7 +1,6 @@
 @media (max-width: 1024px) {
 
   .hero {
-    padding-top: var(--space-3xl);
     text-align: center;
   }
 
