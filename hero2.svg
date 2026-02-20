@@ -1,0 +1,653 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 452 532" width="452" height="532">
+  <defs>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow2" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <style>
+      @keyframes draw    { to { stroke-dashoffset: 0; opacity: 1; } }
+      @keyframes fadeIn  { to { opacity: 1; } }
+      @keyframes fadeOut { to { opacity: 0; } }
+      @keyframes fadeUp  { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:translateY(0)} }
+      @keyframes pop     { from{opacity:0;transform:scale(0.4)} to{opacity:1;transform:scale(1)} }
+
+      /* ── ACT VISIBILITY ── */
+      #act1 { opacity: 1; animation: fadeOut 0.8s ease 8s forwards; }
+      #act2 { opacity: 0; animation: fadeIn  0.8s ease 8s  forwards, fadeOut 0.8s ease 16s forwards; }
+      #act3 { opacity: 0; animation: fadeIn  0.8s ease 16s forwards; }
+
+      /* ════════════════════════
+         ACT 1 — FIGMA WIREFRAME
+         Stacked offset panels, perspective feel
+      ════════════════════════ */
+
+      /* back panel */
+      .a1-back {
+        stroke-dasharray: 1200; stroke-dashoffset: 1200; opacity: 0;
+        animation: draw 0.9s cubic-bezier(0.22,1,0.36,1) 0.1s forwards;
+      }
+      /* mid panel */
+      .a1-mid {
+        stroke-dasharray: 1100; stroke-dashoffset: 1100; opacity: 0;
+        animation: draw 0.8s cubic-bezier(0.22,1,0.36,1) 0.5s forwards;
+      }
+      /* front panel */
+      .a1-front {
+        stroke-dasharray: 1000; stroke-dashoffset: 1000; opacity: 0;
+        animation: draw 0.8s cubic-bezier(0.22,1,0.36,1) 0.9s forwards;
+      }
+
+      /* edge connector lines (perspective) */
+      .a1-edge {
+        stroke-dasharray: 60; stroke-dashoffset: 60; opacity: 0;
+        animation: draw 0.3s ease forwards;
+      }
+      .ae1{animation-delay:1.3s} .ae2{animation-delay:1.35s}
+      .ae3{animation-delay:1.4s} .ae4{animation-delay:1.45s}
+
+      /* content stubs inside front panel */
+      .a1-stub {
+        stroke-dasharray: 180; stroke-dashoffset: 180; opacity: 0;
+        animation: draw 0.35s ease forwards;
+      }
+      .as1{animation-delay:1.6s} .as2{animation-delay:1.75s} .as3{animation-delay:1.9s}
+      .as4{animation-delay:2.05s} .as5{animation-delay:2.2s} .as6{animation-delay:2.35s}
+
+      /* header bar of front panel */
+      .a1-hbar {
+        stroke-dasharray: 300; stroke-dashoffset: 300; opacity: 0;
+        animation: draw 0.4s ease 1.5s forwards;
+      }
+
+      /* dot accent on front panel */
+      .a1-dot {
+        transform-box: fill-box; transform-origin: center; opacity: 0;
+        animation: pop 0.3s cubic-bezier(0.34,1.56,0.64,1) forwards;
+      }
+      .ad1{animation-delay:2.5s} .ad2{animation-delay:2.6s} .ad3{animation-delay:2.7s}
+
+      /* selection frame around front panel */
+      .a1-sel {
+        stroke-dasharray: 600; stroke-dashoffset: 600; opacity: 0;
+        animation: draw 0.5s ease 2.8s forwards;
+      }
+      /* handle dots */
+      .a1-handle {
+        transform-box: fill-box; transform-origin: center; opacity: 0;
+        animation: pop 0.2s ease forwards;
+      }
+      .ah1{animation-delay:3.2s} .ah2{animation-delay:3.25s}
+      .ah3{animation-delay:3.3s} .ah4{animation-delay:3.35s}
+
+      /* cursor */
+      .a1-cursor { opacity: 0;
+        animation: fadeIn 0.2s ease 3.0s forwards,
+                   cur1Drift 3s ease-in-out 3.4s 2;
+      }
+      @keyframes cur1Drift {
+        0%  {transform:translate(0,0)}
+        30% {transform:translate(14px,-10px)}
+        65% {transform:translate(-8px,12px)}
+        100%{transform:translate(0,0)}
+      }
+
+      /* ════════════════════════
+         ACT 2 — AI IDE
+         Code lines typing, suggestion bubble, terminal
+      ════════════════════════ */
+
+      /* window frame */
+      .a2-frame {
+        stroke-dasharray: 1900; stroke-dashoffset: 1900; opacity: 0;
+        animation: draw 0.8s cubic-bezier(0.22,1,0.36,1) 8.2s forwards;
+      }
+      /* top bar */
+      .a2-topbar { opacity: 0; animation: fadeIn 0.3s ease 8.8s forwards; }
+
+      /* sidebar */
+      .a2-tree { opacity: 0; animation: fadeUp 0.28s ease forwards; }
+      .at1{animation-delay:9.0s} .at2{animation-delay:9.1s} .at3{animation-delay:9.2s}
+      .at4{animation-delay:9.3s} .at5{animation-delay:9.4s} .at6{animation-delay:9.5s}
+
+      /* code lines */
+      .a2-code {
+        stroke-dashoffset: 260; opacity: 0;
+        animation: draw 0.3s ease forwards;
+      }
+      .ac1 {stroke-dasharray:260;animation-delay:9.3s}
+      .ac2 {stroke-dasharray:200;stroke-dashoffset:200;animation-delay:9.5s}
+      .ac3 {stroke-dasharray:240;stroke-dashoffset:240;animation-delay:9.7s}
+      .ac4 {stroke-dasharray:160;stroke-dashoffset:160;animation-delay:9.9s}
+      .ac5 {stroke-dasharray:220;stroke-dashoffset:220;animation-delay:10.1s}
+      .ac6 {stroke-dasharray:140;stroke-dashoffset:140;animation-delay:10.3s}
+      .ac7 {stroke-dasharray:260;stroke-dashoffset:260;animation-delay:10.5s}
+      .ac8 {stroke-dasharray:190;stroke-dashoffset:190;animation-delay:10.7s}
+      .ac9 {stroke-dasharray:170;stroke-dashoffset:170;animation-delay:10.9s}
+      .ac10{stroke-dasharray:250;stroke-dashoffset:250;animation-delay:11.1s}
+      .ac11{stroke-dasharray:180;stroke-dashoffset:180;animation-delay:11.3s}
+      .ac12{stroke-dasharray:120;stroke-dashoffset:120;animation-delay:11.5s}
+
+      /* IDE cursor blink */
+      .a2-cur { opacity: 0;
+        animation: fadeIn 0.1s ease 9.3s forwards, ideBlink 0.7s step-end 9.3s 22;
+      }
+      @keyframes ideBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+      /* AI suggestion box */
+      .a2-suggest {
+        stroke-dasharray: 700; stroke-dashoffset: 700; opacity: 0;
+        animation: draw 0.5s ease 11.7s forwards;
+      }
+      .a2-sline {
+        stroke-dashoffset: 200; opacity: 0;
+        animation: draw 0.3s ease forwards;
+      }
+      .asl1{stroke-dasharray:200;animation-delay:12.0s}
+      .asl2{stroke-dasharray:160;stroke-dashoffset:160;animation-delay:12.2s}
+      .asl3{stroke-dasharray:180;stroke-dashoffset:180;animation-delay:12.4s}
+
+      /* accept flash */
+      .a2-accept { opacity: 0;
+        animation: fadeIn 0.15s ease 12.6s forwards,
+                   acceptFlash 0.5s ease 12.6s, fadeOut 0.3s ease 13.3s forwards;
+      }
+      @keyframes acceptFlash { 40%{opacity:0.9} }
+
+      /* terminal */
+      .a2-term { opacity: 0; animation: fadeIn 0.3s ease 13.4s forwards; }
+      .a2-tline {
+        stroke-dashoffset: 220; opacity: 0;
+        animation: draw 0.5s ease forwards;
+      }
+      .atl1{stroke-dasharray:220;animation-delay:13.5s}
+      .atl2{stroke-dasharray:160;stroke-dashoffset:160;animation-delay:14.1s}
+
+      /* ════════════════════════
+         ACT 3 — LIVE INTERFACE
+         UI with cursor traveling
+      ════════════════════════ */
+
+      /* frame */
+      .a3-frame {
+        stroke-dasharray: 1900; stroke-dashoffset: 1900; opacity: 0;
+        animation: draw 0.8s cubic-bezier(0.22,1,0.36,1) 16.2s forwards;
+      }
+      /* nav */
+      .a3-nav { opacity: 0; animation: fadeIn 0.4s ease 16.8s forwards; }
+
+      /* ui elements */
+      .a3-el { opacity: 0; animation: fadeUp 0.35s ease forwards; }
+      .ue1{animation-delay:17.2s} .ue2{animation-delay:17.5s} .ue3{animation-delay:17.8s}
+      .ue4{animation-delay:18.1s} .ue5{animation-delay:18.4s} .ue6{animation-delay:18.7s}
+      .ue7{animation-delay:19.0s} .ue8{animation-delay:19.3s}
+
+      /* cards */
+      .a3-card {
+        stroke-dasharray: 600; stroke-dashoffset: 600; opacity: 0;
+        animation: draw 0.4s ease forwards;
+      }
+      .uc1{animation-delay:19.6s} .uc2{animation-delay:19.9s} .uc3{animation-delay:20.2s}
+
+      /* live cursor travels */
+      .a3-cursor { opacity: 0;
+        animation: fadeIn 0.2s ease 20.6s forwards,
+                   liveTravel 9s ease-in-out 21s infinite;
+      }
+      @keyframes liveTravel {
+        0%  {transform:translate(0,0)}
+        10% {transform:translate(90px,-55px)}
+        22% {transform:translate(190px,10px)}
+        36% {transform:translate(80px,110px)}
+        50% {transform:translate(-20px,190px)}
+        64% {transform:translate(140px,210px)}
+        78% {transform:translate(200px,80px)}
+        90% {transform:translate(90px,-15px)}
+        100%{transform:translate(0,0)}
+      }
+
+      /* click ripple */
+      .a3-rip1 { opacity:0; animation: rip 9s ease-in-out 22s   infinite; }
+      .a3-rip2 { opacity:0; animation: rip 9s ease-in-out 25.5s infinite; }
+      @keyframes rip {
+        0%{opacity:0;r:0} 2%{opacity:0.7;r:4} 7%{opacity:0;r:16} 100%{opacity:0;r:16}
+      }
+
+      /* toast */
+      .a3-toast { opacity:0;
+        animation: fadeUp 0.4s ease 20.8s forwards, fadeOut 0.4s ease 24s forwards;
+      }
+
+      /* status bar live dot */
+      .a3-live { animation: liveDot 1.2s step-end 21s infinite; }
+      @keyframes liveDot { 0%,100%{opacity:1} 50%{opacity:0.1} }
+
+      /* subtle scroll loop on content */
+      .a3-scroll { animation: scrollLoop 7s ease-in-out 22s infinite; }
+      @keyframes scrollLoop { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    </style>
+  </defs>
+
+  <!-- ═══════════════════════════════════════
+       ACT 1 — FIGMA WIREFRAME
+       Three stacked offset panels, perspective
+  ═══════════════════════════════════════ -->
+  <g id="act1">
+
+    <!-- BACK panel (offset bottom-right) -->
+    <rect class="a1-back" x="80" y="100" width="310" height="230"
+      fill="none" stroke="#48CBCF" stroke-width="0.7" opacity="0.25"/>
+    <!-- mid panel header line -->
+    <line x1="80" y1="128" x2="390" y2="128" stroke="#48CBCF" stroke-width="0.5" opacity="0.15"
+      stroke-dasharray="1200" stroke-dashoffset="1200">
+      <animate attributeName="stroke-dashoffset" to="0" dur="0.8s" begin="0.5s" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.15" dur="0.1s" begin="0.5s" fill="freeze"/>
+    </line>
+
+    <!-- MID panel (offset slightly up-left) -->
+    <rect class="a1-mid" x="52" y="72" width="310" height="230"
+      fill="none" stroke="#48CBCF" stroke-width="0.9" opacity="0.4"/>
+    <line x1="52" y1="100" x2="362" y2="100" stroke="#48CBCF" stroke-width="0.6" opacity="0"
+      stroke-dasharray="1100" stroke-dashoffset="1100">
+      <animate attributeName="stroke-dashoffset" to="0" dur="0.7s" begin="0.5s" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.22" dur="0.1s" begin="0.5s" fill="freeze"/>
+    </line>
+    <!-- mid stub lines -->
+    <line x1="68" y1="118" x2="220" y2="118" stroke="#48CBCF" stroke-width="1.2" opacity="0"
+      stroke-dasharray="160" stroke-dashoffset="160">
+      <animate attributeName="stroke-dashoffset" to="0" dur="0.3s" begin="1.0s" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.2" dur="0.1s" begin="1.0s" fill="freeze"/>
+    </line>
+    <line x1="68" y1="132" x2="180" y2="132" stroke="#48CBCF" stroke-width="1.2" opacity="0"
+      stroke-dasharray="120" stroke-dashoffset="120">
+      <animate attributeName="stroke-dashoffset" to="0" dur="0.3s" begin="1.1s" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.14" dur="0.1s" begin="1.1s" fill="freeze"/>
+    </line>
+
+    <!-- FRONT panel (active, brighter) -->
+    <rect class="a1-front" x="22" y="44" width="310" height="230"
+      fill="none" stroke="#48CBCF" stroke-width="1.4" opacity="0.85"
+      filter="url(#glow)"/>
+
+    <!-- perspective edge connectors (front-back corners) -->
+    <line class="a1-edge ae1" x1="22"  y1="44"  x2="52"  y2="72"  stroke="#48CBCF" stroke-width="0.6" opacity="0.3"/>
+    <line class="a1-edge ae2" x1="332" y1="44"  x2="362" y2="72"  stroke="#48CBCF" stroke-width="0.6" opacity="0.3"/>
+    <line class="a1-edge ae3" x1="332" y1="274" x2="362" y2="302" stroke="#48CBCF" stroke-width="0.6" opacity="0.3"/>
+    <line class="a1-edge ae4" x1="22"  y1="274" x2="52"  y2="302" stroke="#48CBCF" stroke-width="0.6" opacity="0.3"/>
+
+    <!-- front panel header bar -->
+    <line class="a1-hbar" x1="22" y1="72" x2="332" y2="72"
+      stroke="#48CBCF" stroke-width="1" opacity="0.6"/>
+    <!-- header dots -->
+    <circle class="a1-dot ad1" cx="36"  cy="58" r="4" fill="none" stroke="#48CBCF" stroke-width="1" opacity="0.5"/>
+    <circle class="a1-dot ad2" cx="50"  cy="58" r="4" fill="none" stroke="#48CBCF" stroke-width="1" opacity="0.35"/>
+    <circle class="a1-dot ad3" cx="64"  cy="58" r="4" fill="none" stroke="#48CBCF" stroke-width="1" opacity="0.25"/>
+
+    <!-- front panel content stubs -->
+    <line class="a1-stub as1" x1="40" y1="98"  x2="220" y2="98"  stroke="#48CBCF" stroke-width="2.5" opacity="0.6" stroke-linecap="square"/>
+    <line class="a1-stub as2" x1="40" y1="118" x2="190" y2="118" stroke="#48CBCF" stroke-width="1.5" opacity="0.25" stroke-linecap="square"/>
+    <line class="a1-stub as3" x1="40" y1="134" x2="260" y2="134" stroke="#48CBCF" stroke-width="1.5" opacity="0.2"  stroke-linecap="square"/>
+
+    <!-- inline image placeholder box -->
+    <rect x="40" y="152" width="90" height="60" fill="none" stroke="#48CBCF" stroke-width="0.8" opacity="0"
+      stroke-dasharray="310" stroke-dashoffset="310">
+      <animate attributeName="stroke-dashoffset" to="0" dur="0.4s" begin="2.1s" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.3" dur="0.1s" begin="2.1s" fill="freeze"/>
+    </rect>
+    <line x1="40" y1="152" x2="130" y2="212" stroke="#48CBCF" stroke-width="0.5" opacity="0"
+      stroke-dasharray="110" stroke-dashoffset="110">
+      <animate attributeName="stroke-dashoffset" to="0" dur="0.3s" begin="2.3s" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.18" dur="0.1s" begin="2.3s" fill="freeze"/>
+    </line>
+    <line x1="130" y1="152" x2="40" y2="212" stroke="#48CBCF" stroke-width="0.5" opacity="0"
+      stroke-dasharray="110" stroke-dashoffset="110">
+      <animate attributeName="stroke-dashoffset" to="0" dur="0.3s" begin="2.35s" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.18" dur="0.1s" begin="2.35s" fill="freeze"/>
+    </line>
+
+    <line class="a1-stub as4" x1="144" y1="162" x2="300" y2="162" stroke="#48CBCF" stroke-width="2"   opacity="0.45" stroke-linecap="square"/>
+    <line class="a1-stub as5" x1="144" y1="178" x2="280" y2="178" stroke="#48CBCF" stroke-width="1.5" opacity="0.2"  stroke-linecap="square"/>
+    <line class="a1-stub as6" x1="144" y1="194" x2="250" y2="194" stroke="#48CBCF" stroke-width="1.5" opacity="0.15" stroke-linecap="square"/>
+
+    <!-- button rect outline -->
+    <rect x="40" y="222" width="80" height="22" fill="none" stroke="#48CBCF" stroke-width="1" opacity="0"
+      stroke-dasharray="210" stroke-dashoffset="210">
+      <animate attributeName="stroke-dashoffset" to="0" dur="0.3s" begin="2.6s" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.6" dur="0.1s" begin="2.6s" fill="freeze"/>
+    </rect>
+    <line x1="52" y1="233" x2="108" y2="233" stroke="#48CBCF" stroke-width="1.5" opacity="0"
+      stroke-dasharray="60" stroke-dashoffset="60">
+      <animate attributeName="stroke-dashoffset" to="0" dur="0.2s" begin="2.7s" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.5" dur="0.1s" begin="2.7s" fill="freeze"/>
+    </line>
+
+    <!-- SELECTION box -->
+    <rect class="a1-sel" x="18" y="40" width="318" height="238"
+      fill="none" stroke="#48CBCF" stroke-width="1.2"
+      stroke-dasharray="5 4" filter="url(#glow)"/>
+    <!-- handles -->
+    <rect class="a1-handle ah1" x="15"  y="37"  width="7" height="7" fill="none" stroke="#48CBCF" stroke-width="1.2"/>
+    <rect class="a1-handle ah2" x="333" y="37"  width="7" height="7" fill="none" stroke="#48CBCF" stroke-width="1.2"/>
+    <rect class="a1-handle ah3" x="15"  y="275" width="7" height="7" fill="none" stroke="#48CBCF" stroke-width="1.2"/>
+    <rect class="a1-handle ah4" x="333" y="275" width="7" height="7" fill="none" stroke="#48CBCF" stroke-width="1.2"/>
+
+    <!-- snap guide lines -->
+    <line x1="0"   y1="44"  x2="452" y2="44"  stroke="#48CBCF" stroke-width="0.6"
+      stroke-dasharray="4 4" opacity="0"
+      stroke-dashoffset="452">
+      <animate attributeName="stroke-dashoffset" to="0" dur="0.4s" begin="3.2s" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.2;0.12" keyTimes="0;0.3;1" dur="1.4s" begin="3.2s" fill="freeze"/>
+    </line>
+    <line x1="22"  y1="0"   x2="22"  y2="532" stroke="#48CBCF" stroke-width="0.6"
+      stroke-dasharray="4 4" opacity="0"
+      stroke-dashoffset="532">
+      <animate attributeName="stroke-dashoffset" to="0" dur="0.4s" begin="3.3s" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.2;0.12" keyTimes="0;0.3;1" dur="1.4s" begin="3.3s" fill="freeze"/>
+    </line>
+
+    <!-- Figma cursor (pointer arrow) -->
+    <g class="a1-cursor" filter="url(#glow)">
+      <polygon points="336,278 336,295 340,290 343,298 346,297 343,289 349,289"
+        fill="rgba(8,8,8,0.9)" stroke="#48CBCF" stroke-width="1.1" stroke-linejoin="miter"/>
+    </g>
+
+  </g>
+
+  <!-- ═══════════════════════════════════════
+       ACT 2 — AI IDE
+  ═══════════════════════════════════════ -->
+  <g id="act2">
+
+    <!-- frame -->
+    <rect class="a2-frame" x="0" y="0" width="452" height="532"
+      fill="none" stroke="#48CBCF" stroke-width="0.9" opacity="0.2"/>
+
+    <!-- top bar -->
+    <g class="a2-topbar">
+      <rect x="0" y="0" width="452" height="32" fill="rgba(72,203,207,0.05)"/>
+      <line x1="0" y1="32" x2="452" y2="32" stroke="#48CBCF" stroke-width="0.5" opacity="0.18"/>
+      <!-- window buttons -->
+      <circle cx="16" cy="16" r="4" fill="none" stroke="#48CBCF" stroke-width="0.8" opacity="0.3"/>
+      <circle cx="30" cy="16" r="4" fill="none" stroke="#48CBCF" stroke-width="0.8" opacity="0.3"/>
+      <circle cx="44" cy="16" r="4" fill="none" stroke="#48CBCF" stroke-width="0.8" opacity="0.3"/>
+      <!-- tabs -->
+      <rect x="64"  y="6" width="72" height="26" fill="rgba(72,203,207,0.1)" stroke="#48CBCF" stroke-width="0.6"/>
+      <line x1="74" y1="19" x2="126" y2="19" stroke="#48CBCF" stroke-width="1.5" opacity="0.5" stroke-linecap="square"/>
+      <rect x="144" y="8" width="64" height="22" fill="rgba(72,203,207,0.04)"/>
+      <line x1="152" y1="19" x2="200" y2="19" stroke="#48CBCF" stroke-width="1.5" opacity="0.2" stroke-linecap="square"/>
+    </g>
+
+    <!-- sidebar divider -->
+    <line x1="100" y1="32" x2="100" y2="468" stroke="#48CBCF" stroke-width="0.5" opacity="0.15"/>
+
+    <!-- file tree -->
+    <g class="a2-tree at1">
+      <rect x="6" y="40" width="88" height="4" fill="#48CBCF" opacity="0.18"/>
+    </g>
+    <g class="a2-tree at2">
+      <rect x="6"  y="52" width="8" height="8" fill="none" stroke="#48CBCF" stroke-width="0.7" opacity="0.4"/>
+      <line x1="18" y1="56" x2="86" y2="56" stroke="#48CBCF" stroke-width="1.5" opacity="0.3" stroke-linecap="square"/>
+    </g>
+    <g class="a2-tree at3">
+      <rect x="10" y="66" width="6" height="6" fill="none" stroke="#48CBCF" stroke-width="0.6" opacity="0.35"/>
+      <line x1="20" y1="69" x2="82" y2="69" stroke="#48CBCF" stroke-width="1.2" opacity="0.2" stroke-linecap="square"/>
+    </g>
+    <g class="a2-tree at4">
+      <rect x="10" y="79" width="6" height="6" fill="none" stroke="#48CBCF" stroke-width="0.6" opacity="0.35"/>
+      <line x1="20" y1="82" x2="88" y2="82" stroke="#48CBCF" stroke-width="1.2" opacity="0.2" stroke-linecap="square"/>
+    </g>
+    <g class="a2-tree at5">
+      <rect x="6"  y="93" width="8" height="8" fill="none" stroke="#48CBCF" stroke-width="0.7" opacity="0.3"/>
+      <line x1="18" y1="97" x2="80" y2="97" stroke="#48CBCF" stroke-width="1.2" opacity="0.15" stroke-linecap="square"/>
+    </g>
+    <g class="a2-tree at6">
+      <rect x="10" y="107" width="6" height="6" fill="none" stroke="#48CBCF" stroke-width="0.6" opacity="0.25"/>
+      <line x1="20" y1="110" x2="84" y2="110" stroke="#48CBCF" stroke-width="1.2" opacity="0.15" stroke-linecap="square"/>
+    </g>
+
+    <!-- line numbers -->
+    <g opacity="0.18">
+      <rect x="104" y="44"  width="18" height="2.5" fill="#48CBCF"/>
+      <rect x="104" y="60"  width="18" height="2.5" fill="#48CBCF"/>
+      <rect x="104" y="76"  width="18" height="2.5" fill="#48CBCF"/>
+      <rect x="104" y="92"  width="18" height="2.5" fill="#48CBCF"/>
+      <rect x="104" y="108" width="18" height="2.5" fill="#48CBCF"/>
+      <rect x="104" y="124" width="18" height="2.5" fill="#48CBCF"/>
+      <rect x="104" y="140" width="18" height="2.5" fill="#48CBCF"/>
+      <rect x="104" y="156" width="18" height="2.5" fill="#48CBCF"/>
+      <rect x="104" y="172" width="18" height="2.5" fill="#48CBCF"/>
+      <rect x="104" y="188" width="18" height="2.5" fill="#48CBCF"/>
+      <rect x="104" y="204" width="18" height="2.5" fill="#48CBCF"/>
+      <rect x="104" y="220" width="18" height="2.5" fill="#48CBCF"/>
+    </g>
+
+    <!-- code lines (teal = keyword, faint = text) -->
+    <line class="a2-code ac1"  x1="130" y1="46"  x2="380" y2="46"  stroke="#48CBCF" stroke-width="2.5" opacity="0.6"  stroke-linecap="square"/>
+    <line class="a2-code ac2"  x1="130" y1="62"  x2="320" y2="62"  stroke="#ffffff" stroke-width="2"   opacity="0.1"  stroke-linecap="square"/>
+    <line class="a2-code ac3"  x1="146" y1="78"  x2="366" y2="78"  stroke="#48CBCF" stroke-width="2.5" opacity="0.45" stroke-linecap="square"/>
+    <line class="a2-code ac4"  x1="162" y1="94"  x2="286" y2="94"  stroke="#ffffff" stroke-width="2"   opacity="0.1"  stroke-linecap="square"/>
+    <line class="a2-code ac5"  x1="162" y1="110" x2="346" y2="110" stroke="#48CBCF" stroke-width="2"   opacity="0.35" stroke-linecap="square"/>
+    <line class="a2-code ac6"  x1="162" y1="126" x2="256" y2="126" stroke="#ffffff" stroke-width="2"   opacity="0.09" stroke-linecap="square"/>
+    <line class="a2-code ac7"  x1="146" y1="142" x2="396" y2="142" stroke="#48CBCF" stroke-width="2.5" opacity="0.5"  stroke-linecap="square"/>
+    <line class="a2-code ac8"  x1="162" y1="158" x2="334" y2="158" stroke="#ffffff" stroke-width="2"   opacity="0.11" stroke-linecap="square"/>
+    <line class="a2-code ac9"  x1="162" y1="174" x2="274" y2="174" stroke="#ffffff" stroke-width="2"   opacity="0.09" stroke-linecap="square"/>
+    <line class="a2-code ac10" x1="146" y1="190" x2="374" y2="190" stroke="#48CBCF" stroke-width="2"   opacity="0.4"  stroke-linecap="square"/>
+    <line class="a2-code ac11" x1="162" y1="206" x2="306" y2="206" stroke="#ffffff" stroke-width="2"   opacity="0.09" stroke-linecap="square"/>
+    <line class="a2-code ac12" x1="130" y1="222" x2="196" y2="222" stroke="#48CBCF" stroke-width="2.5" opacity="0.4"  stroke-linecap="square"/>
+
+    <!-- IDE text cursor -->
+    <rect class="a2-cur" x="198" y="216" width="2" height="14"
+      fill="#48CBCF" filter="url(#glow)"/>
+
+    <!-- AI suggestion box -->
+    <rect class="a2-suggest" x="130" y="238" width="310" height="84"
+      fill="rgba(72,203,207,0.07)" stroke="#48CBCF" stroke-width="1"
+      filter="url(#glow)"/>
+    <!-- AI badge -->
+    <rect x="138" y="248" width="28" height="12" fill="#48CBCF" opacity="0.7">
+      <animate attributeName="opacity" values="0;0.7" dur="0.1s" begin="11.7s" fill="freeze"/>
+    </rect>
+    <line x1="138" y1="256" x2="158" y2="256" stroke="rgba(0,0,0,0.5)" stroke-width="2" stroke-linecap="square">
+      <animate attributeName="opacity" values="0;1" dur="0.1s" begin="11.7s" fill="freeze"/>
+    </line>
+    <line x1="174" y1="253" x2="240" y2="253" stroke="#ffffff" stroke-width="1.5" opacity="0"
+      stroke-dasharray="70" stroke-dashoffset="70">
+      <animate attributeName="stroke-dashoffset" to="0" dur="0.2s" begin="11.8s" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.2" dur="0.1s" begin="11.8s" fill="freeze"/>
+    </line>
+    <line class="a2-sline asl1" x1="138" y1="270" x2="420" y2="270" stroke="#48CBCF" stroke-width="2" opacity="0.5" stroke-linecap="square"/>
+    <line class="a2-sline asl2" x1="138" y1="284" x2="358" y2="284" stroke="#48CBCF" stroke-width="2" opacity="0.35" stroke-linecap="square"/>
+    <line class="a2-sline asl3" x1="138" y1="298" x2="300" y2="298" stroke="#48CBCF" stroke-width="2" opacity="0.25" stroke-linecap="square"/>
+    <!-- accept hint -->
+    <rect x="358" y="308" width="74" height="10" fill="rgba(72,203,207,0.18)">
+      <animate attributeName="opacity" values="0;1" dur="0.1s" begin="12.4s" fill="freeze"/>
+    </rect>
+    <line x1="364" y1="313" x2="424" y2="313" stroke="#48CBCF" stroke-width="1.5" opacity="0"
+      stroke-dasharray="60" stroke-dashoffset="60">
+      <animate attributeName="stroke-dashoffset" to="0" dur="0.2s" begin="12.4s" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.5" dur="0.1s" begin="12.4s" fill="freeze"/>
+    </line>
+
+    <!-- accept flash -->
+    <rect class="a2-accept" x="130" y="238" width="310" height="84"
+      fill="rgba(72,203,207,0.2)" stroke="#48CBCF" stroke-width="1.5"
+      filter="url(#glow2)"/>
+
+    <!-- terminal area -->
+    <g class="a2-term">
+      <line x1="0" y1="468" x2="452" y2="468" stroke="#48CBCF" stroke-width="0.5" opacity="0.2"/>
+      <rect x="0" y="468" width="452" height="64" fill="rgba(72,203,207,0.04)"/>
+      <rect x="8" y="476" width="38" height="4" fill="#48CBCF" opacity="0.28"/>
+    </g>
+    <line class="a2-tline atl1" x1="8" y1="492" x2="228" y2="492" stroke="#48CBCF" stroke-width="2" opacity="0.5" stroke-linecap="square"/>
+    <line class="a2-tline atl2" x1="8" y1="508" x2="164" y2="508" stroke="#48CBCF" stroke-width="2" opacity="0.35" stroke-linecap="square"/>
+    <!-- blinking cursor in terminal -->
+    <rect x="166" y="504" width="2" height="11" fill="#48CBCF" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;0;0.7" dur="0.8s" begin="14.1s" repeatCount="indefinite"/>
+    </rect>
+
+  </g>
+
+  <!-- ═══════════════════════════════════════
+       ACT 3 — LIVE INTERFACE
+  ═══════════════════════════════════════ -->
+  <g id="act3">
+
+    <!-- frame -->
+    <rect class="a3-frame" x="0" y="0" width="452" height="532"
+      fill="none" stroke="#48CBCF" stroke-width="0.9" opacity="0.2"/>
+
+    <!-- NAV -->
+    <g class="a3-nav">
+      <rect x="0" y="0" width="452" height="42" fill="rgba(72,203,207,0.05)"/>
+      <line x1="0" y1="42" x2="452" y2="42" stroke="#48CBCF" stroke-width="0.5" opacity="0.2"/>
+      <!-- logo block -->
+      <rect x="12" y="10" width="38" height="22" fill="rgba(72,203,207,0.18)" stroke="#48CBCF" stroke-width="0.8"/>
+      <line x1="16" y1="18" x2="46" y2="18" stroke="#48CBCF" stroke-width="2" opacity="0.7" stroke-linecap="square"/>
+      <line x1="20" y1="26" x2="42" y2="26" stroke="#48CBCF" stroke-width="1.5" opacity="0.35" stroke-linecap="square"/>
+      <!-- nav links -->
+      <line x1="68"  y1="21" x2="100" y2="21" stroke="#ffffff" stroke-width="1.5" opacity="0.2" stroke-linecap="square"/>
+      <line x1="112" y1="21" x2="140" y2="21" stroke="#ffffff" stroke-width="1.5" opacity="0.15" stroke-linecap="square"/>
+      <line x1="152" y1="21" x2="188" y2="21" stroke="#ffffff" stroke-width="1.5" opacity="0.15" stroke-linecap="square"/>
+      <line x1="200" y1="21" x2="230" y2="21" stroke="#48CBCF" stroke-width="1.5" opacity="0.65" stroke-linecap="square"/>
+      <line x1="200" y1="29" x2="230" y2="29" stroke="#48CBCF" stroke-width="1.2" opacity="0.8" stroke-linecap="square"/>
+      <!-- CTA button -->
+      <rect x="382" y="9" width="60" height="24" fill="none" stroke="#48CBCF" stroke-width="1" opacity="0.6"/>
+      <rect x="382" y="9" width="60" height="24" fill="#48CBCF" opacity="0.18"/>
+      <line x1="396" y1="21" x2="428" y2="21" stroke="#48CBCF" stroke-width="2" opacity="0.6" stroke-linecap="square"/>
+    </g>
+
+    <!-- STATUS BAR -->
+    <rect x="0" y="522" width="452" height="10" fill="rgba(72,203,207,0.04)" opacity="0">
+      <animate attributeName="opacity" values="0;1" dur="0.3s" begin="16.8s" fill="freeze"/>
+    </rect>
+    <circle class="a3-live" cx="10" cy="527" r="3" fill="#48CBCF" opacity="0">
+      <animate attributeName="opacity" values="0;1" dur="0.1s" begin="17s" fill="freeze"/>
+    </circle>
+    <line x1="18" y1="527" x2="80" y2="527" stroke="#48CBCF" stroke-width="1.5" opacity="0"
+      stroke-dasharray="62" stroke-dashoffset="62">
+      <animate attributeName="stroke-dashoffset" to="0" dur="0.3s" begin="17s" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.3" dur="0.1s" begin="17s" fill="freeze"/>
+    </line>
+
+    <!-- HERO CONTENT -->
+    <g class="a3-scroll">
+      <!-- eyebrow tag -->
+      <g class="a3-el ue1">
+        <rect x="12" y="60" width="72" height="14" fill="none" stroke="#48CBCF" stroke-width="0.7" opacity="0.4"/>
+        <rect x="12" y="60" width="72" height="14" fill="rgba(72,203,207,0.1)"/>
+        <line x1="18" y1="67" x2="76" y2="67" stroke="#48CBCF" stroke-width="2" opacity="0.5" stroke-linecap="square"/>
+      </g>
+
+      <!-- H1 lines -->
+      <g class="a3-el ue2">
+        <line x1="12" y1="88"  x2="260" y2="88"  stroke="#ffffff" stroke-width="5" opacity="0.22" stroke-linecap="square"/>
+        <line x1="12" y1="100" x2="220" y2="100" stroke="#ffffff" stroke-width="5" opacity="0.18" stroke-linecap="square"/>
+        <line x1="12" y1="112" x2="180" y2="112" stroke="#48CBCF" stroke-width="5" opacity="0.55" stroke-linecap="square"/>
+      </g>
+
+      <!-- subtitle -->
+      <g class="a3-el ue3">
+        <line x1="12" y1="132" x2="290" y2="132" stroke="#ffffff" stroke-width="1.8" opacity="0.12" stroke-linecap="square"/>
+        <line x1="12" y1="142" x2="240" y2="142" stroke="#ffffff" stroke-width="1.8" opacity="0.1"  stroke-linecap="square"/>
+        <line x1="12" y1="152" x2="200" y2="152" stroke="#ffffff" stroke-width="1.8" opacity="0.08" stroke-linecap="square"/>
+      </g>
+
+      <!-- buttons -->
+      <g class="a3-el ue4">
+        <rect x="12"  y="168" width="110" height="30" fill="none" stroke="#48CBCF" stroke-width="1"/>
+        <rect x="12"  y="168" width="110" height="30" fill="#48CBCF" opacity="0.25"/>
+        <line x1="30" y1="183" x2="104" y2="183" stroke="#48CBCF" stroke-width="2.5" opacity="0.7" stroke-linecap="square"/>
+        <rect x="132" y="168" width="110" height="30" fill="none" stroke="#48CBCF" stroke-width="0.8" opacity="0.4"/>
+        <line x1="150" y1="183" x2="224" y2="183" stroke="#48CBCF" stroke-width="2" opacity="0.3" stroke-linecap="square"/>
+      </g>
+
+      <!-- section divider -->
+      <g class="a3-el ue5">
+        <line x1="12" y1="218" x2="440" y2="218" stroke="#48CBCF" stroke-width="0.5" opacity="0.15"/>
+        <line x1="12" y1="226" x2="130" y2="226" stroke="#48CBCF" stroke-width="2" opacity="0.3" stroke-linecap="square"/>
+      </g>
+
+      <!-- cards row -->
+      <rect class="a3-card uc1" x="12"  y="240" width="130" height="110"
+        fill="none" stroke="#48CBCF" stroke-width="0.9" opacity="0.5"/>
+      <rect class="a3-card uc2" x="157" y="240" width="130" height="110"
+        fill="none" stroke="#48CBCF" stroke-width="0.9" opacity="0.5"/>
+      <rect class="a3-card uc3" x="302" y="240" width="138" height="110"
+        fill="none" stroke="#48CBCF" stroke-width="1.3" opacity="0.8" filter="url(#glow)"/>
+
+      <!-- card internals appear after cards -->
+      <g class="a3-el ue6">
+        <!-- card 1 -->
+        <line x1="22" y1="252" x2="112" y2="252" stroke="#48CBCF" stroke-width="2.5" opacity="0.4" stroke-linecap="square"/>
+        <line x1="22" y1="264" x2="100" y2="264" stroke="#ffffff" stroke-width="1.5" opacity="0.1" stroke-linecap="square"/>
+        <line x1="22" y1="274" x2="92"  y2="274" stroke="#ffffff" stroke-width="1.5" opacity="0.08" stroke-linecap="square"/>
+        <rect x="22" y="326" width="68" height="16" fill="none" stroke="#48CBCF" stroke-width="0.8" opacity="0.35"/>
+        <!-- card 2 -->
+        <line x1="167" y1="252" x2="257" y2="252" stroke="#48CBCF" stroke-width="2.5" opacity="0.4" stroke-linecap="square"/>
+        <line x1="167" y1="264" x2="245" y2="264" stroke="#ffffff" stroke-width="1.5" opacity="0.1" stroke-linecap="square"/>
+        <line x1="167" y1="274" x2="237" y2="274" stroke="#ffffff" stroke-width="1.5" opacity="0.08" stroke-linecap="square"/>
+        <rect x="167" y="326" width="68" height="16" fill="none" stroke="#48CBCF" stroke-width="0.8" opacity="0.35"/>
+        <!-- card 3 (active) -->
+        <line x1="312" y1="252" x2="430" y2="252" stroke="#48CBCF" stroke-width="2.5" opacity="0.7" stroke-linecap="square" filter="url(#glow)"/>
+        <line x1="312" y1="264" x2="420" y2="264" stroke="#ffffff" stroke-width="1.5" opacity="0.14" stroke-linecap="square"/>
+        <line x1="312" y1="274" x2="408" y2="274" stroke="#ffffff" stroke-width="1.5" opacity="0.1" stroke-linecap="square"/>
+        <rect x="312" y="326" width="80" height="16" fill="#48CBCF" opacity="0.25"/>
+        <rect x="312" y="326" width="80" height="16" fill="none" stroke="#48CBCF" stroke-width="0.9"/>
+        <line x1="324" y1="334" x2="380" y2="334" stroke="#48CBCF" stroke-width="2" opacity="0.6" stroke-linecap="square"/>
+      </g>
+
+      <!-- more rows -->
+      <g class="a3-el ue7">
+        <line x1="12" y1="375" x2="440" y2="375" stroke="#48CBCF" stroke-width="0.4" opacity="0.12"/>
+        <line x1="12" y1="386" x2="130" y2="386" stroke="#48CBCF" stroke-width="2" opacity="0.28" stroke-linecap="square"/>
+        <line x1="12" y1="400" x2="210" y2="400" stroke="#ffffff" stroke-width="1.5" opacity="0.1" stroke-linecap="square"/>
+        <line x1="12" y1="412" x2="170" y2="412" stroke="#ffffff" stroke-width="1.5" opacity="0.08" stroke-linecap="square"/>
+        <line x1="12" y1="424" x2="190" y2="424" stroke="#ffffff" stroke-width="1.5" opacity="0.07" stroke-linecap="square"/>
+      </g>
+
+      <!-- tag pills (wireframe outline only) -->
+      <g class="a3-el ue8">
+        <rect x="12"  y="442" width="58" height="16" fill="none" stroke="#48CBCF" stroke-width="0.7" opacity="0.5"/>
+        <line x1="18"  y1="450" x2="62"  y2="450" stroke="#48CBCF" stroke-width="2" opacity="0.4" stroke-linecap="square"/>
+        <rect x="78"  y="442" width="52" height="16" fill="none" stroke="#48CBCF" stroke-width="0.6" opacity="0.35"/>
+        <line x1="84"  y1="450" x2="122" y2="450" stroke="#48CBCF" stroke-width="2" opacity="0.28" stroke-linecap="square"/>
+        <rect x="138" y="442" width="66" height="16" fill="none" stroke="#48CBCF" stroke-width="0.6" opacity="0.35"/>
+        <line x1="144" y1="450" x2="196" y2="450" stroke="#48CBCF" stroke-width="2" opacity="0.28" stroke-linecap="square"/>
+        <rect x="212" y="442" width="42" height="16" fill="none" stroke="#48CBCF" stroke-width="0.6" opacity="0.3"/>
+        <line x1="218" y1="450" x2="246" y2="450" stroke="#48CBCF" stroke-width="2" opacity="0.22" stroke-linecap="square"/>
+      </g>
+    </g>
+
+    <!-- TOAST -->
+    <g class="a3-toast">
+      <rect x="290" y="56" width="152" height="36"
+        fill="rgba(72,203,207,0.1)" stroke="#48CBCF" stroke-width="1" filter="url(#glow)"/>
+      <circle cx="306" cy="74" r="5" fill="none" stroke="#48CBCF" stroke-width="1" opacity="0.7"/>
+      <circle cx="306" cy="74" r="2" fill="#48CBCF" opacity="0.9"/>
+      <line x1="318" y1="68" x2="378" y2="68" stroke="#48CBCF" stroke-width="2" opacity="0.55" stroke-linecap="square"/>
+      <line x1="318" y1="78" x2="432" y2="78" stroke="#ffffff" stroke-width="1.5" opacity="0.12" stroke-linecap="square"/>
+    </g>
+
+    <!-- LIVE CURSOR (pointer + label) -->
+    <g class="a3-cursor">
+      <!-- arrow -->
+      <polygon points="140,250 140,268 144,263 147,271 150,270 147,262 153,262"
+        fill="rgba(6,6,6,0.92)" stroke="#48CBCF" stroke-width="1.2"
+        stroke-linejoin="miter" filter="url(#glow)"/>
+      <!-- label chip -->
+      <rect x="155" y="262" width="40" height="12" fill="rgba(72,203,207,0.18)" stroke="#48CBCF" stroke-width="0.7"/>
+      <line x1="159" y1="268" x2="191" y2="268" stroke="#48CBCF" stroke-width="1.8" opacity="0.55" stroke-linecap="square"/>
+    </g>
+
+    <!-- click ripples -->
+    <circle class="a3-rip1" cx="140" cy="261" r="0" fill="none" stroke="#48CBCF" stroke-width="1.5" filter="url(#glow)"/>
+    <circle class="a3-rip2" cx="372" cy="295" r="0" fill="none" stroke="#48CBCF" stroke-width="1.5" filter="url(#glow)"/>
+
+  </g>
+
+</svg>

@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+  <defs>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-strong" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <style>
+      /* ─── GRID LINES ─── */
+      .line {
+        stroke-dashoffset: 50;
+        animation: draw 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
+      }
+      .lh1 { stroke-dasharray: 50; animation-delay: 0.1s; }
+      .lh2 { stroke-dasharray: 50; animation-delay: 0.2s; }
+      .lh3 { stroke-dasharray: 50; animation-delay: 0.3s; }
+      .lv1 { stroke-dasharray: 42; stroke-dashoffset: 42; animation-delay: 0.35s; }
+      .lv2 { stroke-dasharray: 42; stroke-dashoffset: 42; animation-delay: 0.45s; }
+      .lv3 { stroke-dasharray: 42; stroke-dashoffset: 42; animation-delay: 0.55s; }
+      @keyframes draw { to { stroke-dashoffset: 0; } }
+
+      /* ─── NODES ─── */
+      .node {
+        transform-origin: center;
+        transform-box: fill-box;
+        opacity: 0;
+        animation: pop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
+      }
+      .n1 { animation-delay: 0.7s; }
+      .n2 { animation-delay: 0.78s; }
+      .n3 { animation-delay: 0.86s; }
+      .n4 { animation-delay: 0.94s; }
+      .n5 { animation-delay: 1.02s; }
+      .n6 { animation-delay: 1.10s; }
+      .n7 { animation-delay: 1.18s; }
+      .n8 { animation-delay: 1.26s; }
+      .n9 { animation-delay: 1.34s; }
+      @keyframes pop {
+        0%   { opacity:0; transform: scale(0); }
+        65%  { opacity:1; transform: scale(1.3); }
+        100% { opacity:1; transform: scale(1); }
+      }
+
+      /* center node pulses */
+      .nc {
+        animation: pop 0.4s cubic-bezier(0.34,1.56,0.64,1) 1.02s forwards,
+                   pulse 2.8s ease-in-out 2s infinite;
+      }
+      @keyframes pulse {
+        0%,100% { opacity:1; }
+        50%     { opacity:0.35; }
+      }
+
+      /* ─── TOKEN PILLS ─── */
+      .token {
+        opacity: 0;
+        animation: fadeUp 0.35s ease forwards;
+      }
+      .t1 { animation-delay: 1.55s; }
+      .t2 { animation-delay: 1.65s; }
+      .t3 { animation-delay: 1.75s; }
+      .t4 { animation-delay: 1.85s; }
+      @keyframes fadeUp {
+        from { opacity:0; transform: translateY(4px); }
+        to   { opacity:1; transform: translateY(0); }
+      }
+
+      /* ─── SCAN PULSE ─── */
+      .scan {
+        animation: scanMove 3.2s ease-in-out 2.4s infinite;
+      }
+      @keyframes scanMove {
+        0%   { opacity:0; transform: translateY(-18px); }
+        15%  { opacity:0.55; }
+        85%  { opacity:0.55; }
+        100% { opacity:0; transform: translateY(18px); }
+      }
+
+      /* dashed connectors */
+      .dash {
+        stroke-dasharray: 3 3;
+        stroke-dashoffset: 18;
+        opacity: 0;
+        animation: dashFade 0.4s ease 1.45s forwards;
+      }
+      @keyframes dashFade { to { opacity:0.3; stroke-dashoffset: 0; } }
+    </style>
+  </defs>
+
+
+
+  <!-- ─── GRID ─── -->
+  <line class="line lh1" x1="18" y1="24" x2="62" y2="24" stroke="#48CBCF" stroke-width="0.75" opacity="0.22"/>
+  <line class="line lh2" x1="18" y1="40" x2="62" y2="40" stroke="#48CBCF" stroke-width="0.75" opacity="0.22"/>
+  <line class="line lh3" x1="18" y1="56" x2="62" y2="56" stroke="#48CBCF" stroke-width="0.75" opacity="0.22"/>
+  <line class="line lv1" x1="18" y1="24" x2="18" y2="56" stroke="#48CBCF" stroke-width="0.75" opacity="0.22"/>
+  <line class="line lv2" x1="40" y1="24" x2="40" y2="56" stroke="#48CBCF" stroke-width="0.75" opacity="0.22"/>
+  <line class="line lv3" x1="62" y1="24" x2="62" y2="56" stroke="#48CBCF" stroke-width="0.75" opacity="0.22"/>
+
+  <!-- ─── DASHED CONNECTORS (grid → token pills) ─── -->
+  <line class="dash" x1="18" y1="14" x2="18" y2="24" stroke="#48CBCF" stroke-width="0.6"/>
+  <line class="dash" x1="62" y1="14" x2="62" y2="24" stroke="#48CBCF" stroke-width="0.6"/>
+  <line class="dash" x1="18" y1="56" x2="18" y2="66" stroke="#48CBCF" stroke-width="0.6"/>
+  <line class="dash" x1="62" y1="56" x2="62" y2="66" stroke="#48CBCF" stroke-width="0.6"/>
+
+  <!-- ─── SCAN LINE ─── -->
+  <line class="scan" x1="13" y1="40" x2="67" y2="40" stroke="#48CBCF" stroke-width="1.2" opacity="0.5" filter="url(#glow)"/>
+
+  <!-- ─── TOKEN PILLS (design foundation tokens) ─── -->
+  <g class="token t1">
+    <rect x="4" y="7" width="20" height="8" rx="2" fill="rgba(20,20,20,0.85)" stroke="#48CBCF" stroke-width="0.8"/>
+    <rect x="6.5" y="9.5" width="6" height="2" rx="0.8" fill="#48CBCF" opacity="0.9"/>
+    <rect x="14" y="9.5" width="4" height="2" rx="0.8" fill="#ffffff" opacity="0.2"/>
+  </g>
+  <g class="token t2">
+    <rect x="56" y="7" width="20" height="8" rx="2" fill="rgba(20,20,20,0.85)" stroke="#48CBCF" stroke-width="0.8"/>
+    <rect x="58.5" y="9.5" width="4" height="2" rx="0.8" fill="#48CBCF" opacity="0.9"/>
+    <rect x="64" y="9.5" width="7" height="2" rx="0.8" fill="#ffffff" opacity="0.2"/>
+  </g>
+  <g class="token t3">
+    <rect x="4" y="65" width="20" height="8" rx="2" fill="rgba(20,20,20,0.85)" stroke="#48CBCF" stroke-width="0.8"/>
+    <rect x="6.5" y="67.5" width="8" height="2" rx="0.8" fill="#48CBCF" opacity="0.9"/>
+    <rect x="16" y="67.5" width="4" height="2" rx="0.8" fill="#ffffff" opacity="0.2"/>
+  </g>
+  <g class="token t4">
+    <rect x="56" y="65" width="20" height="8" rx="2" fill="rgba(20,20,20,0.85)" stroke="#48CBCF" stroke-width="0.8"/>
+    <rect x="58.5" y="67.5" width="5" height="2" rx="0.8" fill="#48CBCF" opacity="0.9"/>
+    <rect x="65" y="67.5" width="6" height="2" rx="0.8" fill="#ffffff" opacity="0.2"/>
+  </g>
+
+  <!-- ─── NODES at all 9 intersections ─── -->
+  <!-- row 1 -->
+  <circle class="node n1" cx="18" cy="24" r="2.8" fill="rgba(20,20,20,0.85)" stroke="#48CBCF" stroke-width="1.2" filter="url(#glow)"/>
+  <circle class="node n2" cx="40" cy="24" r="2.8" fill="rgba(20,20,20,0.85)" stroke="#48CBCF" stroke-width="1.2" filter="url(#glow)"/>
+  <circle class="node n3" cx="62" cy="24" r="2.8" fill="rgba(20,20,20,0.85)" stroke="#48CBCF" stroke-width="1.2" filter="url(#glow)"/>
+  <!-- row 2 -->
+  <circle class="node n4" cx="18" cy="40" r="2.8" fill="rgba(20,20,20,0.85)" stroke="#48CBCF" stroke-width="1.2" filter="url(#glow)"/>
+  <!-- CENTER -->
+  <circle class="nc" cx="40" cy="40" r="5.5" fill="#48CBCF" filter="url(#glow-strong)"/>
+  <circle class="nc" cx="40" cy="40" r="2.8" fill="rgba(20,20,20,0.85)"/>
+  <circle class="node n6" cx="62" cy="40" r="2.8" fill="rgba(20,20,20,0.85)" stroke="#48CBCF" stroke-width="1.2" filter="url(#glow)"/>
+  <!-- row 3 -->
+  <circle class="node n7" cx="18" cy="56" r="2.8" fill="rgba(20,20,20,0.85)" stroke="#48CBCF" stroke-width="1.2" filter="url(#glow)"/>
+  <circle class="node n8" cx="40" cy="56" r="2.8" fill="rgba(20,20,20,0.85)" stroke="#48CBCF" stroke-width="1.2" filter="url(#glow)"/>
+  <circle class="node n9" cx="62" cy="56" r="2.8" fill="rgba(20,20,20,0.85)" stroke="#48CBCF" stroke-width="1.2" filter="url(#glow)"/>
+</svg>

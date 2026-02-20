@@ -1,0 +1,15 @@
+.hero {
+  padding-top: var(--space-7xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.hero-cta { 
+  display: flex; 
+  gap: var(--space-md); 
+  opacity: 0; 
+  animation: fadeUp var(--anim-duration-fast) var(--anim-delay-4) forwards; 
+}
+
+.hero img {
+  width: 100%;
+}

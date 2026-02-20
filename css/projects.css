@@ -1,0 +1,20 @@
+
+.project-card { 
+  background: var(--bg); 
+  padding: var(--space-2xl);
+}
+
+.project-year { 
+  color: var(--accent);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  font-size: var(--text-sm);
+  letter-spacing: var(--ls-widest);
+}
+
+.project-desc { 
+  font-size: var(--text-md); 
+  color: var(--muted); 
+  line-height: 1.8; 
+  margin-bottom: var(--space-md); 
+}

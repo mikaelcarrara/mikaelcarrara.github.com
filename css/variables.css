@@ -1,0 +1,109 @@
+:root {
+  /* Colors - Background */
+  --bg: #111418;
+  
+  /* Colors - Borders */
+  --border: rgba(255,255,255,0.07);
+  --border-active: rgba(255,255,255,0.18);
+  
+  /* Colors - Text */
+  --text: #D8DCE4;
+  --text-bright: #EDF0F5;
+  --muted: #7A8494;
+  
+  /* Colors - Accent */
+  --accent: #48CBCF;
+  --accent-hover: #48CBCF;
+  --accent-dim: rgba(200,255,0,0.07);
+  --accent-glow: rgba(200,255,0,0.6);
+  
+  /* Colors - Secondary */
+  --secondary: #00D4FF;
+  --secondary-dim: rgba(0,212,255,0.4);
+  
+  /* Colors - Neutral */
+  --neutral-dark: #3A4252;
+  --neutral-medium: #4A5568;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 44px;
+  --space-3xl: 60px;
+  --space-4xl: 80px;
+  --space-5xl: 100px;
+  --space-6xl: 130px;
+  --space-7xl: 180px;
+  
+  /* Typography - Font Families */
+  --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  
+  /* Typography - Font Sizes */
+  --text-xs: 10px;
+  --text-sm: 11px;
+  --text-base: 13px;
+  --text-md: 14px;
+  --text-lg: 15px;
+  --text-xl: 17px;
+  --text-2xl: 20px;
+  --text-3xl: 26px;
+  --text-4xl: 40px;
+  --text-5xl: 52px;
+  --text-6xl: 64px;
+  
+  /* Typography - Line Heights */
+  --lh-tight: 1;
+  --lh-snug: 1.05;
+  --lh-normal: 1.6;
+  --lh-relaxed: 1.75;
+  --lh-loose: 1.85;
+  
+  /* Typography - Letter Spacing */
+  --ls-tighter: -0.04em;
+  --ls-tight: -0.03em;
+  --ls-normal: -0.025em;
+  --ls-wide: 0.04em;
+  --ls-wider: 0.08em;
+  --ls-widest: 0.12em;
+  --ls-ultra: 0.15em;
+  --ls-max: 0.2em;
+  
+  /* Typography - Font Weights */
+  --weight-light: 300;
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  
+  
+  /* Borders & Radius */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s;
+  --transition-base: 0.4s;
+  --transition-slow: 0.65s;
+  --transition-slower: 1.2s;
+  
+  /* Effects */
+  --blur-sm: 20px;
+  --blur-md: 24px;
+  --blur-lg: 120px;
+  --overlay-light: rgba(255,255,255,0.05);
+  --overlay-dark: rgba(10,12,16,0.8);
+  
+  /* Animations */
+  --anim-duration-fast: 0.8s;
+  --anim-duration-base: 1s;
+  --anim-duration-slow: 1.2s;
+  --anim-delay-1: 0.2s;
+  --anim-delay-2: 0.4s;
+  --anim-delay-3: 0.6s;
+  --anim-delay-4: 0.8s;
+  --anim-delay-5: 1s;
+  --anim-delay-6: 1.2s;
+}

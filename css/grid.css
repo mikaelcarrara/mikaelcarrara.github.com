@@ -1,0 +1,46 @@
+section {
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 65%;
+}
+
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.col-01,
+.col-02 {
+  width: 47%;
+  box-sizing: border-box;
+}
+
+.cols-border .col-01,
+.cols-border .col-02 {
+  width: 50%;
+  border: 1px solid var(--border);
+  padding: var(--space-2xl);
+}
+
+@media (max-width: 1024px) {
+
+  section {
+    width: 90%;
+  }
+
+  .columns {
+    display: block;
+  }
+
+  .col-01,
+  .col-02 {
+    width: 100%;
+  }
+
+  .cols-border .col-01,
+  .cols-border .col-02 {
+    width: 100%;
+  }
+
+}

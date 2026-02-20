@@ -1,0 +1,44 @@
+.about .cols-border .col-02 {
+  border: none;
+  padding: 0;
+}
+
+.about h3 {
+  margin-top: 0
+}
+
+@media (max-width: 1024px) {
+  .about h3 {
+    margin: var(--space-2xl) 0 var(--space-lg) 0;
+  }
+}
+
+.line-accent { 
+  display: block; 
+  width: var(--space-xl); 
+  height: 2px; 
+  background: var(--accent); 
+  margin: 22px 0; 
+}
+.about-quote { 
+  font-size: var(--text-base); 
+  color: var(--muted); 
+  letter-spacing: var(--ls-wide); 
+}
+
+.items-list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.items-list li {
+  width: 50%;
+  list-style-type: none;
+  font-size: var(--text-md);
+  box-sizing: border-box;
+    border: 1px solid var(--border);
+  padding: var(--space-2xl);
+}

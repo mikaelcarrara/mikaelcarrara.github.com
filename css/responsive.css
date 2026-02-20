@@ -1,0 +1,37 @@
+@media (max-width: 1024px) {
+
+  .hero {
+    padding-top: var(--space-3xl);
+    text-align: center;
+  }
+
+  .hero .col-02 {
+    display: none;
+  }
+
+  /* Layout */
+
+  section {
+    max-width: 100%;
+    padding: 0 var(--space-xl);
+  }
+
+
+  /* Hero */
+
+  .hero-name br {
+    display: none;
+  }
+
+  .hero-cta {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+
+  /* Projects */
+
+  .project-card {
+    min-width: 100%;
+  }
+}

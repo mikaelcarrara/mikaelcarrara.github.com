@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 76 76" width="76" height="76">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      .bg-box {
+        opacity: 0;
+        animation: fadeIn 0.3s ease 0s forwards;
+      }
+      @keyframes fadeIn { to { opacity: 1; } }
+
+      .bar-left {
+        stroke-dasharray: 50;
+        stroke-dashoffset: 50;
+        animation: drawDown 0.5s cubic-bezier(0.4,0,0.2,1) 0.2s forwards;
+      }
+      @keyframes drawDown { to { stroke-dashoffset: 0; } }
+
+      .line-top {
+        stroke-dasharray: 30;
+        stroke-dashoffset: 30;
+        animation: drawRight 0.4s cubic-bezier(0.4,0,0.2,1) 0.6s forwards;
+      }
+      .line-bottom {
+        stroke-dasharray: 44;
+        stroke-dashoffset: 44;
+        animation: drawRight 0.4s cubic-bezier(0.4,0,0.2,1) 0.65s forwards;
+      }
+      @keyframes drawRight { to { stroke-dashoffset: 0; } }
+
+      .stub-1 { opacity:0; animation: fadeIn 0.3s ease 0.75s forwards; }
+      .stub-2 { opacity:0; animation: fadeIn 0.3s ease 0.85s forwards; }
+      .stub-3 { opacity:0; animation: fadeIn 0.3s ease 0.95s forwards; }
+      .stub-4 { opacity:0; animation: fadeIn 0.3s ease 1.05s forwards; }
+      .stub-5 { opacity:0; animation: fadeIn 0.3s ease 1.15s forwards; }
+      .stub-6 { opacity:0; animation: fadeIn 0.3s ease 1.25s forwards; }
+
+      .corner {
+        stroke-dasharray: 24;
+        stroke-dashoffset: 24;
+        animation: drawRight 0.4s ease 0.9s forwards;
+      }
+
+      .cursor {
+        opacity: 0;
+        animation: fadeIn 0.2s ease 1.3s forwards, blink 1s step-end 1.5s infinite;
+      }
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <!-- Background: white at 5% opacity, no border -->
+  <rect class="bg-box" x="0" y="0" width="76" height="76" rx="3" fill="rgba(255,255,255,0.05)"/>
+
+  <!-- Left vertical bar -->
+  <line class="bar-left" x1="11.5" y1="12" x2="11.5" y2="62"
+    stroke="#C8FF00" stroke-width="3" filter="url(#softglow)"/>
+
+  <!-- Top horizontal -->
+  <line class="line-top" x1="13" y1="13" x2="43" y2="13"
+    stroke="#C8FF00" stroke-width="2"/>
+
+  <!-- Bottom horizontal -->
+  <line class="line-bottom" x1="13" y1="61" x2="57" y2="61"
+    stroke="#444" stroke-width="2"/>
+
+  <!-- Code stub lines -->
+  <rect class="stub-1" x="20" y="21" width="36" height="2" rx="1" fill="#333"/>
+  <rect class="stub-2" x="20" y="27" width="22" height="2" rx="1" fill="#333"/>
+  <rect class="stub-3" x="20" y="33" width="30" height="2" rx="1" fill="#333"/>
+  <rect class="stub-4" x="20" y="39" width="16" height="2" rx="1" fill="#555"/>
+  <rect class="stub-5" x="20" y="45" width="28" height="2" rx="1" fill="#333"/>
+  <rect class="stub-6" x="20" y="51" width="10" height="2" rx="1" fill="#555"/>
+
+  <!-- Corner bracket -->
+  <polyline class="corner" points="56,12 64,12 64,24"
+    fill="none" stroke="#C8FF00" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Cursor -->
+  <rect class="cursor" x="38" y="39" width="6" height="8" rx="1"
+    fill="#C8FF00" filter="url(#glow)"/>
+</svg>

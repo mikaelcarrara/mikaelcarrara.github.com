@@ -1,0 +1,10 @@
+footer { 
+  border-top: 1px solid var(--border); 
+  padding: var(--space-lg) 48px; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+.footer-copy { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--muted); letter-spacing: var(--ls-wider); }
+.footer-built { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--muted); letter-spacing: var(--ls-wider); }
+.footer-built span { color: var(--accent); }

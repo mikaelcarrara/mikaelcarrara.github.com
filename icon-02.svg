@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+  <defs>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-strong" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <style>
+      /* ─── SHEET 1 (back) slides in from bottom-right ─── */
+      .sheet1 {
+        opacity: 0;
+        animation: sheet1In 0.55s cubic-bezier(0.22,1,0.36,1) 0.1s forwards;
+      }
+      @keyframes sheet1In {
+        from { opacity:0; transform: translate(10px, 8px); }
+        to   { opacity:1; transform: translate(0,0); }
+      }
+
+      /* ─── SHEET 2 (mid) ─── */
+      .sheet2 {
+        opacity: 0;
+        animation: sheet2In 0.55s cubic-bezier(0.22,1,0.36,1) 0.35s forwards;
+      }
+      @keyframes sheet2In {
+        from { opacity:0; transform: translate(6px, 4px); }
+        to   { opacity:1; transform: translate(0,0); }
+      }
+
+      /* ─── SHEET 3 (front, active) ─── */
+      .sheet3 {
+        opacity: 0;
+        animation: sheet3In 0.55s cubic-bezier(0.22,1,0.36,1) 0.6s forwards;
+      }
+      @keyframes sheet3In {
+        from { opacity:0; transform: translate(0, -4px); }
+        to   { opacity:1; transform: translate(0,0); }
+      }
+
+      /* ─── CONTENT LINES appear after sheets ─── */
+      .line {
+        stroke-dashoffset: 28;
+        opacity: 0;
+        animation: drawLine 0.35s ease forwards;
+      }
+      .ln1 { stroke-dasharray: 28; animation-delay: 0.75s; }
+      .ln2 { stroke-dasharray: 20; stroke-dashoffset: 20; animation-delay: 0.85s; }
+      .ln3 { stroke-dasharray: 24; stroke-dashoffset: 24; animation-delay: 0.95s; }
+      .ln4 { stroke-dasharray: 16; stroke-dashoffset: 16; animation-delay: 1.05s; }
+      .ln5 { stroke-dasharray: 28; animation-delay: 1.15s; }
+      .ln6 { stroke-dasharray: 18; stroke-dashoffset: 18; animation-delay: 1.25s; }
+      @keyframes drawLine { to { stroke-dashoffset: 0; opacity:1; } }
+
+      /* ─── INTERSECTION GLOW DOT (overlap zone) ─── */
+      .overlap-dot {
+        opacity: 0;
+        animation: dotAppear 0.4s cubic-bezier(0.34,1.56,0.64,1) 1.05s forwards,
+                   dotPulse 2.8s ease-in-out 2s infinite;
+      }
+      @keyframes dotAppear {
+        from { opacity:0; transform: scale(0); }
+        to   { opacity:1; transform: scale(1); }
+      }
+      @keyframes dotPulse {
+        0%,100% { opacity:1; r: 3.5; }
+        50%     { opacity:0.4; r: 5; }
+      }
+
+      /* ─── CORNER PINS (registration marks) ─── */
+      .pin {
+        opacity: 0;
+        animation: fadeIn 0.25s ease forwards;
+      }
+      .p1 { animation-delay: 1.35s; }
+      .p2 { animation-delay: 1.45s; }
+      .p3 { animation-delay: 1.55s; }
+      @keyframes fadeIn { to { opacity:1; } }
+
+      /* ─── SHEETS BREATHE slightly offset ─── */
+      .sheet1 rect { animation: breathe1 5s ease-in-out 2.5s infinite; }
+      .sheet2 rect { animation: breathe2 5s ease-in-out 2.8s infinite; }
+      @keyframes breathe1 {
+        0%,100% { transform: translate(0,0); }
+        50%     { transform: translate(1px, 1px); }
+      }
+      @keyframes breathe2 {
+        0%,100% { transform: translate(0,0); }
+        50%     { transform: translate(-1px, 0.5px); }
+      }
+    </style>
+  </defs>
+
+  <!-- ─── SHEET 1 — back (tokens layer) ─── -->
+  <g class="sheet1">
+    <rect x="22" y="18" width="44" height="36" rx="3"
+      fill="rgba(72,203,207,0.05)" stroke="#48CBCF" stroke-width="0.8" opacity="0.45"/>
+    <!-- label pill top-left -->
+    <rect x="25" y="21.5" width="10" height="3" rx="1" fill="#48CBCF" opacity="0.2"/>
+    <!-- content stubs -->
+    <line class="line ln5" x1="25" y1="29" x2="53" y2="29" stroke="#ffffff" stroke-width="1.2" opacity="0.1"/>
+    <line class="line ln6" x1="25" y1="34" x2="43" y2="34" stroke="#ffffff" stroke-width="1.2" opacity="0.1"/>
+  </g>
+
+  <!-- ─── SHEET 2 — mid (components layer) ─── -->
+  <g class="sheet2">
+    <rect x="14" y="12" width="44" height="36" rx="3"
+      fill="rgba(72,203,207,0.07)" stroke="#48CBCF" stroke-width="0.9" opacity="0.6"/>
+    <!-- label pill -->
+    <rect x="17" y="15.5" width="12" height="3" rx="1" fill="#48CBCF" opacity="0.28"/>
+    <!-- content stubs -->
+    <line class="line ln3" x1="17" y1="24" x2="41" y2="24" stroke="#48CBCF" stroke-width="1.2" opacity="0.3"/>
+    <line class="line ln4" x1="17" y1="30" x2="33" y2="30" stroke="#48CBCF" stroke-width="1.2" opacity="0.2"/>
+  </g>
+
+  <!-- ─── SHEET 3 — front (patterns / active layer) ─── -->
+  <g class="sheet3">
+    <rect x="8" y="26" width="44" height="36" rx="3"
+      fill="rgba(72,203,207,0.12)" stroke="#48CBCF" stroke-width="1.2" filter="url(#glow)"/>
+    <!-- label pill bright -->
+    <rect x="11" y="29.5" width="14" height="3" rx="1" fill="#48CBCF" opacity="0.7"/>
+    <!-- content stubs -->
+    <line class="line ln1" x1="11" y1="38" x2="39" y2="38" stroke="#48CBCF" stroke-width="1.5" opacity="0.7"/>
+    <line class="line ln2" x1="11" y1="44" x2="31" y2="44" stroke="#48CBCF" stroke-width="1.5" opacity="0.45"/>
+  </g>
+
+  <!-- ─── OVERLAP INTERSECTION DOT ─── -->
+  <!-- sits at the visual center where all 3 sheets overlap -->
+  <circle class="overlap-dot" cx="36" cy="40" r="3.5"
+    fill="#48CBCF" filter="url(#glow-strong)"/>
+  <circle class="overlap-dot" cx="36" cy="40" r="1.8"
+    fill="rgba(20,20,20,0.9)"/>
+
+  <!-- ─── REGISTRATION CORNER MARKS ─── -->
+  <!-- top-right of back sheet -->
+  <g class="pin p1" opacity="0.4">
+    <line x1="63" y1="18" x2="66" y2="18" stroke="#48CBCF" stroke-width="0.8"/>
+    <line x1="66" y1="18" x2="66" y2="21" stroke="#48CBCF" stroke-width="0.8"/>
+  </g>
+  <!-- top-right of mid sheet -->
+  <g class="pin p2" opacity="0.55">
+    <line x1="55" y1="12" x2="58" y2="12" stroke="#48CBCF" stroke-width="0.8"/>
+    <line x1="58" y1="12" x2="58" y2="15" stroke="#48CBCF" stroke-width="0.8"/>
+  </g>
+  <!-- bottom-left of front sheet -->
+  <g class="pin p3" opacity="0.8">
+    <line x1="8"  y1="59" x2="8"  y2="62" stroke="#48CBCF" stroke-width="1"/>
+    <line x1="8"  y1="62" x2="11" y2="62" stroke="#48CBCF" stroke-width="1"/>
+  </g>
+</svg>

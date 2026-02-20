@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+  <defs>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-strong" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <style>
+      /* ─── FRAME draws in ─── */
+      .frame {
+        stroke-dasharray: 240;
+        stroke-dashoffset: 240;
+        animation: drawFrame 0.7s cubic-bezier(0.22,1,0.36,1) 0.05s forwards;
+      }
+      @keyframes drawFrame { to { stroke-dashoffset: 0; } }
+
+      /* ─── HEADER BAR ─── */
+      .header {
+        opacity: 0;
+        animation: fadeIn 0.3s ease 0.6s forwards;
+      }
+
+      /* ─── CROSSHAIR draws ─── */
+      .ch-h {
+        stroke-dasharray: 28;
+        stroke-dashoffset: 28;
+        animation: drawLine 0.4s cubic-bezier(0.22,1,0.36,1) 0.75s forwards;
+      }
+      .ch-v {
+        stroke-dasharray: 28;
+        stroke-dashoffset: 28;
+        animation: drawLine 0.4s cubic-bezier(0.22,1,0.36,1) 0.85s forwards;
+      }
+      @keyframes drawLine { to { stroke-dashoffset: 0; } }
+
+      /* ─── WAVEFORM bars grow up ─── */
+      .wv {
+        transform-origin: bottom;
+        transform-box: fill-box;
+        scaleY: 0;
+        opacity: 0;
+        animation: waveGrow 0.35s cubic-bezier(0.22,1,0.36,1) forwards;
+      }
+      .w1  { animation-delay: 0.9s;  }
+      .w2  { animation-delay: 0.96s; }
+      .w3  { animation-delay: 1.02s; }
+      .w4  { animation-delay: 1.08s; }
+      .w5  { animation-delay: 1.14s; }
+      .w6  { animation-delay: 1.20s; }
+      .w7  { animation-delay: 1.26s; }
+      .w8  { animation-delay: 1.32s; }
+      .w9  { animation-delay: 1.38s; }
+      .w10 { animation-delay: 1.44s; }
+      @keyframes waveGrow {
+        from { opacity:0; transform: scaleY(0); }
+        to   { opacity:1; transform: scaleY(1); }
+      }
+
+      /* ─── WAVEFORM live pulse loop ─── */
+      .w1  { animation: waveGrow 0.35s cubic-bezier(0.22,1,0.36,1) 0.9s forwards,  waveLive 2.1s ease-in-out 2.2s infinite; }
+      .w3  { animation: waveGrow 0.35s cubic-bezier(0.22,1,0.36,1) 1.02s forwards, waveLive 1.8s ease-in-out 2.5s infinite; }
+      .w5  { animation: waveGrow 0.35s cubic-bezier(0.22,1,0.36,1) 1.14s forwards, waveLive 2.4s ease-in-out 2.1s infinite; }
+      .w7  { animation: waveGrow 0.35s cubic-bezier(0.22,1,0.36,1) 1.26s forwards, waveLive 1.9s ease-in-out 2.8s infinite; }
+      .w9  { animation: waveGrow 0.35s cubic-bezier(0.22,1,0.36,1) 1.38s forwards, waveLive 2.2s ease-in-out 2.3s infinite; }
+      @keyframes waveLive {
+        0%,100% { transform: scaleY(1);    opacity:1; }
+        50%     { transform: scaleY(0.35); opacity:0.5; }
+      }
+
+      /* ─── DATA ROWS appear ─── */
+      .row {
+        opacity: 0;
+        animation: slideRow 0.3s ease forwards;
+      }
+      .r1 { animation-delay: 1.0s; }
+      .r2 { animation-delay: 1.12s; }
+      .r3 { animation-delay: 1.24s; }
+      @keyframes slideRow {
+        from { opacity:0; transform: translateX(-5px); }
+        to   { opacity:1; transform: translateX(0); }
+      }
+
+      /* ─── STATUS DOT blinks ─── */
+      .status {
+        opacity: 0;
+        animation: fadeIn 0.2s ease 1.5s forwards,
+                   blink 1.4s step-end 1.8s infinite;
+      }
+      @keyframes fadeIn { to { opacity:1; } }
+      @keyframes blink {
+        0%,100% { opacity:1; }
+        50%     { opacity:0; }
+      }
+
+      /* ─── SCAN LINE sweeps across frame ─── */
+      .scan {
+        animation: scanX 3.5s ease-in-out 2s infinite;
+      }
+      @keyframes scanX {
+        0%   { opacity:0; transform: translateX(-30px); }
+        10%  { opacity:0.5; }
+        90%  { opacity:0.5; }
+        100% { opacity:0; transform: translateX(30px); }
+      }
+
+      /* ─── CORNER BRACKETS ─── */
+      .brk {
+        stroke-dasharray: 14;
+        stroke-dashoffset: 14;
+        opacity: 0;
+        animation: drawLine 0.3s ease forwards;
+      }
+      .bk1 { animation-delay: 0.72s; }
+      .bk2 { animation-delay: 0.78s; }
+      .bk3 { animation-delay: 0.84s; }
+      .bk4 { animation-delay: 0.90s; }
+    </style>
+  </defs>
+
+  <!-- ─── OUTER FRAME ─── -->
+  <rect class="frame" x="7" y="10" width="66" height="60" rx="2"
+    fill="none" stroke="#48CBCF" stroke-width="1" opacity="0.35"/>
+
+  <!-- ─── HEADER BAR ─── -->
+  <g class="header">
+    <rect x="7" y="10" width="66" height="9" rx="2" fill="rgba(72,203,207,0.08)"/>
+    <circle cx="13" cy="14.5" r="1.5" fill="#48CBCF" opacity="0.5"/>
+    <circle cx="19" cy="14.5" r="1.5" fill="#48CBCF" opacity="0.25"/>
+    <circle cx="25" cy="14.5" r="1.5" fill="#48CBCF" opacity="0.15"/>
+    <rect x="32" y="12.5" width="24" height="3" rx="0.8" fill="#48CBCF" opacity="0.12"/>
+  </g>
+
+  <!-- ─── INNER CORNER BRACKETS (focus zone) ─── -->
+  <!-- top-left -->
+  <polyline class="brk bk1" points="18,24 14,24 14,29"
+    fill="none" stroke="#48CBCF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+  <!-- top-right -->
+  <polyline class="brk bk2" points="54,24 58,24 58,29"
+    fill="none" stroke="#48CBCF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+  <!-- bottom-left -->
+  <polyline class="brk bk3" points="18,62 14,62 14,57"
+    fill="none" stroke="#48CBCF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+  <!-- bottom-right -->
+  <polyline class="brk bk4" points="54,62 58,62 58,57"
+    fill="none" stroke="#48CBCF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+
+  <!-- ─── LEFT PANEL: data rows ─── -->
+  <g class="row r1">
+    <rect x="11" y="33" width="5" height="2" rx="0.5" fill="#48CBCF" opacity="0.6"/>
+    <rect x="18" y="33" width="14" height="2" rx="0.5" fill="#ffffff" opacity="0.12"/>
+  </g>
+  <g class="row r2">
+    <rect x="11" y="38" width="5" height="2" rx="0.5" fill="#48CBCF" opacity="0.35"/>
+    <rect x="18" y="38" width="10" height="2" rx="0.5" fill="#ffffff" opacity="0.10"/>
+  </g>
+  <g class="row r3">
+    <rect x="11" y="43" width="5" height="2" rx="0.5" fill="#48CBCF" opacity="0.5"/>
+    <rect x="18" y="43" width="16" height="2" rx="0.5" fill="#ffffff" opacity="0.12"/>
+  </g>
+
+  <!-- ─── DIVIDER ─── -->
+  <line x1="36" y1="22" x2="36" y2="66" stroke="#48CBCF" stroke-width="0.5" opacity="0.12"/>
+
+  <!-- ─── RIGHT PANEL: waveform ─── -->
+  <!-- baseline -->
+  <line class="ch-h" x1="38" y1="50" x2="70" y2="50" stroke="#48CBCF" stroke-width="0.6" opacity="0.2"/>
+
+  <!-- waveform bars (grow from baseline y=50 upward) -->
+  <rect class="wv w1"  x="39"   y="42" width="2.2" height="8"  rx="0.6" fill="#48CBCF" opacity="0.9" filter="url(#glow)"/>
+  <rect class="wv w2"  x="42.5" y="46" width="2.2" height="4"  rx="0.6" fill="#48CBCF" opacity="0.5"/>
+  <rect class="wv w3"  x="46"   y="38" width="2.2" height="12" rx="0.6" fill="#48CBCF" opacity="0.9" filter="url(#glow)"/>
+  <rect class="wv w4"  x="49.5" y="44" width="2.2" height="6"  rx="0.6" fill="#48CBCF" opacity="0.55"/>
+  <rect class="wv w5"  x="53"   y="34" width="2.2" height="16" rx="0.6" fill="#48CBCF" opacity="1"   filter="url(#glow-strong)"/>
+  <rect class="wv w6"  x="56.5" y="45" width="2.2" height="5"  rx="0.6" fill="#48CBCF" opacity="0.5"/>
+  <rect class="wv w7"  x="60"   y="40" width="2.2" height="10" rx="0.6" fill="#48CBCF" opacity="0.85" filter="url(#glow)"/>
+  <rect class="wv w8"  x="63.5" y="47" width="2.2" height="3"  rx="0.6" fill="#48CBCF" opacity="0.4"/>
+  <rect class="wv w9"  x="67"   y="43" width="2.2" height="7"  rx="0.6" fill="#48CBCF" opacity="0.7" filter="url(#glow)"/>
+
+  <!-- ─── CROSSHAIR (target on active signal) ─── -->
+  <line class="ch-h" x1="49" y1="43" x2="59" y2="43" stroke="#48CBCF" stroke-width="0.7" opacity="0.55"/>
+  <line class="ch-v" x1="54" y1="38" x2="54" y2="48" stroke="#48CBCF" stroke-width="0.7" opacity="0.55"/>
+
+  <!-- ─── SCAN LINE ─── -->
+  <line class="scan" x1="36" y1="22" x2="36" y2="66"
+    stroke="#48CBCF" stroke-width="1" opacity="0.3" filter="url(#glow)"/>
+
+  <!-- ─── STATUS DOT (live indicator) ─── -->
+  <circle class="status" cx="66" cy="14.5" r="2"
+    fill="#48CBCF" filter="url(#glow-strong)"/>
+</svg>
