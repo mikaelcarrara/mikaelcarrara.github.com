@@ -29,6 +29,10 @@ section {
 
 @media (max-width: 1024px) {
 
+  section {
+    width: 100%;
+  }
+
   .columns {
     display: block;
   }

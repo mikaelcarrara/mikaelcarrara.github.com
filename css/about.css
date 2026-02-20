@@ -7,12 +7,6 @@
   margin-top: 0
 }
 
-@media (max-width: 1024px) {
-  .about h3 {
-    margin: var(--space-2xl) 0 var(--space-lg) 0;
-  }
-}
-
 .line-accent { 
   display: block; 
   width: var(--space-xl); 
@@ -20,6 +14,7 @@
   background: var(--accent); 
   margin: 22px 0; 
 }
+
 .about-quote { 
   font-size: var(--text-base); 
   color: var(--muted); 
@@ -39,6 +34,10 @@
   list-style-type: none;
   font-size: var(--text-md);
   box-sizing: border-box;
-    border: 1px solid var(--border);
+  border: 1px solid var(--border);
   padding: var(--space-2xl);
+}
+
+.item-list p {
+  margin: 0;
 }

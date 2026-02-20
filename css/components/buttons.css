@@ -9,6 +9,7 @@
   transition: all var(--transition-fast);
   display: inline-block;
   margin-top: var(--space-md);
+      box-sizing: border-box;
 }
 .btn-primary { 
   background: var(--accent); 
