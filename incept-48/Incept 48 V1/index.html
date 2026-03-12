@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incept 48 — Seu produto no ar em 48h</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/buttons.css">
+<link rel="stylesheet" href="css/grid.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/anim.css">
+<link rel="stylesheet" href="css/how.css">
+<link rel="stylesheet" href="css/demo.css">
+<link rel="stylesheet" href="css/metrics.css">
+<link rel="stylesheet" href="css/discovery.css">
+<link rel="stylesheet" href="css/cta.css">
+<link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Incept <em>48</em></div>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-cta">Quero meu MVP →</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <h1>Seu produto no ar<br> <span>em 48h</span>.</h1>
+    <p class="hero-sub">
+      Discovery inteligente, build implacável.
+    </p>
+    <div class="hero-checks">
+      <span>Prazo fixo de 48h</span>
+      <span>Preço fechado</span>
+      <span>Você vê antes de pagar</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#" class="btn-main">Quero meu MVP →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ANIMATION SECTION -->
+<section class="anim-section">
+  <div class="wrap">
+    <div class="anim-label">O processo em tempo real</div>
+    <div class="anim-wrapper">
+      <svg viewBox="0 0 916 520" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="ct1"><rect x="0" y="0" width="0" height="300"><animate attributeName="width" from="0" to="360" dur="1.2s" begin="0.5s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/></rect></clipPath>
+          <clipPath id="ct2"><rect x="0" y="0" width="0" height="300"><animate attributeName="width" from="0" to="360" dur="1s" begin="1.9s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/></rect></clipPath>
+          <clipPath id="ct3"><rect x="0" y="0" width="0" height="300"><animate attributeName="width" from="0" to="360" dur="1s" begin="3s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/></rect></clipPath>
+          <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7ab8d4"/></marker>
+          <marker id="arr2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6dbf7e"/></marker>
+          <filter id="gl"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+
+        <!-- 4 equal columns: w=222 each, gap=2, total=4×222+3×2=894, margin=11 each side -->
+        <!-- Col1: x=11  centre=122  Col2: x=235  centre=346  Col3: x=459  centre=570  Col4: x=683  centre=794 -->
+
+        <rect width="916" height="520" fill="#0d0d10"/>
+        <pattern id="g2" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(122,184,212,0.03)" stroke-width="1"/></pattern>
+        <rect width="916" height="520" fill="url(#g2)"/>
+
+        <!-- Phase labels — centered on each column -->
+        <text x="116" y="38" font-family="system-ui" font-size="10" fill="#48485a" letter-spacing="2" text-anchor="middle" opacity="0">BRIEFING<animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="0.2s" fill="freeze"/></text>
+        <text x="341" y="38" font-family="system-ui" font-size="10" fill="#48485a" letter-spacing="2" text-anchor="middle" opacity="0">IA ANALISA<animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="4.5s" fill="freeze"/></text>
+        <text x="566" y="38" font-family="system-ui" font-size="10" fill="#48485a" letter-spacing="2" text-anchor="middle" opacity="0">PRIORIZAÇÃO<animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="8.2s" fill="freeze"/></text>
+        <text x="791" y="38" font-family="system-ui" font-size="10" fill="#48485a" letter-spacing="2" text-anchor="middle" opacity="0">BUILD<animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="12s" fill="freeze"/></text>
+
+        <!-- ── PHASE 1: BRIEFING  x=11 w=222 ── -->
+        <rect x="10" y="55" width="213" height="390" rx="2" fill="#111114" stroke="#1e1e26" stroke-width="1" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.2s" fill="freeze"/></rect>
+        <rect x="10" y="55" width="213" height="30" rx="2" fill="#16161a" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.2s" fill="freeze"/></rect>
+        <circle cx="25" cy="70" r="5" fill="none" stroke="#7ab8d4" stroke-width="1.5" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="0.3s" fill="freeze"/></circle>
+        <text x="36" y="74" font-family="system-ui" font-size="10" fill="#48485a" opacity="0">reuniao.mp3 · gravando<animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="0.3s" fill="freeze"/></text>
+
+        <!-- Waveform -->
+        <g filter="url(#gl)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="0.5s" fill="freeze"/>
+          <rect x="21" y="103" width="3" rx="1" fill="#7ab8d4"><animate attributeName="height" values="18;28;10;22;16" dur="0.8s" repeatCount="indefinite"/><animate attributeName="y" values="103;98;111;102;106" dur="0.8s" repeatCount="indefinite"/></rect>
+          <rect x="28" y="98"  width="3" rx="1" fill="#7ab8d4"><animate attributeName="height" values="28;14;36;20;26" dur="0.7s" repeatCount="indefinite"/><animate attributeName="y" values="98;110;94;106;100"  dur="0.7s" repeatCount="indefinite"/></rect>
+          <rect x="35" y="106" width="3" rx="1" fill="#7ab8d4"><animate attributeName="height" values="12;26;8;30;18"  dur="0.9s" repeatCount="indefinite"/><animate attributeName="y" values="106;99;113;96;108"  dur="0.9s" repeatCount="indefinite"/></rect>
+          <rect x="42" y="94"  width="3" rx="1" fill="#7ab8d4"><animate attributeName="height" values="36;18;28;12;34" dur="0.65s" repeatCount="indefinite"/><animate attributeName="y" values="94;108;103;114;95"  dur="0.65s" repeatCount="indefinite"/></rect>
+          <rect x="49" y="101" width="3" rx="1" fill="#7ab8d4"><animate attributeName="height" values="22;34;14;26;20" dur="0.85s" repeatCount="indefinite"/><animate attributeName="y" values="101;95;110;101;106" dur="0.85s" repeatCount="indefinite"/></rect>
+          <rect x="56" y="97"  width="3" rx="1" fill="#7ab8d4"><animate attributeName="height" values="30;16;38;22;28" dur="0.75s" repeatCount="indefinite"/><animate attributeName="y" values="97;109;93;106;103"  dur="0.75s" repeatCount="indefinite"/></rect>
+          <rect x="63" y="105" width="3" rx="1" fill="#7ab8d4"><animate attributeName="height" values="14;28;10;24;16" dur="0.95s" repeatCount="indefinite"/><animate attributeName="y" values="105;98;111;100;107" dur="0.95s" repeatCount="indefinite"/></rect>
+          <rect x="70" y="99"  width="3" rx="1" fill="#7ab8d4"><animate attributeName="height" values="26;12;32;18;30" dur="0.68s" repeatCount="indefinite"/><animate attributeName="y" values="99;113;97;108;102"  dur="0.68s" repeatCount="indefinite"/></rect>
+          <rect x="77" y="102" width="3" rx="1" fill="#7ab8d4"><animate attributeName="height" values="20;32;16;28;22" dur="0.88s" repeatCount="indefinite"/><animate attributeName="y" values="102;96;110;103;106" dur="0.88s" repeatCount="indefinite"/></rect>
+          <rect x="84" y="95"  width="3" rx="1" fill="#7ab8d4"><animate attributeName="height" values="34;20;38;14;26" dur="0.72s" repeatCount="indefinite"/><animate attributeName="y" values="95;109;93;117;105"  dur="0.72s" repeatCount="indefinite"/></rect>
+          <rect x="91" y="104" width="3" rx="1" fill="#7ab8d4"><animate attributeName="height" values="16;30;12;26;18" dur="0.82s" repeatCount="indefinite"/><animate attributeName="y" values="104;97;109;99;106"  dur="0.82s" repeatCount="indefinite"/></rect>
+          <rect x="98" y="100" width="3" rx="1" fill="#7ab8d4"><animate attributeName="height" values="24;16;34;20;28" dur="0.78s" repeatCount="indefinite"/><animate attributeName="y" values="100;108;96;106;103" dur="0.78s" repeatCount="indefinite"/></rect>
+        </g>
+
+        <!-- Transcript lines -->
+        <g clip-path="url(#ct1)">
+          <text x="21" y="152" font-family="system-ui" font-size="10" fill="#7878a0">"a gente perde muito</text>
+          <text x="21" y="166" font-family="system-ui" font-size="10" fill="#7878a0">tempo com propostas</text>
+          <text x="21" y="180" font-family="system-ui" font-size="10" fill="#7878a0">manuais..."</text>
+        </g>
+        <g clip-path="url(#ct2)">
+          <text x="21" y="204" font-family="system-ui" font-size="10" fill="#7878a0">"o cliente nunca sabe</text>
+          <text x="21" y="218" font-family="system-ui" font-size="10" fill="#7878a0">o status do pedido..."</text>
+        </g>
+        <g clip-path="url(#ct3)">
+          <text x="21" y="242" font-family="system-ui" font-size="10" fill="#7878a0">"meu time não tem</text>
+          <text x="21" y="256" font-family="system-ui" font-size="10" fill="#7878a0">visibilidade do funil</text>
+          <text x="21" y="270" font-family="system-ui" font-size="10" fill="#7878a0">de vendas..."</text>
+        </g>
+        <rect x="21" y="280" width="6" height="11" fill="#7ab8d4" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" dur="0.9s" begin="4.1s" repeatCount="3"/></rect>
+
+
+        <!-- ── PHASE 2: IA  x=235 w=222 ── -->
+        <rect x="235" y="55" width="213" height="390" rx="2" fill="#111114" stroke="#1e1e26" stroke-width="1" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="4.5s" fill="freeze"/></rect>
+        <rect x="235" y="55" width="213" height="30" rx="2" fill="#16161a" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="4.5s" fill="freeze"/></rect>
+        <text x="251" y="74" font-family="system-ui" font-size="10" fill="#48485a" opacity="0">IA processando transcrição<animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="4.5s" fill="freeze"/></text>
+
+        <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="4.7s" fill="freeze"/>
+          <circle cx="253" cy="112" r="4" fill="#7ab8d4"><animate attributeName="r" values="4;6;4" dur="0.9s" begin="4.7s" repeatCount="5"/><animate attributeName="opacity" values="1;0.3;1" dur="0.9s" begin="4.7s" repeatCount="5"/></circle>
+          <circle cx="268" cy="112" r="4" fill="#7ab8d4"><animate attributeName="r" values="4;6;4" dur="0.9s" begin="5.0s" repeatCount="5"/><animate attributeName="opacity" values="1;0.3;1" dur="0.9s" begin="5.0s" repeatCount="5"/></circle>
+          <circle cx="283" cy="112" r="4" fill="#7ab8d4"><animate attributeName="r" values="4;6;4" dur="0.9s" begin="5.3s" repeatCount="5"/><animate attributeName="opacity" values="1;0.3;1" dur="0.9s" begin="5.3s" repeatCount="5"/></circle>
+        </g>
+
+        <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="5.8s" fill="freeze"/>
+          <rect x="249" y="135" width="7" height="7" rx="1" fill="none" stroke="#7ab8d4" stroke-width="1.5"/>
+          <text x="262" y="143" font-family="system-ui" font-size="11" fill="#e2e2ee">gerador de propostas</text>
+          <text x="262" y="156" font-family="system-ui" font-size="10" fill="#48485a">impacto: alto · esforço: médio</text>
+        </g>
+        <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="6.4s" fill="freeze"/>
+          <rect x="249" y="174" width="7" height="7" rx="1" fill="none" stroke="#7ab8d4" stroke-width="1.5"/>
+          <text x="262" y="182" font-family="system-ui" font-size="11" fill="#e2e2ee">rastreio de pedidos</text>
+          <text x="262" y="195" font-family="system-ui" font-size="10" fill="#48485a">impacto: alto · esforço: baixo</text>
+        </g>
+        <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="7s" fill="freeze"/>
+          <rect x="249" y="213" width="7" height="7" rx="1" fill="none" stroke="#7ab8d4" stroke-width="1.5"/>
+          <text x="262" y="221" font-family="system-ui" font-size="11" fill="#e2e2ee">dashboard do funil</text>
+          <text x="262" y="234" font-family="system-ui" font-size="10" fill="#48485a">impacto: médio · esforço: alto</text>
+        </g>
+        <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="7.5s" fill="freeze"/>
+          <rect x="249" y="252" width="7" height="7" rx="1" fill="none" stroke="#7ab8d4" stroke-width="1.5"/>
+          <text x="262" y="260" font-family="system-ui" font-size="11" fill="#e2e2ee">notificações automáticas</text>
+          <text x="262" y="273" font-family="system-ui" font-size="10" fill="#48485a">impacto: médio · esforço: baixo</text>
+        </g>
+        <line x1="235" y1="292" x2="448" y2="292" stroke="#1e1e26" stroke-width="1" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="7.7s" fill="freeze"/></line>
+        <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="7.8s" fill="freeze"/>
+          <text x="249" y="310" font-family="system-ui" font-size="10" fill="#48485a">4 histórias · pontuação gerada</text>
+          <text x="249" y="326" font-family="system-ui" font-size="10" fill="#6dbf7e">✓ backlog pronto</text>
+        </g>
+
+
+        <!-- ── PHASE 3: PRIORITIZE  x=459 w=222 ── -->
+        <rect x="460" y="55" width="213" height="390" rx="2" fill="#111114" stroke="#1e1e26" stroke-width="1" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="8.2s" fill="freeze"/></rect>
+        <rect x="460" y="55" width="213" height="30" rx="2" fill="#16161a" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="8.2s" fill="freeze"/></rect>
+        <text x="476" y="74" font-family="system-ui" font-size="10" fill="#48485a" opacity="0">cliente prioriza<animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="8.2s" fill="freeze"/></text>
+
+        <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="8.6s" fill="freeze"/>
+          <rect x="472" y="97" width="189" height="44" rx="2" fill="#16161a" stroke="#7ab8d4" stroke-width="1"/>
+          <text x="485" y="115" font-family="system-ui" font-size="11" font-weight="600" fill="#e2e2ee">rastreio de pedidos</text>
+          <text x="485" y="129" font-family="system-ui" font-size="10" fill="#48485a">esforço baixo · 8 pts</text>
+          <text x="647" y="115" font-family="system-ui" font-size="12" fill="#6dbf7e">✓</text>
+        </g>
+        <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="9.2s" fill="freeze"/>
+          <rect x="472" y="150" width="189" height="44" rx="2" fill="#16161a" stroke="#7ab8d4" stroke-width="1"/>
+          <text x="485" y="168" font-family="system-ui" font-size="11" font-weight="600" fill="#e2e2ee">gerador de propostas</text>
+          <text x="485" y="182" font-family="system-ui" font-size="10" fill="#48485a">esforço médio · 13 pts</text>
+          <text x="647" y="168" font-family="system-ui" font-size="12" fill="#6dbf7e">✓</text>
+        </g>
+        <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="9.6s" fill="freeze"/>
+          <rect x="472" y="203" width="189" height="44" rx="2" fill="#111114" stroke="#1e1e26" stroke-width="1"/>
+          <text x="485" y="221" font-family="system-ui" font-size="11" fill="#48485a">dashboard do funil</text>
+          <text x="485" y="235" font-family="system-ui" font-size="10" fill="#2a2a38">esforço alto · 5 pts</text>
+        </g>
+        <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="9.9s" fill="freeze"/>
+          <rect x="472" y="256" width="189" height="44" rx="2" fill="#111114" stroke="#1e1e26" stroke-width="1"/>
+          <text x="485" y="274" font-family="system-ui" font-size="11" fill="#48485a">notificações auto.</text>
+          <text x="485" y="288" font-family="system-ui" font-size="10" fill="#2a2a38">esforço baixo · 3 pts</text>
+        </g>
+        <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="10.4s" fill="freeze"/>
+          <rect x="472" y="316" width="189" height="36" rx="2" fill="rgba(122,184,212,0.06)" stroke="rgba(122,184,212,0.18)" stroke-width="1"/>
+          <text x="485" y="332" font-family="system-ui" font-size="10" fill="#7ab8d4">2 features · 21 pts</text>
+          <text x="485" y="344" font-family="system-ui" font-size="10" fill="#6dbf7e">✓ sprint confirmado</text>
+        </g>
+
+
+        <!-- ── PHASE 4: TERMINAL  x=683 w=222 ── -->
+        <rect x="685" y="55" width="213" height="390" rx="2" fill="#0d0d10" stroke="#1e1e26" stroke-width="1" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="11.8s" fill="freeze"/></rect>
+        <rect x="685" y="55" width="213" height="28" rx="2" fill="#111114" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="11.8s" fill="freeze"/></rect>
+        <circle cx="700" cy="69" r="3.5" fill="#ff5f57" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="11.9s" fill="freeze"/></circle>
+        <circle cx="712" cy="69" r="3.5" fill="#febc2e" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="11.9s" fill="freeze"/></circle>
+        <circle cx="724" cy="69" r="3.5" fill="#28c840" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="11.9s" fill="freeze"/></circle>
+
+        <text x="697" y="102" font-family="system-ui" font-size="9" fill="#6dbf7e" opacity="0">$ npm init project<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="12.2s" fill="freeze"/></text>
+        <text x="697" y="116" font-family="system-ui" font-size="9" fill="#48485a" opacity="0">✓ projeto criado<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="12.7s" fill="freeze"/></text>
+        <text x="697" y="132" font-family="system-ui" font-size="9" fill="#6dbf7e" opacity="0">$ build rastreio<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="13.2s" fill="freeze"/></text>
+        <text x="697" y="146" font-family="system-ui" font-size="9" fill="#48485a" opacity="0">→ model.ts<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="13.6s" fill="freeze"/></text>
+        <text x="697" y="160" font-family="system-ui" font-size="9" fill="#48485a" opacity="0">→ api/orders.ts<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="13.9s" fill="freeze"/></text>
+        <text x="697" y="174" font-family="system-ui" font-size="9" fill="#48485a" opacity="0">→ ui/tracker.tsx<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="14.2s" fill="freeze"/></text>
+        <text x="697" y="190" font-family="system-ui" font-size="9" fill="#6dbf7e" opacity="0">$ build propostas<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="14.6s" fill="freeze"/></text>
+        <text x="697" y="204" font-family="system-ui" font-size="9" fill="#48485a" opacity="0">→ templates/<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="15s" fill="freeze"/></text>
+        <text x="697" y="218" font-family="system-ui" font-size="9" fill="#48485a" opacity="0">→ pdf.service.ts<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="15.3s" fill="freeze"/></text>
+        <text x="697" y="232" font-family="system-ui" font-size="9" fill="#48485a" opacity="0">→ crm.hook.ts<animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="15.6s" fill="freeze"/></text>
+
+        <!-- Progress bar -->
+        <rect x="697" y="252" width="189" height="4" rx="2" fill="#1a1a22" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="16s" fill="freeze"/></rect>
+        <rect x="697" y="252" width="0" height="4" rx="2" fill="#6dbf7e" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" dur="0.2s" begin="16s" fill="freeze"/>
+          <animate attributeName="width" from="0" to="189" dur="1.5s" begin="16s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+        </rect>
+
+        <text x="697" y="276" font-family="system-ui" font-size="9" fill="#6dbf7e" opacity="0">$ deploy --prod<animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="17.6s" fill="freeze"/></text>
+
+        <rect x="685" y="55" width="213" height="390" rx="2" fill="none" stroke="#6dbf7e" stroke-width="1.5" opacity="0">
+          <animate attributeName="opacity" values="0;0.7;0.3;0.7;0" dur="1.2s" begin="18.1s" fill="freeze"/>
+        </rect>
+
+        <text x="697" y="298" font-family="system-ui" font-size="9" fill="#6dbf7e" opacity="0">✓ online em 48h<animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="18.3s" fill="freeze"/></text>
+        <rect x="697" y="308" width="5" height="10" fill="#6dbf7e" opacity="0"><animate attributeName="opacity" values="0;1;0" dur="0.8s" begin="18.6s" repeatCount="indefinite"/></rect>
+
+        <!-- Timeline — from centre of col1 to centre of col4 -->
+        <!-- centres: 122, 346, 570, 794 -->
+        <line x1="116" y1="468" x2="802" y2="468" stroke="#1e1e26" stroke-width="1" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="0.2s" fill="freeze"/></line>
+        <circle cx="116" cy="468" r="4" fill="#7ab8d4" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.3s" fill="freeze"/></circle>
+        <circle cx="341" cy="468" r="4" fill="#7ab8d4" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="4.5s" fill="freeze"/></circle>
+        <circle cx="566" cy="468" r="4" fill="#7ab8d4" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="8.2s" fill="freeze"/></circle>
+        <circle cx="791" cy="468" r="4" fill="#6dbf7e" filter="url(#gl)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="12s" fill="freeze"/></circle>
+
+        <line x1="116" y1="468" x2="116" y2="468" stroke="#7ab8d4" stroke-width="1.5" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" dur="0.1s" begin="0.3s" fill="freeze"/>
+          <animate attributeName="x2" values="116;341;566;791" dur="19s" begin="0.3s" fill="freeze" keyTimes="0;0.13;0.43;1" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/>
+        </line>
+
+        <text x="116" y="490" font-family="system-ui" font-size="9" fill="#48485a" text-anchor="middle" opacity="0">0h<animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.3s" fill="freeze"/></text>
+        <text x="341" y="490" font-family="system-ui" font-size="9" fill="#48485a" text-anchor="middle" opacity="0">+1h<animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="4.5s" fill="freeze"/></text>
+        <text x="566" y="490" font-family="system-ui" font-size="9" fill="#48485a" text-anchor="middle" opacity="0">+2h<animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="8.2s" fill="freeze"/></text>
+        <text x="791" y="490" font-family="system-ui" font-size="9" fill="#6dbf7e" text-anchor="middle" opacity="0">48h<animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="12s" fill="freeze"/></text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="grid grid-4 steps-grid">
+      <div class="step-card">
+        <div class="step-n">01 —</div>
+
+        <h3>Reunião gravada</h3>
+        <p>Você fala sobre seu negócio, dores e objetivos. Sem formulários, sem documentos.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-n">02 —</div>
+
+        <h3>IA analisa</h3>
+        <p>A transcrição vira histórias de usuário com pontuação de impacto e esforço.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-n">03 —</div>
+
+        <h3>Você prioriza</h3>
+        <p>Interface simples: você escolhe quais features entram no build. Sem jargão técnico.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-n">04 —</div>
+
+        <h3>48h de build</h3>
+        <p>Produto entregue, funcionando em produção. Você vê antes de pagar.</p>
+        <div class="step-arrow">›</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO SECTION -->
+<section class="demo-section" id="demo">
+  <div class="wrap">
+    <div class="demo-header">
+      <div class="demo-title">
+        <h2>Você no controle.</h2>
+        <p>Interface real que o cliente usa para priorizar as features do MVP.</p>
+      </div>
+      <div class="demo-badge">Demo interativa</div>
+    </div>
+
+    <div class="demo-window">
+      <div class="demo-topbar">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <span class="topbar-url">sprintready.ai / <em>cliente / priorização</em></span>
+      </div>
+      <div class="demo-body">
+
+        <div class="transcript-box">
+          <strong>// transcrição processada —</strong> "...a gente perde muito tempo enviando proposta manualmente,
+          cada cliente recebe um PDF diferente e fica difícil rastrear quem abriu, quem respondeu.
+          O time de vendas reclama que não tem visibilidade do funil..."
+        </div>
+
+        <div class="ai-status">
+          <div class="pulse-dot"></div>
+          IA identificou 6 histórias de usuário — selecione até 4 para o sprint
+        </div>
+
+        <div class="features-grid" id="features">
+          <div class="fc sel" onclick="toggle(this)">
+            <div class="fc-top">
+              <div class="fc-name">Gerador de propostas automático</div>
+              <div class="fc-pts">13 pts</div>
+            </div>
+            <div class="fc-story">Como vendedor, quero gerar uma proposta personalizada em 1 clique a partir do CRM, para reduzir o tempo de criação de 2h para 5min.</div>
+            <div class="fc-tags"><span class="tag hi">alta prioridade</span><span class="tag">vendas</span><span class="tag">automação</span></div>
+          </div>
+
+          <div class="fc sel" onclick="toggle(this)">
+            <div class="fc-top">
+              <div class="fc-name">Rastreamento de abertura de proposta</div>
+              <div class="fc-pts">8 pts</div>
+            </div>
+            <div class="fc-story">Como gerente, quero saber quando o cliente abriu a proposta e quanto tempo passou nela, para priorizar follow-ups.</div>
+            <div class="fc-tags"><span class="tag hi">alta prioridade</span><span class="tag">visibilidade</span></div>
+          </div>
+
+          <div class="fc" onclick="toggle(this)">
+            <div class="fc-top">
+              <div class="fc-name">Dashboard do funil de vendas</div>
+              <div class="fc-pts">5 pts</div>
+            </div>
+            <div class="fc-story">Como gestor, quero visualizar em qual etapa cada negociação está, para entender gargalos e agir antes de perder deals.</div>
+            <div class="fc-tags"><span class="tag md">média prioridade</span><span class="tag">gestão</span></div>
+          </div>
+
+          <div class="fc" onclick="toggle(this)">
+            <div class="fc-top">
+              <div class="fc-name">Assinatura digital integrada</div>
+              <div class="fc-pts">5 pts</div>
+            </div>
+            <div class="fc-story">Como cliente, quero assinar a proposta diretamente no link enviado, sem precisar baixar ou imprimir.</div>
+            <div class="fc-tags"><span class="tag md">média prioridade</span><span class="tag">UX cliente</span></div>
+          </div>
+
+          <div class="fc" onclick="toggle(this)">
+            <div class="fc-top">
+              <div class="fc-name">Templates por segmento</div>
+              <div class="fc-pts">3 pts</div>
+            </div>
+            <div class="fc-story">Como vendedor, quero templates específicos por tipo de cliente, para que a proposta já venha com o tom certo.</div>
+            <div class="fc-tags"><span class="tag">baixa prioridade</span><span class="tag">customização</span></div>
+          </div>
+
+          <div class="fc" onclick="toggle(this)">
+            <div class="fc-top">
+              <div class="fc-name">Notificação por WhatsApp</div>
+              <div class="fc-pts">3 pts</div>
+            </div>
+            <div class="fc-story">Como vendedor, quero receber uma mensagem no WhatsApp quando o cliente abrir a proposta, para reagir em tempo real.</div>
+            <div class="fc-tags"><span class="tag">baixa prioridade</span><span class="tag">notificações</span></div>
+          </div>
+        </div>
+
+        <div class="demo-footer">
+          <div class="sel-info">
+            <span id="count">2</span> de 4 features selecionadas — <span id="pts">21 pts</span> no sprint
+          </div>
+          <button class="btn-confirm">Confirmar seleção →</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCOVERY SECTION -->
+<section class="discovery-section" id="discovery">
+  <div class="wrap">
+    <div class="discovery-intro">
+      <div class="section-tag">Discovery inteligente</div>
+      <h2>O briefing que vale<br><span>mais que um projeto.</span></h2>
+      <p>Antes de escrever uma linha de código, a IA transforma sua conversa em um plano completo — backlog, prioridades, protótipo e documentação. Você decide o que entra nas 48h com total clareza.</p>
+    </div>
+
+    <div class="grid grid-2 discovery-grid">
+
+      <!-- 1. Auto-Backlog -->
+      <div class="dc">
+        <div class="dc-tag">Auto-Backlog</div>
+        <h3>Sua reunião vira<br>um backlog em minutos.</h3>
+        <p>A transcrição gera automaticamente User Stories prontas para desenvolvimento — com título, critério de aceite e estimativa. O que levaria dias de refinamento, a IA faz antes do café esfriar.</p>
+        <div class="dc-preview">
+          <div class="backlog-item">
+            <div class="backlog-chip a">US-01</div>
+            <span>Como vendedor, gerar proposta em 1 clique</span>
+          </div>
+          <div class="backlog-item">
+            <div class="backlog-chip b">US-02</div>
+            <span>Rastrear abertura de proposta pelo cliente</span>
+          </div>
+          <div class="backlog-item">
+            <div class="backlog-chip">US-03</div>
+            <span>Visualizar funil de vendas em tempo real</span>
+          </div>
+          <div class="backlog-item">
+            <div class="backlog-chip">US-04</div>
+            <span>Assinar proposta sem sair do link</span>
+          </div>
+        </div>
+        <div class="dc-cta">Exporta para Trello, Jira ou Notion →</div>
+      </div>
+
+      <!-- 2. Quick Win -->
+      <div class="dc">
+        <div class="dc-tag green">Quick Win</div>
+        <h3>A IA aponta o que<br>vale mais — e custa menos.</h3>
+        <p>No momento da priorização, cada feature recebe um selo automático de <strong class="text-green">Quick Win</strong>, <strong class="text-accent">Planejado</strong> ou <strong class="text-muted">Depois</strong> — baseado na relação impacto × esforço. Sem achismo, sem reunião extra.</p>
+        <div class="dc-preview">
+          <div class="qw-item">
+            <span>Rastreio de pedidos</span>
+            <div class="qw-badge win">⚡ Quick Win</div>
+          </div>
+          <div class="qw-item">
+            <span>Gerador de propostas</span>
+            <div class="qw-badge plan">→ Planejado</div>
+          </div>
+          <div class="qw-item">
+            <span>Dashboard do funil</span>
+            <div class="qw-badge later">Depois</div>
+          </div>
+        </div>
+        <div class="dc-cta">Critério configurável por segmento →</div>
+      </div>
+
+      <!-- 3. Lofi Prototype -->
+      <div class="dc">
+        <div class="dc-tag amber">Protótipo Lo-fi</div>
+        <h3>Veja o fluxo antes<br>do build começar.</h3>
+        <p>Com as features priorizadas, a IA gera um protótipo clicável ultra-simples — telas, fluxo e navegação. Você valida a lógica e dá o OK final. Zero surpresa na entrega.</p>
+        <div class="dc-preview">
+          <div class="lofi-screen">
+            <div class="lofi-sidebar">
+              <div class="lofi-bar active"></div>
+              <div class="lofi-bar"></div>
+              <div class="lofi-bar"></div>
+              <div class="lofi-bar"></div>
+            </div>
+            <div class="lofi-main">
+              <div class="lofi-row heading accent"></div>
+              <div class="lofi-row"></div>
+              <div class="lofi-row short"></div>
+              <div class="lofi-row btn"></div>
+            </div>
+          </div>
+        </div>
+        <div class="dc-cta">Gerado antes do build · aprovação em 1 clique →</div>
+      </div>
+
+      <!-- 4. Discovery Report -->
+      <div class="dc">
+        <div class="dc-tag purple">Discovery Report</div>
+        <h3>Não quer o build agora?<br>Leva o plano completo.</h3>
+        <p>Mesmo que você não feche o build nas 48h, pode sair com um <strong class="text-main">Discovery Report</strong> completo: arquitetura, requisitos, user stories e roadmap — gerado pela IA, revisado por nós. Um entregável por si só.</p>
+        <div class="dc-preview">
+          <div class="report-lines">
+            <div class="rline heading"></div>
+            <div class="rline"></div>
+            <div class="rline short"></div>
+            <div class="rline"></div>
+            <div class="rline shorter"></div>
+            <div class="rline accent"></div>
+          </div>
+        </div>
+        <div class="dc-cta">PDF + Notion · entregue em 24h →</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="wrap">
+    <h2>Pronto para<br><span>sair do papel?</span></h2>
+    <p>Uma conversa. Seu MVP em 48 horas.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-main">Agendar sessão gratuita →</a>
+      <a href="#demo" class="btn-ghost">Ver a demo primeiro</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="logo">Incept <em>48</em></div>
+    <p>Construído com IA · Feito no Brasil</p>
+  </div>
+</footer>
+
+<script>
+  const pts = {0:13, 1:8, 2:5, 3:5, 4:3, 5:3};
+
+  function toggle(el) {
+    const all = document.querySelectorAll('.fc');
+    const selected = document.querySelectorAll('.fc.sel');
+    const isSel = el.classList.contains('sel');
+    if (!isSel && selected.length >= 4) {
+      el.style.borderColor = '#ff6b6b';
+      setTimeout(() => el.style.borderColor = '', 700);
+      return;
+    }
+    el.classList.toggle('sel');
+    update();
+  }
+
+  function update() {
+    const all = document.querySelectorAll('.fc');
+    let c = 0, t = 0;
+    all.forEach((fc, i) => {
+      if (fc.classList.contains('sel')) { c++; t += pts[i] || 0; }
+    });
+    document.getElementById('count').textContent = c;
+    document.getElementById('pts').textContent = t + ' pts';
+  }
+</script>
+
+</body>
+</html>

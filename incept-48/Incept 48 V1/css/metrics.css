@@ -1,0 +1,27 @@
+.metrics-section { padding: 0 0 var(--space-12); }
+
+.metrics-grid { }
+
+.metric-item {
+  background: var(--off);
+  padding: var(--space-11) var(--space-9);
+}
+
+.metric-num {
+  font-size: var(--fs-7xl);
+  font-weight: var(--fw-extrabold);
+  color: var(--text);
+  letter-spacing: var(--ls-tight-4);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--space-2-5);
+}
+
+.metric-label {
+  font-size: var(--fs-base);
+  color: var(--text2);
+  line-height: var(--lh-normal);
+  max-width: var(--metric-label-maxw);
+}
+
+@media (max-width: var(--bp-lg)) {
+}

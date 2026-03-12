@@ -1,0 +1,40 @@
+.cta-section {
+  padding: var(--space-12) 0 calc(var(--space-12) + var(--space-4));
+  text-align: center;
+  position: relative;
+}
+
+.cta-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--cta-glow-w);
+  height: var(--cta-glow-h);
+  background: radial-gradient(ellipse, var(--accent-a-06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-section h2 {
+  font-size: var(--fs-hero-h2);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: var(--ls-tight-15);
+  margin-bottom: var(--space-4);
+  position: relative;
+}
+.cta-section h2 span { color: var(--accent); }
+
+.cta-section p {
+  font-size: var(--fs-2xl);
+  color: var(--text2);
+  margin-bottom: var(--space-10);
+  position: relative;
+}
+
+.cta-btns {
+  display: flex;
+  gap: var(--space-3-5);
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}

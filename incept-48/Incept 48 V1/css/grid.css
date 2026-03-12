@@ -1,0 +1,35 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  --g: var(--bw-1);
+  gap: var(--g);
+  background: var(--border);
+  border: var(--bw-1) solid var(--border);
+}
+
+.grid > * {
+  background: var(--off);
+  box-sizing: border-box;
+}
+
+.grid.grid-2 > * { flex: 0 0 calc((100% - var(--g)) / 2); }
+.grid.grid-3 > * { flex: 0 0 calc((100% - (2 * var(--g))) / 3); }
+.grid.grid-4 > * { flex: 0 0 calc((100% - (3 * var(--g))) / 4); }
+
+.grid.no-gap,
+.grid.no.gap {
+  --g: 0;
+  gap: 0;
+  border-width: 0;
+}
+
+@media (max-width: var(--bp-lg)) {
+  .grid.grid-3 > *,
+  .grid.grid-4 > * { flex-basis: calc((100% - var(--g)) / 2); }
+}
+
+@media (max-width: var(--bp-sm)) {
+  .grid.grid-2 > *,
+  .grid.grid-3 > *,
+  .grid.grid-4 > * { flex-basis: 100%; }
+}

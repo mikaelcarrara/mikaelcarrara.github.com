@@ -1,0 +1,30 @@
+.anim-section { padding: 0 0 var(--space-12); }
+
+.anim-label {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  letter-spacing: var(--ls-wide-2);
+  text-transform: uppercase;
+  margin-bottom: var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.anim-label::after {
+  content: '';
+  flex: 1;
+  height: var(--bw-1);
+  background: var(--border);
+}
+
+.anim-wrapper {
+  border: var(--bw-1) solid var(--border);
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.anim-wrapper svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}

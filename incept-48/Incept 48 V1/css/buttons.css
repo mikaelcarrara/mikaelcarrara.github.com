@@ -1,0 +1,43 @@
+.btn-main {
+  background: var(--accent);
+  color: var(--black);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-lg);
+  padding: var(--space-4) var(--space-8);
+  border: none;
+  cursor: pointer;
+  transition: all var(--dur-fast);
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-main:hover {
+  background: var(--accent-hover);
+  transform: translateY(calc(-1 * var(--space-0-5)));
+  box-shadow: 0 var(--shadow-y-lg) var(--shadow-blur-lg) var(--accent-shadow);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text2);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-medium);
+  padding: var(--space-4) var(--space-6);
+  border: var(--bw-1) solid var(--border2);
+  cursor: pointer;
+  transition: all var(--dur-fast);
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--text2); color: var(--text); }
+
+.btn-confirm {
+  background: transparent;
+  border: var(--bw-1) solid var(--accent);
+  color: var(--accent);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+  padding: var(--space-3) var(--space-6);
+  cursor: pointer;
+  transition: all var(--dur-fast);
+}
+.btn-confirm:hover { background: var(--accent); color: var(--black); }
