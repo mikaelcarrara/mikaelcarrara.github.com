@@ -7,7 +7,7 @@ Audiência: fundadores, parceiros e colaboradores técnicos
 
 ## O que é Deplova
 
-Deplova é um sistema para transformar ideias de produto em MVPs funcionais em até 48 horas.
+A Deplova transforma ideias de produto em MVPs funcionais em até 48 horas.
 
 Em vez de tratar cada produto como um projeto totalmente novo, a Deplova utiliza um processo estruturado para transformar ideias em software real.
 
