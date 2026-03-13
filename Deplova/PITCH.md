@@ -14,7 +14,7 @@ Em vez de tratar cada produto como um projeto totalmente novo, a Deplova utiliza
 O objetivo é simples:  
 tirar um produto da cabeça e colocá-lo no ar o mais rápido possível.
 
-Deplova não é uma agência tradicional de desenvolvimento.  
+A Deplova não é uma agência tradicional de desenvolvimento.  
 É um **modelo repetível de construção de produtos digitais em estágio inicial**.
 
 ---
