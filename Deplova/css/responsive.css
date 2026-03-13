@@ -1,0 +1,22 @@
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .hero__bg-num {
+    display: none;
+  }
+
+  .how-intro {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-inline: var(--space-5);
+  }
+
+  .nav__links {
+    display: none;
+  }
+}

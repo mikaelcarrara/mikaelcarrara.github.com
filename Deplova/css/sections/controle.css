@@ -1,0 +1,28 @@
+.section-controle {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.controle-grid {
+  --grid-gap: var(--space-20);
+  --grid-2-md-cols: 1;
+  align-items: center;
+}
+
+.controle__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+
+.controle__desc {
+  max-width: 38ch;
+  line-height: 1.65;
+}
+
+.controle__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

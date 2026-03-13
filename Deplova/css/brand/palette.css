@@ -1,0 +1,80 @@
+.brand-color-grid {
+  --grid-gap: var(--space-4);
+}
+
+.brand-swatch-list {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.brand-swatch {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: var(--space-3);
+  align-items: center;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  background: color-mix(in srgb, var(--bg-base) 56%, transparent);
+}
+
+.brand-swatch__color {
+  height: 46px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-mid);
+}
+
+.brand-swatch__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brand-swatch__name {
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+.brand-swatch__hex {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.brand-gradient-grid {
+  --grid-gap: var(--space-4);
+}
+
+.brand-gradient {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.brand-gradient__preview {
+  height: 86px;
+}
+
+.brand-gradient__meta {
+  padding: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.brand-gradient__name {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brand-gradient__code {
+  margin-top: var(--space-2);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+

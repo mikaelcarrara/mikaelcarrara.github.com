@@ -1,0 +1,44 @@
+.cards-grid {
+  --grid-gap: var(--space-4);
+}
+
+.content-card {
+  padding: var(--space-8) var(--space-6);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+  text-align: center;
+  transition: border-color var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out);
+}
+
+.content-card:hover {
+  border-color: var(--border-mid);
+  transform: translateY(-2px);
+}
+
+.content-card__title {
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.35;
+}
+
+.content-card__title--persona {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xl);
+}
+
+.content-card__desc {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.content-card__desc--persona {
+  color: var(--text-secondary);
+}

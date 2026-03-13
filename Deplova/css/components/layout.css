@@ -1,0 +1,14 @@
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-8);
+}
+
+.section {
+  padding-block: var(--space-32);
+}
+
+.section--tight {
+  padding-block: var(--space-16);
+}

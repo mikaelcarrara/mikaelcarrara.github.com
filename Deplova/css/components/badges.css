@@ -1,0 +1,40 @@
+/* ============================================================
+   BADGE
+   ============================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: var(--ink-800);
+  border: 1px solid var(--border-mid);
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--accent-bright);
+  letter-spacing: 0.08em;
+}
+
+.badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--confirm);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--confirm);
+  animation: pulse 2s infinite;
+}
+
+.badge--no-dot::before {
+  display: none;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}

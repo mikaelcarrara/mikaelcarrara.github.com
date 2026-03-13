@@ -1,0 +1,19 @@
+.cta-section::before {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle,
+      color-mix(in srgb, #35B0CD 6%, transparent) 0%,
+      color-mix(in srgb, #F575A2 3%, transparent) 30%,
+      transparent 50%);
+}
+
+.cta-section__desc {
+  max-width: 52ch;
+}
+
+.cta-section__punchline {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--text-primary);
+  font-weight: 700;
+}

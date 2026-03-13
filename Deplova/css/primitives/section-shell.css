@@ -1,0 +1,27 @@
+.objective-section,
+.cta-section {
+  text-align: center;
+  padding-block: var(--space-32);
+  position: relative;
+  overflow: hidden;
+}
+
+.objective-section::before,
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.objective__inner,
+.cta-section__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+}

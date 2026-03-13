@@ -1,0 +1,19 @@
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-16);
+}
+
+.section-header--center {
+  align-items: center;
+  text-align: center;
+}
+
+.section-header__desc {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  max-width: 52ch;
+  line-height: 1.7;
+  font-weight: 300;
+}

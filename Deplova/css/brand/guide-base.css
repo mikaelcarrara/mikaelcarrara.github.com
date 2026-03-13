@@ -1,0 +1,126 @@
+.brand-guide-main {
+  padding-top: 92px;
+}
+
+.brand-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 42% 38% at 18% 28%, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 72%),
+    radial-gradient(ellipse 44% 42% at 84% 66%, color-mix(in srgb, var(--primary) 14%, transparent) 0%, transparent 74%);
+  pointer-events: none;
+}
+
+.brand-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 56rem;
+}
+
+.brand-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.brand-kicker::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.brand-hero__desc {
+  max-width: 50ch;
+  color: var(--text-secondary);
+  font-size: var(--text-lg);
+  line-height: 1.7;
+}
+
+.brand-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.brand-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: 999px;
+  border: 1px solid var(--border-mid);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.brand-chip:hover {
+  color: var(--text-primary);
+  border-color: color-mix(in srgb, var(--accent) 44%, var(--border-mid));
+}
+
+.brand-panel + .brand-panel {
+  margin-top: var(--space-4);
+}
+
+.brand-caption {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.brand-spec {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.brand-spec__row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: var(--space-3);
+  align-items: baseline;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.brand-spec__row:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.brand-spec__key {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.brand-spec__value {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 760px) {
+  .brand-spec__row {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+}

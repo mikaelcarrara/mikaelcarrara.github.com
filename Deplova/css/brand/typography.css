@@ -1,0 +1,56 @@
+.brand-type-grid {
+  --grid-gap: var(--space-4);
+}
+
+.brand-type-sample {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--bg-base) 65%, transparent);
+  padding: var(--space-6);
+}
+
+.brand-type-sample__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.brand-type-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.brand-type-display--xl {
+  font-size: clamp(var(--text-4xl), 5vw, var(--text-6xl));
+}
+
+.brand-type-display--lg {
+  font-size: clamp(var(--text-3xl), 4vw, var(--text-5xl));
+}
+
+.brand-type-body {
+  color: var(--text-secondary);
+  font-size: var(--text-lg);
+  line-height: 1.7;
+}
+
+.brand-type-ui {
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-size: var(--text-sm);
+}
+
+.brand-type-note {
+  margin-top: var(--space-4);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
