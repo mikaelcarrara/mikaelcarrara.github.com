@@ -11,7 +11,7 @@ Documento conceitual interno
 A maioria dos produtos de software não começa realmente do zero.  
 Eles tendem a seguir **padrões recorrentes de estrutura, navegação e funcionalidades**.
 
-Em vez de tratar cada novo produto como um caso totalmente único, o Deplova utiliza **arquétipos de produto** como ponto de partida para acelerar o desenvolvimento de MVPs.
+Em vez de tratar cada novo produto como um caso totalmente único, a Deplova utiliza **arquétipos de produto** como ponto de partida para acelerar o desenvolvimento de MVPs.
 
 Esses arquétipos representam **formas comuns de software** que aparecem repetidamente no mercado.
 
@@ -94,7 +94,7 @@ Isso aumenta a previsibilidade do processo de construção.
 
 ## Arquétipos comuns
 
-O Deplova utiliza alguns arquétipos principais que cobrem a maior parte dos produtos em estágio inicial.
+A Deplova utiliza alguns arquétipos principais que cobrem a maior parte dos produtos em estágio inicial.
 
 ---
 
@@ -192,7 +192,7 @@ Esse tipo de produto é comum nas primeiras fases de validação.
 
 ---
 
-## Relação com o pipeline do Deplova
+## Relação com o pipeline da Deplova
 
 Os arquétipos fazem parte do processo maior de geração de produtos.
 
@@ -234,11 +234,11 @@ A distinção é clara:
 
 ---
 
-## Relação com o Deplova Guardrails
+## Relação com a Deplova Guardrails
 
 Os arquétipos também trabalham em conjunto com o design system.
 
-O Deplova Guardrails define:
+A Deplova Guardrails define:
 
 - organização de layout
 - padrões de navegação

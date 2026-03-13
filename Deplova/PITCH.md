@@ -9,7 +9,7 @@ Audiência: fundadores, parceiros e colaboradores técnicos
 
 Deplova é um sistema para transformar ideias de produto em MVPs funcionais em até 48 horas.
 
-Em vez de tratar cada produto como um projeto totalmente novo, o Deplova utiliza um processo estruturado para transformar ideias em software real.
+Em vez de tratar cada produto como um projeto totalmente novo, a Deplova utiliza um processo estruturado para transformar ideias em software real.
 
 O objetivo é simples:  
 tirar um produto da cabeça e colocá-lo no ar o mais rápido possível.
@@ -37,7 +37,7 @@ Cada semana sem produto é uma semana sem aprendizado.
 
 ## A abordagem
 
-O Deplova resolve esse problema tratando a criação de produtos iniciais como um **pipeline estruturado**.
+A Deplova resolve esse problema tratando a criação de produtos iniciais como um **pipeline estruturado**.
 
 ```
 Ideia
@@ -57,7 +57,7 @@ Implementação
 Deploy
 ```
 
-Em vez de reinventar o processo a cada projeto, o Deplova usa uma fundação técnica reutilizável e um processo repetível para acelerar o caminho até um produto funcional.
+Em vez de reinventar o processo a cada projeto, a Deplova usa uma fundação técnica reutilizável e um processo repetível para acelerar o caminho até um produto funcional.
 
 **Deplova Guardrails** é o sistema de design utilizado pelo Deplova. Ele funciona como um compilador de design system — capturando decisões de tipografia, cores, espaçamento e componentes, e convertendo-as em restrições estruturadas que guiam a geração de interfaces.
 
@@ -80,6 +80,6 @@ O objetivo não é um protótipo.
 
 ## Visão
 
-A longo prazo, o Deplova busca transformar a criação de produtos digitais em um processo **mais rápido, estruturado e previsível**.
+A longo prazo, a Deplova busca transformar a criação de produtos digitais em um processo **mais rápido, estruturado e previsível**.
 
 Em vez de tratar cada novo produto como um projeto artesanal, a ideia é tratá-lo como **um sistema de construção repetível**.

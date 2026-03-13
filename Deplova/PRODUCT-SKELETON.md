@@ -42,7 +42,7 @@ implementar funcionalidades
 deploy
 ```
 
-Em vez de gerar a arquitetura repetidamente, o Deplova utiliza **uma fundação de aplicação estável**, que evolui ao longo do tempo.
+Em vez de gerar a arquitetura repetidamente, a Deplova utiliza **uma fundação de aplicação estável**, que evolui ao longo do tempo.
 
 ---
 

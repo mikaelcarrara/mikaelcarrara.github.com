@@ -1,8 +1,8 @@
 # Documentação Deplova
 
-Este repositório contém os **documentos conceituais principais** que descrevem como o sistema Deplova funciona.
+Este repositório contém os **documentos conceituais principais** que descrevem como a Deplova funciona.
 
-O Deplova não é apenas um serviço de desenvolvimento.  
+A Deplova não é apenas um serviço de desenvolvimento.  
 É um **pipeline estruturado para transformar ideias de produto em MVPs funcionais**.
 
 Os documentos nesta pasta explicam o sistema em diferentes níveis: visão, processo, modelos de produto e estrutura de implementação.
@@ -13,12 +13,12 @@ Os documentos nesta pasta explicam o sistema em diferentes níveis: visão, proc
 
 ### PITCH.md
 
-**Objetivo:** visão estratégica do Deplova.
+**Objetivo:** visão estratégica da Deplova.
 
 Este documento explica:
 
-- o que é o Deplova
-- qual problema ele resolve
+- o que é a Deplova
+- qual problema ela resolve
 - como o sistema funciona em alto nível
 - a visão de longo prazo
 
@@ -55,7 +55,7 @@ Implementação de funcionalidades
 Deploy
 ```
 
-Este documento explica como o Deplova transforma **inputs estruturados em software funcional**.
+Este documento explica como a Deplova transforma **inputs estruturados em software funcional**.
 
 ---
 
@@ -65,7 +65,7 @@ Este documento explica como o Deplova transforma **inputs estruturados em softwa
 
 A maioria dos produtos digitais segue um conjunto pequeno de padrões estruturais.
 
-Em vez de começar cada projeto do zero, o Deplova usa **arquétipos de produto** para acelerar o desenvolvimento.
+Em vez de começar cada projeto do zero, a Deplova usa **arquétipos de produto** para acelerar o desenvolvimento.
 
 Exemplos incluem:
 
@@ -112,7 +112,7 @@ PRODUCT-ARCHETYPES
 PRODUCT-SKELETON
 ```
 
-Juntos, descrevem como o Deplova move um produto de **ideia → MVP deployado**.
+Juntos, descrevem como a Deplova move um produto de **ideia → MVP deployado**.
 
 ---
 
@@ -129,4 +129,4 @@ Ao combinar:
 - arquitetura padronizada via Product Skeleton
 - implementação assistida por IA
 
-O Deplova busca reduzir drasticamente o tempo necessário para lançar novos produtos de software.
+A Deplova busca reduzir drasticamente o tempo necessário para lançar novos produtos de software.

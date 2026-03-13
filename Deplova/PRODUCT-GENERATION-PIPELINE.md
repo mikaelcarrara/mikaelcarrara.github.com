@@ -10,7 +10,7 @@ O objetivo do pipeline é permitir uma **geração de produtos previsível e rep
 
 ## Visão geral do pipeline
 
-O pipeline do Deplova converte uma ideia de produto em uma aplicação deployada por meio de uma sequência de etapas bem definidas.
+O pipeline da Deplova converte uma ideia de produto em uma aplicação deployada por meio de uma sequência de etapas bem definidas.
 
 ```
 Ideia de produto
@@ -93,7 +93,7 @@ Todas as etapas seguintes dependem da clareza deste documento.
 
 ### Deplova Guardrails
 
-O Deplova Guardrails é utilizado para definir o design system do produto.
+A Deplova Guardrails é utilizada para definir o design system do produto.
 
 O Guardrails funciona como um **compilador de design system**.
 
@@ -128,13 +128,13 @@ Instruções típicas incluem:
 - seguir as restrições de acessibilidade
 - manter estruturas de componentes consistentes
 
-Ao injetar esse prompt no início das sessões de IA, o Deplova garante que a geração de UI permaneça **consistente e determinística**.
+Ao injetar esse prompt no início das sessões de IA, a Deplova garante que a geração de UI permaneça **consistente e determinística**.
 
 ---
 
 ## Etapa 6 — Design Tokens
 
-O Deplova Guardrails também produz **design tokens**.
+A Deplova Guardrails também produz **design tokens**.
 
 Esses tokens definem os valores em runtime utilizados pela aplicação.
 
@@ -147,7 +147,7 @@ Categorias típicas de tokens incluem:
 - border radius
 - animação
 
-Os tokens podem ser integrados ao sistema de governança de tokens do Deplova para oferecer:
+Os tokens podem ser integrados ao sistema de governança de tokens da Deplova para oferecer:
 
 - versionamento
 - distribuição entre projetos
@@ -241,7 +241,7 @@ O output final é uma **aplicação MVP funcional** pronta para testes, iteraç�
 
 ## Princípios arquiteturais
 
-O pipeline do Deplova é baseado em alguns princípios fundamentais.
+O pipeline da Deplova é baseado em alguns princípios fundamentais.
 
 ### Geração estruturada
 
@@ -263,7 +263,7 @@ Ferramentas de IA aceleram a implementação de funcionalidades enquanto operam 
 
 ## Resumo
 
-O pipeline do Deplova combina:
+O pipeline da Deplova combina:
 
 - definição estruturada de produto
 - compilação de design system
