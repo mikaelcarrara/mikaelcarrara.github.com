@@ -47,14 +47,7 @@
   margin-bottom: var(--space-8);
 }
 
-.hero__headline em {
-  font-style: italic;
-  background: linear-gradient(135deg, #35B0CD, #F575A2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 .hero__sub {
   margin-bottom: var(--space-10);
+  margin-top: 0;
 }

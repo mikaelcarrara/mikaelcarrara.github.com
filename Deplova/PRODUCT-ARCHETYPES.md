@@ -1,262 +1,534 @@
-# Arquétipos de Produto
+# Product Archetypes & Product Grammar
 
-Documento conceitual interno
-
----
-
-## Visão geral
-
-**Arquétipos de Produto** são modelos estruturais de produtos digitais.
-
-A maioria dos produtos de software não começa realmente do zero.  
-Eles tendem a seguir **padrões recorrentes de estrutura, navegação e funcionalidades**.
-
-Em vez de tratar cada novo produto como um caso totalmente único, a Deplova utiliza **arquétipos de produto** como ponto de partida para acelerar o desenvolvimento de MVPs.
-
-Esses arquétipos representam **formas comuns de software** que aparecem repetidamente no mercado.
-
-Ao reconhecer esses padrões, é possível reduzir decisões iniciais e acelerar significativamente o processo de construção.
+Documento conceitual interno — Deplova
 
 ---
 
-## Ideia central
+# Visão geral
 
-No desenvolvimento tradicional, cada produto começa com uma fase de exploração estrutural.
+A maioria dos produtos digitais não começa realmente do zero.
+
+Eles seguem **padrões estruturais recorrentes** de navegação, organização de páginas e fluxos de interação.
+
+Esses padrões aparecem repetidamente em diferentes categorias de software:
+
+* dashboards SaaS
+* ferramentas internas
+* marketplaces
+* diretórios
+* plataformas de conteúdo
+* produtos de validação
+
+Na Deplova, esses padrões são capturados através de **Product Archetypes**.
+
+Arquétipos funcionam como **formas estruturais de produto** que podem ser rapidamente adaptadas a uma nova ideia.
+
+Para tornar o sistema mais flexível e compatível com IA, os arquétipos são organizados dentro de uma **Product Grammar**.
+
+Essa gramática permite compor produtos a partir de três elementos:
 
 ```
-ideia
-  ↓
-definir estrutura do produto
-  ↓
-desenhar navegação
-  ↓
-definir páginas
-  ↓
-implementar
+Archetype
+Modules
+Features
 ```
 
-Com Arquétipos de Produto, parte dessa estrutura já é conhecida.
+Isso transforma a definição de produto em **uma estrutura declarativa**, que pode ser interpretada tanto por humanos quanto por agentes de IA.
+
+---
+
+# Papel no pipeline da Deplova
+
+Os arquétipos fazem parte da **Product Layer** dentro do pipeline de geração de produtos.
+
+Fluxo simplificado:
 
 ```
-ideia
-  ↓
-identificar arquétipo de produto
-  ↓
-adaptar estrutura
-  ↓
-implementar funcionalidades específicas
+Idea
+↓
+Briefing
+↓
+Product Context
+↓
+Product Spec
+↓
+Product Archetype
+↓
+Module Composition
+↓
+Skeleton Instantiation
+↓
+Build
+↓
+Deploy
 ```
 
-Isso reduz a ambiguidade no início do projeto e acelera a implementação.
+Nesse fluxo:
+
+* o **Product Spec** descreve o produto
+* o **Archetype** define a forma estrutural
+* os **Modules** adicionam capacidades comuns
+* o **Skeleton** gera a infraestrutura técnica
 
 ---
 
-## Por que usar arquétipos de produto
+# Product Grammar
 
-Existem três razões principais para utilizar arquétipos.
+A gramática de produto organiza a composição estrutural de software em três níveis.
 
-### 1 — Reduzir decisões estruturais
+```
+Product Archetype
+↓
+Structural Modules
+↓
+Product Features
+```
 
-Muitos produtos possuem estruturas muito semelhantes.
+## Archetype
 
-Por exemplo:
+Define a **forma principal do produto**.
 
-- dashboards administrativos
-- ferramentas internas
-- marketplaces
-- plataformas de conteúdo
-- landing pages com conversão
+Determina:
 
-Em vez de decidir tudo do zero, o arquétipo já fornece **uma estrutura inicial validada**.
+* estrutura de navegação
+* tipos principais de páginas
+* layout dominante
+* fluxos estruturais
 
-### 2 — Acelerar o design de interface
+Exemplo:
 
-Arquétipos também ajudam a definir rapidamente:
-
-- estrutura de páginas
-- layout base
-- navegação principal
-- tipos de componentes necessários
-
-Isso reduz o tempo gasto em decisões de UX no início do projeto.
-
-### 3 — Melhorar previsibilidade
-
-Quando produtos seguem padrões estruturais conhecidos, fica mais fácil:
-
-- integrar funcionalidades
-- organizar o código
-- manter consistência entre projetos
-
-Isso aumenta a previsibilidade do processo de construção.
+```
+Dashboard
+```
 
 ---
 
-## Arquétipos comuns
+## Modules
 
-A Deplova utiliza alguns arquétipos principais que cobrem a maior parte dos produtos em estágio inicial.
+Módulos estruturais reutilizáveis.
 
----
-
-### SaaS Dashboard
-
-Um dos formatos mais comuns.
-
-Características típicas:
-
-- autenticação de usuários
-- dashboard principal
-- navegação lateral
-- páginas de configuração
-- gestão de dados
-- formulários e tabelas
-
-Esse arquétipo é comum em:
-
-- ferramentas SaaS
-- plataformas de analytics
-- sistemas de gestão
-
----
-
-### Ferramenta Interna
-
-Ferramentas usadas internamente por equipes ou empresas.
-
-Características:
-
-- interface funcional
-- foco em eficiência
-- operações sobre dados
-- automações simples
+Representam capacidades comuns presentes em muitos produtos.
 
 Exemplos:
 
-- painéis administrativos
-- ferramentas de operação
-- sistemas de suporte
+* autenticação
+* perfis
+* busca
+* comentários
+* pagamentos
+* notificações
 
 ---
 
-### Marketplace
+## Features
+
+Funcionalidades específicas do produto.
+
+Representam comportamento único ou lógica de negócio.
+
+Exemplos:
+
+* algoritmo de ranking
+* recomendação com IA
+* scoring customizado
+* automações internas
+
+---
+
+# Archetype Library
+
+A biblioteca inicial de arquétipos cobre a maioria dos produtos em estágio inicial.
+
+---
+
+# Dashboard
+
+Formato comum para aplicações SaaS e ferramentas operacionais.
+
+Características:
+
+* navegação lateral
+* área principal de conteúdo
+* visualização de dados
+* múltiplas páginas funcionais
+
+Páginas típicas:
+
+```
+dashboard
+data views
+settings
+user management
+logs
+```
+
+Aplicações comuns:
+
+* SaaS
+* analytics tools
+* sistemas administrativos
+
+---
+
+# Internal Tool
+
+Aplicações internas focadas em operações.
+
+Características:
+
+* foco em eficiência
+* manipulação de dados
+* workflows operacionais
+
+Páginas típicas:
+
+```
+operations
+data tables
+task views
+logs
+configurations
+```
+
+Aplicações comuns:
+
+* painéis administrativos
+* sistemas de suporte
+* ferramentas internas
+
+---
+
+# Marketplace
 
 Produtos que conectam dois ou mais tipos de usuários.
 
 Características:
 
-- perfis de usuários
-- listagens ou catálogos
-- páginas de detalhe
-- sistema de busca
-- interações entre usuários
+* catálogo ou listagem
+* páginas de detalhe
+* interação entre usuários
 
-Esse arquétipo aparece em:
+Páginas típicas:
 
-- plataformas de serviços
-- plataformas de venda
-- diretórios e catálogos
+```
+home
+listing
+detail page
+user profile
+search results
+```
+
+Aplicações comuns:
+
+* plataformas de serviços
+* marketplaces digitais
+* plataformas de freelancers
 
 ---
 
-### Plataforma de Conteúdo
+# Directory
 
-Produtos focados em publicação ou consumo de conteúdo.
+Catálogos organizados de itens ou entidades.
 
 Características:
 
-- páginas de conteúdo
-- navegação por categorias
-- busca
-- leitura otimizada
+* listagens estruturadas
+* filtros
+* páginas de detalhe
 
-Exemplos:
+Páginas típicas:
 
-- blogs
-- plataformas de artigos
-- hubs de conteúdo
+```
+directory
+detail page
+categories
+search
+```
+
+Aplicações comuns:
+
+* diretórios profissionais
+* catálogos de startups
+* guias de serviços
 
 ---
 
-### Landing + Lista de Espera
+# Content Platform
 
-Arquétipo simples para validar ideias rapidamente.
+Produtos focados em publicação e consumo de conteúdo.
 
 Características:
 
-- página de apresentação do produto
-- formulário de captura de interesse
-- lista de espera
-- métricas básicas de conversão
+* páginas de conteúdo
+* organização por categorias
+* navegação editorial
 
-Esse tipo de produto é comum nas primeiras fases de validação.
-
----
-
-## Relação com o pipeline da Deplova
-
-Os arquétipos fazem parte do processo maior de geração de produtos.
-
-O fluxo completo é:
+Páginas típicas:
 
 ```
-Ideia de produto
-      ↓
-Briefing
-      ↓
-Contexto do Produto
-      ↓
-Deplova Guardrails
-(AI Design Prompt + Design Tokens)
-      ↓
-Arquétipo de Produto
-      ↓
-Product Skeleton
-      ↓
-Implementação de funcionalidades
-      ↓
-Deploy
+home
+article
+category
+author
+search
 ```
 
-O arquétipo funciona como **um acelerador estrutural** dentro do pipeline, reduzindo as decisões arquiteturais necessárias antes da implementação.
+Aplicações comuns:
+
+* blogs
+* hubs de conteúdo
+* plataformas editoriais
 
 ---
 
-## Relação com o Product Skeleton
+# Landing + Validation
 
-Os arquétipos não substituem a arquitetura base.
+Arquétipo mínimo para validação de ideias.
 
-Eles trabalham **em conjunto com o Product Skeleton**.
+Características:
 
-A distinção é clara:
+* apresentação do produto
+* captura de interesse
+* métricas de conversão
 
-- o **arquétipo** define a forma do produto — suas páginas, navegação e fluxos
-- o **skeleton** fornece a estrutura técnica da aplicação — autenticação, layout, componentes, banco de dados
+Páginas típicas:
+
+```
+landing
+signup
+waitlist
+confirmation
+```
+
+Aplicações comuns:
+
+* validação de startups
+* pré-lançamentos
+* experimentos de mercado
 
 ---
 
-## Relação com a Deplova Guardrails
+# Module Library
 
-Os arquétipos também trabalham em conjunto com o design system.
-
-A Deplova Guardrails define:
-
-- organização de layout
-- padrões de navegação
-- uso de componentes
-- fluxo de interação
-
-O arquétipo orienta quais desses padrões aplicar para cada tipo de produto.
+Módulos estruturais reutilizáveis.
 
 ---
 
-## Evolução dos arquétipos
+## Auth
 
-Os arquétipos não são fixos.
+Sistema de autenticação.
 
-Eles evoluem conforme novos padrões de produto são identificados.
+Capacidades:
 
-À medida que mais produtos são construídos usando o sistema, novos arquétipos podem surgir ou os existentes podem se tornar mais sofisticados.
+* login
+* registro
+* recuperação de senha
+* sessões
 
-O objetivo é que, com o tempo, a maioria dos produtos em estágio inicial possa ser descrita através de **uma pequena biblioteca de arquétipos bem definidos**.
+---
 
-Isso reduz ainda mais o tempo entre **ideia e produto funcional**.
+## User Profiles
+
+Perfis de usuário.
+
+Capacidades:
+
+* página de perfil
+* avatar
+* informações públicas
+* histórico de atividade
+
+---
+
+## Search
+
+Sistema de busca.
+
+Capacidades:
+
+* indexação
+* filtros
+* resultados ordenados
+
+---
+
+## Comments
+
+Sistema de comentários.
+
+Capacidades:
+
+* threads
+* respostas
+* moderação
+
+---
+
+## Notifications
+
+Sistema de notificações.
+
+Capacidades:
+
+* notificações in-app
+* notificações por email
+* eventos do sistema
+
+---
+
+## Payments
+
+Sistema de pagamentos.
+
+Capacidades:
+
+* checkout
+* assinaturas
+* histórico de transações
+
+---
+
+## Messaging
+
+Sistema de comunicação entre usuários.
+
+Capacidades:
+
+* mensagens diretas
+* threads
+* histórico
+
+---
+
+## Reviews
+
+Sistema de avaliação.
+
+Capacidades:
+
+* notas
+* comentários
+* reputação
+
+---
+
+# Product Definition Schema
+
+Para uso por agentes de IA, produtos podem ser descritos usando um schema declarativo.
+
+Exemplo:
+
+```yaml
+product:
+
+  name: FounderHub
+
+  archetype: directory
+
+  modules:
+    - auth
+    - user_profiles
+    - search
+    - comments
+    - voting
+
+  features:
+    - daily_ranking
+    - launch_feed
+    - founder_profiles
+```
+
+Esse formato permite que agentes de IA:
+
+* gerem estrutura de páginas
+* configurem banco de dados
+* montem componentes
+* preparem APIs
+
+---
+
+# Exemplos de composição
+
+## Exemplo 1 — SaaS de analytics
+
+```
+Archetype
+Dashboard
+
+Modules
+Auth
+Projects
+Data Tables
+Search
+Notifications
+
+Features
+AI analysis
+Custom reports
+Export system
+```
+
+---
+
+## Exemplo 2 — marketplace de freelancers
+
+```
+Archetype
+Marketplace
+
+Modules
+Auth
+Profiles
+Search
+Messaging
+Payments
+Reviews
+
+Features
+reputation_score
+project_matching
+```
+
+---
+
+## Exemplo 3 — plataforma de lançamentos de startups
+
+```
+Archetype
+Content Platform
+
+Modules
+Auth
+Profiles
+Voting
+Comments
+Directory
+
+Features
+daily_launch
+ranking_algorithm
+```
+
+---
+
+# Evolução da gramática
+
+A Product Grammar evolui conforme novos produtos são construídos.
+
+Com o tempo:
+
+* novos arquétipos podem surgir
+* novos módulos podem ser adicionados
+* módulos existentes podem ser refinados
+
+O objetivo é que a maioria dos MVPs possa ser descrita através de **uma pequena gramática de produto bem definida**.
+
+Isso reduz drasticamente o tempo entre:
+
+```
+idea
+↓
+product definition
+↓
+functional MVP
+```

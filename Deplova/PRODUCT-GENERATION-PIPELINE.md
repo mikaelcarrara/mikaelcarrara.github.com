@@ -2,79 +2,187 @@
 
 Este documento descreve o **pipeline de geração de produtos utilizado pelo Deplova** para transformar ideias iniciais em aplicações MVP funcionais.
 
-A Deplova estrutura a criação de produtos em um **pipeline em camadas** que combina definição de produto, infraestrutura de design system, arquitetura padronizada e implementação assistida por IA.
+A Deplova estrutura a criação de produtos como um **pipeline em camadas**, combinando definição estruturada de produto, infraestrutura de design system, arquitetura reutilizável e implementação assistida por IA.
 
-O objetivo do pipeline é permitir uma **geração de produtos previsível e repetível**.
+O objetivo desse pipeline é permitir uma **geração de produtos previsível, consistente e repetível**.
 
 ---
 
-## Visão geral do pipeline
+# Visão geral do pipeline
 
-O pipeline da Deplova converte uma ideia de produto em uma aplicação deployada por meio de uma sequência de etapas bem definidas.
+O pipeline da Deplova converte uma ideia de produto em uma aplicação funcional por meio de uma sequência de etapas bem definidas.
 
 ```
-Ideia de produto
-      ↓
+
+Ideia
+Identificação de um conceito de produto ou oportunidade.
+
+↓
 Briefing
-      ↓
-Contexto do Produto
-      ↓
-Deplova Guardrails
-      ↓
+Conversa estruturada para extrair problema, usuários e funcionalidades iniciais.
+
+↓
+Product Context
+Documento estruturado que define escopo, usuários, fluxos e objetivos do MVP.
+
+↓
+Product Spec
+Especificação técnica do produto, incluindo páginas, entidades e estrutura do sistema.
+
+↓
+
 AI Design Prompt
-      ↓
-Design Tokens
-      ↓
-Product Archetypes
-      ↓
-Product Skeleton
-      ↓
+
+Contexto do design system e regras de geração de interface utilizadas pelas ferramentas de IA para produzir interfaces consistentes.
+
+↓
+
+Product Archetype
+
+Modelo estrutural do produto selecionado com base em padrões recorrentes (ex: SaaS, diretório, marketplace).
+Inclui a composição estrutural do produto (archetype + modules + features).
+
+↓
+
+Skeleton Instantiation
+
+Instanciação de uma aplicação funcional a partir do Product Skeleton, combinando:
+
+- infraestrutura base da aplicação
+- estrutura definida pelo Product Archetype
+- interface gerada a partir do AI Design Prompt.
+
+↓
 Build
-      ↓
+Implementação das funcionalidades do MVP assistida por ferramentas de IA.
+
+↓
+Review
+Supervisão humana para validar funcionalidade, consistência e aderência ao escopo.
+
+↓
 Deploy
+Publicação da aplicação em infraestrutura de produção.
+
 ```
 
-Cada etapa define um aspecto diferente do produto e reduz a complexidade da próxima etapa.
+Cada etapa define um aspecto específico do produto e reduz a complexidade da etapa seguinte.
+
+O resultado final é um **MVP funcional deployado**, pronto para testes e iteração.
 
 ---
 
-## Etapa 1 — Ideia de produto
+# Arquitetura em Camadas
+
+O pipeline da Deplova pode ser entendido como três camadas principais que se combinam para gerar o produto final.
+
+```
+
+Product Layer
+↓
+Design Layer
+↓
+Execution Layer
+
+```
+
+Cada camada define um aspecto diferente do sistema.
+
+---
+
+## Product Layer
+
+A Product Layer define **o que está sendo construído**.
+
+Ela descreve o produto em termos de problema, usuários, funcionalidades e estrutura.
+
+Componentes dessa camada:
+
+- Ideia
+- Briefing
+- Product Context
+- Product Spec
+- Product Archetype
+
+Essa camada transforma um conceito inicial em uma **definição estruturada de produto**.
+
+---
+
+## Design Layer
+
+A Design Layer define **como a interface do produto deve ser gerada**.
+
+Ela contém as regras do design system que guiam a geração de interfaces por ferramentas de IA.
+
+Componentes dessa camada:
+
+- AI Design Prompt
+- Design tokens
+- Sistema tipográfico
+- Grid e espaçamento
+- Regras de acessibilidade
+- Padrões de componentes
+
+Essa camada garante que a interface gerada seja **consistente e determinística**.
+
+---
+
+## Execution Layer
+
+A Execution Layer define **como o produto é implementado e entregue**.
+
+Ela contém a infraestrutura técnica e o ambiente onde a aplicação é construída.
+
+Componentes dessa camada:
+
+- Product Skeleton
+- Implementação assistida por IA
+- Supervisão humana
+- Deploy
+
+Essa camada transforma a definição do produto em **software executável**.
+
+---
+
+# Etapas do Pipeline
+
+## Etapa 1 — Ideia
 
 Todo projeto começa com uma ideia ou oportunidade de produto.
 
-Nessa etapa o conceito pode ainda ser informal. A ideia normalmente descreve:
+Nesta etapa o conceito ainda pode ser informal. Normalmente a ideia descreve:
 
 - um problema
 - um público-alvo
-- uma possível solução de produto
+- uma possível solução
 
-O objetivo dessa etapa é simplesmente identificar um conceito de produto viável e que vale a pena explorar.
+O objetivo desta etapa é simplesmente identificar **um conceito de produto que vale a pena explorar**.
 
 ---
 
 ## Etapa 2 — Briefing
 
-O briefing converte a ideia inicial em uma definição de produto mais clara.
+O briefing converte a ideia inicial em uma definição mais clara de produto.
 
-Uma conversa estruturada é utilizada para extrair informações-chave sobre o produto.
+Uma conversa estruturada é utilizada para extrair informações essenciais.
 
-Tópicos típicos incluem:
+Tópicos comuns incluem:
 
-- o problema central a ser resolvido
+- o problema central
 - o usuário-alvo
 - possíveis funcionalidades
-- resultados esperados
+- objetivos do produto
 - restrições ou requisitos
 
-O briefing fornece as informações necessárias para produzir o Contexto do Produto.
+A sessão é gravada e utilizada como input para as próximas etapas.
 
 ---
 
-## Etapa 3 — Contexto do Produto
+## Etapa 3 — Product Context
 
-O Contexto do Produto é um documento estruturado que define o escopo do MVP.
+O Product Context é um documento estruturado que define o escopo do MVP.
 
-Tipicamente inclui:
+Ele normalmente inclui:
 
 - descrição do produto
 - perfis de usuário
@@ -83,62 +191,43 @@ Tipicamente inclui:
 - não-objetivos
 - critérios de sucesso
 
-O Contexto do Produto funciona como a **fonte da verdade para a etapa de implementação**.
-
-Todas as etapas seguintes dependem da clareza deste documento.
+Esse documento se torna a **principal fonte de verdade para a implementação**.
 
 ---
 
-## Etapa 4 — Definição do design system
+## Etapa 4 — Product Spec
 
-### Deplova Guardrails
+O Product Spec traduz o contexto do produto em uma **especificação implementável**.
 
-A Deplova Guardrails é utilizada para definir o design system do produto.
+Enquanto o Product Context descreve o produto conceitualmente, o Product Spec define sua estrutura técnica.
 
-O Guardrails funciona como um **compilador de design system**.
+Normalmente inclui:
 
-Por meio de um wizard de configuração, o sistema captura decisões de design, incluindo:
+- páginas do produto
+- componentes principais
+- entidades de dados
+- relações entre entidades
+- endpoints ou operações principais
 
-- tipografia
-- paleta de cores
-- escala de espaçamento
-- filosofia de layout
-- restrições de componentes
-- regras de animação
-- requisitos de acessibilidade
-- tom e diretrizes de conteúdo
-
-Em vez de documentar essas decisões manualmente, o Guardrails as converte em **definições de sistema estruturadas**.
+Esse documento fornece à implementação uma **estrutura clara do sistema**.
 
 ---
 
 ## Etapa 5 — AI Design Prompt
 
-Um dos principais outputs produzidos pelo Deplova Guardrails é um **prompt pronto para uso com IA**.
+O AI Design Prompt contém o contexto do design system que as ferramentas de IA devem seguir ao gerar interfaces.
 
-Este prompt contém todo o contexto do design system que as ferramentas de IA devem seguir durante a geração de interfaces.
+Ele garante que as interfaces produzidas respeitem as regras visuais e estruturais do sistema.
 
-O prompt garante que as interfaces geradas respeitem as regras do sistema configurado.
-
-Instruções típicas incluem:
+### Regras típicas
 
 - utilizar apenas a paleta de cores definida
 - respeitar a escala de espaçamento
 - aplicar o sistema tipográfico
-- seguir as restrições de acessibilidade
-- manter estruturas de componentes consistentes
+- seguir padrões de acessibilidade
+- manter estruturas consistentes de componentes
 
-Ao injetar esse prompt no início das sessões de IA, a Deplova garante que a geração de UI permaneça **consistente e determinística**.
-
----
-
-## Etapa 6 — Design Tokens
-
-A Deplova Guardrails também produz **design tokens**.
-
-Esses tokens definem os valores em runtime utilizados pela aplicação.
-
-Categorias típicas de tokens incluem:
+### Tokens incluídos
 
 - cores
 - tipografia
@@ -147,21 +236,13 @@ Categorias típicas de tokens incluem:
 - border radius
 - animação
 
-Os tokens podem ser integrados ao sistema de governança de tokens da Deplova para oferecer:
-
-- versionamento
-- distribuição entre projetos
-- outputs compatíveis com frameworks
-
-Os design tokens garantem que o design system seja aplicado de forma consistente em toda a aplicação.
-
 ---
 
-## Etapa 7 — Arquétipo de Produto
+## Etapa 6 — Product Archetype
 
-Os Arquétipos de Produto definem o modelo estrutural do produto.
+Os Arquétipos de Produto definem modelos estruturais recorrentes.
 
-A maioria dos MVPs se encaixa em uma pequena lista de categorias recorrentes, como:
+A maioria dos MVPs se encaixa em algumas categorias comuns, como:
 
 - SaaS dashboards
 - ferramentas internas
@@ -172,21 +253,21 @@ A maioria dos MVPs se encaixa em uma pequena lista de categorias recorrentes, co
 Cada arquétipo define:
 
 - páginas típicas
-- funcionalidades esperadas
-- estruturas de dados
 - fluxos de usuário
+- estruturas de dados comuns
+- funcionalidades esperadas
 
-Selecionar um arquétipo permite ao sistema instanciar rapidamente uma estrutura de produto, reduzindo significativamente as decisões arquiteturais durante a implementação.
+Selecionar um arquétipo reduz significativamente as decisões arquiteturais durante a implementação.
 
 ---
 
-## Etapa 8 — Product Skeleton
+## Etapa 7 — Skeleton Instantiation
 
 O Product Skeleton fornece a arquitetura base utilizada em todos os projetos Deplova.
 
-Em vez de gerar uma aplicação inteira do zero, o desenvolvimento começa a partir de **uma fundação pré-construída**.
+Em vez de iniciar cada aplicação do zero, o desenvolvimento parte de uma fundação pré-construída.
 
-O skeleton tipicamente inclui:
+O skeleton normalmente inclui:
 
 - estrutura de aplicação Next.js
 - sistema de autenticação
@@ -196,79 +277,78 @@ O skeleton tipicamente inclui:
 - integração com banco de dados
 - configuração de deploy
 
-Essa arquitetura cobre a maior parte da infraestrutura técnica necessária para produtos em estágio inicial.
+---
 
-O skeleton garante que as aplicações sejam construídas sobre **uma fundação estável e consistente**.
+## Etapa 8 — Implementação (Build)
+
+Nesta etapa o produto é implementado.
+
+A IA recebe como inputs:
+
+- Product Context
+- Product Spec
+- AI Design Prompt
+- Product Archetype
+- Product Skeleton
+
+A IA então implementa as funcionalidades definidas no escopo do MVP.
 
 ---
 
-## Etapa 9 — Implementação de funcionalidades
+## Etapa 9 — Review
 
-Nessa etapa o produto é implementado.
+Após a implementação inicial, o sistema passa por uma etapa de revisão.
 
-O sistema de IA recebe os seguintes inputs:
+Supervisão humana valida:
 
-- Contexto do Produto
-- AI Design Prompt
-- Arquétipo de Produto
-- Product Skeleton
-
-Esses inputs fornecem à IA:
-
-- requisitos do produto
-- restrições de design
-- modelo estrutural
-- arquitetura da aplicação
-
-A IA então foca em implementar as funcionalidades definidas no escopo do MVP.
-
-Como a arquitetura e o design system já estão definidos, a implementação se torna significativamente mais eficiente.
+- funcionamento do produto
+- aderência ao escopo
+- consistência da interface
+- eventuais correções necessárias
 
 ---
 
 ## Etapa 10 — Deploy
 
-Uma vez concluída a implementação, o produto é deployado.
+Uma vez concluída a revisão, o produto é deployado.
 
-A infraestrutura típica inclui:
+Infraestrutura típica:
 
 - Vercel para hospedagem da aplicação
-- Supabase para banco de dados e serviços de backend
+- Supabase para banco de dados e backend
 
-O output final é uma **aplicação MVP funcional** pronta para testes, iterações e feedback de usuários.
-
----
-
-## Princípios arquiteturais
-
-O pipeline da Deplova é baseado em alguns princípios fundamentais.
-
-### Geração estruturada
-
-A criação de produto é dividida em etapas explícitas que definem diferentes aspectos do sistema.
-
-### Geração de interfaces determinística
-
-Os design systems são compilados em restrições legíveis por máquina que guiam as ferramentas de IA.
-
-### Arquitetura reutilizável
-
-Product Skeletons e Arquétipos reduzem o trabalho repetido entre projetos.
-
-### Implementação assistida por IA
-
-Ferramentas de IA aceleram a implementação de funcionalidades enquanto operam dentro de limites de sistema predefinidos.
+O resultado final é uma **aplicação MVP funcional disponível online**.
 
 ---
 
-## Resumo
+# Resumo
 
 O pipeline da Deplova combina:
 
 - definição estruturada de produto
-- compilação de design system
-- estruturas de produto reutilizáveis
+- regras explícitas de design system
+- modelos reutilizáveis de produto
 - arquitetura de aplicação padronizada
-- implementação de funcionalidades assistida por IA
+- implementação assistida por IA
 
-Juntos, esses componentes criam um **sistema repetível para gerar produtos de software MVP de forma rápida e confiável**.
+Juntos, esses elementos formam um **sistema repetível para gerar produtos de software MVP de forma rápida e confiável**.
+```
+
+---
+
+💡 **Sugestão pequena mas poderosa para esse documento**
+
+Se quiser deixar ele ainda mais **“engenharia de sistema”**, dá para adicionar um pequeno bloco no topo:
+
+```
+Estimated execution time
+
+Discovery → ~1h  
+Backlog generation → ~1h  
+Build → ~48h  
+Review + Deploy → ~1h
+```
+
+Isso conecta diretamente o **pipeline técnico** com a promessa operacional da Deplova.
+
+Se quiser, no próximo passo podemos também projetar o **schema do Product Spec**, que provavelmente será **o coração técnico do sistema**.

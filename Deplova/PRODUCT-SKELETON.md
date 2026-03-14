@@ -1,270 +1,263 @@
-# Product Skeleton
+A versão final do **Product Skeleton** precisa refletir a arquitetura que você definiu no pipeline:
 
-Documento interno de arquitetura
+```
+AI Design Prompt
+↓
+Product Archetype
+↓
+Skeleton Instantiation
+```
+
+Então o Skeleton não define **produto**, nem **interface**.
+Ele define apenas **infraestrutura executável**.
+
+Abaixo está uma versão **limpa, consistente com o pipeline e simples para agentes**.
 
 ---
+
+# Product Skeleton
 
 ## Visão geral
 
-O **Product Skeleton** é a arquitetura base utilizada pelo Deplova para acelerar o desenvolvimento de MVPs.
+O **Product Skeleton** é a infraestrutura base utilizada pelo sistema Deplova para gerar aplicações web.
 
-Em vez de gerar aplicações inteiras do zero, todo projeto começa a partir de **uma estrutura de aplicação pré-construída**, que já inclui os sistemas mais comuns necessários em produtos web modernos.
+Em vez de iniciar cada produto com uma arquitetura nova, todos os projetos começam a partir de **uma fundação de aplicação reutilizável**.
 
-Isso permite que o processo de construção foque apenas em **lógica e funcionalidades específicas do produto**, reduzindo drasticamente o tempo e a complexidade de desenvolvimento.
+Essa fundação fornece os sistemas essenciais necessários para executar produtos web modernos.
 
-O Product Skeleton normalmente fornece **70–80% da estrutura necessária para um MVP** antes mesmo de qualquer implementação específica do produto começar.
+O Skeleton não define o produto nem a interface.
 
----
-
-## Ideia central
-
-No desenvolvimento tradicional, muitas vezes se começa com um repositório vazio.
+Esses elementos são definidos anteriormente no pipeline por:
 
 ```
-novo projeto
-  ↓
-definir arquitetura
-  ↓
-construir fundação
-  ↓
-implementar funcionalidades
-```
-
-O Product Skeleton remove os dois primeiros passos.
-
-```
-product skeleton
-  ↓
-injetar contexto do produto
-  ↓
-implementar funcionalidades
-  ↓
-deploy
-```
-
-Em vez de gerar a arquitetura repetidamente, a Deplova utiliza **uma fundação de aplicação estável**, que evolui ao longo do tempo.
-
----
-
-## Por que o Product Skeleton existe
-
-Existem três razões principais para usar uma arquitetura baseada em skeleton.
-
-### 1 — Eliminar setup repetido
-
-A maioria dos produtos em estágio inicial precisa das mesmas capacidades básicas:
-
-- autenticação
-- layout de dashboard
-- navegação
-- integração com banco de dados
-- formulários
-- estrutura de API
-- configuração de deploy
-
-Sem um skeleton, esses sistemas precisam ser recriados em cada projeto.
-
-O skeleton centraliza essas capacidades em **uma fundação reutilizável**.
-
-### 2 — Aumentar a velocidade de construção
-
-Gerar arquitetura do zero aumenta:
-
-- tempo de geração
-- probabilidade de erros
-- esforço de debugging
-
-Quando a arquitetura já existe, a implementação pode focar apenas na **lógica de funcionalidades**.
-
-Isso reduz significativamente os ciclos de iteração.
-
-### 3 — Melhorar a previsibilidade
-
-Começar de uma estrutura conhecida garante que:
-
-- a arquitetura da aplicação permaneça consistente
-- as funcionalidades geradas se integrem de forma limpa
-- o deploy funcione de forma confiável
-
-Previsibilidade é fundamental para comprimir o tempo de desenvolvimento.
-
----
-
-## Estrutura típica do skeleton
-
-Um repositório típico de Product Skeleton possui a seguinte estrutura.
-
-```
-deplova-skeleton/
-
-  app/
-  components/
-  features/
-  hooks/
-  lib/
-  api/
-  db/
-  styles/
-  layout/
-```
-
-Cada diretório tem um papel específico dentro da arquitetura da aplicação.
-
----
-
-## Sistemas principais incluídos no skeleton
-
-O skeleton fornece vários sistemas pré-construídos necessários para a maioria dos MVPs.
-
-### Autenticação
-
-A autenticação vem pré-configurada usando Supabase.
-
-Capacidades incluem:
-
-- login
-- cadastro
-- gerenciamento de sessão
-- rotas protegidas
-
-Isso evita reconstruir fluxos de autenticação em cada projeto.
-
-### Sistema de layout
-
-O sistema de layout fornece a fundação estrutural da interface.
-
-Inclui:
-
-- shell de navegação
-- layout de dashboard
-- sistema de containers responsivos
-- estrutura base de páginas
-
-Todas as funcionalidades se encaixam dentro dessa estrutura.
-
-### Sistema de componentes
-
-O skeleton inclui uma biblioteca base de componentes de interface reutilizáveis.
-
-Componentes típicos incluem:
-
-- Button
-- Input
-- Card
-- Modal
-- Table
-- controles de formulário
-- componentes de navegação
-
-Esses componentes são integrados com os design tokens produzidos pelo Deplova Guardrails.
-
-### Sistema de formulários
-
-Formulários são um padrão de interação central na maioria dos produtos.
-
-O skeleton fornece um sistema padronizado para lidar com formulários, incluindo:
-
-- validação
-- envio de dados
-- estados de erro
-- estilização consistente
-
-### Camada de banco de dados
-
-A camada de banco de dados fornece uma interface consistente para o modelo de dados da aplicação.
-
-Normalmente inclui:
-
-- integração com Supabase
-- utilitários de cliente de banco
-- organização de schema
-- suporte a migrações
-
-### Camada de API
-
-A camada de API fornece um local estruturado para lógica de backend.
-
-Responsabilidades incluem:
-
-- server actions
-- rotas de API
-- lógica de integração
-- conexão com serviços externos
-
-Isso garante que o código backend permaneça organizado de forma previsível.
-
-### Configuração de deploy
-
-O skeleton inclui configuração de deploy para a infraestrutura padrão.
-
-Configurações típicas incluem:
-
-- setup de projeto na Vercel
-- estrutura de variáveis de ambiente
-- configuração de build
-- parâmetros de deploy em produção
-
----
-
-## Integração com o processo de construção
-
-O Product Skeleton é combinado com outros inputs do sistema na etapa de implementação.
-
-```
-Contexto do Produto
-      +
 AI Design Prompt
-      +
-Arquétipo de Produto
-      +
-Product Skeleton
-      ↓
-Implementação de funcionalidades
-      ↓
+Product Archetype
+```
+
+O Skeleton apenas fornece **a infraestrutura onde o produto será executado**.
+
+---
+
+# Papel no pipeline
+
+O Product Skeleton é utilizado na etapa de **Skeleton Instantiation**.
+
+Fluxo simplificado:
+
+```
+AI Design Prompt
+↓
+Product Archetype
+↓
+Skeleton Instantiation
+↓
+Feature Implementation
+↓
 Deploy
 ```
 
-Em vez de gerar uma aplicação inteira, o sistema implementa apenas **as funcionalidades definidas no escopo do produto**.
+Nesse momento do pipeline o sistema já conhece:
+
+* o tipo de produto (arquétipo)
+* a estrutura de páginas
+* os módulos do produto
+* os padrões de interface
+
+O Skeleton fornece a base técnica para transformar essa definição em **uma aplicação funcional**.
 
 ---
 
-## Papel do operador
+# Ideia central
 
-O operador prepara os inputs do sistema antes do início da implementação.
+Sem um Skeleton, cada projeto começa com decisões arquiteturais repetidas.
 
-Isso inclui:
+```
+novo projeto
+↓
+definir arquitetura
+↓
+configurar infraestrutura
+↓
+começar implementação
+```
 
-- definir o Contexto do Produto
-- confirmar o escopo do MVP
-- garantir que o skeleton seja adequado para o produto
+Com um Product Skeleton:
 
-O operador não constrói o produto manualmente, mas garante que o sistema tenha **as restrições e informações corretas**.
+```
+product skeleton
+↓
+injetar estrutura do produto
+↓
+implementar funcionalidades
+↓
+deploy
+```
+
+Isso elimina a necessidade de recriar infraestrutura em cada build.
 
 ---
 
-## Impacto esperado
+# Sistemas incluídos no Skeleton
 
-O Product Skeleton reduz drasticamente o overhead de desenvolvimento.
+O Skeleton contém apenas os sistemas fundamentais necessários para executar aplicações web.
 
-Benefícios típicos incluem:
-
-- implementação inicial mais rápida
-- menos erros arquiteturais
-- debugging mais simples
-- deploys mais previsíveis
-
-Sem um skeleton, builds exigem decisões estruturais repetidas.
-
-Com um skeleton, o sistema pode focar exclusivamente na **funcionalidade do produto**.
+Ele não define interface nem estrutura de produto.
 
 ---
 
-## Evolução no longo prazo
+# Application Runtime
 
-O Product Skeleton não é estático.
+O Skeleton define a estrutura base da aplicação.
 
-Ele evolui ao longo do tempo conforme novos padrões e capacidades são adicionados.
+Exemplo de organização:
 
-À medida que mais produtos são construídos com o sistema, o skeleton se torna cada vez mais poderoso, cobrindo uma parcela maior das necessidades comuns de produtos em estágio inicial.
+```
+app/
+components/
+features/
+lib/
+api/
+db/
+config/
+styles/
+```
 
-O objetivo de longo prazo é que o skeleton represente **a arquitetura padrão para a maioria dos produtos de classe MVP**.
+Essa estrutura organiza o código gerado de forma previsível.
+
+---
+
+# Authentication System
+
+O Skeleton inclui um sistema de autenticação pré-configurado.
+
+Capacidades incluem:
+
+```
+login
+signup
+session management
+protected routes
+```
+
+Isso evita a necessidade de implementar autenticação em cada produto.
+
+---
+
+# Data Layer
+
+A camada de dados fornece acesso estruturado ao banco de dados.
+
+Capacidades típicas:
+
+```
+database client
+schema organization
+data access utilities
+```
+
+Isso permite que entidades do produto sejam implementadas rapidamente.
+
+---
+
+# Server Layer
+
+A camada de servidor organiza a lógica de backend da aplicação.
+
+Responsabilidades incluem:
+
+```
+API routes
+server actions
+business logic
+external integrations
+```
+
+Essa camada conecta a interface do produto ao modelo de dados.
+
+---
+
+# Deployment Infrastructure
+
+O Skeleton inclui configuração padrão de deploy.
+
+Capacidades típicas:
+
+```
+build configuration
+environment variables
+deployment setup
+production configuration
+```
+
+Isso permite publicar produtos rapidamente.
+
+---
+
+# O que o Skeleton não define
+
+O Product Skeleton não define elementos do produto.
+
+Ele não determina:
+
+```
+pages
+navigation
+layout
+components
+features
+```
+
+Esses elementos são definidos por:
+
+```
+AI Design Prompt
+Product Archetype
+```
+
+---
+
+# Skeleton Instantiation
+
+Durante a etapa de **Skeleton Instantiation**, o sistema combina:
+
+```
+Product Skeleton
++
+Product Archetype
++
+AI Design Prompt
+```
+
+O resultado é uma aplicação funcional onde:
+
+* o Skeleton fornece infraestrutura
+* o Archetype define a estrutura do produto
+* o Design Prompt define a interface
+
+---
+
+# Benefícios do Skeleton
+
+O uso de um Product Skeleton oferece várias vantagens:
+
+* elimina configuração repetida de infraestrutura
+* acelera a geração de aplicações
+* reduz erros arquiteturais
+* torna o processo de build mais previsível
+
+Isso permite que o sistema foque principalmente na **implementação das funcionalidades do produto**.
+
+---
+
+# Evolução do Skeleton
+
+O Product Skeleton evolui ao longo do tempo conforme novos padrões de infraestrutura são identificados.
+
+Possíveis evoluções incluem:
+
+* novas integrações
+* novos sistemas de dados
+* melhorias de performance
+* suporte a novos serviços
+
+O objetivo é manter o Skeleton como **uma infraestrutura estável e confiável para geração rápida de produtos web**.

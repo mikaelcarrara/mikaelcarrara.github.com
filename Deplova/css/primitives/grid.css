@@ -1,10 +1,12 @@
 .grid {
   display: grid;
   gap: var(--grid-gap, var(--space-6));
+  align-items: center;
 }
 
 .grid-2 {
   grid-template-columns: repeat(var(--grid-2-cols, 2), minmax(0, 1fr));
+  gap: var(--grid-gap, var(--space-16));
 }
 
 .grid-3 {

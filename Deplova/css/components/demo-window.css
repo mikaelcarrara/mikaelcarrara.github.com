@@ -3,7 +3,6 @@
    ============================================================ */
 .demo-window {
   width: 100%;
-  max-width: 520px;
   background: var(--bg-raised);
   border: 1px solid var(--border-mid);
   border-radius: var(--radius-md);
