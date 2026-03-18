@@ -1,0 +1,89 @@
+/* ============================================================
+   TOKENS — Design System Foundation
+   ============================================================ */
+:root {
+  --ink-950: #080c10;
+  --ink-900: #0d1117;
+  --ink-800: #161c24;
+  --ink-700: #1f2937;
+  --ink-600: #2d3a4a;
+  --ink-400: #64748b;
+  --ink-200: #94a3b8;
+  --ink-100: #cbd5e1;
+  --ink-50: #f0f4f8;
+
+  --cyan-500: #35B0CD;
+  --cyan-400: #4dc0db;
+  --cyan-300: #80d4e8;
+  --cyan-100: #d0f0f8;
+
+  --rose-500: #F575A2;
+  --rose-400: #f788b0;
+  --rose-300: #fab0cc;
+  --rose-100: #fde4ee;
+
+  --green-done: #3dd68c;
+
+  --bg-base: var(--ink-950);
+  --bg-surface: var(--ink-900);
+  --bg-raised: var(--ink-800);
+  --bg-hover: var(--ink-700);
+
+  --text-primary: var(--ink-50);
+  --text-secondary: var(--ink-200);
+  --text-muted: var(--ink-400);
+
+  --accent: var(--cyan-500);
+  --accent-bright: var(--cyan-400);
+  --accent-dim: var(--cyan-300);
+
+  --confirm: var(--green-done);
+  --confirm-bright: #5ee8b0;
+
+  --primary: var(--rose-500);
+  --primary-bright: var(--rose-400);
+
+  --border-subtle: var(--ink-700);
+  --border-mid: var(--ink-600);
+
+  --font-display: 'EB Garamond', Georgia, serif;
+  --font-mono: 'DM Sans', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 3rem;
+  --text-5xl: 4rem;
+  --text-6xl: 5.5rem;
+  --text-7xl: 7.5rem;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  --container-max: 1200px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+  --duration-slow: 600ms;
+}

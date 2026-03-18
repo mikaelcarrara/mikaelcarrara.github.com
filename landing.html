@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deplova — Seu produto no ar. Você no comando.</title>
+  <meta name="description"
+    content="Transformamos uma conversa sobre seu produto em um MVP funcional — com código e arquitetura que você realmente controla.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="site/css/style.css">
+
+  <link rel="icon" href="site/img/favicon.png" type="image/svg+xml">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Deplova">
+  <meta property="og:locale" content="pt_BR">
+
+  <meta property="og:title" content="Deplova — Seu produto no ar. Você no comando.">
+  <meta property="og:description" content="Transformamos uma conversa sobre seu produto em um MVP funcional — com código e arquitetura que você realmente controla.">
+  <meta property="og:url" content="https://mikaelcarrara.github.io/deplova/">
+
+  <meta property="og:image" content="https://mikaelcarrara.github.io/deplova/site/img/social.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Deplova — Seu produto no ar. Você no comando.">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Deplova — Seu produto no ar. Você no comando.">
+  <meta name="twitter:description" content="Transformamos uma conversa sobre seu produto em um MVP funcional — com código e arquitetura que você realmente controla.">
+  <meta name="twitter:image" content="https://mikaelcarrara.github.io/deplova/site/img/social.png">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <header role="banner">
+    <nav class="nav" aria-label="Navegação principal">
+      <div class="container nav__inner">
+        <a href="#" class="nav__logo" aria-label="Deplova — Home">
+          <img src="site/img/deplova-logo.svg" alt="Deplova">
+        </a>
+        <div class="nav__right">
+          <ul class="nav__links" role="list">
+            <li><a href="#como-funciona" class="nav__link">Processo</a></li>
+            <li><a href="#entregaveis" class="nav__link">Entregáveis</a></li>
+            <li><a href="#para-quem" class="nav__link">Para quem</a></li>
+            <li><a href="#planos" class="nav__link">Planos</a></li>
+          </ul>
+          <a href="https://w.app/deplova" class="btn btn--primary btn--sm" aria-label="Começar projeto">
+            <span class="btn__inner">Agendar briefing
+              <span class="btn__arrow" aria-hidden="true">→</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" role="main">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-headline">
+      <canvas id="bg-canvas"></canvas>
+      <div class="container hero__content">
+        <h1 id="hero-headline" class="headline headline--xl hero__headline animate-fade-up">
+          Seu produto no ar.<br>Você no comando.
+        </h1>
+        <p class="desc hero__sub animate-fade-up">
+          Transformamos uma conversa sobre seu produto em um MVP funcional —<br> com código e arquitetura que você realmente controla.
+        </p>
+        <div class="hero__actions animate-fade-up">
+          <a href="https://w.app/deplova" class="btn btn--primary">
+            <span class="btn__inner btn__inner--hero">
+              <span class="btn__text">
+                <span class="btn__title">Iniciar MVP</span>
+                <span class="btn__subtitle">Briefing de 60 minutos</span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- COMO FUNCIONA -->
+    <section id="como-funciona" class="section" aria-labelledby="how-headline">
+      <div class="container">
+        <div class="grid grid-2">
+          <div class="section-header">
+            <p class="label">O processo</p>
+            <h2 id="how-headline" class="headline headline--lg animate-fade-up">
+              Rápido porque<br>
+              precisa ser.
+            </h2>
+            <p class="desc">
+              Tempo é a variável mais cara de um projeto.<br>
+              Por isso o processo da Deplova é reduzido ao essencial.
+            </p>
+          </div>
+          <ol class="timeline" aria-label="Etapas do processo">
+
+            <li class="timeline-step">
+              <div class="timeline-step__marker" aria-hidden="true">
+                <span class="timeline-step__dot"></span>
+              </div>
+              <div>
+                <p class="timeline-step__time">Etapa 01</p>
+                <h3 class="timeline-step__title">Briefing</h3>
+                <p class="timeline-step__desc">
+                  60 minutos para definir problema, escopo e prioridades.
+                  Você sai da sessão com um backlog lapidado e priorizado.
+                </p>
+              </div>
+            </li>
+
+            <li class="timeline-step">
+              <div class="timeline-step__marker" aria-hidden="true">
+                <span class="timeline-step__dot"></span>
+              </div>
+              <div>
+                <p class="timeline-step__time">Etapa 02</p>
+                <h3 class="timeline-step__title">Escopo</h3>
+                <p class="timeline-step__desc">
+                  O MVP é a menor versão capaz de validar a hipótese.
+                  Cortamos tudo que não impacta essa primeira entrega.
+                </p>
+              </div>
+            </li>
+
+            <li class="timeline-step">
+              <div class="timeline-step__marker" aria-hidden="true">
+                <span class="timeline-step__dot"></span>
+              </div>
+              <div>
+                <p class="timeline-step__time">Etapa 03</p>
+                <h3 class="timeline-step__title">Build</h3>
+                <p class="timeline-step__desc">
+                  Dias de desenvolvimento contínuo.
+                  Produto real, código real, deploy real.
+                </p>
+              </div>
+            </li>
+
+            <li class="timeline-step">
+              <div class="timeline-step__marker" aria-hidden="true">
+                <span class="timeline-step__dot"></span>
+              </div>
+              <div>
+                <p class="timeline-step__time">Etapa 04</p>
+                <h3 class="timeline-step__title">Entrega + Treinamento</h3>
+                <p class="timeline-step__desc">
+                  Você recebe o sistema funcionando, o repositório completo
+                  e uma sessão de treinamento para operar e evoluir a base com IA.
+                </p>
+              </div>
+            </li>
+
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRIORIZAÇÃO -->
+    <section class="section" aria-labelledby="controle-headline">
+      <div class="container">
+        <div class="grid grid-2">
+          <div class="section-header">
+            <p class="label">Priorização</p>
+            <h2 id="controle-headline" class="headline headline--lg animate-fade-up">
+              A maioria dos projetos falha no escopo.
+            </h2>
+            <p class="desc">
+              Atribuímos um score de impacto para cada funcionalidade do seu MVP. Isso dá a você total clareza para priorizar ou descartar o que não move o ponteiro, garantindo que o orçamento foque no que realmente importa.
+            </p>
+          </div>
+          <div class="controle__visual" aria-label="Demonstração da interface de priorização">
+            <div class="demo-window">
+              <div class="demo-window__bar" aria-hidden="true">
+                <span class="terminal-dot terminal-dot--r"></span>
+                <span class="terminal-dot terminal-dot--y"></span>
+                <span class="terminal-dot terminal-dot--g"></span>
+                <span class="demo-window__url">deplova.com / <em>cliente · priorização</em></span>
+              </div>
+              <div class="demo-window__body">
+                <div class="demo-features" role="list">
+
+                  <div class="demo-feature demo-feature--selected" role="listitem" aria-selected="true">
+                    <div class="demo-feature__sel" aria-hidden="true">✓</div>
+                    <div class="demo-feature__content">
+                      <div class="demo-feature__header">
+                        <span class="demo-feature__name">Rastrear abertura de proposta</span>
+                        <span class="demo-feature__tags">
+                          <span class="demo-feature__tag demo-feature__tag--high">alta prioridade</span>
+                          <span class="demo-feature__tag">Impacto: 9/10</span>
+                        </span>
+                      </div>
+                      <p class="demo-feature__story">Como vendedor, quero saber quando o cliente abriu a proposta e
+                        quanto tempo passou nela, para priorizar follow-ups.</p>
+                    </div>
+                  </div>
+
+                  <div class="demo-feature demo-feature--selected" role="listitem" aria-selected="true">
+                    <div class="demo-feature__sel" aria-hidden="true">✓</div>
+                    <div class="demo-feature__content">
+                      <div class="demo-feature__header">
+                        <span class="demo-feature__name">Assinatura digital no link</span>
+                        <span class="demo-feature__tags">
+                          <span class="demo-feature__tag demo-feature__tag--high">alta prioridade</span>
+                          <span class="demo-feature__tag">Impacto: 8/10</span>
+                        </span>
+                      </div>
+                      <p class="demo-feature__story">Como cliente, quero assinar a proposta diretamente no link enviado,
+                        sem precisar baixar ou imprimir.</p>
+                    </div>
+                  </div>
+
+                  <div class="demo-feature" role="listitem" aria-selected="false">
+                    <div class="demo-feature__sel demo-feature__sel--empty" aria-hidden="true"></div>
+                    <div class="demo-feature__content">
+                      <div class="demo-feature__header">
+                        <span class="demo-feature__name">Templates por tipo de cliente</span>
+                        <span class="demo-feature__tags">
+                          <span class="demo-feature__tag">média prioridade</span>
+                          <span class="demo-feature__tag">Impacto: 6/10</span>
+                        </span>
+                      </div>
+                      <p class="demo-feature__story">Como vendedor, quero templates específicos por tipo de cliente para
+                        que a proposta já venha com o tom certo.</p>
+                    </div>
+                  </div>
+
+                  <div class="demo-feature" role="listitem" aria-selected="false">
+                    <div class="demo-feature__sel demo-feature__sel--empty" aria-hidden="true"></div>
+                    <div class="demo-feature__content">
+                      <div class="demo-feature__header">
+                        <span class="demo-feature__name">Alerta no WhatsApp ao abrir</span>
+                        <span class="demo-feature__tags">
+                          <span class="demo-feature__tag">baixa prioridade</span>
+                          <span class="demo-feature__tag">Impacto: 5/10</span>
+                        </span>
+                      </div>
+                      <p class="demo-feature__story">Como vendedor, quero receber uma mensagem no WhatsApp quando o
+                        cliente abrir a proposta, para reagir em tempo real.</p>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="demo-window__footer">
+                  <span class="demo-window__count">2 de 4 features selecionadas</span>
+                  <span class="demo-window__pts">21 pts no sprint</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ENTREGÁVEIS -->
+    <section id="entregaveis" class="section" aria-labelledby="deliverables-headline">
+      <div class="container">
+        <div class="section-header">
+          <p class="label">Entregáveis</p>
+          <h2 id="deliverables-headline" class="headline headline--lg animate-fade-up">
+            O que você recebe.
+          </h2>
+          <p class="desc">
+            Cada entrega termina com uma solução real<br>
+            e uma base técnica pronta para evoluir.
+          </p>
+        </div>
+        <div class="grid grid-3" role="list">
+
+          <article class="content-card" role="listitem">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <line class="e1 e-pulse" x1="32" y1="32" x2="12" y2="12" stroke="var(--c4)" stroke-width="1" />
+              <line class="e2 e-pulse" x1="32" y1="32" x2="52" y2="12" stroke="var(--c4)" stroke-width="1" />
+              <line class="e3 e-pulse" x1="32" y1="32" x2="10" y2="48" stroke="var(--c4)" stroke-width="1" />
+              <line class="e4 e-pulse" x1="32" y1="32" x2="54" y2="48" stroke="var(--r4)" stroke-width="1" />
+              <circle class="nd1" cx="12" cy="12" fill="var(--c4)" opacity=".7" />
+              <circle class="nd2" cx="52" cy="12" fill="var(--c4)" opacity=".7" />
+              <circle class="nd3" cx="10" cy="48" fill="var(--c4)" opacity=".7" />
+              <circle class="nd4" cx="54" cy="48" fill="var(--r4)" opacity=".7" />
+              <text x="12" y="8" font-family="monospace" font-size="5" fill="var(--c3)" text-anchor="middle"
+                opacity=".6">DB</text>
+              <text x="52" y="8" font-family="monospace" font-size="5" fill="var(--c3)" text-anchor="middle"
+                opacity=".6">API</text>
+              <text x="10" y="58" font-family="monospace" font-size="5" fill="var(--c3)" text-anchor="middle"
+                opacity=".6">UI</text>
+              <text x="54" y="58" font-family="monospace" font-size="5" fill="var(--r3)" text-anchor="middle"
+                opacity=".6">CDN</text>
+              <circle cx="32" cy="32" r="10" fill="var(--c4)" fill-opacity=".08" stroke="var(--c4)" stroke-width=".6"
+                opacity=".4" />
+              <circle class="nc" cx="32" cy="32" fill="var(--c4)" opacity=".9" />
+            </svg>
+            <h3 class="content-card__title">Arquitetura preparada para crescimento</h3>
+            <p class="content-card__desc">Estrutura técnica organizada para novas funcionalidades,
+              integrações e escala.</p>
+          </article>
+
+          <article class="content-card" role="listitem">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <g class="ui-grid">
+                <rect x="4" y="4" width="56" height="56" rx="4" stroke="var(--ink)" stroke-width=".6" fill="none"
+                  stroke-dasharray="3 2" />
+                <line x1="4" y1="16" x2="60" y2="16" stroke="var(--ink)" stroke-width=".5" stroke-dasharray="3 2" />
+                <line x1="20" y1="16" x2="20" y2="60" stroke="var(--ink)" stroke-width=".5" stroke-dasharray="3 2" />
+              </g>
+              <g class="ui-nav">
+                <rect x="4" y="4" width="56" height="11" rx="3" fill="var(--c4)" fill-opacity=".1" stroke="var(--c4)"
+                  stroke-width=".9" />
+                <rect x="7" y="7" width="10" height="5" rx="1.5" fill="var(--c4)" fill-opacity=".4" />
+                <rect x="44" y="7" width="13" height="5" rx="2.5" fill="var(--r4)" fill-opacity=".6" />
+              </g>
+              <g class="ui-side">
+                <rect x="4" y="16" width="15" height="44" rx="0" fill="var(--c4)" fill-opacity=".05" stroke="var(--c4)"
+                  stroke-width=".7" opacity=".5" />
+                <rect x="6" y="20" width="9" height="2" rx="1" fill="var(--c4)" opacity=".4" />
+                <rect x="6" y="25" width="9" height="2" rx="1" fill="var(--ink)" opacity=".2" />
+                <rect x="6" y="30" width="7" height="2" rx="1" fill="var(--ink)" opacity=".2" />
+              </g>
+              <g class="ui-card">
+                <rect x="22" y="18" width="38" height="22" rx="3" fill="var(--c4)" fill-opacity=".07" stroke="var(--c4)"
+                  stroke-width=".8" />
+                <rect x="25" y="21" width="18" height="4" rx="1" fill="var(--ink)" opacity=".2" />
+                <rect x="25" y="27" width="30" height="2" rx="1" fill="var(--ink)" opacity=".12" />
+              </g>
+              <g class="ui-btn">
+                <rect class="ui-btn-fill" x="48" y="44" width="12" height="8" rx="3" fill="var(--r4)" fill-opacity=".15"
+                  stroke="var(--r4)" stroke-width=".9" />
+                <text x="54" y="49" font-family="monospace" font-size="4.5" fill="var(--r4)" text-anchor="middle"
+                  dominant-baseline="central" opacity=".8">GO</text>
+              </g>
+              <g class="ui-cursor">
+                <path d="M22 44 L22 52 L24 50 L25.2 53 L26.4 52.5 L25.2 49.5 L27.5 49.5 Z" fill="var(--r4)"
+                  stroke="#090910" stroke-width=".4" />
+              </g>
+            </svg>
+            <h3 class="content-card__title">MVP funcional</h3>
+            <p class="content-card__desc">Interface completa com fluxos reais de uso —
+              utilizável desde o primeiro dia.</p>
+          </article>
+
+          <article class="content-card" role="listitem">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <g class="code-blk">
+                <text x="8" y="18" font-family="monospace" font-size="6" fill="var(--c4)" opacity=".45">const app =</text>
+                <text x="8" y="26" font-family="monospace" font-size="6" fill="var(--ink)" opacity=".3">  listen(3000)</text>
+                <text x="8" y="34" font-family="monospace" font-size="6" fill="var(--r4)" opacity=".35">→ build</text>
+              </g>
+              <path class="dep-arrow" d="M32 52 L32 24 M26 30 L32 24 L38 30" stroke="var(--c4)" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+              <path class="dep-cloud"
+                d="M14 28 Q14 18 24 18 Q26 12 34 12 Q44 12 44 20 Q52 20 52 28 Q52 36 44 36 L22 36 Q14 36 14 28Z"
+                stroke="var(--c4)" stroke-width="1.2" fill="none" />
+              <circle class="dep-ping" cx="32" cy="24" fill="var(--c4)" />
+              <g class="dep-url">
+                <rect x="8" y="46" width="48" height="12" rx="6" fill="var(--c4)" fill-opacity=".08" stroke="var(--c4)"
+                  stroke-width=".9" />
+                <text x="32" y="52" font-family="monospace" font-size="6" fill="var(--c4)" text-anchor="middle"
+                  dominant-baseline="central" opacity=".85">deplova.app ✓</text>
+              </g>
+            </svg>
+            <h3 class="content-card__title">Deploy ativo</h3>
+            <p class="content-card__desc">Sua aplicação é entregue no ar, com infraestrutura
+              configurada e acessível.</p>
+          </article>
+
+          <article class="content-card" role="listitem">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <circle cx="32" cy="20" r="10" stroke="var(--c4)" stroke-width="1.2" fill="none" opacity=".7" />
+              <circle cx="32" cy="20" r="4" fill="var(--c4)" opacity=".4" />
+              <line x1="32" y1="30" x2="32" y2="44" stroke="var(--c4)" stroke-width="1.2" stroke-linecap="round"
+                opacity=".6" />
+              <line x1="20" y1="38" x2="32" y2="44" stroke="var(--c4)" stroke-width="1" stroke-linecap="round"
+                opacity=".5" />
+              <line x1="44" y1="38" x2="32" y2="44" stroke="var(--c4)" stroke-width="1" stroke-linecap="round"
+                opacity=".5" />
+              <line x1="32" y1="44" x2="26" y2="56" stroke="var(--c4)" stroke-width="1" stroke-linecap="round"
+                opacity=".5" />
+              <line x1="32" y1="44" x2="38" y2="56" stroke="var(--c4)" stroke-width="1" stroke-linecap="round"
+                opacity=".5" />
+              <rect x="42" y="10" width="16" height="10" rx="2" fill="var(--r4)" fill-opacity=".15" stroke="var(--r4)"
+                stroke-width=".9" />
+              <text x="50" y="16" font-family="monospace" font-size="5" fill="var(--r4)" text-anchor="middle"
+                dominant-baseline="central" opacity=".9">IA</text>
+              <line x1="42" y1="16" x2="40" y2="18" stroke="var(--r4)" stroke-width=".8" stroke-dasharray="2 1"
+                opacity=".6" />
+            </svg>
+            <h3 class="content-card__title">Treinamento em evolução com IA</h3>
+            <p class="content-card__desc">Uma sessão prática para você aprender a iterar,
+              melhorar e expandir sua base usando IA.</p>
+          </article>
+
+          <article class="content-card" role="listitem">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <line class="trunk" x1="16" y1="8" x2="16" y2="52" stroke="var(--c4)" stroke-width="1.4"
+                stroke-linecap="round" />
+              <path class="br-l" d="M16 22 Q16 32 30 32" fill="none" stroke="var(--c3)" stroke-width="1"
+                stroke-linecap="round" />
+              <path class="br-r" d="M16 36 Q16 44 30 44" fill="none" stroke="var(--r3)" stroke-width="1"
+                stroke-linecap="round" />
+              <circle class="cm1" cx="16" cy="12" r="3.5" fill="var(--c4)" opacity=".9" />
+              <circle class="cm2" cx="16" cy="24" r="3.5" fill="var(--c4)" opacity=".9" />
+              <circle class="cm3" cx="16" cy="36" r="3.5" fill="var(--c4)" opacity=".9" />
+              <circle class="cm4" cx="30" cy="32" r="3" fill="var(--c3)" opacity=".8" />
+              <circle class="cm5" cx="30" cy="44" r="3" fill="var(--r4)" opacity=".8" />
+              <g class="head-tag">
+                <rect x="8" y="6" width="16" height="8" rx="2" fill="var(--c4)" fill-opacity=".2" stroke="var(--c4)"
+                  stroke-width=".8" />
+                <text class="head-txt" x="16" y="10.5" font-family="monospace" font-size="4.5" fill="var(--c4)"
+                  text-anchor="middle" dominant-baseline="central">HEAD</text>
+              </g>
+              <g class="git-doc">
+                <rect x="36" y="8" width="22" height="28" rx="3" fill="var(--c4)" fill-opacity=".06" stroke="var(--c4)"
+                  stroke-width="1" />
+                <path d="M52 8 L58 14 L52 14 Z" fill="var(--c4)" fill-opacity=".2" />
+                <path d="M52 8 L58 14 L52 14" stroke="var(--c4)" stroke-width=".9" fill="none" />
+                <line x1="39" y1="20" x2="50" y2="20" stroke="var(--ink)" stroke-width="1" stroke-linecap="round"
+                  opacity=".4" />
+                <line x1="39" y1="24" x2="53" y2="24" stroke="var(--ink)" stroke-width="1" stroke-linecap="round"
+                  opacity=".3" />
+                <line x1="39" y1="28" x2="47" y2="28" stroke="var(--ink)" stroke-width="1" stroke-linecap="round"
+                  opacity=".2" />
+                <text x="47" y="12" font-family="monospace" font-size="4.5" fill="var(--c4)" text-anchor="middle"
+                  dominant-baseline="central" opacity=".6">PDF</text>
+              </g>
+            </svg>
+            <h3 class="content-card__title">Repositório completo</h3>
+            <p class="content-card__desc">Código, documentação e credenciais são entregues integralmente.
+              O projeto passa a ser seu.</p>
+          </article>
+
+          <article class="content-card" role="listitem">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <rect x="6" y="4" width="34" height="44" rx="3" fill="var(--c4)" fill-opacity=".05" stroke="var(--c4)"
+                stroke-width="1" />
+              <line x1="11" y1="14" x2="30" y2="14" stroke="var(--r4)" stroke-width="1.1" stroke-linecap="round"
+                opacity=".7" />
+              <line x1="11" y1="20" x2="34" y2="20" stroke="var(--c4)" stroke-width="1" stroke-linecap="round"
+                opacity=".5" />
+              <line x1="14" y1="26" x2="32" y2="26" stroke="var(--c4)" stroke-width="1" stroke-linecap="round"
+                opacity=".4" />
+              <line x1="14" y1="32" x2="28" y2="32" stroke="var(--c4)" stroke-width="1" stroke-linecap="round"
+                opacity=".3" />
+              <line x1="11" y1="38" x2="26" y2="38" stroke="var(--c4)" stroke-width="1" stroke-linecap="round"
+                opacity=".5" />
+              <rect x="11" y="11" width="3" height="3" rx=".5" fill="var(--r4)" opacity=".5" />
+              <rect x="11" y="17" width="3" height="3" rx=".5" fill="var(--c4)" opacity=".4" />
+              <rect x="11" y="35" width="3" height="3" rx=".5" fill="var(--c4)" opacity=".4" />
+              <circle cx="48" cy="36" r="12" fill="var(--c4)" fill-opacity=".07" stroke="var(--c4)"
+                stroke-width="1.1" />
+              <circle cx="48" cy="36" r="5" fill="var(--c4)" fill-opacity=".2" />
+              <circle cx="48" cy="36" r="2" fill="var(--c4)" opacity=".8" />
+              <line x1="40" y1="20" x2="44" y2="30" stroke="var(--c4)" stroke-width=".8" stroke-dasharray="2.5 2"
+                opacity=".5" />
+              <line x1="40" y1="32" x2="44" y2="34" stroke="var(--c4)" stroke-width=".8" stroke-dasharray="2.5 2"
+                opacity=".4" />
+              <circle cx="48" cy="12" r="4" stroke="var(--r4)" stroke-width="1" fill="none" opacity=".7" />
+              <path d="M42 22 Q48 18 54 22" stroke="var(--r4)" stroke-width="1" fill="none" stroke-linecap="round"
+                opacity=".6" />
+              <circle cx="56" cy="52" r="6" fill="var(--c4)" fill-opacity=".15" stroke="var(--c4)" stroke-width=".9" />
+              <path d="M53 52 L55.5 54.5 L59 50" stroke="var(--c4)" stroke-width="1.2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <h3 class="content-card__title">Arquitetura IA-friendly</h3>
+            <p class="content-card__desc">A base do sistema é organizada para ser compreendida
+              tanto por desenvolvedores quanto por ferramentas de IA.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- PARA QUEM É -->
+    <section id="para-quem" class="section" aria-labelledby="persona-headline">
+      <div class="container">
+        <div class="section-header">
+          <p class="label">Para quem</p>
+          <h2 id="persona-headline" class="headline headline--lg animate-fade-up">
+            Para quem precisa transformar<br> visão em software real.
+          </h2>
+        </div>
+        <div class="grid grid-3" role="list">
+
+          <article class="content-card" role="listitem">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <g class="plant">
+                <path class="p-root" d="M32 54 Q29 61 34 64" stroke="var(--c4)" stroke-width="1" stroke-linecap="round"
+                  opacity=".38" />
+                <ellipse class="p-seed" cx="32" cy="53" rx="5.5" ry="3.5" stroke="var(--r4)" stroke-width="1.3"
+                  fill="none" />
+                <line class="p-stem" x1="32" y1="50" x2="32" y2="13" stroke="var(--c4)" stroke-width="1.2"
+                  stroke-linecap="round" />
+                <path class="p-ll" d="M32 38 Q16 33 18 20 Q27 30 32 34" stroke="var(--c4)" stroke-width="1.2"
+                  stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                <path class="p-lr" d="M32 26 Q48 21 46 11 Q37 20 32 22" stroke="var(--c4)" stroke-width="1.2"
+                  stroke-linecap="round" stroke-linejoin="round" fill="none" />
+              </g>
+            </svg>
+            <h3 class="content-card__title content-card__title--persona">Fundadores</h3>
+            <p class="content-card__desc content-card__desc--persona">
+              Você traz a visão do produto. Nós a transformamos em uma aplicação funcional pronta para testar com usuários e começar a evoluir.
+            </p>
+          </article>
+
+          <article class="content-card" role="listitem">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <circle class="lb-glow" cx="32" cy="27" r="18" fill="var(--c4)" />
+              <path class="lb-fill"
+                d="M32 9C44.5 9 51 19 51 27C51 36 46 41 42.5 44L21.5 44C18 41 13 36 13 27C13 19 19.5 9 32 9Z"
+                fill="var(--c4)" />
+              <path class="lb-glass"
+                d="M32 9C44.5 9 51 19 51 27C51 36 46 41 42.5 44L21.5 44C18 41 13 36 13 27C13 19 19.5 9 32 9Z"
+                stroke="var(--c4)" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+              <path class="lb-fil" d="M23 30 Q27 21 32 29 Q37 37 41 28" stroke="var(--r4)" stroke-width="1.3"
+                fill="none" stroke-linecap="round" />
+              <line class="lb-b1" x1="21.5" y1="47" x2="42.5" y2="47" stroke="var(--c4)" stroke-width="1.4"
+                stroke-linecap="round" />
+              <line class="lb-b2" x1="24" y1="51" x2="40" y2="51" stroke="var(--c4)" stroke-width="1.4"
+                stroke-linecap="round" />
+              <line class="lb-b3" x1="27" y1="55" x2="37" y2="55" stroke="var(--c4)" stroke-width="1.4"
+                stroke-linecap="round" />
+            </svg>
+            <h3 class="content-card__title content-card__title--persona">Startups</h3>
+            <p class="content-card__desc content-card__desc--persona">
+              Investidores querem ver produto em funcionamento, não apenas apresentações. A Deplova acelera o caminho entre ideia e MVP utilizável.
+            </p>
+          </article>
+
+          <article class="content-card" role="listitem">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <rect x="25.5" y="47" width="13" height="12" rx="1" stroke="var(--c4)" stroke-width="1" fill="none"
+                opacity=".4" />
+              <rect class="bldg" x="15" y="9" width="34" height="50" rx="2" stroke="var(--c4)" stroke-width="1.2"
+                fill="none" />
+              <rect class="w1" x="19" y="15" width="10" height="7" rx="1" fill="var(--c4)" fill-opacity=".2"
+                stroke="var(--c4)" stroke-width=".8" />
+              <rect class="w3" x="19" y="26" width="10" height="7" rx="1" fill="var(--c4)" fill-opacity=".2"
+                stroke="var(--c4)" stroke-width=".8" />
+              <rect class="w5" x="19" y="37" width="10" height="7" rx="1" fill="var(--c4)" fill-opacity=".2"
+                stroke="var(--c4)" stroke-width=".8" />
+              <rect class="w2" x="35" y="15" width="10" height="7" rx="1" fill="var(--r4)" fill-opacity=".2"
+                stroke="var(--r4)" stroke-width=".8" />
+              <rect class="w4" x="35" y="26" width="10" height="7" rx="1" fill="var(--r4)" fill-opacity=".2"
+                stroke="var(--r4)" stroke-width=".8" />
+              <rect class="w6" x="35" y="37" width="10" height="7" rx="1" fill="var(--r4)" fill-opacity=".2"
+                stroke="var(--r4)" stroke-width=".8" />
+              <g class="scf">
+                <line x1="9" y1="9" x2="9" y2="58" stroke="var(--r4)" stroke-width=".9" stroke-dasharray="2.5 2" />
+                <line x1="55" y1="9" x2="55" y2="58" stroke="var(--r4)" stroke-width=".9" stroke-dasharray="2.5 2" />
+                <line x1="9" y1="23" x2="15" y2="23" stroke="var(--r4)" stroke-width="1" />
+                <line x1="49" y1="23" x2="55" y2="23" stroke="var(--r4)" stroke-width="1" />
+                <line x1="9" y1="39" x2="15" y2="39" stroke="var(--r4)" stroke-width="1" />
+                <line x1="49" y1="39" x2="55" y2="39" stroke="var(--r4)" stroke-width="1" />
+                <circle cx="9" cy="9" r="1.5" fill="var(--r4)" />
+                <circle cx="55" cy="9" r="1.5" fill="var(--r4)" />
+                <circle cx="9" cy="58" r="1.5" fill="var(--r4)" />
+                <circle cx="55" cy="58" r="1.5" fill="var(--r4)" />
+              </g>
+            </svg>
+            <h3 class="content-card__title content-card__title--persona">Empresas</h3>
+            <p class="content-card__desc content-card__desc--persona">
+              Projetos internos frequentemente ficam presos em documentos ou provas de conceito. Nós transformamos essas iniciativas em software real, pronto para escalar.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- INDEPENDÊNCIA -->
+    <section class="section" aria-labelledby="independencia-headline">
+      <div class="container">
+        <div class="grid grid-2">
+          <div class="section-header">
+            <p class="label">Independência</p>
+            <h2 id="independencia-headline" class="headline headline--lg animate-fade-up">
+              Controle real sobre<br>a sua tecnologia.
+            </h2>
+          </div>
+          <div>
+            <p class="desc">
+              A Deplova não entrega apenas um MVP.<br>
+              Entrega a capacidade de continuar iterando.
+            </p>
+            <p class="desc">
+              Depois da entrega, você poderá:
+            </p>
+            <ul class="desc" style="list-style: disc; padding-left: 1.5rem; margin-bottom: 2rem;">
+              <li>Solicitar melhorias para IA</li>
+              <li>Implementar novas funcionalidades</li>
+              <li>Corrigir problemas rapidamente</li>
+              <li>Evoluir a aplicação sem depender de um time dedicado</li>
+            </ul>
+            <p class="desc">
+              Também treinamos designers e equipes internas para trabalhar
+              diretamente sobre o código do projeto entregue.
+            </p>
+            <p class="desc">
+              O objetivo é simples:
+              a base precisa continuar evoluindo mesmo sem nós.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- PLANOS -->
+    <section id="planos" class="section" aria-labelledby="plans-headline" style="text-align: center;">
+      <div class="container">
+
+        <div class="section-header">
+          <p class="label">Planos</p>
+          <h2 id="plans-headline" class="headline headline--lg animate-fade-up">
+            Comece pelo Discovery<br>ou vá direto à execução.
+          </h2>
+          <p class="desc">
+            Você paga pelo resultado — não por horas de desenvolvimento.
+          </p>
+        </div>
+
+        <div class="plans-grid grid grid-2" role="list">
+
+          <article class="plan-card" aria-labelledby="plan-discovery-name" role="listitem">
+            <div>
+              <p id="plan-discovery-name" class="label label--muted">Discovery</p>
+            </div>
+            <div class="plan-card__price">
+              <span class="plan-card__currency">R$</span>
+              <span class="plan-card__amount">2.400</span>
+            </div>
+            <ul class="plan-card__features" aria-label="Itens inclusos no Discovery">
+              <li class="plan-card__feature">
+                <span class="plan-card__check" aria-hidden="true">→</span>
+                <span>Backlog estruturado</span>
+              </li>
+              <li class="plan-card__feature">
+                <span class="plan-card__check" aria-hidden="true">→</span>
+                <span>Priorização por impacto</span>
+              </li>
+              <li class="plan-card__feature">
+                <span class="plan-card__check" aria-hidden="true">→</span>
+                <span>Relatório completo em PDF</span>
+              </li>
+            </ul>
+            <a href="#" class="btn btn--outline btn--sm" aria-label="Contratar plano Discovery">
+              Agendar discovery
+              <span class="btn__arrow" aria-hidden="true">→</span>
+            </a>
+          </article>
+
+          <article class="plan-card plan-card--featured" aria-labelledby="plan-mvp-name" role="listitem">
+            <span class="plan-card__tag" aria-label="Plano recomendado">Mais escolhido</span>
+            <div>
+              <p id="plan-mvp-name" class="label">MVP + Capacitação</p>
+            </div>
+            <div class="plan-card__price">
+              <span class="plan-card__currency plan-card__currency--featured">R$</span>
+              <span class="plan-card__amount">4.999</span>
+            </div>
+            <ul class="plan-card__features" aria-label="Itens inclusos no MVP + Treinamento">
+              <li class="plan-card__feature">
+                <span class="plan-card__check" aria-hidden="true">→</span>
+                <span>Tudo do Discovery</span>
+              </li>
+              <li class="plan-card__feature">
+                <span class="plan-card__check" aria-hidden="true">→</span>
+                <span>MVP desenvolvido e publicado</span>
+              </li>
+              <li class="plan-card__feature">
+                <span class="plan-card__check" aria-hidden="true">→</span>
+                <span>Repositório e infraestrutura entregues</span>
+              </li>
+              <li class="plan-card__feature">
+                <span class="plan-card__check" aria-hidden="true">→</span>
+                <span>Sessão de treinamento em evolução com IA</span>
+              </li>
+              <li class="plan-card__feature">
+                <span class="plan-card__check" aria-hidden="true">→</span>
+                <span>30 dias de suporte</span>
+              </li>
+            </ul>
+            <a href="https://w.app/deplova" class="btn btn--primary btn--sm" aria-label="Iniciar MVP">
+              <span class="btn__inner">Agendar briefing
+                <span class="btn__arrow" aria-hidden="true">→</span>
+              </span>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="section" aria-labelledby="cta-headline" style="text-align: center;">
+      <div class="container">
+        <h2 id="cta-headline" class="headline headline--lg">
+          Hora de tirar sua<br> ideia do papel.
+        </h2>
+        <p class="desc">
+          Um briefing de 60 minutos. Alguns dias de build. Aplicação funcionando,<br> código nas suas mãos e o conhecimento para continuar evoluindo.
+        </p>
+        <a href="https://w.app/deplova" class="cta btn btn--primary btn--sm" aria-label="Começar projeto">
+          <span class="btn__inner">Agendar briefing
+            <span class="btn__arrow" aria-hidden="true">→</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="site/js/hero.js"></script>
+
+</body>
+
+</html>

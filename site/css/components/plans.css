@@ -1,0 +1,95 @@
+/* ============================================================
+   PLAN CARDS
+   ============================================================ */
+.plans-grid {
+  --grid-gap: var(--space-6);
+  --grid-2-md-cols: 2;
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+.plan-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-10);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  position: relative;
+  align-items: flex-start;
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.plan-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.plan-card--featured {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--ink-800), var(--ink-900)) padding-box,
+    linear-gradient(135deg, #35B0CD, #F575A2) border-box;
+}
+
+.plan-card__tag {
+  position: absolute;
+  top: calc(-1 * var(--space-3));
+  right: var(--space-8);
+  background: linear-gradient(135deg, #35B0CD, #F575A2);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  padding: var(--space-1) var(--space-4);
+  border-radius: 100px;
+  letter-spacing: 0.08em;
+}
+
+.plan-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.plan-card__currency {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.plan-card__currency--featured {
+  color: var(--text-secondary);
+}
+
+.plan-card__amount {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-5xl);
+  line-height: 1;
+}
+
+.plan-card__features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+}
+
+.plan-card__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.plan-card__check {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+  margin-top: 2px;
+}

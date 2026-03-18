@@ -1,0 +1,73 @@
+/* ============================================================
+   TIMELINE (Como Funciona)
+   ============================================================ */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-left: -28px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+
+.timeline-step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: var(--space-6);
+  padding-block: var(--space-6);
+  position: relative;
+}
+
+.timeline-step__marker {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: var(--space-1);
+}
+
+.timeline-step__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bg-base);
+  border: 1px solid var(--accent);
+  position: relative;
+  z-index: 1;
+  margin-top: 4px;
+  transition: background var(--duration-fast);
+}
+
+.timeline-step:hover .timeline-step__dot {
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.timeline-step__time {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-2);
+}
+
+.timeline-step__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  line-height: 1.2;
+  margin-bottom: var(--space-2);
+}
+
+.timeline-step__desc {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}

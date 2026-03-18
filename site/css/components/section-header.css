@@ -1,0 +1,16 @@
+.section-header {
+  margin-bottom: var(--space-16);
+}
+
+.section-header .headline {
+  margin-top: var(--space-6);
+}
+
+.desc {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-weight: 300;
+  margin-top: var(--space-6);
+  margin-bottom: 0;
+}

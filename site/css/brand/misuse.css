@@ -1,0 +1,66 @@
+.brand-misuse-grid {
+  --grid-gap: var(--space-4);
+  --grid-3-md-cols: 1;
+}
+
+.brand-misuse-card {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  overflow: hidden;
+}
+
+.brand-misuse-card__sample {
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--bg-base) 62%, transparent);
+}
+
+.brand-misuse-card__sample::after {
+  content: '✕';
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  color: var(--primary);
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.brand-misuse-card__label {
+  border-top: 1px solid var(--border-subtle);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.brand-misuse-logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+  line-height: 1;
+}
+
+.brand-misuse-logo--stretch {
+  transform: scaleX(1.35);
+}
+
+.brand-misuse-logo--rotate {
+  transform: rotate(-14deg);
+}
+
+.brand-misuse-logo--dim {
+  opacity: 0.25;
+}
