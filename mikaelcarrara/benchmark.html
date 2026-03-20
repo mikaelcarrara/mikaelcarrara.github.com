@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deplova — Benchmark Comparativo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+
+/* ─── TOKENS ─────────────────────────────────────────── */
+:root {
+  --bg:       #0a0c0f;
+  --bg-card:  #0f1216;
+  --bg-lift:  #141820;
+  --rule:     rgba(255,255,255,.08);
+  --rule2:    rgba(255,255,255,.13);
+  --ink:      #f0f2f5;       /* warm off-white, like Garamond on dark */
+  --ink-2:    #8b95a3;       /* body muted */
+  --ink-3:    #4a5568;       /* dimmer */
+  --accent:   #35B0CD;       /* Deplova accent */
+  --accent-dim: rgba(53,176,205,.10);
+  --accent-mid: rgba(53,176,205,.22);
+  --red-dim:  rgba(255,90,80,.1);
+  --red-ink:  #f06055;
+  --blue-ink: #6eaef5;
+  --blue-dim: rgba(110,174,245,.1);
+  --teal-ink: #3dd6c0;
+  --teal-dim: rgba(61,214,192,.1);
+  --amber-ink:#f0b955;
+  --amber-dim:rgba(240,185,85,.1);
+}
+
+/* ─── RESET + BASE ────────────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── LAYOUT ──────────────────────────────────────────── */
+.w { max-width: 1060px; margin: 0 auto; padding: 0 48px; }
+section { padding: 88px 0; }
+section + section { border-top: 1px solid var(--rule); }
+
+/* ─── TYPE SCALE ─────────────────────────────────────── */
+
+/* Garamond display — hero + section titles */
+.g-hero {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(52px, 8vw, 108px);
+  font-weight: 400;
+  line-height: .93;
+  letter-spacing: -.02em;
+}
+.g-hero em { font-style: italic; }
+
+.g-title {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(34px, 4.5vw, 58px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  margin-bottom: 18px;
+}
+.g-title em { font-style: italic; }
+
+.g-quote {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(22px, 3vw, 38px);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -.015em;
+}
+.g-quote em { font-style: italic; color: var(--accent); }
+
+/* DM Sans functional */
+.eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content:'';
+  display:block;
+  width: 18px; height: 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.lead {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--ink-2);
+  max-width: 580px;
+}
+
+code, .mono {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11.5px;
+  font-weight: 400;
+  letter-spacing: .03em;
+  background: var(--rule2);
+  padding: 1px 6px;
+  border-radius: 3px;
+  color: var(--accent);
+}
+
+/* ─── HERO ─────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-dots {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(53,176,205,.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.hero-glow {
+  position: absolute;
+  bottom: -300px; left: 50%;
+  transform: translateX(-50%);
+  width: 900px; height: 500px;
+  background: radial-gradient(ellipse, rgba(53,176,205,.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative; z-index: 1;
+  padding: 80px 48px 0;
+  max-width: 1060px;
+  margin: 0 auto; width: 100%;
+}
+
+.hero-logo {
+  margin-bottom: 64px;
+  display: block;
+}
+.hero-logo img { height: 28px; opacity: .9; }
+
+.hero-headline { margin-bottom: 36px; }
+
+.hero-rule {
+  width: 40px; height: 1px;
+  background: var(--accent);
+  margin-bottom: 20px;
+}
+
+.hero-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--ink-2);
+  max-width: 560px;
+  margin-bottom: 72px;
+}
+
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--rule);
+  position: relative; z-index: 1;
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+.hero-meta-item {
+  padding: 20px 0 20px;
+  border-right: 1px solid var(--rule);
+}
+.hero-meta-item:first-child { padding-left: 0; }
+.hero-meta-item:last-child  { border-right: none; }
+.hero-meta-lbl {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-3); margin-bottom: 5px;
+}
+.hero-meta-val {
+  font-size: 13px; font-weight: 500;
+  color: var(--ink);
+}
+.hero-meta-val.accent { color: var(--accent); }
+
+/* ─── CALLOUT ────────────────────────────────────────── */
+.callout {
+  border-left: 1px solid var(--accent);
+  background: var(--accent-dim);
+  padding: 16px 20px;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--ink-2);
+  line-height: 1.7;
+  margin: 28px 0;
+}
+.callout strong { color: var(--ink); font-weight: 500; }
+
+/* ─── GRID BANDS ─────────────────────────────────────── */
+.grid-band {
+  display: grid;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+
+.grid-cell {
+  background: var(--bg-card);
+  padding: 28px 24px;
+}
+.grid-cell:hover { background: var(--bg-lift); }
+
+/* ─── PREMISE ─────────────────────────────────────────── */
+.premise-bg {
+  background: var(--bg-card);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 80px 0;
+}
+
+/* ─── PLAYER LIST ─────────────────────────────────────── */
+.players {
+  display: flex; flex-direction: column;
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-bottom: 56px;
+}
+
+.player {
+  background: var(--bg-card);
+  display: grid;
+  grid-template-columns: 196px 1fr 196px;
+  transition: background .12s;
+}
+.player:hover { background: var(--bg-lift); }
+
+.player.deplova {
+  background: #0b1118;
+  border-left: 2px solid var(--accent);
+}
+
+.p-id {
+  padding: 22px;
+  border-right: 1px solid var(--rule);
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.p-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 22px; font-weight: 400;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  line-height: 1;
+}
+.deplova .p-name { color: var(--accent); }
+
+.p-org {
+  font-size: 11px; color: var(--ink-3);
+  font-weight: 400;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 9.5px; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 3px;
+  align-self: flex-start;
+}
+.b-assist  { background: var(--blue-dim);  color: var(--blue-ink); }
+.b-builder { background: var(--teal-dim);  color: var(--teal-ink); }
+.b-agent   { background: var(--red-dim);   color: var(--red-ink);  }
+.b-spec    { background: rgba(100,100,100,.1); color: var(--ink-3); }
+.b-compiler{ background: var(--accent-mid);  color: var(--accent); font-weight: 600; }
+
+.p-body {
+  padding: 22px 26px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.p-model {
+  font-size: 11px; color: var(--ink-3);
+  font-style: italic; font-weight: 300;
+}
+
+.p-desc {
+  font-size: 13px; font-weight: 300;
+  color: var(--ink-2); line-height: 1.65;
+  max-width: 520px;
+}
+.deplova .p-desc { color: var(--ink); max-width: none; }
+
+.p-scores {
+  padding: 22px;
+  border-left: 1px solid var(--rule);
+  display: flex; flex-direction: column;
+  gap: 9px; justify-content: center;
+}
+
+.sr { display: flex; align-items: center; gap: 8px; }
+.sr-lbl { font-size: 10px; color: var(--ink-3); min-width: 80px; }
+.sr-track { flex: 1; height: 2px; background: var(--rule2); border-radius: 1px; }
+.sr-fill  { height: 100%; border-radius: 1px; }
+
+/* ─── BENCHMARK TABLE ────────────────────────────────── */
+.t-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  margin-bottom: 56px;
+}
+
+table.bm {
+  width: 100%; border-collapse: collapse;
+  font-size: 11.5px; min-width: 1020px;
+}
+
+table.bm th {
+  padding: 11px 14px;
+  text-align: left;
+  font-size: 9.5px; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-3);
+  border-bottom: 1px solid var(--rule);
+  background: var(--bg-card);
+  white-space: nowrap;
+}
+table.bm th.dep { background: #0b1118; color: var(--accent); border-bottom: 1px solid rgba(53,176,205,.22); }
+
+table.bm td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-3);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+table.bm tr:last-child td { border-bottom: none; }
+
+table.bm td:first-child {
+  font-size: 12px; font-weight: 400;
+  color: var(--ink-2); white-space: normal;
+}
+table.bm td.dep {
+  background: rgba(11,17,24,.7);
+  border-left: 1px solid rgba(53,176,205,.18);
+  border-right: 1px solid rgba(53,176,205,.18);
+}
+table.bm tr:last-child td.dep { border-bottom: 1px solid rgba(53,176,205,.18); }
+
+.chip {
+  display: inline-flex; align-items: center;
+  padding: 2px 7px; border-radius: 3px;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: .03em; white-space: nowrap;
+}
+.c-yes  { background: var(--teal-dim); color: var(--teal-ink); }
+.c-no   { background: var(--red-dim);  color: var(--red-ink);  }
+.c-part { background: rgba(100,100,100,.1); color: var(--ink-3); }
+.c-dep  { background: var(--accent-mid); color: var(--accent); font-weight: 600; }
+
+/* ─── PIPELINE ────────────────────────────────────────── */
+.pipe-bg {
+  background: var(--bg-card);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 80px 0;
+}
+
+.pipe-stages {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 44px;
+}
+
+.ps {
+  background: var(--bg-lift);
+  padding: 20px 14px; text-align: center;
+}
+
+.ps-letter {
+  font-family: 'EB Garamond', serif;
+  font-size: 32px; font-weight: 400;
+  color: var(--accent); opacity: .45;
+  line-height: 1; margin-bottom: 8px;
+}
+
+.ps-name {
+  font-size: 12px; font-weight: 500;
+  color: var(--ink); margin-bottom: 4px;
+  letter-spacing: -.01em;
+}
+
+.ps-role {
+  font-size: 10px; font-weight: 300;
+  color: var(--ink-3); line-height: 1.5;
+}
+
+.pipe-arts {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); border-top: none;
+}
+
+.pa {
+  background: var(--bg);
+  padding: 10px 14px; text-align: center;
+  font-size: 9px; font-weight: 400;
+  color: var(--ink-3); letter-spacing: .03em;
+  line-height: 1.5;
+}
+
+/* ─── GOVERNANCE ─────────────────────────────────────── */
+.gov-list {
+  display: flex; flex-direction: column;
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 44px;
+}
+
+.gov-row {
+  background: var(--bg-card);
+  display: grid;
+  grid-template-columns: 36px 180px 1fr 80px;
+  align-items: stretch;
+  transition: background .12s;
+}
+.gov-row:hover { background: var(--bg-lift); }
+
+.gov-row.biz  { border-left: 2px solid rgba(110,174,245,.4); }
+.gov-row.tech { border-left: 2px solid rgba(61,214,192,.35); }
+.gov-row.hum  { border-left: 2px solid rgba(240,185,85,.5); }
+
+.gn {
+  border-right: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10.5px; color: var(--ink-3); font-weight: 400;
+}
+
+.gname {
+  padding: 14px 18px;
+  border-right: 1px solid var(--rule);
+  font-size: 13px; font-weight: 500;
+  color: var(--ink);
+  display: flex; align-items: center;
+}
+
+.gdesc {
+  padding: 14px 18px;
+  font-size: 12px; font-weight: 300;
+  color: var(--ink-2); line-height: 1.6;
+  border-right: 1px solid var(--rule);
+}
+
+.gmode {
+  padding: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9.5px; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  text-align: center;
+}
+.gmode.auto  { color: var(--accent); }
+.gmode.human { color: var(--amber-ink); }
+.gmode.failfast { color: #D97757; }
+
+/* ─── QUOTE BAND ─────────────────────────────────────── */
+.quote-bg {
+  background: #0a0c0f;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 80px 0;
+}
+.q-attr {
+  font-size: 11px; color: var(--ink-3);
+  font-weight: 400; letter-spacing: .08em;
+  margin-top: 20px;
+}
+
+/* ─── VERDICT ────────────────────────────────────────── */
+.verdict {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 44px;
+}
+
+.vc {
+  background: var(--bg-card);
+  padding: 28px 24px;
+}
+.vc.win {
+  background: #0b1118;
+  border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent);
+}
+
+.vc-cat {
+  font-size: 9.5px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-3); margin-bottom: 12px;
+}
+.vc.win .vc-cat { color: var(--accent); }
+
+.vc-who {
+  font-family: 'EB Garamond', serif;
+  font-size: 20px; font-weight: 400;
+  color: var(--ink); margin-bottom: 10px;
+  letter-spacing: -.01em;
+}
+.vc.win .vc-who { color: var(--accent); }
+
+.vc-body {
+  font-size: 13px; font-weight: 300;
+  color: var(--ink-2); line-height: 1.65;
+}
+
+
+
+
+
+/* ─── FOOTER ──────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 20px 48px;
+  display: flex; justify-content: space-between;
+  align-items: center;
+}
+.f-logo img { height: 22px; opacity: .65; }
+.f-tag {
+  font-size: 12px; font-weight: 300;
+  color: var(--ink-3); font-style: italic;
+  font-family: 'EB Garamond', serif;
+}
+.f-year {
+  font-size: 11px; font-weight: 500;
+  color: var(--accent); letter-spacing: .1em;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 860px) {
+  .w { padding: 0 20px; }
+  .hero-inner { padding: 60px 20px 0; }
+  .hero-meta  { padding: 0 20px; grid-template-columns: 1fr 1fr; }
+  .hero-meta-item:nth-child(2) { border-right: none; }
+  .premise-bg, .pipe-bg, .quote-bg { padding: 56px 0; }
+  .player { grid-template-columns: 1fr; }
+  .p-id, .p-body { border-right: none; }
+  .p-scores { border-left: none; border-top: 1px solid var(--rule); }
+  .pipe-stages, .pipe-arts { grid-template-columns: 1fr 1fr; }
+  .gov-row { grid-template-columns: 32px 1fr 80px; }
+  .gdesc { display: none; }
+  .verdict { grid-template-columns: 1fr; }
+  .rm { grid-template-columns: 1fr 1fr; }
+  .final-note { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 10px; padding: 20px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<div class="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-inner">
+    <a class="hero-logo" href="#">
+      <img src="https://raw.githubusercontent.com/mikaelcarrara/mikaelcarrara.github.com/717facd0f39bc100bbc2285bd33025956b8ef53d/site/img/deplova-logo.svg" alt="Deplova">
+    </a>
+
+    <div class="hero-rule"></div>
+    <div class="eyebrow" style="margin-bottom: 28px;">Benchmark Comparativo · 2026</div>
+
+    <div class="hero-headline">
+      <div class="g-hero">
+        Taming<br>
+        <em>the machine.</em>
+      </div>
+    </div>
+
+    <p class="hero-sub">
+      Uma nova classe de ferramentas emergiu com uma premissa em comum:
+      IA sem controle é caos com velocidade. Como cada player resolve isso —
+      e onde a Deplova está sozinha.
+    </p>
+  </div>
+
+</div>
+
+
+<!-- ══════════ THREAD ══════════ -->
+<div class="premise-bg">
+  <div class="w">
+    <div class="eyebrow">A thread em comum</div>
+    <h2 class="g-title">O que eles não<br><em>conseguem ignorar.</em></h2>
+    <p class="lead" style="margin-bottom: 36px;">Dez sistemas diferentes. Uma mesma conclusão: IA sem estrutura não entrega produto — entrega risco.</p>
+
+    <div class="grid-band" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="grid-cell">
+        <div class="eyebrow" style="margin-bottom: 10px; font-size: 9.5px;">01</div>
+        <div style="font-family:'EB Garamond',serif; font-size:17px; font-weight:400; margin-bottom:8px; letter-spacing:-.01em;">Desconfiança produtiva</div>
+        <p style="font-size:13px; font-weight:300; color:var(--ink-2); line-height:1.65;">Nenhum entrega controle total à IA. Todos criam alguma camada entre a geração e o output final.</p>
+      </div>
+      <div class="grid-cell">
+        <div class="eyebrow" style="margin-bottom: 10px; font-size: 9.5px;">02</div>
+        <div style="font-family:'EB Garamond',serif; font-size:17px; font-weight:400; margin-bottom:8px; letter-spacing:-.01em;">Verdade antes do código</div>
+        <p style="font-size:13px; font-weight:300; color:var(--ink-2); line-height:1.65;">Todos trabalham com uma "fonte de verdade" — spec, schema, briefing. O código é consequência.</p>
+      </div>
+      <div class="grid-cell">
+        <div class="eyebrow" style="margin-bottom: 10px; font-size: 9.5px;">03</div>
+        <div style="font-family:'EB Garamond',serif; font-size:17px; font-weight:400; margin-bottom:8px; letter-spacing:-.01em;">Controle de drift</div>
+        <p style="font-size:13px; font-weight:300; color:var(--ink-2); line-height:1.65;">Todos tentam manter coerência ao longo do tempo. O código que começa fiel à spec e depois deriva.</p>
+      </div>
+      <div class="grid-cell">
+        <div class="eyebrow" style="margin-bottom: 10px; font-size: 9.5px;">04</div>
+        <div style="font-family:'EB Garamond',serif; font-size:17px; font-weight:400; margin-bottom:8px; letter-spacing:-.01em;">Separação de papéis</div>
+        <p style="font-size:13px; font-weight:300; color:var(--ink-2); line-height:1.65;">Todos separam "quem sabe o quê". A questão é o quão explícita e auditável é essa separação.</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-bottom: 0;">
+      <strong>A diferença não está no problema.</strong> Está na profundidade da solução. A maioria parou no input (prompt melhor). Poucos chegaram no processo. Ninguém chegou no compilador.
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ PLAYERS ══════════ -->
+<section>
+  <div class="w">
+    <div class="eyebrow">Os Players</div>
+    <h2 class="g-title">Quem está<br><em>no campo.</em></h2>
+    <p class="lead" style="margin-bottom: 44px;">Dez sistemas. Um espectro que vai de autocomplete sofisticado até compilador de produto — com uma categoria vazia até a Deplova ocupar.</p>
+
+    <div class="players">
+
+      <!-- Copilot -->
+      <div class="player">
+        <div class="p-id">
+          <div>
+            <div class="p-name">Copilot</div>
+            <div class="p-org">GitHub · Microsoft</div>
+          </div>
+          <span class="badge b-assist">Assistant</span>
+        </div>
+        <div class="p-body">
+          <div class="p-model">humano → IDE → IA sugere → humano aceita</div>
+          <p class="p-desc">O primeiro a normalizar IA no fluxo de desenvolvimento. Autocomplete com contexto de repositório. Sem arquitetura de controle — a IA sugere, o humano decide. Sem contratos, sem governança.</p>
+        </div>
+        <div class="p-scores">
+          <div class="sr"><span class="sr-lbl">Contratos</span><div class="sr-track"><div class="sr-fill" style="width:5%;background:var(--red-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Governança</span><div class="sr-track"><div class="sr-fill" style="width:5%;background:var(--red-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Determinismo</span><div class="sr-track"><div class="sr-fill" style="width:20%;background:var(--ink-3)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Auditabilidade</span><div class="sr-track"><div class="sr-fill" style="width:10%;background:var(--red-ink)"></div></div></div>
+        </div>
+      </div>
+
+      <!-- Cursor -->
+      <div class="player">
+        <div class="p-id">
+          <div>
+            <div class="p-name">Cursor</div>
+            <div class="p-org">Anysphere · 2023</div>
+          </div>
+          <span class="badge b-assist">Assistant</span>
+        </div>
+        <div class="p-body">
+          <div class="p-model">edita → IA sugere com contexto profundo → humano integra</div>
+          <p class="p-desc">IDE com IA nativa e contexto rico do codebase. O .cursorrules permite alguma forma de restrição. Mais disciplinado que Copilot, mas ainda reativo. Sem pipeline, sem artefatos canônicos.</p>
+        </div>
+        <div class="p-scores">
+          <div class="sr"><span class="sr-lbl">Contratos</span><div class="sr-track"><div class="sr-fill" style="width:25%;background:var(--blue-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Governança</span><div class="sr-track"><div class="sr-fill" style="width:15%;background:var(--red-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Determinismo</span><div class="sr-track"><div class="sr-fill" style="width:28%;background:var(--ink-3)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Auditabilidade</span><div class="sr-track"><div class="sr-fill" style="width:22%;background:var(--blue-ink)"></div></div></div>
+        </div>
+      </div>
+
+      <!-- v0 -->
+      <div class="player">
+        <div class="p-id">
+          <div>
+            <div class="p-name">v0</div>
+            <div class="p-org">Vercel · 2023</div>
+          </div>
+          <span class="badge b-builder">Builder</span>
+        </div>
+        <div class="p-body">
+          <div class="p-model">prompt → componente → copiar e colar</div>
+          <p class="p-desc">Geração de UI em React/Tailwind a partir de texto. Forte no front, sem camada de negócio. Ótimo para componentes isolados, frágil em sistemas com dependências. A spec não existe.</p>
+        </div>
+        <div class="p-scores">
+          <div class="sr"><span class="sr-lbl">Contratos</span><div class="sr-track"><div class="sr-fill" style="width:6%;background:var(--red-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Governança</span><div class="sr-track"><div class="sr-fill" style="width:5%;background:var(--red-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Determinismo</span><div class="sr-track"><div class="sr-fill" style="width:42%;background:var(--blue-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Auditabilidade</span><div class="sr-track"><div class="sr-fill" style="width:6%;background:var(--red-ink)"></div></div></div>
+        </div>
+      </div>
+
+      <!-- Bolt -->
+      <div class="player">
+        <div class="p-id">
+          <div>
+            <div class="p-name">Bolt</div>
+            <div class="p-org">StackBlitz · 2024</div>
+          </div>
+          <span class="badge b-builder">Builder</span>
+        </div>
+        <div class="p-body">
+          <div class="p-model">prompt → app completo → exportar</div>
+          <p class="p-desc">Full-stack no browser com deploy integrado. Impressionante para MVPs rápidos. Sem persistência de spec, sem governança. O que você pede sai — sem filtro, sem contrato entre etapas.</p>
+        </div>
+        <div class="p-scores">
+          <div class="sr"><span class="sr-lbl">Contratos</span><div class="sr-track"><div class="sr-fill" style="width:6%;background:var(--red-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Governança</span><div class="sr-track"><div class="sr-fill" style="width:5%;background:var(--red-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Determinismo</span><div class="sr-track"><div class="sr-fill" style="width:45%;background:var(--blue-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Auditabilidade</span><div class="sr-track"><div class="sr-fill" style="width:5%;background:var(--red-ink)"></div></div></div>
+        </div>
+      </div>
+
+      <!-- Lovable -->
+      <div class="player">
+        <div class="p-id">
+          <div>
+            <div class="p-name">Lovable</div>
+            <div class="p-org">ex-GPT Engineer · 2024</div>
+          </div>
+          <span class="badge b-builder">Builder</span>
+        </div>
+        <div class="p-body">
+          <div class="p-model">conversa → app → iterar conversando</div>
+          <p class="p-desc">App builder conversacional com a melhor UX do segmento. Sem separação real de camada de negócio e técnica. A conversa é a spec — elegante, mas frágil. Sem artefatos persistentes.</p>
+        </div>
+        <div class="p-scores">
+          <div class="sr"><span class="sr-lbl">Contratos</span><div class="sr-track"><div class="sr-fill" style="width:18%;background:var(--ink-3)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Governança</span><div class="sr-track"><div class="sr-fill" style="width:10%;background:var(--red-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Determinismo</span><div class="sr-track"><div class="sr-fill" style="width:38%;background:var(--blue-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Auditabilidade</span><div class="sr-track"><div class="sr-fill" style="width:15%;background:var(--ink-3)"></div></div></div>
+        </div>
+      </div>
+
+      <!-- Replit -->
+      <div class="player">
+        <div class="p-id">
+          <div>
+            <div class="p-name">Replit</div>
+            <div class="p-org">Replit Agent · 2024</div>
+          </div>
+          <span class="badge b-agent">Agent</span>
+        </div>
+        <div class="p-body">
+          <div class="p-model">prompt → agente executa no ambiente → app rodando</div>
+          <p class="p-desc">Agente autônomo com deploy integrado. Executa tasks completas dentro do ambiente. Bom para prototipação rápida, perde coerência em sistemas com dependências complexas.</p>
+        </div>
+        <div class="p-scores">
+          <div class="sr"><span class="sr-lbl">Contratos</span><div class="sr-track"><div class="sr-fill" style="width:12%;background:var(--red-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Governança</span><div class="sr-track"><div class="sr-fill" style="width:20%;background:var(--ink-3)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Determinismo</span><div class="sr-track"><div class="sr-fill" style="width:35%;background:var(--blue-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Auditabilidade</span><div class="sr-track"><div class="sr-fill" style="width:18%;background:var(--ink-3)"></div></div></div>
+        </div>
+      </div>
+
+      <!-- Devin -->
+      <div class="player">
+        <div class="p-id">
+          <div>
+            <div class="p-name">Devin</div>
+            <div class="p-org">Cognition · 2024</div>
+          </div>
+          <span class="badge b-agent">Agent</span>
+        </div>
+        <div class="p-body">
+          <div class="p-model">tarefa → agente autônomo → resultado (caixa preta)</div>
+          <p class="p-desc">O primeiro "engenheiro de software autônomo". Acessa terminais, navega na web, faz deploy. Alta capacidade, rastreabilidade zero. Você delega e recebe um resultado sem trilha auditável.</p>
+        </div>
+        <div class="p-scores">
+          <div class="sr"><span class="sr-lbl">Contratos</span><div class="sr-track"><div class="sr-fill" style="width:8%;background:var(--red-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Governança</span><div class="sr-track"><div class="sr-fill" style="width:8%;background:var(--red-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Determinismo</span><div class="sr-track"><div class="sr-fill" style="width:25%;background:var(--ink-3)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Auditabilidade</span><div class="sr-track"><div class="sr-fill" style="width:8%;background:var(--red-ink)"></div></div></div>
+        </div>
+      </div>
+
+      <!-- Spec Kit -->
+      <div class="player">
+        <div class="p-id">
+          <div>
+            <div class="p-name">Spec Kit</div>
+            <div class="p-org">GitHub Workflow · 2024</div>
+          </div>
+          <span class="badge b-spec">Spec</span>
+        </div>
+        <div class="p-body">
+          <div class="p-model">humano escreve spec → IA ajuda → humano integra</div>
+          <p class="p-desc">Framework de processo para desenvolvimento assistido. Markdown como contrato. Pipeline manual com /plan, /tasks. Boa organização, sem enforcement real. O humano ainda é o compilador.</p>
+        </div>
+        <div class="p-scores">
+          <div class="sr"><span class="sr-lbl">Contratos</span><div class="sr-track"><div class="sr-fill" style="width:30%;background:var(--blue-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Governança</span><div class="sr-track"><div class="sr-fill" style="width:15%;background:var(--ink-3)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Determinismo</span><div class="sr-track"><div class="sr-fill" style="width:22%;background:var(--ink-3)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Auditabilidade</span><div class="sr-track"><div class="sr-fill" style="width:35%;background:var(--blue-ink)"></div></div></div>
+        </div>
+      </div>
+
+      <!-- Tessl -->
+      <div class="player">
+        <div class="p-id">
+          <div>
+            <div class="p-name">Tessl</div>
+            <div class="p-org">Tessl · 2024</div>
+          </div>
+          <span class="badge b-spec">Spec Runtime</span>
+        </div>
+        <div class="p-body">
+          <div class="p-model">spec → sistema → código emerge continuamente</div>
+          <p class="p-desc">Spec como runtime. A spec não é documento estático — é sistema vivo com mapping contínuo com código. O mais próximo da Deplova em filosofia. Porém caixa preta, sem artefatos auditáveis.</p>
+        </div>
+        <div class="p-scores">
+          <div class="sr"><span class="sr-lbl">Contratos</span><div class="sr-track"><div class="sr-fill" style="width:50%;background:var(--blue-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Governança</span><div class="sr-track"><div class="sr-fill" style="width:35%;background:var(--ink-3)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Determinismo</span><div class="sr-track"><div class="sr-fill" style="width:55%;background:var(--blue-ink)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Auditabilidade</span><div class="sr-track"><div class="sr-fill" style="width:20%;background:var(--ink-3)"></div></div></div>
+        </div>
+      </div>
+
+      <!-- DEPLOVA -->
+      <div class="player deplova">
+        <div class="p-id">
+          <div>
+            <div class="p-name">Deplova</div>
+            <div class="p-org">Product Compiler · 2025</div>
+          </div>
+          <span class="badge b-compiler">Product Compiler</span>
+        </div>
+        <div class="p-body">
+          <div class="p-model" style="color:var(--accent);opacity:.7;">briefing → thinker → bridge → architect → governance → coherence → handoff → builder</div>
+          <p class="p-desc">Não é um assistant. Não é um builder. Não é um agente autônomo. É um compilador de intenção com garantias — onde 60 minutos de briefing entram e <code>builder_handoff.json</code> sai como plano de obra verificado. 11 camadas de governança. 6 artefatos canônicos. Cada agent ignora o que o outro fez — separação de preocupações real.</p>
+        </div>
+        <div class="p-scores">
+          <div class="sr"><span class="sr-lbl">Contratos</span><div class="sr-track"><div class="sr-fill" style="width:95%;background:var(--accent)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Governança</span><div class="sr-track"><div class="sr-fill" style="width:92%;background:var(--accent)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Determinismo</span><div class="sr-track"><div class="sr-fill" style="width:88%;background:var(--accent)"></div></div></div>
+          <div class="sr"><span class="sr-lbl">Auditabilidade</span><div class="sr-track"><div class="sr-fill" style="width:95%;background:var(--accent)"></div></div></div>
+        </div>
+      </div>
+
+    </div><!-- /players -->
+  </div>
+</section>
+
+
+<!-- ══════════ BENCHMARK TABLE ══════════ -->
+<section style="padding-top:0; border-top:none;">
+  <div class="w">
+    <div class="eyebrow">Análise comparativa</div>
+    <h2 class="g-title">Benchmark<br><em>matrix.</em></h2>
+    <p class="lead" style="margin-bottom:36px;">12 dimensões. Cada uma mede o quanto o sistema realmente governa a IA — ao invés de apenas aproveitar a sua capacidade.</p>
+
+    <div class="t-wrap">
+      <table class="bm">
+        <thead>
+          <tr>
+            <th style="min-width:155px;">Dimensão</th>
+            <th>Copilot</th><th>Cursor</th><th>v0</th><th>Bolt</th>
+            <th>Lovable</th><th>Replit</th><th>Devin</th>
+            <th>Spec Kit</th><th>Tessl</th>
+            <th class="dep">Deplova</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Unidade central</td>
+            <td>Sugestão</td><td>Contexto</td><td>Componente</td><td>App</td>
+            <td>Conversa</td><td>Task</td><td>Goal</td><td>Spec file</td><td>Spec viva</td>
+            <td class="dep" style="color:var(--accent);font-weight:500;">Intenção governada</td>
+          </tr>
+          <tr>
+            <td>Contratos JSON explícitos</td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-part">Parcial</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-part">Fraco</span></td>
+            <td><span class="chip c-part">Implícito</span></td>
+            <td class="dep"><span class="chip c-dep">6 artefatos ✓</span></td>
+          </tr>
+          <tr>
+            <td>Pipeline multi-stage</td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-part">Básico</span></td>
+            <td><span class="chip c-part">Interno</span></td><td><span class="chip c-part">Manual</span></td>
+            <td><span class="chip c-part">Implícito</span></td>
+            <td class="dep"><span class="chip c-dep">Determinístico ✓</span></td>
+          </tr>
+          <tr>
+            <td>Separação biz / técnico</td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-part">Parcial</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-part">Parcial</span></td>
+            <td class="dep"><span class="chip c-dep">Explícita ✓</span></td>
+          </tr>
+          <tr>
+            <td>Agentes especializados</td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-part">Parcial</span></td>
+            <td><span class="chip c-part">Parcial</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td>
+            <td class="dep"><span class="chip c-dep">7 agentes ✓</span></td>
+          </tr>
+          <tr>
+            <td>Governança automática</td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-part">Básica</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-part">Guardrails</span></td>
+            <td class="dep"><span class="chip c-dep">11 camadas ✓</span></td>
+          </tr>
+          <tr>
+            <td>Anti-hallucination (schema)</td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-part">Parcial</span></td>
+            <td class="dep"><span class="chip c-dep">additionalProps:false ✓</span></td>
+          </tr>
+          <tr>
+            <td>Checkpoints humanos</td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-part">Manual</span></td>
+            <td><span class="chip c-no">Não</span></td>
+            <td class="dep"><span class="chip c-dep">2 pontos planejados ✓</span></td>
+          </tr>
+          <tr>
+            <td>Controle de drift</td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-yes">Sim</span></td>
+            <td class="dep"><span class="chip c-dep">Sync Check ✓</span></td>
+          </tr>
+          <tr>
+            <td>Auditabilidade + trace</td>
+            <td><span class="chip c-no">Baixa</span></td><td><span class="chip c-part">Média</span></td>
+            <td><span class="chip c-no">Baixa</span></td><td><span class="chip c-no">Baixa</span></td>
+            <td><span class="chip c-part">Média</span></td><td><span class="chip c-part">Média</span></td>
+            <td><span class="chip c-no">Baixa</span></td><td><span class="chip c-part">Média</span></td>
+            <td><span class="chip c-no">Baixa</span></td>
+            <td class="dep"><span class="chip c-dep">reasoning_trace ✓</span></td>
+          </tr>
+          <tr>
+            <td>Priorização por cliente</td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td><td><span class="chip c-no">Não</span></td>
+            <td><span class="chip c-no">Não</span></td>
+            <td class="dep"><span class="chip c-dep">Sprint Dashboard ✓</span></td>
+          </tr>
+          <tr>
+            <td>Categoria real</td>
+            <td>Autocomplete</td><td>Context IDE</td><td>UI Gen</td><td>App Builder</td>
+            <td>App Builder</td><td>Cloud Agent</td><td>Auto Agent</td>
+            <td>Proc. Framework</td><td>Spec Runtime</td>
+            <td class="dep" style="color:var(--accent);font-weight:500;">Product Compiler</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ PIPELINE ══════════ -->
+<div class="pipe-bg">
+  <div class="w">
+    <div class="eyebrow">Arquitetura interna</div>
+    <h2 class="g-title">Da conversa ao<br><em>builder_handoff.json.</em></h2>
+    <p class="lead">Sete agentes. Seis artefatos JSON. Uma sequência determinística com checkpoints de validação em cada etapa. Isso não é workflow de IA — é compilação de produto.</p>
+
+    <div class="pipe-stages">
+      <div class="ps"><div class="ps-letter">T</div><div class="ps-name">Thinker</div><div class="ps-role">Product Strategist<br>NotebookLM</div></div>
+      <div class="ps"><div class="ps-letter">B</div><div class="ps-name">Bridge</div><div class="ps-role">Security / Constraints<br>bridge.py</div></div>
+      <div class="ps"><div class="ps-letter">A</div><div class="ps-name">Architect</div><div class="ps-role">Tech Lead<br>self-inferred-context.py</div></div>
+      <div class="ps"><div class="ps-letter">G</div><div class="ps-name">Governance</div><div class="ps-role">QA + Compliance<br>governance.py</div></div>
+      <div class="ps"><div class="ps-letter">C</div><div class="ps-name">Coherence</div><div class="ps-role">Infra Engineer<br>check_coherence.py</div></div>
+      <div class="ps"><div class="ps-letter">H</div><div class="ps-name">Handoff</div><div class="ps-role">Build System<br>handoff-compiler.py</div></div>
+      <div class="ps"><div class="ps-letter">X</div><div class="ps-name">Builder</div><div class="ps-role">Dev Executor<br>Claude Code</div></div>
+    </div>
+    <div class="pipe-arts">
+      <div class="pa">thinker_output.json</div>
+      <div class="pa">refined_intent.json</div>
+      <div class="pa">product_definition.json</div>
+      <div class="pa">validated_spec.json</div>
+      <div class="pa">coherence_map.json</div>
+      <div class="pa">compiled_plan.json</div>
+      <div class="pa">builder_handoff.json</div>
+    </div>
+
+    <div class="callout" style="margin-bottom:0;">
+      <strong>Cada artefato JSON é rastreável, auditável e debuggável de forma independente.</strong> Nenhum outro sistema no mercado tem esse nível de separação explícita entre etapas — com contratos verificáveis em cada camada.
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ GOVERNANCE ══════════ -->
+<section>
+  <div class="w">
+    <div class="eyebrow">O que nenhum outro tem</div>
+    <h2 class="g-title">11 camadas.<br><em>10 automáticas.</em></h2>
+    <p class="lead" style="margin-bottom:0;">Enquanto outros confiam na IA para "fazer certo", a Deplova define o que é certo antes, durante e depois da execução.</p>
+
+    <div class="gov-list">
+      <div class="gov-row hum">
+        <div class="gn">01</div>
+        <div class="gname">Sprint Planning</div>
+        <div class="gdesc">Cliente prioriza features em P0/P1/P2 com base em impact score e story points. Só o que o cliente confirmou entra no pipeline. Contrato de sprint assinado antes de qualquer código.</div>
+        <div class="gmode human">Humano</div>
+      </div>
+      <div class="gov-row tech">
+        <div class="gn">02</div>
+        <div class="gname">Sync Check</div>
+        <div class="gdesc">Detecta drift entre skeleton_manifest.json, bridge.py e handoff-compiler.py. Pipeline não avança com contratos desatualizados. Garante que nenhuma etapa roda com versões incompatíveis.</div>
+        <div class="gmode auto">Auto</div>
+      </div>
+      <div class="gov-row tech">
+        <div class="gn">03</div>
+        <div class="gname">Bridge Guard</div>
+        <div class="gdesc">Descarta HEX colors, normaliza archetype, converte is_priority em P0/P1/P2, aplica restrições de infra. Só entra no pipeline o que o skeleton consegue construir. Intenção blindada.</div>
+        <div class="gmode auto">Auto</div>
+      </div>
+      <div class="gov-row biz">
+        <div class="gn">04</div>
+        <div class="gname">Schema Validation</div>
+        <div class="gdesc">product_definition.json validado contra JSON Schema com additionalProperties: false. O Architect não pode inventar campos. Output malformado rejeita o estágio inteiro.</div>
+        <div class="gmode failfast">Fail-Fast</div>
+      </div>
+      <div class="gov-row biz">
+        <div class="gn">05</div>
+        <div class="gname">Structure Guard</div>
+        <div class="gdesc">Anti-hallucination: verifica se o Architect inventou campos não previstos no schema. Camada adicional de validação estrutural além do JSON Schema padrão.</div>
+        <div class="gmode failfast">Fail-Fast</div>
+      </div>
+      <div class="gov-row biz">
+        <div class="gn">06</div>
+        <div class="gname">Identity Check</div>
+        <div class="gdesc">Nome e archetype do produto batem com o intent definido pelo Bridge? Nenhum agent pode mudar a identidade do produto sem invalidar o pipeline.</div>
+        <div class="gmode auto">Auto</div>
+      </div>
+      <div class="gov-row biz">
+        <div class="gn">07</div>
+        <div class="gname">Capabilities Lock</div>
+        <div class="gdesc">Capabilities definidas no Bridge e travadas. O Architect compila — não decide. O Builder executa — não interpreta. Zero scope creep por alucinação.</div>
+        <div class="gmode auto">Auto</div>
+      </div>
+      <div class="gov-row biz">
+        <div class="gn">08</div>
+        <div class="gname">DB Access Guard</div>
+        <div class="gdesc">Restrições de infraestrutura de banco de dados respeitadas? Operações destrutivas bloqueadas. Nenhum migration não planejado avança no pipeline.</div>
+        <div class="gmode auto">Auto</div>
+      </div>
+      <div class="gov-row tech">
+        <div class="gn">09</div>
+        <div class="gname">Skeleton Fit</div>
+        <div class="gdesc">O skeleton físico existe e está íntegro? O código será verificado contra o skeleton de arquitetura. Desvios estruturais capturados antes do build.</div>
+        <div class="gmode auto">Auto</div>
+      </div>
+      <div class="gov-row tech">
+        <div class="gn">10</div>
+        <div class="gname">Capability Support</div>
+        <div class="gdesc">O skeleton suporta as capabilities pedidas? Viabilidade técnica verificada antes do handoff. Nenhuma feature entra no build sem suporte físico.</div>
+        <div class="gmode auto">Auto</div>
+      </div>
+      <div class="gov-row tech">
+        <div class="gn">11</div>
+        <div class="gname">Route Conflict</div>
+        <div class="gdesc">Rotas colidem com protected_zones? Endpoints duplicados detectados antes do build. Classe inteira de bugs de integração eliminada antes de existirem.</div>
+        <div class="gmode auto">Auto</div>
+      </div>
+      <div class="gov-row hum" style="border-left:2px solid rgba(240,185,85,.5); background:rgba(240,185,85,.04);">
+        <div class="gn" style="color:var(--amber-ink);">✓</div>
+        <div class="gname" style="color:var(--amber-ink);">Checkpoint do Operador — Corregedoria</div>
+        <div class="gdesc">Operador revisa blueprint e wireframe de baixa fidelidade. Confirma ou manda regenerar. Pipeline pausa aqui — o Builder não começa sem autorização humana explícita.</div>
+        <div class="gmode human">Humano</div>
+      </div>
+    </div>
+
+    <div class="grid-band" style="grid-template-columns:1fr 1fr; margin-top: 1px;">
+      <div class="grid-cell" style="padding: 22px 20px;">
+        <div class="eyebrow" style="margin-bottom:10px; font-size:9.5px;">Governance — auditor cego</div>
+        <p style="font-size:13px;font-weight:300;color:var(--ink-2);line-height:1.65;">Valida fidelidade ao contrato de negócio — schema, identity, capabilities lock, DB guard. <strong style="color:var(--ink);font-weight:500;">Não sabe que existe skeleton.</strong></p>
+      </div>
+      <div class="grid-cell" style="padding: 22px 20px;">
+        <div class="eyebrow" style="margin-bottom:10px; font-size:9.5px;">Coherence — engenheiro de solo</div>
+        <p style="font-size:13px;font-weight:300;color:var(--ink-2);line-height:1.65;">Valida viabilidade técnica — skeleton fit, capability support, route conflicts. <strong style="color:var(--ink);font-weight:500;">Não sabe de regras de negócio.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ QUOTE ══════════ -->
+<div class="quote-bg">
+  <div class="w">
+    <p class="g-quote">
+      "O Builder não decide. Ele opera dentro de um contrato que foi
+      <em>auditado</em> antes de chegar nele."
+    </p>
+    <div class="q-attr">Deplova — Pitch Deck Técnico · Princípio central</div>
+    <p style="margin-top:24px; font-size:11px; font-weight:300; color:var(--ink-3); max-width:580px; line-height:1.75; letter-spacing:.01em;">
+      <em>Auditado, nesse contexto:</em> cada artefato JSON que o Builder recebe passou por 11 camadas de validação automática e 2 checkpoints humanos — schema verificado, identidade confirmada, capabilities travadas, rotas sem conflito. O Builder não interpreta intenção. Ele executa um contrato que já foi rejeitado, corrigido e aprovado antes de chegar a ele.
+    </p>
+  </div>
+</div>
+
+
+
+
+<!-- ══════════ CATEGORIA ══════════ -->
+<div style="background:rgba(53,176,205,.04); border-top:1px solid rgba(53,176,205,.15); border-bottom:1px solid rgba(53,176,205,.15); padding:56px 0;">
+  <div class="w">
+    <div class="eyebrow">Por que nenhum deles compete diretamente</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.06); margin-top:36px;">
+      <div style="background:#0a0c0f; padding:28px 24px;">
+        <div style="font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#4a5568;margin-bottom:12px;">Assistants (Copilot, Cursor)</div>
+        <div style="font-family:'EB Garamond',serif;font-size:18px;font-weight:400;color:#f0f2f5;margin-bottom:10px;letter-spacing:-.01em;">Amplificam o dev</div>
+        <p style="font-size:13px;font-weight:300;color:#8b95a3;line-height:1.65;">Reduzem o tempo de escrita. Não substituem arquitetura, não criam contratos. O humano ainda é o compilador.</p>
+      </div>
+      <div style="background:#0a0c0f; padding:28px 24px;">
+        <div style="font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#4a5568;margin-bottom:12px;">Builders (Bolt, Lovable, v0)</div>
+        <div style="font-family:'EB Garamond',serif;font-size:18px;font-weight:400;color:#f0f2f5;margin-bottom:10px;letter-spacing:-.01em;">Geram o produto</div>
+        <p style="font-size:13px;font-weight:300;color:#8b95a3;line-height:1.65;">Velocidade máxima. Sem governança. O que sai é o que a IA decidiu — sem contrato verificável entre intenção e código.</p>
+      </div>
+      <div style="background:rgba(53,176,205,.06); border-left:2px solid var(--accent); padding:28px 24px;">
+        <div style="font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Deplova</div>
+        <div style="font-family:'EB Garamond',serif;font-size:18px;font-weight:400;color:var(--accent);margin-bottom:10px;letter-spacing:-.01em;">Compila a intenção</div>
+        <p style="font-size:13px;font-weight:300;color:#8b95a3;line-height:1.65;">Briefing vira contrato. Contrato vira código. 11 validações entre um e outro. Rastreabilidade completa.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ VERDICT ══════════ -->
+<section>
+  <div class="w">
+    <div class="eyebrow">Onde cada um vence</div>
+    <h2 class="g-title">Quem ganha<br><em>o quê.</em></h2>
+    <p class="lead" style="margin-bottom:0;">Cada sistema tem um contexto onde é a escolha certa. A questão é: o que você está construindo?</p>
+
+    <div class="verdict">
+      <div class="vc">
+        <div class="vc-cat">Velocidade bruta</div>
+        <div class="vc-who">Bolt / Lovable</div>
+        <p class="vc-body">Para protótipos em horas. Você paga com governança zero — mas se o produto é descartável ou um MVP de validação rápida, o tradeoff faz sentido.</p>
+      </div>
+      <div class="vc">
+        <div class="vc-cat">Contexto em codebase existente</div>
+        <div class="vc-who">Cursor</div>
+        <p class="vc-body">O melhor para trabalhar em repositório existente com contexto rico. É o assistente — não o compilador. Diferente por design, não por limitação.</p>
+      </div>
+      <div class="vc">
+        <div class="vc-cat">Consistência spec ↔ código</div>
+        <div class="vc-who">Tessl</div>
+        <p class="vc-body">O melhor para manter código consistente com spec ao longo do tempo — quando você pode tolerar o custo de ser uma caixa preta.</p>
+      </div>
+      <div class="vc">
+        <div class="vc-cat">Autonomia máxima</div>
+        <div class="vc-who">Devin</div>
+        <p class="vc-body">Maior capacidade de execução autônoma. O tradeoff é rastreabilidade zero. Útil para tasks isoladas, arriscado em sistemas com dependências.</p>
+      </div>
+      <div class="vc win">
+        <div class="vc-cat">Produção real · sistemas auditáveis</div>
+        <div class="vc-who">Deplova</div>
+        <p class="vc-body">Quando o produto vai para produção real, quando precisar de auditoria, quando drift é inaceitável — é Deplova. Sem segundo lugar nessa categoria.</p>
+      </div>
+      <div class="vc">
+        <div class="vc-cat">Processo disciplinado em equipe</div>
+        <div class="vc-who">Spec Kit</div>
+        <p class="vc-body">O melhor framework de processo sem enforcement para equipes que já usam IA mas precisam de estrutura compartilhada e documentada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="f-logo">
+    <img src="https://raw.githubusercontent.com/mikaelcarrara/mikaelcarrara.github.com/717facd0f39bc100bbc2285bd33025956b8ef53d/site/img/deplova-logo.svg" alt="Deplova">
+  </div>
+  <div class="f-tag">O compilador de produtos digitais. <em>Determinístico por design.</em></div>
+  <div class="f-year">2026</div>
+</footer>
+
+</body>
+</html>
