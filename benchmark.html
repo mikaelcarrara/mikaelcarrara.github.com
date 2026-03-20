@@ -830,8 +830,8 @@ footer {
           <span class="badge b-spec">Spec Runtime</span>
         </div>
         <div class="p-body">
-          <div class="p-model">spec → sistema → código emerge continuamente</div>
-          <p class="p-desc">Spec como runtime. A spec não é documento estático — é sistema vivo com mapping contínuo com código. O mais próximo da Deplova em filosofia. Porém caixa preta, sem artefatos auditáveis.</p>
+          <div class="p-model">spec → sistema → código emerge continuamente (caixa preta)</div>
+          <p class="p-desc">O sistema mais próximo da Deplova em filosofia: a spec é o runtime, o código é detalhe de implementação. Excelente para paridade spec↔código a longo prazo. O custo: lock-in total na plataforma, sem artefatos auditáveis por fora, sem intervenção manual segura. Se a Tessl sumir, a spec — que é o sistema — fica órfã.</p>
         </div>
         <div class="p-scores">
           <div class="sr"><span class="sr-lbl">Contratos</span><div class="sr-track"><div class="sr-fill" style="width:50%;background:var(--blue-ink)"></div></div></div>
@@ -1142,25 +1142,107 @@ footer {
 
 
 
+
+
+<!-- ══════════ TESSL vs DEPLOVA ══════════ -->
+<section>
+  <div class="w">
+    <div class="eyebrow">O confronto mais próximo</div>
+    <h2 class="g-title">Tessl vs Deplova.<br><em>Mesma filosofia. Decisão diferente.</em></h2>
+    <p class="lead" style="margin-bottom:44px;">São os dois sistemas com posicionamento mais próximo — ambos operam com contratos antes do código. A divergência está onde o valor fica e quem o controla.</p>
+
+    <div class="grid-band" style="grid-template-columns:200px 1fr 1fr; margin-bottom:1px;">
+      <div class="grid-cell" style="background:var(--bg); border-right:1px solid var(--rule);"></div>
+      <div class="grid-cell" style="text-align:center; padding:16px;">
+        <div style="font-family:'EB Garamond',serif;font-size:20px;font-weight:400;color:var(--ink);letter-spacing:-.01em;">Tessl</div>
+        <div style="font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:4px;">Spec Runtime</div>
+      </div>
+      <div class="grid-cell" style="text-align:center; padding:16px; background:rgba(53,176,205,.04); border-left:2px solid var(--accent);">
+        <div style="font-family:'EB Garamond',serif;font-size:20px;font-weight:400;color:var(--accent);letter-spacing:-.01em;">Deplova</div>
+        <div style="font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);opacity:.7;margin-top:4px;">Product Compiler</div>
+      </div>
+    </div>
+
+    <div class="grid-band" style="grid-template-columns:200px 1fr 1fr;">
+
+      <div class="grid-cell" style="font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;">Filosofia core</div>
+      <div class="grid-cell"><p style="font-size:13px;font-weight:300;color:var(--ink-2);line-height:1.65;">"The Spec is the System." O código é um detalhe de implementação gerado pela plataforma.</p></div>
+      <div class="grid-cell" style="background:rgba(53,176,205,.03);border-left:2px solid var(--accent);"><p style="font-size:13px;font-weight:300;color:var(--ink-2);line-height:1.65;">"Contract-over-Value." O sistema é o resultado de 11 camadas de governança com artefatos auditáveis.</p></div>
+
+      <div class="grid-cell" style="font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;">Gestão de estado</div>
+      <div class="grid-cell"><p style="font-size:13px;font-weight:300;color:var(--ink-2);line-height:1.65;">Sistema vivo com mapping contínuo. Difícil intervir manualmente sem quebrar o sync.</p></div>
+      <div class="grid-cell" style="background:rgba(53,176,205,.03);border-left:2px solid var(--accent);"><p style="font-size:13px;font-weight:300;color:var(--ink-2);line-height:1.65;">Artefatos canônicos por etapa. Cada estágio gera um snapshot auditável e debuggável de forma independente.</p></div>
+
+      <div class="grid-cell" style="font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;">Transparência</div>
+      <div class="grid-cell"><p style="font-size:13px;font-weight:300;color:var(--ink-2);line-height:1.65;">Tendência à caixa preta. Você confia que a Spec reflete o runtime — sem trilha verificável de fora.</p></div>
+      <div class="grid-cell" style="background:rgba(53,176,205,.03);border-left:2px solid var(--accent);"><p style="font-size:13px;font-weight:300;color:var(--ink-2);line-height:1.65;">Separação explícita de preocupações entre agentes. Se algo der errado: está no JSON ou não está.</p></div>
+
+      <div class="grid-cell" style="font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;">Governança</div>
+      <div class="grid-cell"><p style="font-size:13px;font-weight:300;color:var(--ink-2);line-height:1.65;">Implícita na plataforma. Você não vê as regras — confia que elas existem.</p></div>
+      <div class="grid-cell" style="background:rgba(53,176,205,.03);border-left:2px solid var(--accent);"><p style="font-size:13px;font-weight:300;color:var(--ink-2);line-height:1.65;">11 camadas explícitas, cada uma verificável antes da escrita de qualquer linha de código.</p></div>
+
+      <div class="grid-cell" style="font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;">Risco principal</div>
+      <div class="grid-cell"><p style="font-size:13px;font-weight:300;color:var(--red-ink);line-height:1.65;">Lock-in total. Se a plataforma sumir ou mudar, a spec — que é o seu sistema — fica órfã.</p></div>
+      <div class="grid-cell" style="background:rgba(53,176,205,.03);border-left:2px solid var(--accent);"><p style="font-size:13px;font-weight:300;color:var(--ink-2);line-height:1.65;">Curva de setup. O pipeline exige estrutura inicial — não é "prompt e pronto".</p></div>
+
+      <div class="grid-cell" style="font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;">Melhor para</div>
+      <div class="grid-cell"><p style="font-size:13px;font-weight:300;color:var(--ink-2);line-height:1.65;">Manutenção de longo prazo quando paridade spec↔código é mais importante que controle do processo.</p></div>
+      <div class="grid-cell" style="background:rgba(53,176,205,.03);border-left:2px solid var(--accent);"><p style="font-size:13px;font-weight:300;color:var(--ink-2);line-height:1.65;">MVPs e produtos de produção real onde auditabilidade, determinismo e independência de vendor são inegociáveis.</p></div>
+
+    </div>
+
+    <!-- Handoff anatomy -->
+    <div style="margin-top:56px;">
+      <div class="eyebrow" style="margin-bottom:20px;">O que o builder_handoff.json resolve que a Tessl não resolve</div>
+      <div class="grid-band" style="grid-template-columns:1fr 1fr;">
+        <div class="grid-cell" style="border-top:2px solid var(--red-ink);">
+          <div style="font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--red-ink);margin-bottom:14px;">O abismo — Tessl / Devin</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div><div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:3px;">Origem da decisão</div><p style="font-size:12px;font-weight:300;color:var(--ink-2);line-height:1.6;">O modelo decide stack e arquitetura durante a execução. Você descobre quando está pronto.</p></div>
+            <div><div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:3px;">Ponto de intervenção</div><p style="font-size:12px;font-weight:300;color:var(--ink-2);line-height:1.6;">Você pede para mudar e reza para o agente não quebrar o que está funcionando.</p></div>
+            <div><div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:3px;">Trilha de auditoria</div><p style="font-size:12px;font-weight:300;color:var(--ink-2);line-height:1.6;">O log de chat — ou a spec proprietária — é a única evidência do que foi decidido e por quê.</p></div>
+            <div><div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:3px;">Garantia de escopo</div><p style="font-size:12px;font-weight:300;color:var(--ink-2);line-height:1.6;">O agente pode adicionar features não pedidas. Sem delimitação explícita do que está fora do contrato.</p></div>
+          </div>
+        </div>
+        <div class="grid-cell" style="border-top:2px solid var(--accent);background:rgba(53,176,205,.03);">
+          <div style="font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">O handoff — Deplova</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div><div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:3px;">Origem da decisão</div><p style="font-size:12px;font-weight:300;color:var(--ink-2);line-height:1.6;">O Architect fixa stack e padrões no JSON <em>antes</em> de qualquer linha de código. O Builder executa — não interpreta.</p></div>
+            <div><div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:3px;">Ponto de intervenção</div><p style="font-size:12px;font-weight:300;color:var(--ink-2);line-height:1.6;">Você edita o contrato. O Builder re-executa a nova especificação sem precisar renegociar toda a arquitetura.</p></div>
+            <div><div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:3px;">Trilha de auditoria</div><p style="font-size:12px;font-weight:300;color:var(--ink-2);line-height:1.6;">Cada uma das 11 camadas de governança deixa registro. Se algo está errado: está no contrato ou o Builder divergiu.</p></div>
+            <div><div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:3px;">Garantia de escopo</div><p style="font-size:12px;font-weight:300;color:var(--ink-2);line-height:1.6;">O skeleton delimita as zonas de atuação. O Builder está proibido de criar o que não foi mapeado no handoff.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ══════════ CATEGORIA ══════════ -->
 <div style="background:rgba(53,176,205,.04); border-top:1px solid rgba(53,176,205,.15); border-bottom:1px solid rgba(53,176,205,.15); padding:56px 0;">
   <div class="w">
     <div class="eyebrow">Por que nenhum deles compete diretamente</div>
-    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.06); margin-top:36px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:1px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.06); margin-top:36px;">
       <div style="background:#0a0c0f; padding:28px 24px;">
         <div style="font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#4a5568;margin-bottom:12px;">Assistants (Copilot, Cursor)</div>
         <div style="font-family:'EB Garamond',serif;font-size:18px;font-weight:400;color:#f0f2f5;margin-bottom:10px;letter-spacing:-.01em;">Amplificam o dev</div>
-        <p style="font-size:13px;font-weight:300;color:#8b95a3;line-height:1.65;">Reduzem o tempo de escrita. Não substituem arquitetura, não criam contratos. O humano ainda é o compilador.</p>
+        <p style="font-size:13px;font-weight:300;color:#8b95a3;line-height:1.65;">Reduzem o tempo de escrita. O humano ainda é o compilador — a IA só sugere.</p>
       </div>
       <div style="background:#0a0c0f; padding:28px 24px;">
         <div style="font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#4a5568;margin-bottom:12px;">Builders (Bolt, Lovable, v0)</div>
         <div style="font-family:'EB Garamond',serif;font-size:18px;font-weight:400;color:#f0f2f5;margin-bottom:10px;letter-spacing:-.01em;">Geram o produto</div>
-        <p style="font-size:13px;font-weight:300;color:#8b95a3;line-height:1.65;">Velocidade máxima. Sem governança. O que sai é o que a IA decidiu — sem contrato verificável entre intenção e código.</p>
+        <p style="font-size:13px;font-weight:300;color:#8b95a3;line-height:1.65;">Velocidade máxima, governança zero. O que a IA decidiu é o que sai — sem trilha auditável.</p>
+      </div>
+      <div style="background:#0a0c0f; padding:28px 24px;">
+        <div style="font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#4a5568;margin-bottom:12px;">Spec Runtime (Tessl)</div>
+        <div style="font-family:'EB Garamond',serif;font-size:18px;font-weight:400;color:#f0f2f5;margin-bottom:10px;letter-spacing:-.01em;">Mantêm a paridade</div>
+        <p style="font-size:13px;font-weight:300;color:#8b95a3;line-height:1.65;">Spec como sistema vivo. Excelente para consistência de longo prazo — mas caixa preta com risco de lock-in total.</p>
       </div>
       <div style="background:rgba(53,176,205,.06); border-left:2px solid var(--accent); padding:28px 24px;">
         <div style="font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Deplova</div>
         <div style="font-family:'EB Garamond',serif;font-size:18px;font-weight:400;color:var(--accent);margin-bottom:10px;letter-spacing:-.01em;">Compila a intenção</div>
-        <p style="font-size:13px;font-weight:300;color:#8b95a3;line-height:1.65;">Briefing vira contrato. Contrato vira código. 11 validações entre um e outro. Rastreabilidade completa.</p>
+        <p style="font-size:13px;font-weight:300;color:#8b95a3;line-height:1.65;">Briefing vira contrato. Contrato vira código. 11 validações entre um e outro. Artefatos auditáveis, vendor-independent.</p>
       </div>
     </div>
   </div>
