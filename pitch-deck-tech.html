@@ -187,8 +187,6 @@
     .grid-2 > * { min-width: 0; }
     @media(max-width:768px) { .grid-2 { grid-template-columns: 1fr; } }
 
-    /* ── TERMINAL (overflow global, não só no breakpoint) ── */
-
     /* ── 3-LAYER VISUAL ── */
     .layers-stack {
       display: flex; flex-direction: column; gap: var(--space-3);
@@ -254,7 +252,7 @@
       display: flex; flex-direction: column; align-items: flex-start;
       gap: var(--space-2); background: var(--bg-raised);
       border: 1px solid var(--border-mid); border-radius: var(--radius-lg);
-      padding: var(--space-5); flex: 0 0 200px; width: 200px;
+      padding: var(--space-5); flex: 1; min-width: 0;
     }
     .pt-phase__label {
       font-family: var(--font-mono); font-size: 9.5px;
@@ -469,6 +467,7 @@
         padding-left: var(--space-5);
         padding-right: var(--space-5);
       }
+      .pt-phase { flex: 0 0 180px; width: 180px; }
       .pt-arrow { padding-top: 36px; flex-shrink: 0; }
 
       /* ── GOV STACK ── */
@@ -558,7 +557,7 @@
         alt="Deplova" class="cover-logo"
       >
       <h1 class="cover-tagline">
-        Do caos<br>ao código.<br>
+        Do caos ao código.<br>
         <em>Determinístico por design.</em>
       </h1>
       <p class="cover-sub">
@@ -573,7 +572,7 @@
   <!-- 01: A VISÃO -->
   <section class="slide" id="slide-1" aria-labelledby="s1-title">
     <div class="slide__inner">
-      <p class="slide__number">01 / 08</p>
+      <p class="slide__number">01 / 12</p>
       <p class="slide__label">A Visão</p>
       <h2 id="s1-title" class="slide__title">
         Intenção em software.<br><em>Com garantias.</em>
@@ -591,7 +590,7 @@
         <div class="highlight-box" style="border-color: rgba(61,214,140,.3);">
           <span class="highlight-box__tag" style="color:var(--green);background:var(--green-dim);border-color:rgba(61,214,140,.3);">Determinístico</span>
           <div class="highlight-box__title">Mesmo input, mesmo output</div>
-          <p class="highlight-box__desc">Fail-fast em cada etapa. Qualquer inconsistência interrompe a execução antes de chegar ao build — protegendo a integridade do sistema.</p>
+          <p class="highlight-box__desc">O mesmo briefing sempre gera o mesmo resultado. Cada etapa depende da anterior — sem atalhos, sem variação entre execuções. Previsível por design.</p>
         </div>
         <div class="highlight-box" style="border-color: rgba(129,140,248,.3);">
           <span class="highlight-box__tag" style="color:var(--indigo);background:var(--indigo-dim);border-color:rgba(129,140,248,.3);">Anti-hallucination</span>
@@ -610,7 +609,7 @@
   <!-- 02: O PROBLEMA -->
   <section class="slide" id="slide-2" aria-labelledby="s2-title">
     <div class="slide__inner">
-      <p class="slide__number">02 / 08</p>
+      <p class="slide__number">02 / 12</p>
       <p class="slide__label">O Problema</p>
       <h2 id="s2-title" class="slide__title">
         O desenvolvimento artesanal<br>é o <em>gargalo da inovação.</em>
@@ -658,7 +657,7 @@
   <!-- 03: A SOLUÇÃO -->
   <section class="slide" id="slide-3" aria-labelledby="s3-title">
     <div class="slide__inner" style="max-width: var(--container-pipeline);">
-      <p class="slide__number">03 / 08</p>
+      <p class="slide__number">03 / 12</p>
       <p class="slide__label">A Solução</p>
       <h2 id="s3-title" class="slide__title">
         Da conversa ao MVP em 48h.<br><em>Com contratos, não com sorte.</em>
@@ -728,7 +727,7 @@
   <!-- 04: COMO FUNCIONA -->
   <section class="slide" id="slide-4" aria-labelledby="s4-title">
     <div class="slide__inner">
-      <p class="slide__number">04 / 08</p>
+      <p class="slide__number">04 / 12</p>
       <p class="slide__label">Como Funciona</p>
       <h2 id="s4-title" class="slide__title">
         Arquitetura em<br><em>três camadas independentes.</em>
@@ -755,16 +754,16 @@
           </div>
         </div>
 
-        <div class="layer-card" style="border-color:rgba(245,117,162,.35);">
-          <div class="layer-card__stripe" style="background:rgba(245,117,162,.08); color:var(--rose);">
+        <div class="layer-card" style="border-color:rgba(53,176,205,.35);">
+          <div class="layer-card__stripe" style="background:rgba(53,176,205,.08); color:var(--accent);">
             02
           </div>
           <div class="layer-card__body">
-            <div class="layer-card__number" style="color:var(--rose);">Core Architect</div>
+            <div class="layer-card__number" style="color:var(--accent);">Core Architect</div>
             <div class="layer-card__title">O motor de governança — Da intenção ao blueprint</div>
             <p class="layer-card__desc">O coração do sistema. Normaliza a intenção (Bridge), compila a arquitetura (Architect), valida 11 camadas de governança (Governance + Coherence) e traduz capabilities abstratas em instruções operacionais (Handoff Compiler). Nenhum agent sabe o que o outro fez.</p>
             <div class="layer-card__files">
-              <span class="file-tag" style="background:rgba(245,117,162,.1);border:1px solid rgba(245,117,162,.3);color:var(--rose);">refined_intent.json</span>
+              <span class="file-tag" style="background:rgba(53,176,205,.1);border:1px solid rgba(53,176,205,.25);color:var(--accent);">refined_intent.json</span>
               <span class="file-tag" style="background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.3);color:var(--indigo);">product_definition.json</span>
               <span class="file-tag" style="background:rgba(61,214,140,.1);border:1px solid rgba(61,214,140,.3);color:var(--green);">builder_handoff.json</span>
             </div>
@@ -795,7 +794,7 @@
   <!-- 05: GOVERNANÇA -->
   <section class="slide" id="slide-5" aria-labelledby="s5-title">
     <div class="slide__inner">
-      <p class="slide__number">05 / 08</p>
+      <p class="slide__number">05 / 12</p>
       <p class="slide__label">Governança e Segurança</p>
       <h2 id="s5-title" class="slide__title">
         Máquina governa.<br><em>Humano corrige.</em>
@@ -836,7 +835,7 @@
           <span class="gov-layer__num">4–5</span>
           <div>
             <div class="gov-layer__name">Schema Validation + Structure Guard — Anti-hallucination</div>
-            <div class="gov-layer__desc"><code>product_definition.json</code> validado contra JSON Schema com <code>additionalProperties: false</code>. O Architect não pode inventar campos fora do contrato. Output malformado rejeita o estágio inteiro.</div>
+            <div class="gov-layer__desc">O <code>product_definition.json</code> é validado contra um contrato rígido. O Architect não pode inventar campos fora do que foi definido. Qualquer output malformado rejeita o estágio inteiro antes de avançar.</div>
           </div>
           <span class="gov-layer__tag tag--failfast">Fail-Fast</span>
         </div>
@@ -893,7 +892,7 @@
   <!-- 06: DIFERENCIAIS -->
   <section class="slide" id="slide-6" aria-labelledby="s6-title">
     <div class="slide__inner">
-      <p class="slide__number">06 / 08</p>
+      <p class="slide__number">06 / 12</p>
       <p class="slide__label">Diferenciais Competitivos</p>
       <h2 id="s6-title" class="slide__title">
         Não é prompt engineering.<br><em>É um compilador.</em>
@@ -1046,12 +1045,12 @@
   </section>
 
 
-  <!-- 08: NÚMEROS -->
-  <section class="slide" id="slide-12" aria-labelledby="s12-title">
+  <!-- 10: NÚMEROS -->
+  <section class="slide" id="slide-10" aria-labelledby="s10-title">
     <div class="slide__inner">
       <p class="slide__number">10 / 12</p>
       <p class="slide__label">Em Números</p>
-      <h2 id="s12-title" class="slide__title">
+      <h2 id="s10-title" class="slide__title">
         Velocidade com<br><em>governança em cada linha.</em>
       </h2>
 
@@ -1080,7 +1079,7 @@
   </section>
 
 
-  <!-- 09: ROADMAP -->
+  <!-- 11: ROADMAP -->
   <section class="slide" id="slide-11" aria-labelledby="s11-title">
     <div class="slide__inner">
       <p class="slide__number">11 / 12</p>
@@ -1130,14 +1129,14 @@
   </section>
 
 
-  <!-- 10: FECHAMENTO -->
-  <section class="slide slide--cta" id="slide-10" aria-labelledby="s10-title">
+  <!-- 12: FECHAMENTO -->
+  <section class="slide slide--cta" id="slide-12" aria-labelledby="s12-title">
     <div class="slide__inner">
       <img
         src="https://raw.githubusercontent.com/mikaelcarrara/mikaelcarrara.github.com/717facd0f39bc100bbc2285bd33025956b8ef53d/site/img/deplova-logo.svg"
         alt="Deplova" style="width:140px;margin-bottom:var(--space-10);opacity:.85;"
       >
-      <h2 id="s10-title" class="slide__title" style="margin-bottom:var(--space-4);">
+      <h2 id="s12-title" class="slide__title" style="margin-bottom:var(--space-4);">
         Obrigado.
       </h2>
       <p style="font-family:var(--font-body);font-size:var(--text-lg);color:var(--text-secondary);max-width:480px;font-weight:300;margin-bottom:var(--space-10);">
