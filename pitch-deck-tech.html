@@ -366,7 +366,7 @@
 
     /* ── DELIVERABLE GRID ── */
     .deliverable-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      display: grid; grid-template-columns: repeat(3, 1fr);
       gap: var(--space-4); margin: var(--space-10) 0;
     }
     .deliverable-item {
@@ -375,9 +375,8 @@
       display: flex; flex-direction: column; gap: var(--space-3);
     }
     .deliverable-item__icon {
-      width: 36px; height: 36px; border-radius: var(--radius-md);
+      width: 44px; height: 44px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
     }
     .deliverable-item__name {
       font-family: var(--font-body); font-size: var(--text-sm);
@@ -454,7 +453,7 @@
       /* ── GRIDS → empilha ── */
       .grid-2         { grid-template-columns: 1fr; gap: var(--space-8); }
       .highlight-grid { grid-template-columns: 1fr !important; gap: var(--space-4); }
-      .deliverable-grid { grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+      .deliverable-grid { grid-template-columns: 1fr; }
 
       /* ── PIPELINE → scroll lateral ── */
       .pipeline-tech {
@@ -754,16 +753,16 @@
           </div>
         </div>
 
-        <div class="layer-card" style="border-color:rgba(53,176,205,.35);">
-          <div class="layer-card__stripe" style="background:rgba(53,176,205,.08); color:var(--accent);">
+        <div class="layer-card" style="border-color:rgba(245,117,162,.35);">
+          <div class="layer-card__stripe" style="background:rgba(245,117,162,.08); color:var(--rose);">
             02
           </div>
           <div class="layer-card__body">
-            <div class="layer-card__number" style="color:var(--accent);">Core Architect</div>
+            <div class="layer-card__number" style="color:var(--rose);">Core Pipeline</div>
             <div class="layer-card__title">O motor de governança — Da intenção ao blueprint</div>
             <p class="layer-card__desc">O coração do sistema. Normaliza a intenção (Bridge), compila a arquitetura (Architect), valida 11 camadas de governança (Governance + Coherence) e traduz capabilities abstratas em instruções operacionais (Handoff Compiler). Nenhum agent sabe o que o outro fez.</p>
             <div class="layer-card__files">
-              <span class="file-tag" style="background:rgba(53,176,205,.1);border:1px solid rgba(53,176,205,.25);color:var(--accent);">refined_intent.json</span>
+              <span class="file-tag" style="background:rgba(245,117,162,.1);border:1px solid rgba(245,117,162,.3);color:var(--rose);">refined_intent.json</span>
               <span class="file-tag" style="background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.3);color:var(--indigo);">product_definition.json</span>
               <span class="file-tag" style="background:rgba(61,214,140,.1);border:1px solid rgba(61,214,140,.3);color:var(--green);">builder_handoff.json</span>
             </div>
@@ -1010,32 +1009,70 @@
 
       <div class="deliverable-grid">
         <div class="deliverable-item" style="border-color:rgba(53,176,205,.3);">
-          <div class="deliverable-item__icon" style="background:var(--accent-dim);">⚙</div>
+          <div class="deliverable-item__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="3" width="20" height="13" rx="2" stroke="#35B0CD" stroke-width="1.5"/>
+              <rect x="6" y="7" width="8" height="5" rx="1" fill="rgba(53,176,205,.2)" stroke="#35B0CD" stroke-width="1"/>
+              <circle cx="17" cy="9" r="2" fill="#F575A2"/>
+              <path d="M8 21h8M12 16v5" stroke="#35B0CD" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
           <div class="deliverable-item__name">MVP Funcional</div>
           <p class="deliverable-item__desc">Interface completa com fluxos reais de uso. Next.js + Tailwind v4 + shadcn/ui. Utilizável desde o primeiro dia.</p>
         </div>
         <div class="deliverable-item" style="border-color:rgba(61,214,140,.3);">
-          <div class="deliverable-item__icon" style="background:var(--green-dim);">✓</div>
+          <div class="deliverable-item__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 4h6v6H4z" rx="1" stroke="#35B0CD" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M14 4h6v6h-6z" rx="1" stroke="#35B0CD" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M4 14h6v6H4z" rx="1" stroke="#35B0CD" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M17 14v6M14 17h6" stroke="#F575A2" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
           <div class="deliverable-item__name">TypeScript Limpo</div>
           <p class="deliverable-item__desc">Código sem erros de tipo e sem uso de <code>any</code>. Archetypes homologados — dashboards, marketplaces, SaaS, portais.</p>
         </div>
         <div class="deliverable-item" style="border-color:rgba(129,140,248,.3);">
-          <div class="deliverable-item__icon" style="background:var(--indigo-dim);">⊞</div>
+          <div class="deliverable-item__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="14" width="18" height="5" rx="1.5" stroke="#35B0CD" stroke-width="1.5"/>
+              <rect x="5" y="9" width="14" height="5" rx="1.5" fill="rgba(53,176,205,.15)" stroke="#35B0CD" stroke-width="1.5"/>
+              <rect x="7" y="4" width="10" height="5" rx="1.5" fill="rgba(53,176,205,.25)" stroke="#35B0CD" stroke-width="1.5"/>
+              <circle cx="19" cy="16.5" r="2" fill="#F575A2"/>
+            </svg>
+          </div>
           <div class="deliverable-item__name">Arquitetura IA-friendly</div>
           <p class="deliverable-item__desc">Base organizada para ser compreendida tanto por desenvolvedores quanto por ferramentas de IA. Evolução contínua sem refactoring.</p>
         </div>
         <div class="deliverable-item" style="border-color:rgba(61,214,140,.3);">
-          <div class="deliverable-item__icon" style="background:var(--green-dim);">↗</div>
+          <div class="deliverable-item__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V6L12 2z" stroke="#35B0CD" stroke-width="1.5" stroke-linejoin="round" fill="rgba(53,176,205,.1)"/>
+              <path d="M8.5 12l2.5 2.5 4.5-5" stroke="#F575A2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
           <div class="deliverable-item__name">Deploy Ativo</div>
           <p class="deliverable-item__desc">Aplicação entregue no ar. Infraestrutura configurada e acessível. Não é protótipo — é produto.</p>
         </div>
         <div class="deliverable-item" style="border-color:rgba(53,176,205,.3);">
-          <div class="deliverable-item__icon" style="background:var(--accent-dim);">▣</div>
+          <div class="deliverable-item__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 7c0-1.1.9-2 2-2h5l2 2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" stroke="#35B0CD" stroke-width="1.5" fill="rgba(53,176,205,.1)"/>
+              <path d="M9 14h6M9 11h4" stroke="#F575A2" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
           <div class="deliverable-item__name">Repositório Completo</div>
           <p class="deliverable-item__desc">Código, documentação e credenciais entregues integralmente. O projeto passa a ser seu. Sem lock-in.</p>
         </div>
         <div class="deliverable-item" style="border-color:rgba(245,158,11,.3);">
-          <div class="deliverable-item__icon" style="background:var(--yellow-dim);">◎</div>
+          <div class="deliverable-item__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="9" cy="7" r="4" stroke="#35B0CD" stroke-width="1.5" fill="rgba(53,176,205,.1)"/>
+              <path d="M3 21v-1a6 6 0 0 1 6-6v0a6 6 0 0 1 6 6v1" stroke="#35B0CD" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="18" cy="10" r="3" fill="#F575A2"/>
+              <path d="M18 8v2l1 1" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
           <div class="deliverable-item__name">Treinamento em IA</div>
           <p class="deliverable-item__desc">Sessão prática para iterar, melhorar e expandir a base usando IA. Independência total após a entrega.</p>
         </div>
