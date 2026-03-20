@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deplova — Pitch Deck Técnico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --font-display: 'EB Garamond', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+
+      --bg-base:    #0a0c0f;
+      --bg-surface: #0f1216;
+      --bg-raised:  #141820;
+      --bg-hover:   #1c2230;
+
+      --border-subtle: rgba(255,255,255,.06);
+      --border-mid:    rgba(255,255,255,.10);
+      --border-strong: rgba(255,255,255,.18);
+
+      --text-primary:   #f0f2f5;
+      --text-secondary: #8b95a3;
+      --text-muted:     #4a5568;
+
+      --accent:     #35B0CD;
+      --accent-dim: rgba(53,176,205,.10);
+      --green:      #3dd68c;
+      --green-dim:  rgba(61,214,140,.10);
+      --rose:       #F575A2;
+      --rose-dim:   rgba(245,117,162,.10);
+      --orange:     #D97757;
+      --orange-dim: rgba(217,119,87,.08);
+      --indigo:     #818CF8;
+      --indigo-dim: rgba(129,140,248,.10);
+      --yellow:     #F59E0B;
+      --yellow-dim: rgba(245,158,11,.08);
+
+      --container-max: 960px;
+      --container-pipeline: 1200px;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+      --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+      --space-12: 48px; --space-16: 64px; --space-20: 80px;
+
+      --text-xs: .75rem; --text-sm: .875rem; --text-base: 1rem;
+      --text-lg: 1.125rem; --text-xl: 1.25rem; --text-2xl: 1.5rem;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    .pitch-nav {
+      position: fixed; top: 50%; right: var(--space-6);
+      transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: var(--space-3);
+      z-index: 100;
+    }
+    .pitch-nav__dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--border-mid); cursor: pointer; border: none; padding: 0;
+      transition: background .25s, transform .25s;
+    }
+    .pitch-nav__dot.active, .pitch-nav__dot:hover {
+      background: var(--accent); transform: scale(1.4);
+    }
+
+    /* ── SLIDES ── */
+    .pitch-wrap { display: flex; flex-direction: column; }
+
+    .slide {
+      min-height: 100vh; display: flex;
+      align-items: center; justify-content: center;
+      padding: var(--space-20) var(--space-8);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .slide:nth-child(even) { background: var(--bg-surface); }
+    .slide__inner { width: 100%; max-width: var(--container-max); margin: 0 auto; }
+
+    .slide__number {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--text-muted); letter-spacing: .12em;
+      text-transform: uppercase; margin-bottom: var(--space-6);
+    }
+    .slide__label {
+      font-family: var(--font-mono); font-size: var(--text-sm);
+      color: var(--accent); letter-spacing: .08em;
+      text-transform: uppercase; margin-bottom: var(--space-4);
+    }
+    .slide__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 5vw, 4rem);
+      font-weight: 500; color: var(--text-primary);
+      line-height: 1.15; margin-bottom: var(--space-6);
+    }
+    .slide__title em { font-style: italic; color: var(--accent); }
+    .slide__body {
+      font-family: var(--font-body); font-size: var(--text-lg);
+      color: var(--text-secondary); line-height: 1.7;
+      max-width: 640px; margin-bottom: var(--space-8);
+    }
+    .slide__impact {
+      font-family: var(--font-display);
+      font-size: clamp(1.375rem, 2.5vw, 2rem);
+      font-style: italic; color: var(--text-primary);
+      border-left: 3px solid var(--accent);
+      padding-left: var(--space-6); margin-top: var(--space-8);
+      max-width: 700px;
+    }
+
+    /* ── COVER ── */
+    .slide--cover {
+      background: var(--bg-base); text-align: left;
+      border-bottom: 1px solid var(--border-mid);
+      position: relative; overflow: hidden;
+    }
+    .slide--cover .slide__inner { position: relative; z-index: 2; }
+    .cover-canvas {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1; pointer-events: none; opacity: .6;
+    }
+    .cover-logo { width: 180px; margin-bottom: var(--space-10); filter: drop-shadow(0 0 20px rgba(53,176,205,.2)); }
+    .cover-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      color: var(--text-primary); line-height: 1.1;
+      margin-bottom: var(--space-6); font-weight: 500;
+    }
+    .cover-tagline em { font-style: italic; color: var(--accent); }
+    .cover-sub {
+      font-family: var(--font-body); font-size: var(--text-xl);
+      color: var(--text-secondary); max-width: 600px;
+      margin-bottom: var(--space-12);
+    }
+    .cover-footer {
+      position: absolute; bottom: var(--space-12); left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--text-muted); text-transform: uppercase;
+      letter-spacing: .2em; white-space: nowrap;
+    }
+
+    /* ── BULLETS ── */
+    .pitch-bullets { list-style: none; padding: 0; margin: 0 0 var(--space-8); display: flex; flex-direction: column; gap: var(--space-4); }
+    .pitch-bullets li { font-family: var(--font-body); font-size: var(--text-base); color: var(--text-secondary); display: flex; align-items: flex-start; gap: var(--space-3); }
+    .pitch-bullets li::before { content: "—"; color: var(--accent); flex-shrink: 0; }
+
+    /* ── GRID ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); align-items: start; }
+    @media(max-width:768px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    /* ── PIPELINE TECH ── */
+    .pipeline-tech {
+      display: flex; align-items: flex-start; gap: var(--space-2);
+      flex-wrap: nowrap; margin: var(--space-10) 0 0;
+      width: 100%; overflow-x: auto; padding-bottom: var(--space-4);
+    }
+    .pt-phase {
+      display: flex; flex-direction: column; align-items: flex-start;
+      gap: var(--space-2); background: var(--bg-raised);
+      border: 1px solid var(--border-mid); border-radius: var(--radius-lg);
+      padding: var(--space-5); flex: 1; min-width: 110px;
+    }
+    .pt-phase__label { font-family: var(--font-mono); font-size: 10px; color: var(--accent); letter-spacing: .12em; text-transform: uppercase; }
+    .pt-phase__name { font-family: var(--font-body); font-size: var(--text-sm); font-weight: 500; color: var(--text-primary); line-height: 1.3; }
+    .pt-phase__desc { font-family: var(--font-body); font-size: 11px; color: var(--text-muted); line-height: 1.55; }
+    .pt-arrow { display: flex; align-items: center; padding-top: 52px; flex-shrink: 0; color: var(--accent); }
+
+    /* ── CONTRACTS FLOW ── */
+    .contracts-flow {
+      display: flex; align-items: center; gap: 0;
+      margin: var(--space-10) 0; flex-wrap: wrap; gap: var(--space-2);
+    }
+    .contract-node {
+      display: flex; flex-direction: column; gap: var(--space-2);
+      background: var(--bg-raised); border-radius: var(--radius-lg);
+      padding: var(--space-5); flex: 1; min-width: 160px;
+    }
+    .contract-node__label { font-family: var(--font-mono); font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .1em; }
+    .contract-node__agent { font-family: var(--font-body); font-size: var(--text-base); font-weight: 500; color: var(--text-primary); }
+    .contract-node__file {
+      font-family: var(--font-mono); font-size: 10px;
+      padding: 3px 8px; border-radius: var(--radius-sm); margin-top: var(--space-1);
+      display: inline-block; width: fit-content;
+    }
+    .contract-node__desc { font-family: var(--font-body); font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+    .contract-arrow { color: var(--accent); flex-shrink: 0; padding: 0 4px; display: flex; align-items: center; }
+
+    .file--intent  { background: var(--rose-dim); border: 1px solid rgba(245,117,162,.3); color: var(--rose); }
+    .file--product { background: var(--indigo-dim); border: 1px solid rgba(129,140,248,.3); color: var(--indigo); }
+    .file--handoff { background: var(--green-dim); border: 1px solid rgba(61,214,140,.3); color: var(--green); }
+
+    .border--rose   { border-color: rgba(245,117,162,.4) !important; background: var(--rose-dim) !important; }
+    .border--indigo { border-color: rgba(129,140,248,.4) !important; background: var(--indigo-dim) !important; }
+    .border--green  { border-color: rgba(61,214,140,.4) !important; background: var(--green-dim) !important; }
+
+    /* ── HIGHLIGHT BOXES ── */
+    .highlight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-6); margin: var(--space-10) 0; }
+    .highlight-box { background: var(--bg-raised); border: 1px solid var(--border-mid); border-radius: var(--radius-lg); padding: var(--space-6); }
+    .highlight-box__tag { display: inline-block; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(53,176,205,.25); border-radius: var(--radius-sm); padding: 2px var(--space-3); margin-bottom: var(--space-3); text-transform: uppercase; letter-spacing: .08em; }
+    .highlight-box__title { font-family: var(--font-body); font-size: var(--text-base); font-weight: 500; color: var(--text-primary); margin-bottom: var(--space-2); }
+    .highlight-box__desc { font-family: var(--font-body); font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.6; }
+
+    /* ── CHECKPOINT SLIDE ── */
+    .checkpoint-diagram {
+      display: flex; flex-direction: column; gap: var(--space-6);
+      background: var(--bg-raised); border: 1px solid rgba(245,158,11,.3);
+      border-radius: var(--radius-lg); padding: var(--space-8);
+      margin: var(--space-10) 0;
+    }
+    .checkpoint-diagram__label { font-family: var(--font-mono); font-size: 10px; color: var(--yellow); text-transform: uppercase; letter-spacing: .12em; }
+    .checkpoint-diagram__title { font-family: var(--font-display); font-size: var(--text-2xl); color: var(--text-primary); }
+    .checkpoint-flow { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; }
+    .checkpoint-box {
+      flex: 1; min-width: 150px; background: var(--bg-base);
+      border-radius: var(--radius-md); padding: var(--space-4);
+      border: 1px solid var(--border-mid);
+    }
+    .checkpoint-box__label { font-family: var(--font-mono); font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: var(--space-1); }
+    .checkpoint-box__name { font-family: var(--font-body); font-size: var(--text-sm); font-weight: 500; color: var(--text-primary); }
+    .checkpoint-box--pause { border-color: rgba(245,158,11,.4); background: var(--yellow-dim); }
+    .checkpoint-box--pause .checkpoint-box__name { color: var(--yellow); }
+
+    .checkpoint-actions { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+    .checkpoint-btn {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-3) var(--space-6); border-radius: var(--radius-md);
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      font-weight: 500; letter-spacing: .06em; cursor: default;
+    }
+    .checkpoint-btn--confirm { background: var(--green-dim); border: 1px solid var(--green); color: var(--green); }
+    .checkpoint-btn--reject  { background: rgba(224,92,106,.1); border: 1px solid #e05c6a; color: #e05c6a; }
+
+    /* ── GOVERNANCE LAYERS ── */
+    .gov-stack { display: flex; flex-direction: column; gap: var(--space-3); margin: var(--space-8) 0; }
+    .gov-layer {
+      display: flex; align-items: flex-start; gap: var(--space-4);
+      padding: var(--space-4) var(--space-5); border-radius: var(--radius-md);
+      border: 1px solid var(--border-mid); background: var(--bg-raised);
+      transition: border-color .2s;
+    }
+    .gov-layer__num { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); flex-shrink: 0; min-width: 24px; padding-top: 2px; }
+    .gov-layer__name { font-family: var(--font-body); font-size: var(--text-base); font-weight: 500; color: var(--text-primary); margin-bottom: 2px; }
+    .gov-layer__desc { font-family: var(--font-body); font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.5; }
+    .gov-layer__tag { font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: .1em; padding: 2px 8px; border-radius: var(--radius-sm); margin-left: auto; flex-shrink: 0; white-space: nowrap; }
+    .tag--machine { background: var(--accent-dim); border: 1px solid rgba(53,176,205,.25); color: var(--accent); }
+    .tag--human   { background: var(--yellow-dim); border: 1px solid rgba(245,158,11,.3); color: var(--yellow); }
+
+    /* ── ROADMAP ── */
+    .roadmap { display: flex; flex-direction: column; gap: 0; margin: var(--space-8) 0; }
+    .roadmap-phase {
+      display: flex; gap: var(--space-6); padding: var(--space-6) 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .roadmap-phase:last-child { border-bottom: none; }
+    .roadmap-phase__time {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--accent); text-transform: uppercase; letter-spacing: .1em;
+      min-width: 120px; flex-shrink: 0; padding-top: 3px;
+    }
+    .roadmap-phase__title { font-family: var(--font-body); font-size: var(--text-base); font-weight: 500; color: var(--text-primary); margin-bottom: var(--space-2); }
+    .roadmap-phase__desc { font-family: var(--font-body); font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.6; }
+    .roadmap-phase__milestone {
+      display: inline-block; margin-top: var(--space-2);
+      font-family: var(--font-mono); font-size: 10px;
+      color: var(--green); background: var(--green-dim);
+      border: 1px solid rgba(61,214,140,.3);
+      border-radius: var(--radius-sm); padding: 2px 8px;
+    }
+
+    /* ── TERMINAL ── */
+    .terminal { background: #010409; border: 1px solid #30363d; border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 24px 48px rgba(0,0,0,.5); }
+    .terminal__header { background: #161b22; padding: var(--space-3) var(--space-4); display: flex; align-items: center; gap: var(--space-2); border-bottom: 1px solid #30363d; }
+    .terminal__dot { width: 10px; height: 10px; border-radius: 50%; }
+    .terminal__label { margin-left: auto; font-family: var(--font-mono); font-size: 10px; color: #8b949e; text-transform: uppercase; letter-spacing: .1em; }
+    .terminal__body { padding: var(--space-6); font-family: var(--font-mono); font-size: 13px; color: #e6edf3; line-height: 1.9; }
+    .t-ok   { color: #3dd68c; }
+    .t-warn { color: #f0c060; }
+    .t-dim  { color: #8b949e; }
+    .t-cyan { color: #35B0CD; }
+    .t-err  { color: #e05c6a; }
+    .t-bingo { color: #3dd68c; font-weight: 700; }
+
+    /* ── CTA / FECHAMENTO ── */
+    .slide--cta { text-align: center; }
+    .slide--cta .slide__inner { display: flex; flex-direction: column; align-items: center; }
+    .slide--cta .slide__title { font-size: clamp(2.5rem, 6vw, 5rem); }
+    .cta-pillars { display: flex; gap: var(--space-4); flex-wrap: wrap; justify-content: center; margin: var(--space-8) 0; }
+    .cta-pillar { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(53,176,205,.2); border-radius: var(--radius-md); padding: var(--space-3) var(--space-5); }
+    .links { list-style: none; padding: 0; margin: 20px 0 0; }
+    .links li { display: inline-block; margin: 0 10px; }
+    .links a { color: var(--text-secondary); text-decoration: none; font-size: var(--text-sm); }
+    .links a:hover { color: var(--accent); }
+
+    .btn { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-4) var(--space-8); border-radius: var(--radius-md); font-family: var(--font-body); font-size: var(--text-base); font-weight: 500; text-decoration: none; transition: all .2s; cursor: pointer; border: none; }
+    .btn--primary { background: var(--accent); color: #0a0c0f; }
+    .btn--primary:hover { background: #4dc8e8; box-shadow: 0 0 24px rgba(53,176,205,.3); }
+
+    @media(max-width: 768px) {
+      .pitch-nav { display: none; }
+      .pipeline-tech { flex-wrap: wrap; }
+      .pt-arrow { padding-top: 0; }
+      .contracts-flow { flex-direction: column; }
+      .contract-arrow { transform: rotate(90deg); }
+      .checkpoint-flow { flex-direction: column; }
+      .roadmap-phase { flex-direction: column; gap: var(--space-2); }
+      .roadmap-phase__time { min-width: unset; }
+    }
+  </style>
+</head>
+
+<body>
+
+<main class="pitch-wrap" id="pitch">
+
+  <!-- 00: CAPA -->
+  <section class="slide slide--cover" id="slide-0">
+    <canvas id="cover-canvas" class="cover-canvas"></canvas>
+    <div class="slide__inner">
+      <img src="https://raw.githubusercontent.com/mikaelcarrara/mikaelcarrara.github.com/717facd0f39bc100bbc2285bd33025956b8ef53d/site/img/deplova-logo.svg" alt="Deplova" class="cover-logo">
+      <h1 class="cover-tagline">O compilador de<br>produtos digitais.<br><em>Determinístico por design.</em></h1>
+      <p class="cover-sub">
+        Transformamos intenção em software com governança em camadas — não com prompts, com contratos.
+      </p>
+      <p>
+        Pitch Deck Técnico
+      </p>
+    </div>
+  </section>
+
+  <!-- 01: SOLUÇÃO -->
+  <section class="slide" id="slide-1" aria-labelledby="s1-title">
+    <div class="slide__inner" style="max-width:var(--container-pipeline);">
+      <p class="slide__number">01 / 05</p>
+      <p class="slide__label">O Pipeline</p>
+      <h2 id="s1-title" class="slide__title">Da conversa ao MVP em 48h.<br><em>Com contratos, não com sorte.</em></h2>
+      <p class="slide__body" style="max-width:620px">A Deplova transforma 60 minutos de briefing em um pipeline de compilação determinístico. Cada camada passa por validação antes de avançar. Nada é gerado sem contrato técnico aprovado.</p>
+
+      <div class="pipeline-tech" style="margin-top: var(--space-10);">
+
+        <div class="pt-phase">
+                    <p class="pt-phase__name">Briefing</p>
+          <p class="pt-phase__desc">Sessão gravada. Whisper transcreve para <code style="color:var(--accent);font-size:10px;">transcript.txt</code></p>
+        </div>
+        <div class="pt-arrow"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="#35B0CD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+        <div class="pt-phase">
+                    <p class="pt-phase__name">Thinker</p>
+          <p class="pt-phase__desc">NotebookLM extrai estrutura, scoring de impacto e story points. Gera <code style="color:var(--accent);font-size:10px;">thinker_output.json</code></p>
+        </div>
+        <div class="pt-arrow"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="#35B0CD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+        <div class="pt-phase">
+                    <p class="pt-phase__name">Sprint Planning</p>
+          <p class="pt-phase__desc">Cliente prioriza features em P0/P1/P2. Confirma capacidade da sprint. Exporta <code style="color:var(--accent);font-size:10px;">thinker_output_sprint.json</code></p>
+        </div>
+        <div class="pt-arrow"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="#35B0CD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+        <div class="pt-phase" style="border-color:rgba(245,117,162,.4);background:linear-gradient(135deg,rgba(245,117,162,.07) 0%,rgba(53,176,205,.07) 100%);">
+                    <p class="pt-phase__name">Bridge → Architect</p>
+          <p class="pt-phase__desc">Pipeline automático: blinda intenção, compila blueprint, valida 10 camadas de governança. Gera <code style="color:var(--indigo);font-size:10px;">builder_handoff.json</code></p>
+        </div>
+        <div class="pt-arrow"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="#35B0CD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+        <div class="pt-phase" style="border-color:rgba(245,117,162,.4);background:linear-gradient(135deg,rgba(245,117,162,.07) 0%,rgba(53,176,205,.07) 100%);">
+                    <p class="pt-phase__name">Checkpoint</p>
+          <p class="pt-phase__desc">Operador revisa wireframe e contratos. Confirma ou manda regenerar.</p>
+        </div>
+        <div class="pt-arrow"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="#35B0CD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+        <div class="pt-phase" style="border-color:rgba(217,119,87,.5);background:rgba(217,119,87,.06);">
+                    <p class="pt-phase__name">Builder</p>
+          <p class="pt-phase__desc">Claude Code executa dentro do handoff. MVP no ar.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 02: OS CONTRATOS -->
+  <section class="slide" id="slide-2" aria-labelledby="s2-title">
+    <div class="slide__inner">
+      <p class="slide__number">02 / 05</p>
+      <p class="slide__label">Os Contratos</p>
+      <h2 id="s2-title" class="slide__title">Quatro artefatos.<br><em>Uma cadeia inquebrável.</em></h2>
+      <p class="slide__body">Do briefing ao build, cada etapa produz um artefato JSON auditável que serve de contrato para a próxima.</p>
+
+      <div class="contracts-flow">
+        <div class="contract-node" style="border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.06);">
+          <span class="contract-node__label">Cliente + Operador</span>
+          <span class="contract-node__agent">Contrato de Sprint</span>
+          <code class="contract-node__file" style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);color:var(--yellow);">thinker_output_sprint.json</code>
+          <p class="contract-node__desc">Features priorizadas pelo cliente com impact score, story points e capacidade da sprint confirmada.</p>
+        </div>
+        <div class="contract-arrow">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 14h20M18 8l6 6-6 6" stroke="#35B0CD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="contract-node border--rose">
+          <span class="contract-node__label">Produzido pelo Bridge</span>
+          <span class="contract-node__agent">Intenção Blindada</span>
+          <code class="contract-node__file file--intent">refined_intent.json</code>
+          <p class="contract-node__desc">Intenção normalizada, sem HEX, sem infra não declarada. Capabilities travadas pelo Bridge.</p>
+        </div>
+        <div class="contract-arrow">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 14h20M18 8l6 6-6 6" stroke="#35B0CD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="contract-node border--indigo">
+          <span class="contract-node__label">Produzido pelo Architect</span>
+          <span class="contract-node__agent">Blueprint de Produto</span>
+          <code class="contract-node__file file--product">product_definition.json</code>
+          <p class="contract-node__desc">Archetype, pages, features, design grammar — validado por JSON Schema com anti-hallucination.</p>
+        </div>
+        <div class="contract-arrow">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 14h20M18 8l6 6-6 6" stroke="#35B0CD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="contract-node border--green">
+          <span class="contract-node__label">Produzido pelo Handoff Compiler</span>
+          <span class="contract-node__agent">Plano de Obra</span>
+          <code class="contract-node__file file--handoff">builder_handoff.json</code>
+          <p class="contract-node__desc">Libs concretas, injection points, protected zones, file tree map. O Builder só executa.</p>
+        </div>
+      </div>
+
+      <blockquote class="slide__impact">"O Builder não decide. Ele opera dentro de um contrato que foi auditado antes de chegar nele."</blockquote>
+    </div>
+  </section>
+
+  <!-- 03: A GOVERNANÇA -->
+  <section class="slide" id="slide-3" aria-labelledby="s3-title">
+    <div class="slide__inner">
+      <p class="slide__number">03 / 05</p>
+      <p class="slide__label">A Governança</p>
+      <h2 id="s3-title" class="slide__title">Máquina governa.<br><em>Humano corrige.</em></h2>
+      <p class="slide__body">Seis camadas automáticas. Dois pontos humanos. O cliente decide o escopo antes de qualquer código. O operador revisa a arquitetura antes do build. Nenhum improviso passa por aqui.</p>
+
+      <div class="gov-stack">
+        <div class="gov-layer" style="border-color:rgba(245,158,11,.3);background:var(--yellow-dim);">
+          <span class="gov-layer__num" style="color:var(--yellow);">1</span>
+          <div>
+            <div class="gov-layer__name" style="color:var(--yellow);">Sprint Planning</div>
+            <div class="gov-layer__desc">Cliente prioriza features em P0/P1/P2 com base em impact score e story points. Só o que o cliente confirmou entra no pipeline.</div>
+          </div>
+          <span class="gov-layer__tag tag--human">Humano</span>
+        </div>
+        <div class="gov-layer">
+          <span class="gov-layer__num">2</span>
+          <div>
+            <div class="gov-layer__name">Sync Check</div>
+            <div class="gov-layer__desc">Detecta drift entre <code>skeleton_manifest.json</code>, <code>bridge.py</code> e <code>handoff-compiler.py</code>. Pipeline não avança com contratos desatualizados.</div>
+          </div>
+          <span class="gov-layer__tag tag--machine">Automático</span>
+        </div>
+        <div class="gov-layer">
+          <span class="gov-layer__num">3</span>
+          <div>
+            <div class="gov-layer__name">Bridge Guard</div>
+            <div class="gov-layer__desc">Descarta HEX, normaliza archetype, aplica restrições de infra. Só entra no pipeline o que o skeleton consegue construir.</div>
+          </div>
+          <span class="gov-layer__tag tag--machine">Automático</span>
+        </div>
+        <div class="gov-layer">
+          <span class="gov-layer__num">4</span>
+          <div>
+            <div class="gov-layer__name">Schema Validation</div>
+            <div class="gov-layer__desc">O <code>product_definition.json</code> é validado contra JSON Schema com <code>additionalProperties: false</code>. O Architect não pode inventar campos.</div>
+          </div>
+          <span class="gov-layer__tag tag--machine">Automático</span>
+        </div>
+        <div class="gov-layer">
+          <span class="gov-layer__num">5</span>
+          <div>
+            <div class="gov-layer__name">Governance Audit</div>
+            <div class="gov-layer__desc">Identity check, capabilities lock, DB access guard, feature coverage P0. O Architect não pode mudar o que o Bridge definiu.</div>
+          </div>
+          <span class="gov-layer__tag tag--machine">Automático</span>
+        </div>
+        <div class="gov-layer">
+          <span class="gov-layer__num">6</span>
+          <div>
+            <div class="gov-layer__name">Coherence Check</div>
+            <div class="gov-layer__desc">Skeleton suporta as capabilities? Rotas conflitam com protected zones? Viabilidade técnica antes do handoff.</div>
+          </div>
+          <span class="gov-layer__tag tag--machine">Automático</span>
+        </div>
+        <div class="gov-layer">
+          <span class="gov-layer__num">7</span>
+          <div>
+            <div class="gov-layer__name">Handoff Compiler</div>
+            <div class="gov-layer__desc">Traduz capabilities abstratas em libs concretas, rotas em caminhos de arquivo, injection points em instruções operacionais. O Builder não interpreta — só executa.</div>
+          </div>
+          <span class="gov-layer__tag tag--machine">Automático</span>
+        </div>
+        <div class="gov-layer" style="border-color:rgba(245,158,11,.4);background:var(--yellow-dim);">
+          <span class="gov-layer__num" style="color:var(--yellow);">8</span>
+          <div>
+            <div class="gov-layer__name" style="color:var(--yellow);">Checkpoint do Architect — Corregedoria</div>
+            <div class="gov-layer__desc">Operador revisa blueprint e wireframe de baixa fidelidade. Confirma ou manda regenerar. Pipeline pausa aqui — o Builder não começa sem autorização humana.</div>
+          </div>
+          <span class="gov-layer__tag tag--human">Humano</span>
+        </div>
+      </div>
+
+      <div class="checkpoint-diagram">
+        <div class="checkpoint-diagram__label">Checkpoint em ação</div>
+        <div class="checkpoint-flow">
+          <div class="checkpoint-box">
+            <div class="checkpoint-box__label">Architect</div>
+            <div class="checkpoint-box__name">Blueprint gerado</div>
+          </div>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M14 6l6 6-6 6" stroke="#35B0CD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="checkpoint-box checkpoint-box--pause">
+            <div class="checkpoint-box__label">Pipeline pausa</div>
+            <div class="checkpoint-box__name">⚠ Operador revisa wireframe + contratos</div>
+          </div>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M14 6l6 6-6 6" stroke="#35B0CD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="checkpoint-box">
+            <div class="checkpoint-box__label">Decisão</div>
+            <div class="checkpoint-actions" style="margin-top: var(--space-2);">
+              <span class="checkpoint-btn checkpoint-btn--confirm">✓ Confirmar</span>
+              <span class="checkpoint-btn checkpoint-btn--reject">✕ Regenerar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04: NÃO É PROMPT -->
+  <section class="slide" id="slide-4" aria-labelledby="s4-title">
+    <div class="slide__inner">
+      <p class="slide__number">04 / 05</p>
+      <p class="slide__label">A Prova Técnica</p>
+      <h2 id="s4-title" class="slide__title">Não é prompt engineering.<br><em>É um compilador.</em></h2>
+      <p class="slide__body">A diferença entre "pedir pra IA" e o Deplova é a mesma diferença entre escrever código em texto livre e usar um compilador tipado. O compilador rejeita o que não obedece o contrato.</p>
+
+      <div class="grid-2" style="margin-top: var(--space-10); gap: var(--space-8);">
+        <div>
+          <div class="terminal">
+            <div class="terminal__header">
+              <div class="terminal__dot" style="background:#e05c6a"></div>
+              <div class="terminal__dot" style="background:#f0c060"></div>
+              <div class="terminal__dot" style="background:#3dd68c"></div>
+              <span class="terminal__label">run-pipeline.bat</span>
+            </div>
+            <div class="terminal__body">
+              <span class="t-cyan">[0/4]</span> Sync Check<br>
+              <span class="t-ok">✅</span> <span class="t-dim">Skeleton sincronizado</span><br><br>
+              <span class="t-cyan">[1/4]</span> Bridge<br>
+              <span class="t-ok">✅</span> <span class="t-dim">refined_intent.json gerado</span><br>
+              <span class="t-ok">✅</span> <span class="t-dim">4 features validadas</span><br><br>
+              <span class="t-cyan">[2/4]</span> Architect<br>
+              <span class="t-ok">✅</span> <span class="t-dim">Blueprint compilado</span><br><br>
+              <span class="t-cyan">[3/4]</span> Governance | Coherence | Handoff<br>
+              <span class="t-ok">✅</span> <span class="t-dim">Schema validado</span><br>
+              <span class="t-ok">✅</span> <span class="t-dim">Capabilities locked</span><br>
+              <span class="t-ok">✅</span> <span class="t-dim">Identity consistente</span><br>
+              <span class="t-ok">✅</span> <span class="t-dim">DB BLOCKED respeitado</span><br>
+              <span class="t-ok">✅</span> <span class="t-dim">Skeleton fit confirmado</span><br>
+              <span class="t-ok">✅</span> <span class="t-dim">Sem conflito de rotas</span><br>
+              <span class="t-ok">✅</span> <span class="t-dim">reasoning_trace.json salvo</span><br><br>
+              <span class="t-bingo">🎉 BINGO — Builder autorizado.</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-5);">
+          <div class="highlight-box">
+            <span class="highlight-box__tag">Anti-hallucination</span>
+            <div class="highlight-box__title">O Architect não pode inventar</div>
+            <p class="highlight-box__desc"><code style="color:var(--accent)">additionalProperties: false</code> no schema. Qualquer campo fora do contrato rejeita o output inteiro.</p>
+          </div>
+          <div class="highlight-box">
+            <span class="highlight-box__tag">Capabilities Lock</span>
+            <div class="highlight-box__title">Nenhum agent muda o escopo</div>
+            <p class="highlight-box__desc">As capabilities são definidas no Bridge e travadas. O Architect compila — não decide. O Builder executa — não interpreta.</p>
+          </div>
+          <div class="highlight-box">
+            <span class="highlight-box__tag">Determinismo</span>
+            <div class="highlight-box__title">Mesmo input, mesmo output</div>
+            <p class="highlight-box__desc">Pipeline fail-fast: qualquer gate quebrado para a execução antes de avançar. Nenhuma etapa começa sem a anterior aprovada.</p>
+          </div>
+          <div class="highlight-box">
+            <span class="highlight-box__tag">Rastreabilidade</span>
+            <div class="highlight-box__title">O Architect documenta suas decisões</div>
+            <p class="highlight-box__desc"><code style="color:var(--accent)">reasoning_trace.json</code> registra por que cada archetype, navegação e página foi escolhida. Degradações aplicadas ficam documentadas. Debug e auditoria em segundos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- 05 : OPORTUNIDADE-->
+<section class="slide" id="slide-5" aria-labelledby="s56-title">
+  <div class="slide__inner">
+
+    <div class="grid grid-2">
+
+      <div>
+        <p class="slide__number">05 / 05</p>
+        <p class="slide__label">Oportunidade e Visão</p>
+        <h2 id="s5-title" class="slide__title">
+          De execução manual para <em>infraestrutura de geração de produto.</em>
+        </h2>
+      </div>
+
+      <div>
+        <div>
+          <div>
+            <h3>Mês 0: Core Validado</h3>
+            <p class="engine-feature__desc">
+              Pipeline determinístico com validação de schema e coerência física.<br>
+              <strong>Resultado:</strong> Garantia de blueprints consistentes e prontos para produção.
+            </p>
+          </div>
+          <div>
+            <h3 style="margin-top: 25px;">Meses 1–3: Prova de Valor (Tração)</h3>
+            <p class="engine-feature__desc">
+              Implementação em projetos reais para refinamento de padrões.<br>
+              <strong>Resultado:</strong> Redução do lead time de desenvolvimento e consolidação do feedback de campo.
+            </p>
+          </div>
+          <div>
+            <h3 style="margin-top: 25px;">Meses 4–6: Automação Avançada (Escala)</h3>
+            <p class="engine-feature__desc">
+              Evolução da autonomia do Core e expansão da cobertura de casos de uso.<br>
+              <strong>Resultado:</strong> Minimização da intervenção humana e aumento da margem operacional.
+            </p>
+          </div>
+          <div>
+            <h3 style="margin-top: 25px;">Meses 6–12: Ecossistema Deplova (Plataforma)</h3>
+            <p class="engine-feature__desc">
+              Transição de ferramenta para plataforma de governança e escala.<br>
+              <strong>Resultado:</strong> Geração contínua de produtos com padronização industrial.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- 08: FECHAMENTO -->
+  <section class="slide slide--cta" id="slide-8" aria-labelledby="s8-title">
+    <div class="slide__inner">
+      <h2 id="s8-title" class="slide__title" style="margin-bottom: var(--space-8);">Obrigado.</h2>
+        <div style="margin-top: 20px">
+          <a href="https://mikaelcarrara.github.io/landing" class="btn btn--primary" style="margin-top: 20px;">
+            <span class="btn__inner">Website Deplova<span class="btn__arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      <h4 style="margin-top: var(--space-16); font-family: var(--font-body); font-weight: 500; color: var(--text-primary);">Mikael Carrara</h4>
+      <ul class="links">
+        <li><a href="https://www.linkedin.com/in/mikaelcarrara/">LinkedIn</a></li>
+        <li><a href="https://www.behance.net/mikaelmcarrara">Portfólio</a></li>
+        <li><a href="https://mikaelcarrara.github.io/">Website pessoal</a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Canvas animation
+  const canvas = document.getElementById('cover-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  class Line {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * W; this.y = Math.random() * H;
+      this.length = 60 + Math.random() * 200;
+      this.vertical = Math.random() > .5;
+      this.life = 0; this.maxLife = 60 + Math.random() * 80; this.opacity = 0;
+    }
+    update() {
+      this.life++;
+      if (this.life < this.maxLife * .2) this.opacity = this.life / (this.maxLife * .2);
+      else if (this.life > this.maxLife * .8) this.opacity = 1 - (this.life - this.maxLife * .8) / (this.maxLife * .2);
+      else this.opacity = 1;
+      if (this.life >= this.maxLife) this.reset();
+    }
+    draw() {
+      const p = this.life / this.maxLife;
+      let start = 0, end = 0;
+      if (p < .5) end = (p / .5) * this.length;
+      else { start = ((p - .5) / .5) * this.length; end = this.length; }
+      ctx.strokeStyle = `rgba(53,176,205,${this.opacity * .35})`;
+      ctx.lineWidth = .8; ctx.beginPath();
+      if (this.vertical) { ctx.moveTo(this.x, this.y + start); ctx.lineTo(this.x, this.y + end); }
+      else { ctx.moveTo(this.x + start, this.y); ctx.lineTo(this.x + end, this.y); }
+      ctx.stroke();
+    }
+  }
+
+  const lines = Array.from({ length: 50 }, () => new Line());
+  function animate() { ctx.clearRect(0, 0, W, H); lines.forEach(l => { l.update(); l.draw(); }); requestAnimationFrame(animate); }
+  animate();
+
+  // Nav dots
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.pitch-nav__dot');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const i = Array.from(slides).indexOf(e.target);
+        dots.forEach(d => d.classList.remove('active'));
+        if (dots[i]) dots[i].classList.add('active');
+      }
+    });
+  }, { threshold: .5 });
+  slides.forEach(s => obs.observe(s));
+  dots.forEach(d => d.addEventListener('click', () => slides[+d.dataset.slide].scrollIntoView({ behavior: 'smooth' })));
+</script>
+
+</body>
+</html>
