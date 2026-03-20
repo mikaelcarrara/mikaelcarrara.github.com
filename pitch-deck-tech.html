@@ -184,7 +184,10 @@
 
     /* ── GRID ── */
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); align-items: start; }
+    .grid-2 > * { min-width: 0; }
     @media(max-width:768px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    /* ── TERMINAL (overflow global, não só no breakpoint) ── */
 
     /* ── 3-LAYER VISUAL ── */
     .layers-stack {
@@ -251,7 +254,7 @@
       display: flex; flex-direction: column; align-items: flex-start;
       gap: var(--space-2); background: var(--bg-raised);
       border: 1px solid var(--border-mid); border-radius: var(--radius-lg);
-      padding: var(--space-5); flex: 1; min-width: 110px;
+      padding: var(--space-5); flex: 0 0 200px; width: 200px;
     }
     .pt-phase__label {
       font-family: var(--font-mono); font-size: 9.5px;
@@ -351,6 +354,8 @@
     .terminal__body {
       padding: var(--space-6); font-family: var(--font-mono);
       font-size: 12.5px; color: #e6edf3; line-height: 1.9; font-weight: 400;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
     }
     .t-ok    { color: #3dd68c; }
     .t-warn  { color: #f0c060; }
@@ -432,13 +437,68 @@
     .btn--primary:hover { background: #4dc8e8; box-shadow: 0 0 24px rgba(53,176,205,.3); }
 
     @media(max-width: 768px) {
+
+      /* ── NAV ── */
       .pitch-nav { display: none; }
-      .pipeline-tech { flex-wrap: wrap; }
-      .pt-arrow { padding-top: 0; }
+
+      /* ── SLIDE PADDING ── */
+      .slide { padding: var(--space-12) var(--space-5); }
+      .slide--screenshot { padding: var(--space-10) var(--space-5); }
+      .slide__inner { max-width: 100%; }
+
+      /* ── TYPOGRAPHY ── */
+      .slide__title  { font-size: clamp(1.75rem, 7vw, 2.5rem); }
+      .cover-tagline { font-size: clamp(2rem, 8vw, 3.5rem); }
+      .cover-sub     { font-size: var(--text-base); }
+      .slide__impact { font-size: clamp(1.1rem, 4vw, 1.5rem); }
+      .screenshot-title { font-size: clamp(1.5rem, 6vw, 2.25rem); }
+
+      /* ── GRIDS → empilha ── */
+      .grid-2         { grid-template-columns: 1fr; gap: var(--space-8); }
+      .highlight-grid { grid-template-columns: 1fr !important; gap: var(--space-4); }
+      .deliverable-grid { grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+
+      /* ── PIPELINE → scroll lateral ── */
+      .pipeline-tech {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: var(--space-4);
+        margin-left: calc(-1 * var(--space-5));
+        margin-right: calc(-1 * var(--space-5));
+        padding-left: var(--space-5);
+        padding-right: var(--space-5);
+      }
+      .pt-arrow { padding-top: 36px; flex-shrink: 0; }
+
+      /* ── GOV STACK ── */
+      .gov-layer { flex-wrap: wrap; gap: var(--space-3); }
+      .gov-layer__tag { margin-left: 0; }
+
+      /* ── LAYER CARDS ── */
+      .layer-card { grid-template-columns: 1fr; }
+      .layer-card__stripe {
+        writing-mode: horizontal-tb;
+        padding: var(--space-3) var(--space-5);
+        font-size: .9rem;
+      }
+
+      /* ── ROADMAP ── */
       .roadmap-phase { flex-direction: column; gap: var(--space-2); }
       .roadmap-phase__time { min-width: unset; }
-      .layer-card { grid-template-columns: 1fr; }
-      .layer-card__stripe { writing-mode: horizontal-tb; padding: var(--space-3) var(--space-5); font-size: .9rem; }
+
+      /* ── SCREENSHOT ── */
+      .screenshot-frame { border-radius: var(--radius-md); }
+
+      /* ── MISC ── */
+      .slide__body { max-width: 100%; }
+      .slide__impact { padding-left: var(--space-4); }
+      .btn { padding: var(--space-3) var(--space-6); font-size: var(--text-sm); }
+    }
+
+    @media(max-width: 480px) {
+      .slide { padding: var(--space-10) var(--space-4); }
+      .deliverable-grid { grid-template-columns: 1fr; }
     }
 
     /* ── SCREENSHOT SLIDE ── */
@@ -576,17 +636,17 @@
               <span class="terminal__label">sem-deplova.log</span>
             </div>
             <div class="terminal__body">
-              <span class="t-dim">Cliente: "quero câmera ao vivo"</span><br>
-              <span class="t-dim">Dev: <em>começa a codar WebRTC</em></span><br><br>
-              <span class="t-dim">Semana 3: escopo mudou.</span><br>
-              <span class="t-err">❌ Feature conflita com infra</span><br>
-              <span class="t-err">❌ DB não foi planejado</span><br>
-              <span class="t-err">❌ Auth adicionado sem spec</span><br><br>
-              <span class="t-dim">Semana 6: refactoring total.</span><br>
-              <span class="t-warn">⚠ Mesmo input, output diferente</span><br>
-              <span class="t-warn">⚠ Sem trace de decisões</span><br>
-              <span class="t-warn">⚠ Sem contratos entre camadas</span><br><br>
-              <span class="t-rose">MVP atrasado. Budget estourado.</span>
+              <span class="t-dim">Cliente: "quero câmera ao vivo no app"</span><br>
+              <span class="t-dim">Dev: começa a construir sem especificação</span><br><br>
+              <span class="t-dim">Semana 3: cliente muda de ideia.</span><br>
+              <span class="t-err">❌ Câmera não funciona com o servidor escolhido</span><br>
+              <span class="t-err">❌ Banco de dados não foi planejado para isso</span><br>
+              <span class="t-err">❌ Login foi improvisado no meio do projeto</span><br><br>
+              <span class="t-dim">Semana 6: tudo precisa ser refeito.</span><br>
+              <span class="t-warn">⚠ Mesma conversa, resultado diferente toda vez</span><br>
+              <span class="t-warn">⚠ Ninguém sabe por que cada decisão foi tomada</span><br>
+              <span class="t-warn">⚠ Cada parte do sistema faz suposições diferentes</span><br><br>
+              <span class="t-rose">MVP atrasado. Budget estourado. Cliente insatisfeito.</span>
             </div>
           </div>
         </div>
@@ -853,23 +913,23 @@
             </div>
             <div class="terminal__body">
               <span class="t-cyan">[0/4]</span> Sync Check<br>
-              <span class="t-ok">✓</span> <span class="t-dim">Skeleton sincronizado</span><br><br>
+              <span class="t-ok">✓</span> <span class="t-dim">Template de projeto está atualizado</span><br><br>
               <span class="t-cyan">[1/4]</span> Bridge<br>
-              <span class="t-ok">✓</span> <span class="t-dim">refined_intent.json gerado</span><br>
-              <span class="t-ok">✓</span> <span class="t-dim">4 features P0 validadas</span><br>
-              <span class="t-ok">✓</span> <span class="t-dim">HEX descartado, tokens aplicados</span><br><br>
+              <span class="t-ok">✓</span> <span class="t-dim">Briefing virou especificação técnica</span><br>
+              <span class="t-ok">✓</span> <span class="t-dim">4 funcionalidades prioritárias confirmadas</span><br>
+              <span class="t-ok">✓</span> <span class="t-dim">Cores e tokens de design normalizados</span><br><br>
               <span class="t-cyan">[2/4]</span> Architect<br>
-              <span class="t-ok">✓</span> <span class="t-dim">Blueprint compilado</span><br>
-              <span class="t-ok">✓</span> <span class="t-dim">Degradação inteligente aplicada</span><br><br>
-              <span class="t-cyan">[3/4]</span> Governance | Coherence | Handoff<br>
-              <span class="t-ok">✓</span> <span class="t-dim">Schema validado</span><br>
-              <span class="t-ok">✓</span> <span class="t-dim">Capabilities locked</span><br>
-              <span class="t-ok">✓</span> <span class="t-dim">Identity consistente</span><br>
-              <span class="t-ok">✓</span> <span class="t-dim">DB BLOCKED respeitado</span><br>
-              <span class="t-ok">✓</span> <span class="t-dim">Skeleton fit confirmado</span><br>
-              <span class="t-ok">✓</span> <span class="t-dim">Sem conflito de rotas</span><br>
-              <span class="t-ok">✓</span> <span class="t-dim">reasoning_trace.json salvo</span><br><br>
-              <span class="t-bingo">🎉 BINGO — Builder autorizado.</span>
+              <span class="t-ok">✓</span> <span class="t-dim">Páginas, rotas e componentes definidos</span><br>
+              <span class="t-ok">✓</span> <span class="t-dim">1 feature simplificada para caber no prazo</span><br><br>
+              <span class="t-cyan">[3/4]</span> Governança<br>
+              <span class="t-ok">✓</span> <span class="t-dim">Estrutura do projeto está dentro do contrato</span><br>
+              <span class="t-ok">✓</span> <span class="t-dim">Nenhuma funcionalidade foi adicionada fora do escopo</span><br>
+              <span class="t-ok">✓</span> <span class="t-dim">Nome e identidade do produto não mudaram</span><br>
+              <span class="t-ok">✓</span> <span class="t-dim">Banco de dados não será modificado</span><br>
+              <span class="t-ok">✓</span> <span class="t-dim">Template suporta tudo que foi pedido</span><br>
+              <span class="t-ok">✓</span> <span class="t-dim">Nenhuma rota em conflito com arquivos existentes</span><br>
+              <span class="t-ok">✓</span> <span class="t-dim">Registro de decisões salvo</span><br><br>
+              <span class="t-bingo">🎉 Aprovado — Builder pode começar.</span>
             </div>
           </div>
         </div>
