@@ -171,12 +171,12 @@
     /* ── BULLETS ── */
     .pitch-bullets {
       list-style: none; padding: 0; margin: 0 0 var(--space-8);
-      display: flex; flex-direction: column; gap: var(--space-4);
+
     }
     .pitch-bullets li {
       font-family: var(--font-body); font-size: var(--text-base);
-      color: var(--text-secondary); display: flex;
-      align-items: flex-start; gap: var(--space-3);
+      color: var(--text-secondary);
+      margin-bottom: 20px;
       font-weight: 300;
     }
     .pitch-bullets li::before { content: "—"; color: var(--accent); flex-shrink: 0; }
@@ -560,10 +560,8 @@
         <em>Determinístico por design.</em>
       </h1>
       <p class="cover-sub">
-        Transformamos "vibes" de cliente em fatos de engenharia —<br>
-        com governança em camadas, não com prompts e sorte.
+        Fabricamos software com determinismo e governança: do DNA do produto ao código pronto, sem alucinação e com velocidade industrial.
       </p>
-      <p class="cover-label">Pitch Deck Técnico</p>
     </div>
   </section>
 
@@ -613,40 +611,30 @@
       <h2 id="s2-title" class="slide__title">
         O desenvolvimento artesanal<br>é o <em>gargalo da inovação.</em>
       </h2>
-      <div class="grid-2">
+      <div class="grid-2" style="margin-top: 50px;">
         <div>
           <p class="slide__body" style="margin-bottom: var(--space-6);">
             Ideias morrem no vale entre o conceito e o código. O custo é alto, o prazo é incompatível com o mercado, e quando o produto sai, já está desatualizado.
           </p>
-          <ul class="pitch-bullets">
-            <li><strong>Squads inflados:</strong> meses e queima de caixa para validar uma hipótese simples.</li>
-            <li><strong>AI builders sem controle:</strong> Lovable e Bolt geram e torcem — sem governança, sem auditoria, sem rastreabilidade.</li>
-            <li><strong>Prompt engineering frágil:</strong> o mesmo prompt gera resultados diferentes a cada execução. Não escala para produção real.</li>
-            <li><strong>Briefings como caos:</strong> o cliente diz "quero um botão azul e câmera ao vivo". Alguém precisa traduzir isso em arquitetura.</li>
-          </ul>
+        <p class="slide__impact">
+          Resultado: as empresas perdem tempo corrigindo o que a IA “tentou” fazer.
+        </p>
         </div>
         <div>
-          <div class="terminal">
-            <div class="terminal__header">
-              <div class="terminal__dot" style="background:#e05c6a"></div>
-              <div class="terminal__dot" style="background:#f0c060"></div>
-              <div class="terminal__dot" style="background:#3dd68c"></div>
-              <span class="terminal__label">sem-deplova.log</span>
-            </div>
-            <div class="terminal__body">
-              <span class="t-dim">Cliente: "quero câmera ao vivo no app"</span><br>
-              <span class="t-dim">Dev: começa a construir sem especificação</span><br><br>
-              <span class="t-dim">Semana 3: cliente muda de ideia.</span><br>
-              <span class="t-err">❌ Câmera não funciona com o servidor escolhido</span><br>
-              <span class="t-err">❌ Banco de dados não foi planejado para isso</span><br>
-              <span class="t-err">❌ Login foi improvisado no meio do projeto</span><br><br>
-              <span class="t-dim">Semana 6: tudo precisa ser refeito.</span><br>
-              <span class="t-warn">⚠ Mesma conversa, resultado diferente toda vez</span><br>
-              <span class="t-warn">⚠ Ninguém sabe por que cada decisão foi tomada</span><br>
-              <span class="t-warn">⚠ Cada parte do sistema faz suposições diferentes</span><br><br>
-              <span class="t-rose">MVP atrasado. Budget estourado. Cliente insatisfeito.</span>
-            </div>
-          </div>
+          <ul class="pitch-bullets">
+            <li>
+              <strong>Squads inflados:</strong><br> meses e queima de caixa para validar uma hipótese simples.
+            </li>
+            <li>
+              <strong>A IA alucina:</strong><br> inventa soluções que não funcionam.
+            </li>
+            <li>
+              <strong>Falta de padrão:</strong><br> cada entrega vem de um jeito.
+            </li>
+            <li>
+              <strong>Insegurança:</strong><br> risco de quebrar o que já estava pronto
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -662,7 +650,7 @@
         Da conversa ao MVP em 48h.<br><em>Com contratos, não com sorte.</em>
       </h2>
       <p class="slide__body" style="max-width: 620px;">
-        O Deplova transforma 60 minutos de briefing em um pipeline de compilação determinístico. Cada camada passa por validação antes de avançar. Nada é gerado sem contrato técnico aprovado.
+        A Deplova transforma 60 minutos de briefing em um pipeline de compilação determinístico. Cada camada passa por validação antes de avançar. Nada é gerado sem contrato técnico aprovado.
       </p>
 
       <div class="pipeline-tech">
@@ -1179,7 +1167,7 @@
       <p style="font-family:var(--font-body);font-size:var(--text-lg);color:var(--text-secondary);max-width:480px;font-weight:300;margin-bottom:var(--space-10);">
         Um briefing de 60 minutos. Dois dias de build. Aplicação funcionando, código nas suas mãos, governança em cada linha.
       </p>
-      <a href="https://mikaelcarrara.github.io/landing/" class="btn btn--primary">
+      <a href="/" class="btn btn--primary">
         Website Deplova →
       </a>
       <h4 style="margin-top:var(--space-16);font-family:var(--font-body);font-weight:500;color:var(--text-primary);">Mikael Carrara</h4>
