@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deplova — Operator Dashboard</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+<style>
+  :root {
+    --bg:        #080b0f;
+    --surface:   #0d1117;
+    --border:    #1c2330;
+    --border2:   #243044;
+    --cyan:      #35B0CD;
+    --cyan-dim:  rgba(53,176,205,0.12);
+    --cyan-glow: rgba(53,176,205,0.35);
+    --green:     #2dba6f;
+    --green-dim: rgba(45,186,111,0.12);
+    --red:       #e05c6a;
+    --red-dim:   rgba(224,92,106,0.12);
+    --yellow:    #f0c060;
+    --yellow-dim:rgba(240,192,96,0.12);
+    --muted:     #4a5568;
+    --text:      #c9d1d9;
+    --text-dim:  #6e7d8f;
+    --mono:      'DM Sans', sans-serif;
+    --sans:      'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* GRID NOISE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(53,176,205,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(53,176,205,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* LAYOUT */
+  .app { position: relative; z-index: 1; display: grid; grid-template-rows: auto 1fr; min-height: 100vh; }
+
+  /* HEADER */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    background: rgba(8,11,15,0.9);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--cyan);
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .header-meta {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    color: var(--text-dim);
+    font-size: 11px;
+  }
+
+  .status-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .status-badge.idle   { border-color: var(--border2); color: var(--muted); }
+  .status-badge.running{ border-color: var(--cyan); color: var(--cyan); background: var(--cyan-dim); }
+  .status-badge.done   { border-color: var(--green); color: var(--green); background: var(--green-dim); }
+  .status-badge.error  { border-color: var(--red); color: var(--red); background: var(--red-dim); }
+
+  .status-badge .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: currentColor;
+  }
+
+  .status-badge.running .dot { animation: pulse 1s infinite; }
+
+  /* MAIN */
+  main {
+    display: grid;
+    grid-template-columns: 280px 1fr 340px;
+    gap: 0;
+    height: calc(100vh - 56px);
+    overflow: hidden;
+  }
+
+  /* PANELS */
+  .panel {
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .panel:last-child { border-right: none; }
+
+  .panel-title {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* PIPELINE STEPS */
+  .pipeline { display: flex; flex-direction: column; gap: 0; }
+
+  .step {
+    display: flex;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .step:last-child { border-bottom: none; }
+  .step:hover { padding-left: 4px; }
+
+  .step-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    flex-shrink: 0;
+    width: 20px;
+  }
+
+  .step-dot {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--muted);
+    background: var(--surface);
+    flex-shrink: 0;
+    transition: all 0.3s;
+  }
+
+  .step-line {
+    width: 1px;
+    flex: 1;
+    min-height: 20px;
+    background: var(--border);
+    margin-top: 4px;
+  }
+
+  .step.done .step-dot {
+    border-color: var(--green);
+    background: var(--green-dim);
+    color: var(--green);
+  }
+
+  .step.running .step-dot {
+    border-color: var(--cyan);
+    background: var(--cyan-dim);
+    color: var(--cyan);
+    animation: pulse 1s infinite;
+    box-shadow: 0 0 12px var(--cyan-glow);
+  }
+
+  .step.error .step-dot {
+    border-color: var(--red);
+    background: var(--red-dim);
+    color: var(--red);
+  }
+
+  .step.waiting .step-dot {
+    border-color: var(--yellow);
+    background: var(--yellow-dim);
+    color: var(--yellow);
+  }
+
+  .step.active .step-dot {
+    border-color: var(--cyan);
+    box-shadow: 0 0 16px var(--cyan-glow);
+  }
+
+  .step-content { flex: 1; min-width: 0; }
+
+  .step-name {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .step.done .step-name   { color: var(--green); }
+  .step.running .step-name{ color: var(--cyan); }
+  .step.error .step-name  { color: var(--red); }
+  .step.waiting .step-name{ color: var(--yellow); }
+
+  .step-desc {
+    font-size: 10px;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  .step-time {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-primary {
+    background: var(--cyan);
+    color: #080b0f;
+    font-weight: 700;
+  }
+
+  .btn-primary:hover {
+    background: #4dc8e8;
+    box-shadow: 0 0 20px var(--cyan-glow);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:disabled {
+    background: var(--border2);
+    color: var(--muted);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border2);
+  }
+
+  .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .btn-danger {
+    background: var(--red-dim);
+    color: var(--red);
+    border: 1px solid var(--red);
+  }
+
+  .btn-danger:hover { background: var(--red); color: #fff; }
+
+  .btn-confirm {
+    background: var(--green-dim);
+    color: var(--green);
+    border: 1px solid var(--green);
+  }
+
+  .btn-confirm:hover { background: var(--green); color: #fff; }
+
+  /* CENTER PANEL - LOG / CONTENT */
+  .center-panel {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--surface);
+    position: relative;
+  }
+
+  .center-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    gap: 0;
+    flex-shrink: 0;
+  }
+
+  .tab {
+    padding: 14px 16px;
+    font-size: 11px;
+    color: var(--text-dim);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--cyan); border-bottom-color: var(--cyan); }
+
+  .tab-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: none;
+  }
+
+  .tab-content.active { display: block; }
+
+  /* LOG STREAM */
+  .log-stream { display: flex; flex-direction: column; gap: 2px; }
+
+  .log-line {
+    display: flex;
+    gap: 12px;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.02);
+    animation: fadeIn 0.2s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-4px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .log-time { color: var(--muted); flex-shrink: 0; font-size: 11px; width: 52px; }
+  .log-event { color: var(--cyan); flex-shrink: 0; font-size: 11px; width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .log-msg { color: var(--text); font-size: 11px; }
+
+  .log-line.success .log-event { color: var(--green); }
+  .log-line.error   .log-event { color: var(--red); }
+  .log-line.warn    .log-event { color: var(--yellow); }
+
+  /* PROOF OF CONCEPT */
+  .poc-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .poc-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .poc-title {
+    font-family: var(--sans);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .poc-subtitle { font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+
+  .poc-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+  /* WIREFRAME */
+  .wireframe {
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(13,17,23,0.8);
+  }
+
+  .wireframe-bar {
+    background: var(--border);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .wf-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  .wireframe-body { padding: 16px; display: flex; gap: 12px; min-height: 280px; }
+
+  .wf-sidebar {
+    width: 120px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border);
+    padding-right: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .wf-nav-item {
+    height: 24px;
+    border-radius: 4px;
+    background: var(--border);
+    opacity: 0.6;
+  }
+
+  .wf-nav-item.active {
+    background: var(--cyan-dim);
+    border: 1px solid var(--cyan);
+    opacity: 1;
+  }
+
+  .wf-main { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+
+  .wf-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+
+  .wf-stat {
+    height: 60px;
+    border-radius: 6px;
+    border: 1px solid var(--border2);
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8px;
+    gap: 4px;
+  }
+
+  .wf-stat-bar {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--cyan);
+    opacity: 0.6;
+  }
+
+  .wf-block {
+    border-radius: 6px;
+    border: 1px solid var(--border2);
+    background: var(--surface);
+  }
+
+  .wf-block-header {
+    height: 32px;
+    border-bottom: 1px solid var(--border);
+    background: var(--border);
+    border-radius: 6px 6px 0 0;
+  }
+
+  .wf-rows { padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+
+  .wf-row {
+    height: 28px;
+    border-radius: 4px;
+    background: var(--border);
+    opacity: 0.5;
+  }
+
+  /* ARCHETYPE CARDS */
+  .arch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  .arch-card {
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 12px;
+    background: var(--bg);
+    transition: all 0.2s;
+  }
+
+  .arch-card:hover { border-color: var(--cyan); background: var(--cyan-dim); }
+
+  .arch-card-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--cyan);
+    margin-bottom: 4px;
+  }
+
+  .arch-card-value {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* CAPABILITY PILLS */
+  .caps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+
+  .cap {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    border: 1px solid var(--border2);
+    color: var(--text-dim);
+  }
+
+  .cap.active { border-color: var(--cyan); color: var(--cyan); background: var(--cyan-dim); }
+  .cap.blocked { border-color: var(--red); color: var(--red); background: var(--red-dim); text-decoration: line-through; }
+
+  /* ROUTES */
+  .routes { display: flex; flex-direction: column; gap: 4px; }
+
+  .route {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    font-size: 11px;
+  }
+
+  .route-method {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 30px;
+  }
+
+  .route-path { color: var(--text); }
+  .route-comp { color: var(--text-dim); font-size: 10px; margin-left: auto; }
+
+  /* RIGHT PANEL - ARTIFACTS */
+  .artifact-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .artifact {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+
+  .artifact:hover { border-color: var(--border2); }
+
+  .artifact-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: var(--surface);
+    cursor: pointer;
+    gap: 8px;
+  }
+
+  .artifact-name {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .artifact-icon { font-size: 14px; }
+
+  .artifact-status {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  .artifact-status.ready  { background: var(--green-dim); color: var(--green); }
+  .artifact-status.pending{ background: var(--border); color: var(--muted); }
+  .artifact-status.active { background: var(--cyan-dim); color: var(--cyan); }
+
+  .artifact-body {
+    padding: 12px 14px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    display: none;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .artifact-body.open { display: block; }
+
+  .artifact-body pre {
+    font-size: 10px;
+    color: var(--text-dim);
+    white-space: pre-wrap;
+    word-break: break-all;
+    line-height: 1.5;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* RUN ACTIONS */
+  .run-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* CHECKPOINT BANNER — overlay sobre o painel central */
+  .checkpoint-banner {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 48px);
+    max-width: 520px;
+    background: rgba(10, 13, 8, 0.97);
+    border: 1px solid var(--yellow);
+    border-radius: 10px;
+    padding: 20px 24px;
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 50;
+    box-shadow: 0 8px 48px rgba(0,0,0,0.7), 0 0 0 1px rgba(240,192,96,0.1);
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+
+  .checkpoint-banner.visible { display: flex; }
+
+  .checkpoint-title {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--yellow);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .checkpoint-desc { font-size: 11px; color: var(--text-dim); }
+
+  .checkpoint-actions { display: flex; gap: 8px; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+  /* EMPTY STATE */
+  .empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 200px;
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .empty-icon { font-size: 32px; opacity: 0.3; }
+
+  /* FEATURE LIST */
+  .feature-list { display: flex; flex-direction: column; gap: 6px; }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg);
+  }
+
+  .feature-priority {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .p0 { background: var(--red-dim); color: var(--red); border: 1px solid var(--red); }
+  .p1 { background: var(--yellow-dim); color: var(--yellow); border: 1px solid var(--yellow); }
+
+  .feature-title { font-size: 11px; color: var(--text); font-weight: 500; }
+  .feature-note { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+
+  /* PROGRESS BAR */
+  .progress-track {
+    height: 2px;
+    background: var(--border);
+    border-radius: 1px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--cyan);
+    border-radius: 1px;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 8px var(--cyan-glow);
+  }
+
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/mikaelcarrara/mikaelcarrara.github.com/717facd0f39bc100bbc2285bd33025956b8ef53d/site/img/deplova-logo.svg" height="28" alt="Deplova" style="display:block;">
+    </div>
+    <div class="header-meta">
+      <span id="project-name" style="color:var(--text)">—</span>
+      <span id="run-id" style="font-size:10px">—</span>
+      <div class="status-badge idle" id="global-status">
+        <div class="dot"></div>
+        <span id="status-text">IDLE</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- LEFT: PIPELINE -->
+    <div class="panel">
+      <div class="panel-title">Pipeline</div>
+
+      <div class="run-actions">
+        <button class="btn btn-primary" id="btn-run" onclick="startPipeline()">
+          ▶ Executar Pipeline
+        </button>
+        <button class="btn btn-ghost" id="btn-reset" onclick="resetPipeline()">
+          ↺ Resetar
+        </button>
+      </div>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+
+      <div class="pipeline" id="pipeline">
+        <!-- steps rendered by JS -->
+      </div>
+
+    </div>
+
+    <!-- CENTER: LOGS / POC -->
+    <div class="center-panel">
+      <div class="center-tabs">
+        <div class="tab active" onclick="switchTab('logs', this)">Log Stream</div>
+        <div class="tab" onclick="switchTab('poc', this)">Prova de Conceito</div>
+        <div class="tab" onclick="switchTab('features', this)">Features</div>
+      </div>
+
+      <!-- LOG STREAM -->
+      <div class="tab-content active" id="tab-logs">
+        <div class="log-stream" id="log-stream">
+          <div class="empty">
+            <div class="empty-icon">◈</div>
+            <span>Execute o pipeline para ver os logs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROOF OF CONCEPT -->
+      <div class="tab-content" id="tab-poc">
+        <div id="poc-content">
+          <div class="empty">
+            <div class="empty-icon">⬡</div>
+            <span>Aguardando o Architect gerar o blueprint</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURES -->
+      <div class="tab-content" id="tab-features">
+        <div id="features-content">
+          <div class="empty">
+            <div class="empty-icon">◈</div>
+            <span>Aguardando o Bridge processar as features</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHECKPOINT BANNER — overlay no painel central -->
+      <div class="checkpoint-banner" id="checkpoint-banner">
+        <div class="checkpoint-title">⚠ Checkpoint do Architect</div>
+        <div class="checkpoint-desc">
+          O Architect gerou o blueprint. Revise a prova de conceito antes de autorizar o Builder.
+        </div>
+        <div class="checkpoint-actions">
+          <button class="btn btn-confirm" onclick="confirmCheckpoint()">✓ Confirmar</button>
+          <button class="btn btn-danger" onclick="rejectCheckpoint()">✕ Regenerar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: ARTIFACTS -->
+    <div class="panel">
+      <div class="panel-title">Artefatos</div>
+
+      <div class="artifact-list" id="artifact-list">
+
+        <div class="artifact" id="art-thinker">
+          <div class="artifact-header" onclick="toggleArtifact('thinker-body')">
+            <div class="artifact-name">
+              <span class="artifact-icon">🧠</span>
+              thinker_output.json
+            </div>
+            <span class="artifact-status pending">aguardando</span>
+          </div>
+          <div class="artifact-body" id="thinker-body">
+            <pre id="thinker-content">—</pre>
+          </div>
+        </div>
+
+        <div class="artifact" id="art-intent">
+          <div class="artifact-header" onclick="toggleArtifact('intent-body')">
+            <div class="artifact-name">
+              <span class="artifact-icon">🛡</span>
+              refined_intent.json
+            </div>
+            <span class="artifact-status pending" id="intent-status">aguardando</span>
+          </div>
+          <div class="artifact-body" id="intent-body">
+            <pre id="intent-content">—</pre>
+          </div>
+        </div>
+
+        <div class="artifact" id="art-product">
+          <div class="artifact-header" onclick="toggleArtifact('product-body')">
+            <div class="artifact-name">
+              <span class="artifact-icon">📐</span>
+              product_definition.json
+            </div>
+            <span class="artifact-status pending" id="product-status">aguardando</span>
+          </div>
+          <div class="artifact-body" id="product-body">
+            <pre id="product-content">—</pre>
+          </div>
+        </div>
+
+        <div class="artifact" id="art-handoff">
+          <div class="artifact-header" onclick="toggleArtifact('handoff-body')">
+            <div class="artifact-name">
+              <span class="artifact-icon">🏗</span>
+              builder_handoff.json
+            </div>
+            <span class="artifact-status pending" id="handoff-status">aguardando</span>
+          </div>
+          <div class="artifact-body" id="handoff-body">
+            <pre id="handoff-content">—</pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ============================================================
+// STATE
+// ============================================================
+const STATE = {
+  running: false,
+  currentStep: -1,
+  checkpointPending: false,
+  steps: [
+    { id: 'sync',      label: 'Sync Check',    desc: 'Skeleton sincronizado com o pipeline',       icon: '⟳', script: 'core/sync_check.py' },
+    { id: 'bridge',    label: 'Bridge',         desc: 'Blindando intenção e normalizando features', icon: '', script: 'core/bridge.py' },
+    { id: 'architect', label: 'Architect',      desc: 'Compilando blueprint de produto',            icon: '', script: 'core/architect-agent/self-inferred-context.py' },
+    { id: 'checkpoint',label: 'Checkpoint',     desc: 'Aguardando confirmação do operador',         icon: '', script: null },
+    { id: 'governance',label: 'Governance',     desc: 'Auditoria de contrato de negócio',           icon: '', script: 'core/governance.py' },
+    { id: 'coherence', label: 'Coherence',      desc: 'Viabilidade técnica no Skeleton',            icon: '', script: 'core/check_coherence.py' },
+    { id: 'handoff',   label: 'Handoff',        desc: 'Compilando plano de obra para o Builder',    icon: '', script: 'core/handoff-compiler.py' },
+  ],
+  stepStatus: {},
+  logs: [],
+};
+
+// Mock data for demo
+const MOCK = {
+  refined_intent: {
+    project_name: "PetFlow",
+    archetype: "dashboard-saas",
+    design_context: { theme: "dark", style: "glassmorphism" },
+    capabilities: {
+      auth: { enabled: true, providers: ["google_auth"] },
+      database: { enabled: false },
+      persistence: { enabled: true, type: "local_storage" }
+    },
+    features: [
+      { id: "feat_01", title: "Google Social Auth", priority: "P0" },
+      { id: "feat_02", title: "Quick Check-in System", priority: "P0" },
+      { id: "feat_03", title: "Status Board", priority: "P0", degradation_note: "real-time → fallback_to_manual_refresh" },
+      { id: "feat_04", title: "Pet/Tutor Mapping", priority: "P1" },
+    ]
+  },
+  product_definition: {
+    schema_version: "1.1.0",
+    product_name: "PetFlow",
+    archetype: "dashboard-saas",
+    skeleton_template: "nextjs_app_base",
+    design_grammar: { theme: "dark", style: "glassmorphism" },
+    pages: [
+      { route: "/dashboard", layout: "3-col", components: ["StatCards", "StatusBoard"] },
+      { route: "/checkin", layout: "w-full", components: ["CheckinForm"] },
+      { route: "/pets", layout: "2-col", components: ["PetList", "TutorCard"] },
+      { route: "/settings", layout: "w-full", components: ["SettingsPanel"] },
+    ],
+    capabilities: { auth: { enabled: true }, persistence: { enabled: true } },
+    features: ["feat_01", "feat_02", "feat_03", "feat_04"],
+  },
+  handoff: {
+    handoff_version: "1.0.0",
+    run_id: "20240318_143022",
+    skeleton_id: "nextjs_app_base",
+    archetype: "dashboard-saas",
+    pages: [
+      { target_file: "app/(routes)/dashboard/page.tsx", required_components: ["StatCards","StatusBoard"] },
+      { target_file: "app/(routes)/checkin/page.tsx", required_components: ["CheckinForm"] },
+      { target_file: "app/(routes)/pets/page.tsx", required_components: ["PetList","TutorCard"] },
+    ],
+    capabilities: { auth_lib: "next-auth", strategy: "local_storage", env_required: ["NEXTAUTH_SECRET"] },
+    protected_zones: ["middleware.ts", "lib/db/client.ts", "config/env.ts"],
+    injection_points: { tokens: "app/globals.css", auth: "lib/auth/config.ts", database: null }
+  }
+};
+
+// ============================================================
+// INIT
+// ============================================================
+function init() {
+  renderSteps();
+  setGlobalStatus('idle');
+}
+
+function renderSteps() {
+  const el = document.getElementById('pipeline');
+  el.innerHTML = STATE.steps.map((s, i) => `
+    <div class="step idle" id="step-${s.id}">
+      <div class="step-indicator">
+        <div class="step-dot" id="dot-${s.id}">${i}</div>
+        ${i < STATE.steps.length - 1 ? '<div class="step-line"></div>' : ''}
+      </div>
+      <div class="step-content">
+        <div class="step-name">${s.icon} ${s.label}</div>
+        <div class="step-desc">${s.desc}</div>
+        <div class="step-time" id="time-${s.id}"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// PIPELINE SIMULATION
+// ============================================================
+async function startPipeline() {
+  if (STATE.running) return;
+  STATE.running = true;
+  STATE.currentStep = 0;
+
+  document.getElementById('btn-run').disabled = true;
+  document.getElementById('log-stream').innerHTML = '';
+  setGlobalStatus('running');
+
+  const runId = new Date().toISOString().replace(/[:.]/g,'').slice(0,15);
+  document.getElementById('run-id').textContent = `run: ${runId}`;
+  document.getElementById('project-name').textContent = 'PetFlow';
+
+  // Reset all steps
+  STATE.steps.forEach(s => setStepStatus(s.id, 'idle'));
+  updateProgress(0);
+
+  await runStep(0); // sync
+}
+
+async function runStep(idx) {
+  if (idx >= STATE.steps.length) {
+    finishPipeline();
+    return;
+  }
+
+  const step = STATE.steps[idx];
+  STATE.currentStep = idx;
+  setStepStatus(step.id, 'running');
+  updateProgress(Math.round((idx / STATE.steps.length) * 100));
+
+  // CHECKPOINT — pause for operator
+  if (step.id === 'checkpoint') {
+    setStepStatus('checkpoint', 'waiting');
+    document.getElementById('checkpoint-banner').classList.add('visible');
+    switchTabById('poc');
+    renderPOC();
+    log('checkpoint:waiting', 'Aguardando confirmação do operador', 'warn');
+    return; // pause here
+  }
+
+  const start = Date.now();
+  log(`${step.id}:start`, `Iniciando ${step.label}...`);
+
+  // Simulate step duration
+  const duration = step.id === 'architect' ? 2800 : 800 + Math.random() * 600;
+  await sleep(duration);
+
+  const elapsed = Date.now() - start;
+  document.getElementById(`time-${step.id}`).textContent = `${elapsed}ms`;
+
+  // Step-specific side effects
+  if (step.id === 'bridge') {
+    log('bridge:ok', 'refined_intent.json gerado', 'success');
+    log('bridge:features', '4 features validadas | 0 bloqueadas', 'success');
+    setArtifact('intent', MOCK.refined_intent, 'ready');
+    renderFeatures(MOCK.refined_intent.features);
+  }
+
+  if (step.id === 'architect') {
+    log('architect:stage1', 'Stage 1: arquitetura compilada', 'success');
+    log('architect:stage2', 'Stage 2: estrutura de app mapeada', 'success');
+    log('architect:ok', 'product_definition.json gerado', 'success');
+    setArtifact('product', MOCK.product_definition, 'ready');
+  }
+
+  if (step.id === 'governance') {
+    log('schema:valid', 'Schema validado', 'success');
+    log('identity:ok', "Nome consistente: 'PetFlow'", 'success');
+    log('capabilities:locked', 'Capabilities preservadas', 'success');
+    log('features:ok', '4 features cobertas', 'success');
+    log('governance:success', 'Contrato de negócio validado', 'success');
+  }
+
+  if (step.id === 'coherence') {
+    log('coherence:skeleton', 'nextjs_app_base detectado', 'success');
+    log('coherence:caps', 'Capabilities compatíveis com o skeleton', 'success');
+    log('coherence:ok', 'Blueprint 100% executável', 'success');
+  }
+
+  if (step.id === 'handoff') {
+    log('handoff:caps', 'auth → next-auth | persistence → local_storage', 'success');
+    log('handoff:pages', '3 páginas mapeadas', 'success');
+    log('handoff:ok', 'builder_handoff.json gerado', 'success');
+    setArtifact('handoff', MOCK.handoff, 'ready');
+  }
+
+  setStepStatus(step.id, 'done');
+  log(`${step.id}:done`, `${step.label} concluído em ${elapsed}ms`, 'success');
+
+  await sleep(200);
+  await runStep(idx + 1);
+}
+
+function confirmCheckpoint() {
+  document.getElementById('checkpoint-banner').classList.remove('visible');
+  setStepStatus('checkpoint', 'done');
+  log('checkpoint:confirmed', 'Operador confirmou o blueprint', 'success');
+  runStep(STATE.currentStep + 1);
+}
+
+function rejectCheckpoint() {
+  document.getElementById('checkpoint-banner').classList.remove('visible');
+  setStepStatus('checkpoint', 'idle');
+  log('checkpoint:rejected', 'Operador rejeitou — regenerando Architect', 'warn');
+  // Re-run from architect
+  STATE.currentStep = 2;
+  runStep(2);
+}
+
+function finishPipeline() {
+  STATE.running = false;
+  setGlobalStatus('done');
+  updateProgress(100);
+  document.getElementById('btn-run').disabled = false;
+  log('pipeline:done', '🎉 BINGO — Builder autorizado', 'success');
+}
+
+function resetPipeline() {
+  STATE.running = false;
+  STATE.currentStep = -1;
+  STATE.checkpointPending = false;
+  document.getElementById('btn-run').disabled = false;
+  document.getElementById('log-stream').innerHTML = '<div class="empty"><div class="empty-icon">◈</div><span>Execute o pipeline para ver os logs</span></div>';
+  document.getElementById('checkpoint-banner').classList.remove('visible');
+  document.getElementById('project-name').textContent = '—';
+  document.getElementById('run-id').textContent = '—';
+  setGlobalStatus('idle');
+  updateProgress(0);
+  STATE.steps.forEach(s => {
+    setStepStatus(s.id, 'idle');
+    document.getElementById(`time-${s.id}`).textContent = '';
+  });
+  ['intent','product','handoff'].forEach(a => {
+    document.getElementById(`${a}-status`).className = 'artifact-status pending';
+    document.getElementById(`${a}-status`).textContent = 'aguardando';
+    document.getElementById(`${a}-content`).textContent = '—';
+  });
+  document.getElementById('poc-content').innerHTML = '<div class="empty"><div class="empty-icon">⬡</div><span>Aguardando o Architect gerar o blueprint</span></div>';
+  document.getElementById('features-content').innerHTML = '<div class="empty"><div class="empty-icon">◈</div><span>Aguardando o Bridge processar as features</span></div>';
+}
+
+// ============================================================
+// RENDER HELPERS
+// ============================================================
+function renderPOC() {
+  const pd = MOCK.product_definition;
+  document.getElementById('poc-content').innerHTML = `
+    <div class="poc-container">
+      <div class="poc-header">
+        <div>
+          <div class="poc-title">${pd.product_name}</div>
+          <div class="poc-subtitle">Archetype: ${pd.archetype} · Skeleton: ${pd.skeleton_template}</div>
+        </div>
+      </div>
+
+      <div class="section-label">Wireframe de Baixa Fidelidade</div>
+      <div class="wireframe">
+        <div class="wireframe-bar">
+          <div class="wf-dot" style="background:#e05c6a"></div>
+          <div class="wf-dot" style="background:#f0c060"></div>
+          <div class="wf-dot" style="background:#2dba6f"></div>
+        </div>
+        <div class="wireframe-body">
+          <div class="wf-sidebar">
+            ${pd.pages.map((p,i) => `<div class="wf-nav-item ${i===0?'active':''}"></div>`).join('')}
+          </div>
+          <div class="wf-main">
+            <div class="wf-stats">
+              ${[1,2,3].map(n => `<div class="wf-stat"><div class="wf-stat-bar" style="width:${40+n*15}%"></div></div>`).join('')}
+            </div>
+            <div class="wf-block">
+              <div class="wf-block-header"></div>
+              <div class="wf-rows">
+                ${[1,2,3,4].map(() => '<div class="wf-row"></div>').join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-label">Arquitetura</div>
+      <div class="arch-grid">
+        <div class="arch-card">
+          <div class="arch-card-label">Archetype</div>
+          <div class="arch-card-value">${pd.archetype}</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-card-label">Skeleton</div>
+          <div class="arch-card-value">${pd.skeleton_template}</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-card-label">Theme</div>
+          <div class="arch-card-value">${pd.design_grammar.style}</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-card-label">Páginas</div>
+          <div class="arch-card-value">${pd.pages.length} rotas</div>
+        </div>
+      </div>
+
+      <div class="section-label">Rotas</div>
+      <div class="routes">
+        ${pd.pages.map(p => `
+          <div class="route">
+            <span class="route-method">GET</span>
+            <span class="route-path">${p.route}</span>
+            <span class="route-comp">${p.components.join(', ')}</span>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="section-label">Capabilities</div>
+      <div class="caps">
+        <span class="cap active">auth</span>
+        <span class="cap active">persistence</span>
+        <span class="cap blocked">database</span>
+        <span class="cap blocked">realtime</span>
+      </div>
+    </div>
+  `;
+}
+
+function renderFeatures(features) {
+  document.getElementById('features-content').innerHTML = `
+    <div class="section-label">Features Validadas</div>
+    <div class="feature-list">
+      ${features.map(f => `
+        <div class="feature-item">
+          <span class="feature-priority ${f.priority.toLowerCase()}">${f.priority}</span>
+          <div>
+            <div class="feature-title">${f.title}</div>
+            ${f.degradation_note ? `<div class="feature-note">↓ ${f.degradation_note}</div>` : ''}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+// ============================================================
+// UI HELPERS
+// ============================================================
+function setStepStatus(id, status) {
+  const el = document.getElementById(`step-${id}`);
+  const dot = document.getElementById(`dot-${id}`);
+  if (!el) return;
+  el.className = `step ${status}`;
+  const icons = { done: '✓', error: '✕', running: '◉', waiting: '⚠', idle: STATE.steps.findIndex(s=>s.id===id).toString() };
+  dot.textContent = icons[status] || '○';
+}
+
+function setGlobalStatus(status) {
+  const badge = document.getElementById('global-status');
+  const text  = document.getElementById('status-text');
+  badge.className = `status-badge ${status}`;
+  const labels = { idle: 'IDLE', running: 'RUNNING', done: 'DONE', error: 'ERROR' };
+  text.textContent = labels[status] || status.toUpperCase();
+}
+
+function setArtifact(key, data, status) {
+  const statusEl  = document.getElementById(`${key}-status`);
+  const contentEl = document.getElementById(`${key}-content`);
+  if (!statusEl) return;
+  statusEl.className = `artifact-status ${status}`;
+  statusEl.textContent = status === 'ready' ? 'pronto' : status === 'active' ? 'gerado' : 'aguardando';
+  contentEl.textContent = JSON.stringify(data, null, 2);
+}
+
+function toggleArtifact(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+function updateProgress(pct) {
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function switchTab(name, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(`tab-${name}`).classList.add('active');
+}
+
+function switchTabById(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  const tabs = document.querySelectorAll('.tab');
+  const names = ['logs','poc','features'];
+  const idx = names.indexOf(name);
+  if (idx >= 0) tabs[idx].classList.add('active');
+  document.getElementById(`tab-${name}`).classList.add('active');
+}
+
+function log(event, message, status = 'info') {
+  const stream = document.getElementById('log-stream');
+  const empties = stream.querySelectorAll('.empty');
+  empties.forEach(e => e.remove());
+
+  const now = new Date();
+  const t = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+
+  const line = document.createElement('div');
+  line.className = `log-line ${status}`;
+  line.innerHTML = `
+    <span class="log-time">${t}</span>
+    <span class="log-event">${event}</span>
+    <span class="log-msg">${message}</span>
+  `;
+  stream.appendChild(line);
+  stream.scrollTop = stream.scrollHeight;
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ============================================================
+// BOOT
+// ============================================================
+init();
+</script>
+</body>
+</html>
