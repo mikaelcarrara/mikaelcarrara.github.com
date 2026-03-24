@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deplova — Pipeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root {
+  --bg:  #0C0C0C;
+  --c:   #4DD2CD;
+  --c2:  #fff;
+  --c3:  #85BECD;
+  --grn: #3DD68C;
+  --acc: #85BECD;
+  --amb: #F0C040;
+  --red: #E05C6A;
+  --bdr: #111;
+  --t1:  rgba(255,255,255,.88);
+  --t2:  rgba(255,255,255,.46);
+  --t3:  rgba(255,255,255,.20);
+  --t4:  rgba(255,255,255,.06);
+  --fm:  'Martian Mono', monospace;
+}
+html,body{height:100%;overflow:hidden;}
+body{background:var(--bg);color:var(--t2);font-family:var(--fm);font-size:12px;line-height:1.9;font-weight:300;-webkit-font-smoothing:antialiased;}
+
+/* ── APP ── */
+.app{display:grid;grid-template-rows:40px 1fr;height:100vh;}
+
+/* ── HEADER ── */
+header{
+  display:flex;align-items:center;padding:10px 15px 10px 20px;gap:16px;
+  background:var(--bg);position:sticky;top:0;z-index:100;
+  position:relative;overflow:hidden;
+}
+.logo img{height:22px;display:block;}
+.hdr-div{width:1px;height:16px;background:var(--bdr);}
+.hdr-right{display:flex;align-items:center;gap:16px;margin-left:auto;font-size:10px;color:var(--t3);}
+#project-name{color:var(--t1);font-size:11px;}
+#run-id{font-size:9.5px;letter-spacing:.03em;}
+.badge{
+  display:flex;align-items:center;gap:5px;
+  padding:2px 9px;border-radius:2px;font-size:9px;font-weight:400;
+  letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--bdr);color:var(--t3);
+}
+.badge .dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
+.badge.running{border-color:var(--c3);color:var(--c);}
+.badge.running .dot{animation:pulse .9s infinite;}
+.badge.done{border-color:rgba(61,214,140,.2);color:var(--grn);}
+.badge.error{border-color:rgba(224,92,106,.2);color:var(--red);}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* ── MAIN ── */
+main{display:grid;grid-template-columns:240px 1fr 380px;height:calc(100vh - 40px);overflow:hidden;}
+.col{border-right:1px solid var(--bdr);overflow-y:auto;display:flex;flex-direction:column;}
+.col:last-child{border-right:none;}
+.col::-webkit-scrollbar{width:2px;}
+.col::-webkit-scrollbar-thumb{background:var(--t4);}
+
+/* ── COL HEADER ── */
+.col-hdr{
+  padding:16px 20px 12px;border-bottom:1px solid var(--bdr);flex-shrink:0;
+  font-size:9px;font-weight:400;color:var(--c2);letter-spacing:.22em;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;
+}
+.col-hdr::before{content:"//";color:var(--t4);}
+
+/* ── BUTTONS ── */
+.hdr-btns{display:flex;align-items:center;gap:8px;}
+.btn{
+  font-family:var(--fm);font-size:10.5px;font-weight:400;
+  padding:7px 13px;border-radius:2px;cursor:pointer;
+  letter-spacing:.06em;transition:all .18s;border:none;
+  display:flex;align-items:center;gap:6px;
+}
+.btn-primary{background:var(--c);color:#0C0C0C;font-weight:500;}
+.btn-primary:hover{background:#5EDFDA;}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed;}
+.btn-ghost{background:transparent;color:var(--t3);border:1px solid var(--bdr);}
+.btn-ghost:hover{border-color:var(--c3);color:var(--t2);}
+.btn-confirm{background:var(--grn);color:#0C0C0C;font-weight:500;}
+.btn-confirm:hover{background:#4FE09E;}
+.btn-danger{background:transparent;color:var(--red);border:1px solid rgba(224,92,106,.2);}
+.btn-danger:hover{background:rgba(224,92,106,.07);}
+
+/* ── PROGRESS ── */
+.prog{position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--t4);}
+.prog-fill{height:100%;background:var(--c);transition:width .4s ease;box-shadow:0 0 6px rgba(77,210,205,.35);}
+
+/* ── PIPELINE STEPS ── */
+.pipeline{display:flex;flex-direction:column;padding:8px 20px;}
+.step{
+  display:flex;gap:12px;padding:10px 0;
+  cursor:pointer;transition:padding .12s;
+}
+.step:hover{padding-left:3px;}
+.step-indicator{display:none;}
+.step-ind{display:none;}
+.step-dot{display:none;}
+.step-ln{display:none;}
+.step-name{font-size:11px;font-weight:400;color:var(--t2);}
+.step-desc{font-size:9.5px;color:var(--t3);line-height:1.6;}
+.step-time{font-size:8.5px;color:var(--acc);opacity:.8;margin-top:1px;}
+@keyframes stepBlink{0%,100%{color:#fff}50%{color:var(--c)}}
+.step.running .step-name{animation:stepBlink .7s infinite;}
+.step.done .step-name{color:var(--grn);}
+.step.error .step-name{color:var(--red);}
+.step.waiting .step-name{color:var(--amb);}
+
+/* ── CENTER ── */
+.center-col{display:flex;flex-direction:column;overflow:hidden;position:relative;border-right:1px solid var(--bdr);}
+.tabs{display:flex;justify-content:center;border-bottom:1px solid var(--bdr);padding:0 20px;}
+.tab{padding:11px 14px;font-size:9.5px;font-weight:400;color:var(--t3);cursor:pointer;transition:color .15s;letter-spacing:.08em;text-transform:uppercase;border-bottom:1.5px solid transparent;margin-bottom:-1px;}
+.tab:hover{color:var(--t2);}
+.tab.active{color:var(--acc);border-bottom-color:var(--acc);}
+.tab-content{display:none;flex:1;overflow-y:auto;padding:20px 24px;}
+.tab-content.active{display:block;}
+.tab-content::-webkit-scrollbar{width:2px;}
+.tab-content::-webkit-scrollbar-thumb{background:var(--t4);}
+
+/* ── LOG STREAM ── */
+.log-mascot{display:flex;gap:20px;align-items:flex-start;padding:16px 0 14px;border-bottom:1px solid var(--t4);margin-bottom:4px;}
+.log-mascot-pre{font-family:var(--fm);font-size:11.5px;line-height:1.9;flex-shrink:0;}
+.log-mascot-msg{font-size:12px;color:var(--t2);padding-top:4px;line-height:2;}
+.log-stream{display:flex;flex-direction:column;gap:0;font-size:13.5px;}
+.log-mascot{
+  display:flex;gap:20px;align-items:flex-start;
+  padding:16px 0 20px;border-bottom:1px solid var(--t4);margin-bottom:8px;
+}
+.log-mascot pre{font-family:var(--fm);font-size:11.5px;line-height:1.85;display:inline-block;}
+.log-mascot-info{display:flex;flex-direction:column;justify-content:center;gap:4px;}
+.log-mascot-title{font-size:11px;font-weight:400;color:var(--t1);}
+.log-mascot-sub{font-size:10px;color:var(--t3);}
+
+.log-line{
+  display:grid;grid-template-columns:54px 140px 1fr;
+  gap:0 12px;padding:5px 0;
+  border-bottom:1px solid var(--t4);
+  align-items:baseline;line-height:2.1;
+}
+.log-line:last-child{border-bottom:none;}
+.log-time{font-size:9.5px;color:var(--acc);opacity:.7;}
+.log-event{font-size:9.5px;color:var(--acc);letter-spacing:.04em;}
+.log-msg{font-size:12px;color:var(--t2);}
+.log-line.success .log-msg{color:var(--grn);}
+.log-line.warn .log-msg{color:var(--amb);}
+.log-line.error .log-msg{color:var(--red);}
+
+/* ── EMPTY ── */
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:48px 20px;color:var(--t3);text-align:center;font-size:11px;}
+.empty-icon{font-size:18px;color:var(--c3);}
+
+/* ── CHECKPOINT ── */
+.checkpoint-banner{
+  position:absolute;bottom:0;left:0;right:0;
+  background:var(--bg);border-top:1.5px solid rgba(240,192,64,.28);
+  display:flex;align-items:center;gap:16px;padding:12px 20px;
+  opacity:0;pointer-events:none;transform:translateY(100%);
+  transition:opacity .2s,transform .2s ease;z-index:10;
+}
+.checkpoint-banner.visible{opacity:1;pointer-events:all;transform:translateY(0);}
+.checkpoint-title{font-size:9.5px;font-weight:500;color:var(--amb);letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.checkpoint-title::before{content:"⚠";}
+.checkpoint-desc{font-size:11px;color:var(--t2);line-height:1.7;flex:1;}
+.checkpoint-actions{display:flex;gap:8px;flex-shrink:0;}
+
+/* ── POC ── */
+.poc-container{display:flex;flex-direction:column;gap:18px;}
+.poc-title{font-size:13px;font-weight:400;color:var(--t1);}
+.poc-sub{font-size:9.5px;color:var(--t3);margin-top:2px;}
+.sec-lbl{font-size:9px;font-weight:400;color:var(--c2);letter-spacing:.22em;text-transform:uppercase;padding-bottom:9px;border-bottom:1px solid var(--t4);}
+.wireframe{border:1px solid var(--bdr);border-radius:4px;overflow:hidden;}
+.wireframe-bar{padding:7px 12px;display:flex;gap:5px;border-bottom:1px solid var(--t4);}
+.wf-dot{width:8px;height:8px;border-radius:50%;}
+.wireframe-body{display:flex;height:110px;}
+.wf-sidebar{width:44px;border-right:1px solid var(--t4);padding:10px 7px;display:flex;flex-direction:column;gap:7px;}
+.wf-nav-item{height:6px;background:var(--t4);border-radius:1px;}
+.wf-nav-item.active{background:var(--c3);}
+.wf-main{flex:1;padding:10px;display:flex;flex-direction:column;gap:8px;}
+.wf-stats{display:flex;gap:7px;}
+.wf-stat{flex:1;background:var(--t4);border-radius:2px;height:28px;overflow:hidden;display:flex;align-items:flex-end;padding:3px;}
+.wf-stat-bar{height:3px;background:var(--c3);border-radius:1px;}
+.wf-block{flex:1;border:1px solid var(--t4);border-radius:2px;overflow:hidden;}
+.wf-block-header{height:10px;background:var(--t4);border-bottom:1px solid rgba(255,255,255,.03);}
+.wf-rows{padding:5px;display:flex;flex-direction:column;gap:4px;}
+.wf-row{height:4px;background:var(--t4);border-radius:1px;}
+.arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.arch-card{border:1px solid var(--bdr);border-radius:3px;padding:10px 12px;}
+.arch-card-label{font-size:8.5px;color:var(--t3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px;}
+.arch-card-value{font-size:11px;font-weight:400;color:var(--c);}
+.routes{display:flex;flex-direction:column;}
+.route{display:grid;grid-template-columns:36px 110px 1fr;gap:0 10px;padding:5px 0;border-bottom:1px solid var(--t4);font-size:11px;line-height:1.8;align-items:baseline;}
+.route:last-child{border-bottom:none;}
+.route-method{font-size:8.5px;color:var(--grn);letter-spacing:.1em;}
+.route-path{color:var(--c);font-weight:400;}
+.route-comp{color:var(--t3);font-size:10px;}
+.caps{display:flex;flex-wrap:wrap;gap:6px;}
+.cap{font-size:8.5px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;padding:2px 9px;border-radius:2px;}
+.cap.active{color:var(--grn);border:1px solid rgba(61,214,140,.2);}
+.cap.blocked{color:var(--t3);border:1px solid var(--t4);text-decoration:line-through;}
+.feature-list{display:flex;flex-direction:column;}
+.feature-item{display:flex;gap:12px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--t4);font-size:11px;}
+.feature-item:last-child{border-bottom:none;}
+.feature-priority{font-size:8.5px;font-weight:400;letter-spacing:.1em;padding:2px 8px;border-radius:2px;flex-shrink:0;}
+.feature-priority.p0{color:var(--c);border:1px solid var(--c3);}
+.feature-priority.p1{color:var(--amb);border:1px solid rgba(240,192,64,.2);}
+.feature-priority.p2{color:var(--t3);border:1px solid var(--t4);}
+.feature-title{color:var(--t1);}
+.feature-note{font-size:9.5px;color:var(--amb);margin-top:1px;}
+
+/* ── ARTIFACTS (right col) ── */
+.artifacts{display:flex;flex-direction:column;gap:8px;padding:14px 16px;}
+.artifact{border:1px solid var(--bdr);border-radius:4px;overflow:hidden;transition:border-color .18s;}
+.artifact:hover{border-color:var(--c3);}
+.artifact-header{display:flex;align-items:center;padding:10px 14px;cursor:pointer;justify-content:space-between;}
+.artifact-name{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:400;color:var(--t2);}
+.artifact-icon{font-size:11px;color:var(--c2);}
+.astatus{font-size:8.5px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;border-radius:2px;}
+.astatus.pending{color:var(--t3);border:1px solid var(--t4);}
+.astatus.ready{color:var(--grn);border:1px solid rgba(61,214,140,.2);}
+.astatus.active{color:var(--c);border:1px solid var(--c3);}
+.artifact-body{display:none;border-top:1px solid var(--t4);}
+.artifact-body.open{display:block;}
+.artifact-body pre{padding:14px;font-size:9.5px;line-height:1.8;color:var(--t2);overflow-x:auto;white-space:pre;max-height:200px;overflow-y:auto;}
+.artifact-body pre::-webkit-scrollbar{width:2px;height:2px;}
+.artifact-body pre::-webkit-scrollbar-thumb{background:var(--t4);}
+
+::-webkit-scrollbar{width:2px;}
+::-webkit-scrollbar-thumb{background:var(--t4);}
+
+/* token colors for log */
+.ok{color:var(--grn);}
+.cy{color:var(--c);}
+.lo{color:var(--t3);}
+
+/* ── ARTIFACT IMPROVEMENTS ── */
+.artifact{border:1px solid var(--t4);border-radius:5px;overflow:hidden;transition:border-color .2s;margin-bottom:10px;}
+.artifact:last-child{margin-bottom:0;}
+.artifact:hover{border-color:var(--c3);}
+.artifact-header{display:flex;align-items:center;padding:12px 16px;cursor:pointer;justify-content:space-between;background:rgba(77,210,205,.018);user-select:none;}
+.artifact-header:hover{background:rgba(77,210,205,.03);}
+.artifact-status{font-size:9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:20px;display:flex;align-items:center;gap:5px;}
+.artifact-status::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;}
+.artifact-status.pending{color:var(--t3);border:1px solid var(--t4);}
+.artifact-status.ready{color:var(--grn);border:1px solid rgba(61,214,140,.30);background:rgba(61,214,140,.08);}
+.artifact-status.active{color:var(--c);border:1px solid var(--c3);background:var(--cg);}
+.artifact-body{display:none;border-top:1px solid var(--t4);}
+.artifact-body.open{display:block;}
+.artifact-toolbar{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--t4);background:rgba(0,0,0,.3);}
+.artifact-toolbar-name{font-size:9.5px;color:var(--t3);letter-spacing:.06em;}
+.copy-btn{font-family:var(--fm);font-size:9px;font-weight:400;color:var(--c2);background:none;border:1px solid var(--c3);padding:3px 10px;border-radius:2px;cursor:pointer;letter-spacing:.08em;text-transform:uppercase;transition:all .15s;display:flex;align-items:center;gap:5px;}
+.copy-btn:hover{background:var(--cg);color:var(--c);}
+.copy-btn.copied{color:var(--grn);border-color:rgba(61,214,140,.3);}
+.artifact-body pre{padding:16px 18px;font-size:12px;line-height:1.9;color:var(--t2);overflow-x:auto;white-space:pre;max-height:260px;overflow-y:auto;}
+.artifact-body pre::-webkit-scrollbar{width:2px;height:2px;}
+.artifact-body pre::-webkit-scrollbar-thumb{background:var(--t4);}
+
+.log-finale {
+  margin-top: 28px;
+  padding: 28px 24px;
+  border: 1.5px solid rgba(61,214,140,.35);
+  border-top: 2px solid var(--grn);
+  border-radius: 6px;
+  background: rgba(61,214,140,.07);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.log-finale::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(61,214,140,.08), transparent 70%);
+  pointer-events: none;
+}
+.log-finale-chars {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+.log-finale-mascot,
+.log-finale-cat {
+  font-family: var(--fm);
+  font-size: 12.5px;
+  line-height: 1.9;
+  letter-spacing: .02em;
+  flex-shrink: 0;
+}
+.log-finale-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
+.log-finale-bingo {
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--grn);
+  letter-spacing: .10em;
+  line-height: 1;
+  text-shadow: 0 0 24px rgba(61,214,140,.4);
+}
+.log-finale-msg {
+  font-size: 13px;
+  color: var(--t1);
+  font-weight: 300;
+  line-height: 2;
+}
+
+.log-finale {
+  margin-top: 28px;
+  padding: 32px;
+  border: 1.5px solid rgba(61, 214, 140, 0.35);
+  border-top: 3px solid var(--grn);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(61, 214, 140, 0.08) 0%, rgba(12, 12, 12, 0) 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.log-finale-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.log-finale-info {
+  text-align: left;
+  flex: 1;
+}
+.log-finale-badge {
+  font-size: 42px;
+  font-weight: 600;
+  color: var(--grn);
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 30px rgba(61, 214, 140, 0.4);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.log-finale-info h4 { color: var(--t1); font-size: 15px; margin-bottom: 4px; }
+.log-finale-info p { color: var(--t3); font-size: 12px; }
+
+.log-finale-chars {
+  display: flex;
+  align-items: flex-end;
+  padding-left: 24px;
+  border-left: 1px solid rgba(61, 214, 140, 0.15);
+}
+.log-finale-cat {
+  font-family: var(--fm);
+  font-size: 15px; /* Gato maior */
+  line-height: 1.2;
+  color: var(--grn);
+  margin: 0;
+  user-select: none;
+}
+
+/* -- DELIVERY BUTTONS -- */
+.delivery-box { border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 20px; }
+.delivery-label { font-size: 9px; color: var(--t3); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 12px; }
+.delivery-actions { display: flex; gap: 10px; }
+.btn-delivery {
+  background: rgba(77, 210, 205, 0.06);
+  border: 1px solid var(--c3);
+  color: var(--c);
+  padding: 10px 18px;
+  font-size: 10px;
+  font-family: var(--fm);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-delivery:hover { background: var(--c); color: var(--bg); }
+.btn-delivery span { opacity: 0.5; font-size: 8px; margin-right: 5px; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <img src="logo-cli.png">
+    </div>
+    <div class="hdr-div"></div>
+    <span id="project-name">—</span>
+    <div class="hdr-right">
+      
+      <span id="run-id">—</span>
+      <div class="badge" id="global-status">
+        <div class="dot"></div>
+        <span id="status-text">IDLE</span>
+      </div>
+      <div class="hdr-div"></div>
+      <div class="hdr-btns">
+        <button class="btn btn-ghost" id="btn-reset" onclick="resetPipeline()">↺ Reset</button>
+        <button class="btn btn-primary" id="btn-run" onclick="startPipeline()">▶ Executar</button>
+      </div>
+    </div>
+    <div class="prog"><div class="prog-fill" id="progress-fill" style="width:0%"></div></div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- LEFT: PIPELINE -->
+    <div class="col">
+<div class="pipeline" id="pipeline"></div>
+    </div>
+
+    <!-- CENTER: LOGS / POC / FEATURES -->
+    <div class="center-col">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('logs', this)">Log Stream</div>
+        <div class="tab" onclick="switchTab('poc', this)">Prova de Conceito</div>
+        <div class="tab" onclick="switchTab('features', this)">Features</div>
+      </div>
+
+      <div class="tab-content active" id="tab-logs">
+        <div class="log-stream" id="log-stream">
+          <div class="log-mascot">
+            <pre class="lo">   ╭───────╮   
+   │ ◉   ◉ │   
+   │   ‿   │   
+   ╰───────╯   
+     │   │     </pre>
+            <div class="log-mascot-info">
+              <div class="log-mascot-title" style="color:var(--c)">deplova agent</div>
+              <div class="log-mascot-sub">aguardando execução do pipeline</div>
+              <div class="log-mascot-sub" style="margin-top:6px;color:var(--t3)">// execute o pipeline para ver os logs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-poc">
+        <div id="poc-content">
+          <div class="empty"><div class="empty-icon">⬡</div><span>Aguardando o Architect gerar o blueprint</span></div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-features">
+        <div id="features-content">
+          <div class="empty"><div class="empty-icon">◈</div><span>Aguardando o Bridge processar as features</span></div>
+        </div>
+      </div>
+
+      <!-- CHECKPOINT BAR -->
+      <div class="checkpoint-banner" id="checkpoint-banner">
+        <div class="checkpoint-title">Checkpoint do Architect</div>
+        <div class="checkpoint-desc">Revise o blueprint na aba Prova de Conceito antes de autorizar o Builder.</div>
+        <div class="checkpoint-actions">
+          <button class="btn btn-confirm" onclick="confirmCheckpoint()">✓ Confirmar</button>
+          <button class="btn btn-danger" onclick="rejectCheckpoint()">✕ Regenerar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: ARTIFACTS -->
+    <div class="col">
+      <div class="col-hdr">Artefatos</div>
+      <div class="artifacts" id="artifact-list" style="display:flex;flex-direction:column;gap:0">
+
+        <div class="artifact" id="art-thinker">
+          <div class="artifact-header" onclick="toggleArtifact('thinker-body')">
+            <div class="artifact-name">thinker_output.json</div>
+            <span class="astatus pending">aguardando</span>
+          </div>
+          <div class="artifact-body" id="thinker-body">
+            <div class="artifact-toolbar">
+              <span class="artifact-toolbar-name">thinker_output.json</span>
+              <button class="copy-btn" onclick="copyArtifact('thinker', this)">⎘ copiar</button>
+            </div>
+            <pre id="thinker-content">—</pre>
+          </div>
+        </div>
+
+        <div class="artifact" id="art-intent">
+          <div class="artifact-header" onclick="toggleArtifact('intent-body')">
+            <div class="artifact-name">refined_intent.json</div>
+            <span class="astatus pending" id="intent-status">aguardando</span>
+          </div>
+          <div class="artifact-body" id="intent-body">
+            <div class="artifact-toolbar">
+              <span class="artifact-toolbar-name">refined_intent.json</span>
+              <button class="copy-btn" onclick="copyArtifact('intent', this)">⎘ copiar</button>
+            </div>
+            <pre id="intent-content">—</pre>
+          </div>
+        </div>
+
+        <div class="artifact" id="art-product">
+          <div class="artifact-header" onclick="toggleArtifact('product-body')">
+            <div class="artifact-name">product_definition.json</div>
+            <span class="astatus pending" id="product-status">aguardando</span>
+          </div>
+          <div class="artifact-body" id="product-body">
+            <div class="artifact-toolbar">
+              <span class="artifact-toolbar-name">product_definition.json</span>
+              <button class="copy-btn" onclick="copyArtifact('product', this)">⎘ copiar</button>
+            </div>
+            <pre id="product-content">—</pre>
+          </div>
+        </div>
+
+        <div class="artifact" id="art-handoff">
+          <div class="artifact-header" onclick="toggleArtifact('handoff-body')">
+            <div class="artifact-name">builder_handoff.json</div>
+            <span class="astatus pending" id="handoff-status">aguardando</span>
+          </div>
+          <div class="artifact-body" id="handoff-body">
+            <div class="artifact-toolbar">
+              <span class="artifact-toolbar-name">builder_handoff.json</span>
+              <button class="copy-btn" onclick="copyArtifact('handoff', this)">⎘ copiar</button>
+            </div>
+            <pre id="handoff-content">—</pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// Patch setArtifact to use new class names
+const _origSetArtifact = typeof setArtifact !== 'undefined' ? setArtifact : null;
+</script>
+
+<script>
+// ============================================================
+// STATE
+// ============================================================
+const STATE = {
+  running: false,
+  currentStep: -1,
+  checkpointPending: false,
+  steps: [
+    { id: 'sync',      label: 'Sync Check',    desc: 'Skeleton sincronizado com o pipeline',       icon: '⟳', script: 'core/sync_check.py' },
+    { id: 'bridge',    label: 'Bridge',         desc: 'Blindando intenção e normalizando features', icon: '', script: 'core/bridge.py' },
+    { id: 'architect', label: 'Architect',      desc: 'Compilando blueprint de produto',            icon: '', script: 'core/architect-agent/self-inferred-context.py' },
+    { id: 'checkpoint',label: 'Checkpoint',     desc: 'Aguardando confirmação do operador',         icon: '', script: null },
+    { id: 'governance',label: 'Governance',     desc: 'Auditoria de contrato de negócio',           icon: '', script: 'core/governance.py' },
+    { id: 'coherence', label: 'Coherence',      desc: 'Viabilidade técnica no Skeleton',            icon: '', script: 'core/check_coherence.py' },
+    { id: 'handoff',   label: 'Handoff',        desc: 'Compilando plano de obra para o Builder',    icon: '', script: 'core/handoff-compiler.py' },
+  ],
+  stepStatus: {},
+  logs: [],
+};
+
+// Mock data for demo
+const MOCK = {
+  refined_intent: {
+    project_name: "PetFlow",
+    archetype: "dashboard-saas",
+    design_context: { theme: "dark", style: "glassmorphism" },
+    capabilities: {
+      auth: { enabled: true, providers: ["google_auth"] },
+      database: { enabled: false },
+      persistence: { enabled: true, type: "local_storage" }
+    },
+    features: [
+      { id: "feat_01", title: "Google Social Auth", priority: "P0" },
+      { id: "feat_02", title: "Quick Check-in System", priority: "P0" },
+      { id: "feat_03", title: "Status Board", priority: "P0", degradation_note: "real-time → fallback_to_manual_refresh" },
+      { id: "feat_04", title: "Pet/Tutor Mapping", priority: "P1" },
+    ]
+  },
+  product_definition: {
+    schema_version: "1.1.0",
+    product_name: "PetFlow",
+    archetype: "dashboard-saas",
+    skeleton_template: "nextjs_app_base",
+    design_grammar: { theme: "dark", style: "glassmorphism" },
+    pages: [
+      { route: "/dashboard", layout: "3-col", components: ["StatCards", "StatusBoard"] },
+      { route: "/checkin", layout: "w-full", components: ["CheckinForm"] },
+      { route: "/pets", layout: "2-col", components: ["PetList", "TutorCard"] },
+      { route: "/settings", layout: "w-full", components: ["SettingsPanel"] },
+    ],
+    capabilities: { auth: { enabled: true }, persistence: { enabled: true } },
+    features: ["feat_01", "feat_02", "feat_03", "feat_04"],
+  },
+  handoff: {
+    handoff_version: "1.0.0",
+    run_id: "20240318_143022",
+    skeleton_id: "nextjs_app_base",
+    archetype: "dashboard-saas",
+    pages: [
+      { target_file: "app/(routes)/dashboard/page.tsx", required_components: ["StatCards","StatusBoard"] },
+      { target_file: "app/(routes)/checkin/page.tsx", required_components: ["CheckinForm"] },
+      { target_file: "app/(routes)/pets/page.tsx", required_components: ["PetList","TutorCard"] },
+    ],
+    capabilities: { auth_lib: "next-auth", strategy: "local_storage", env_required: ["NEXTAUTH_SECRET"] },
+    protected_zones: ["middleware.ts", "lib/db/client.ts", "config/env.ts"],
+    injection_points: { tokens: "app/globals.css", auth: "lib/auth/config.ts", database: null }
+  }
+};
+
+// ============================================================
+// INIT
+// ============================================================
+function init() {
+  renderSteps();
+  setGlobalStatus('idle');
+}
+
+function renderSteps() {
+  const el = document.getElementById('pipeline');
+  el.innerHTML = STATE.steps.map((s, i) => `
+    <div class="step idle" id="step-${s.id}">
+      <div class="step-indicator">
+        <div class="step-dot" id="dot-${s.id}">○</div>
+        ${i < STATE.steps.length - 1 ? '<div class="step-line"></div>' : ''}
+      </div>
+      <div class="step-content">
+        <div class="step-name">${s.label}</div>
+        <div class="step-desc">${s.desc}</div>
+        <div class="step-time" id="time-${s.id}"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// PIPELINE SIMULATION
+// ============================================================
+async function startPipeline() {
+  if (STATE.running) return;
+  STATE.running = true;
+  STATE.currentStep = 0;
+
+  document.getElementById('btn-run').disabled = true;
+  const msc0 = document.querySelector('.log-mascot pre');
+  const msci0 = document.querySelector('.log-mascot-info .log-mascot-sub');
+  if (msc0) msc0.textContent = '   ╭───────╮   \n   │ ⊙   ⊙ │   \n   │  ~~~  │   \n   ╰───────╯   \n    ╱▔▔▔▔╲    ';
+  if (msci0) { msci0.textContent='compilando pipeline...'; msci0.style.color='#4DD2CD'; }
+  document.getElementById('log-stream').innerHTML = '';
+  setGlobalStatus('running');
+
+  const runId = new Date().toISOString().replace(/[:.]/g,'').slice(0,15);
+  document.getElementById('run-id').textContent = `run: ${runId}`;
+  document.getElementById('project-name').textContent = 'PetFlow';
+
+  // Reset all steps
+  STATE.steps.forEach(s => setStepStatus(s.id, 'idle'));
+  updateProgress(0);
+
+  await runStep(0); // sync
+}
+
+async function runStep(idx) {
+  if (idx >= STATE.steps.length) {
+    finishPipeline();
+    return;
+  }
+
+  const step = STATE.steps[idx];
+  STATE.currentStep = idx;
+  setStepStatus(step.id, 'running');
+  updateProgress(Math.round((idx / STATE.steps.length) * 100));
+
+  // CHECKPOINT — pause for operator
+  if (step.id === 'checkpoint') {
+    setStepStatus('checkpoint', 'waiting');
+    document.getElementById('checkpoint-banner').classList.add('visible');
+    switchTabById('poc');
+    renderPOC();
+    log('checkpoint:waiting', 'Aguardando confirmação do operador', 'warn');
+    return; // pause here
+  }
+
+  const start = Date.now();
+  log(`${step.id}:start`, `Iniciando ${step.label}...`);
+
+  // Simulate step duration
+  const duration = step.id === 'architect' ? 2800 : 800 + Math.random() * 600;
+  await sleep(duration);
+
+  const elapsed = Date.now() - start;
+  document.getElementById(`time-${step.id}`).textContent = `${elapsed}ms`;
+
+  // Step-specific side effects
+  if (step.id === 'bridge') {
+    log('bridge:ok', 'refined_intent.json gerado', 'success');
+    log('bridge:features', '4 features validadas | 0 bloqueadas', 'success');
+    setArtifact('intent', MOCK.refined_intent, 'ready');
+    renderFeatures(MOCK.refined_intent.features);
+  }
+
+  if (step.id === 'architect') {
+    log('architect:stage1', 'Stage 1: arquitetura compilada', 'success');
+    log('architect:stage2', 'Stage 2: estrutura de app mapeada', 'success');
+    log('architect:ok', 'product_definition.json gerado', 'success');
+    setArtifact('product', MOCK.product_definition, 'ready');
+  }
+
+  if (step.id === 'governance') {
+    log('schema:valid', 'Schema validado', 'success');
+    log('identity:ok', "Nome consistente: 'PetFlow'", 'success');
+    log('capabilities:locked', 'Capabilities preservadas', 'success');
+    log('features:ok', '4 features cobertas', 'success');
+    log('governance:success', 'Contrato de negócio validado', 'success');
+  }
+
+  if (step.id === 'coherence') {
+    log('coherence:skeleton', 'nextjs_app_base detectado', 'success');
+    log('coherence:caps', 'Capabilities compatíveis com o skeleton', 'success');
+    log('coherence:ok', 'Blueprint 100% executável', 'success');
+  }
+
+  if (step.id === 'handoff') {
+    log('handoff:caps', 'auth → next-auth | persistence → local_storage', 'success');
+    log('handoff:pages', '3 páginas mapeadas', 'success');
+    log('handoff:ok', 'builder_handoff.json gerado', 'success');
+    setArtifact('handoff', MOCK.handoff, 'ready');
+  }
+
+  setStepStatus(step.id, 'done');
+  log(`${step.id}:done`, `${step.label} concluído em ${elapsed}ms`, 'success');
+
+  await sleep(200);
+  await runStep(idx + 1);
+}
+
+function confirmCheckpoint() {
+  document.getElementById('checkpoint-banner').classList.remove('visible');
+  setStepStatus('checkpoint', 'done');
+  switchTabById('logs');
+  log('checkpoint:confirmed', 'Operador confirmou o blueprint', 'success');
+  runStep(STATE.currentStep + 1);
+}
+
+function rejectCheckpoint() {
+  document.getElementById('checkpoint-banner').classList.remove('visible');
+  setStepStatus('checkpoint', 'idle');
+  log('checkpoint:rejected', 'Operador rejeitou — regenerando Architect', 'warn');
+  // Re-run from architect
+  STATE.currentStep = 2;
+  runStep(2);
+}
+
+function finishPipeline() {
+  STATE.running = false;
+  setGlobalStatus('done');
+  updateProgress(100);
+  document.getElementById('btn-run').disabled = false;
+
+  const stream = document.getElementById('log-stream');
+  
+  const finale = document.createElement('div');
+  finale.className = 'log-finale';
+  finale.innerHTML = `
+    <div class="log-finale-content">
+      <div class="log-finale-info">
+        <div class="log-finale-badge">READY</div>
+        <h4>Pipeline finalizado com sucesso.</h4>
+        <p>Blueprint gerado. Protocolos de engenharia injetados e validados.</p>
+      </div>
+    </div>
+
+    <div class="delivery-box">
+      <div class="delivery-label">Entregue isso para seu AI Builder preferido:</div>
+      <div class="delivery-actions">
+        <button class="btn-delivery" onclick="copyArtifact('handoff', this)">
+          <span>JSON</span> HANDOFF
+        </button>
+        <button class="btn-delivery" onclick="alert('Copiando SPEC...')">
+          <span>DOC</span> SPEC
+        </button>
+        <button class="btn-delivery" onclick="alert('Copiando PROTOCOLO...')">
+          <span>SHD</span> PROTOCOLO
+        </button>
+      </div>
+    </div>
+  `;
+  
+  stream.appendChild(finale);
+  stream.scrollTop = stream.scrollHeight;
+}
+
+function resetPipeline() {
+  STATE.running = false;
+  STATE.currentStep = -1;
+  STATE.checkpointPending = false;
+  document.getElementById('btn-run').disabled = false;
+  document.getElementById('log-stream').innerHTML = '<div class="empty"><div class="empty-icon">◈</div><span>Execute o pipeline para ver os logs</span></div>';
+  document.getElementById('checkpoint-banner').classList.remove('visible');
+  document.getElementById('project-name').textContent = '—';
+  document.getElementById('run-id').textContent = '—';
+  setGlobalStatus('idle');
+  updateProgress(0);
+  STATE.steps.forEach(s => {
+    setStepStatus(s.id, 'idle');
+    document.getElementById(`time-${s.id}`).textContent = '';
+  });
+  ['intent','product','handoff'].forEach(a => {
+    document.getElementById(`${a}-status`).className = 'astatus pending';
+    document.getElementById(`${a}-status`).textContent = 'aguardando';
+    document.getElementById(`${a}-content`).textContent = '—';
+  });
+  document.getElementById('poc-content').innerHTML = '<div class="empty"><div class="empty-icon">⬡</div><span>Aguardando o Architect gerar o blueprint</span></div>';
+  document.getElementById('features-content').innerHTML = '<div class="empty"><div class="empty-icon">◈</div><span>Aguardando o Bridge processar as features</span></div>';
+}
+
+// ============================================================
+// RENDER HELPERS
+// ============================================================
+function renderPOC() {
+  const pd = MOCK.product_definition;
+  document.getElementById('poc-content').innerHTML = `
+    <div class="poc-container">
+      <div class="poc-header">
+        <div>
+          <div class="poc-title">${pd.product_name}</div>
+          <div class="poc-subtitle">Archetype: ${pd.archetype} · Skeleton: ${pd.skeleton_template}</div>
+        </div>
+      </div>
+
+      <div class="section-label">Wireframe de Baixa Fidelidade</div>
+      <div class="wireframe">
+        <div class="wireframe-bar">
+          <div class="wf-dot" style="background:#e05c6a"></div>
+          <div class="wf-dot" style="background:#f0c060"></div>
+          <div class="wf-dot" style="background:#2dba6f"></div>
+        </div>
+        <div class="wireframe-body">
+          <div class="wf-sidebar">
+            ${pd.pages.map((p,i) => `<div class="wf-nav-item ${i===0?'active':''}"></div>`).join('')}
+          </div>
+          <div class="wf-main">
+            <div class="wf-stats">
+              ${[1,2,3].map(n => `<div class="wf-stat"><div class="wf-stat-bar" style="width:${40+n*15}%"></div></div>`).join('')}
+            </div>
+            <div class="wf-block">
+              <div class="wf-block-header"></div>
+              <div class="wf-rows">
+                ${[1,2,3,4].map(() => '<div class="wf-row"></div>').join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-label">Arquitetura</div>
+      <div class="arch-grid">
+        <div class="arch-card">
+          <div class="arch-card-label">Archetype</div>
+          <div class="arch-card-value">${pd.archetype}</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-card-label">Skeleton</div>
+          <div class="arch-card-value">${pd.skeleton_template}</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-card-label">Theme</div>
+          <div class="arch-card-value">${pd.design_grammar.style}</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-card-label">Páginas</div>
+          <div class="arch-card-value">${pd.pages.length} rotas</div>
+        </div>
+      </div>
+
+      <div class="section-label">Rotas</div>
+      <div class="routes">
+        ${pd.pages.map(p => `
+          <div class="route">
+            <span class="route-method">GET</span>
+            <span class="route-path">${p.route}</span>
+            <span class="route-comp">${p.components.join(', ')}</span>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="section-label">Capabilities</div>
+      <div class="caps">
+        <span class="cap active">auth</span>
+        <span class="cap active">persistence</span>
+        <span class="cap blocked">database</span>
+        <span class="cap blocked">realtime</span>
+      </div>
+    </div>
+  `;
+}
+
+function renderFeatures(features) {
+  document.getElementById('features-content').innerHTML = `
+    <div class="section-label">Features Validadas</div>
+    <div class="feature-list">
+      ${features.map(f => `
+        <div class="feature-item">
+          <span class="feature-priority ${f.priority.toLowerCase()}">${f.priority}</span>
+          <div>
+            <div class="feature-title">${f.title}</div>
+            ${f.degradation_note ? `<div class="feature-note">↓ ${f.degradation_note}</div>` : ''}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+// ============================================================
+// UI HELPERS
+// ============================================================
+function setStepStatus(id, status) {
+  const el = document.getElementById(`step-${id}`);
+  const dot = document.getElementById(`dot-${id}`);
+  if (!el) return;
+  el.className = `step ${status}`;
+  const icons = { done: '✓', error: '✕', running: '◉', waiting: '⚠', idle: '○' };
+  dot.textContent = icons[status] || '○';
+}
+
+function setGlobalStatus(status) {
+  const badge = document.getElementById('global-status');
+  const text  = document.getElementById('status-text');
+  badge.className = `status-badge ${status}`;
+  const labels = { idle: 'IDLE', running: 'RUNNING', done: 'DONE', error: 'ERROR' };
+  text.textContent = labels[status] || status.toUpperCase();
+}
+
+function setArtifact(key, data, status) {
+  const statusEl  = document.getElementById(`${key}-status`);
+  const contentEl = document.getElementById(`${key}-content`);
+  if (!statusEl) return;
+  statusEl.className = `artifact-status ${status}`;
+  statusEl.textContent = status === 'ready' ? 'pronto' : status === 'active' ? 'gerado' : 'aguardando';
+  contentEl.textContent = JSON.stringify(data, null, 2);
+}
+
+function toggleArtifact(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+function copyArtifact(key, btn) {
+  const content = document.getElementById(`${key}-content`).textContent;
+  if (content === '—') return;
+  navigator.clipboard.writeText(content).then(() => {
+    btn.textContent = '✓ copiado';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '⎘ copiar'; btn.classList.remove('copied'); }, 1600);
+  });
+}
+
+function updateProgress(pct) {
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function switchTab(name, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(`tab-${name}`).classList.add('active');
+}
+
+function switchTabById(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  const tabs = document.querySelectorAll('.tab');
+  const names = ['logs','poc','features'];
+  const idx = names.indexOf(name);
+  if (idx >= 0) tabs[idx].classList.add('active');
+  document.getElementById(`tab-${name}`).classList.add('active');
+}
+
+const MASCOTS = {
+  idle:  ['   \u256d\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e   ','   \u2502 \u25c9   \u25c9 \u2502   ','   \u2502   \u203f   \u2502   ','   \u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f   ','     \u2502   \u2502     '],
+  work:  ['   \u256d\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e   ','   \u2502 \u2299   \u2299 \u2502   ','   \u2502  ~~~  \u2502   ','   \u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f   ','    \u256f\u2594\u2594\u2594\u2594\u2572    '],
+  check: ['   \u256d\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e   ','   \u2502 \u25d1   \u25d1 \u2502   ','   \u2502  ...  \u2502   ','   \u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f   ','   \u256f\u2502     \u2502\u2572  '],
+  happy: ['   \u256d\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e   ','   \u2502 \u25d5   \u25d5 \u2502   ','   \u2502  \u232c\u232c\u232c  \u2502   ','   \u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f   ','  \u2572(  \u2713  )\u256f   '],
+  win:   ['   \u256d\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e   ','   \u2502 \u2605   \u2605 \u2502   ','   \u2502  \u203f\u203f\u203f  \u2502   ','   \u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f   ',' \u2572\u2572(  \u2191  )\u256f\u256f  '],
+  sad:   ['   \u256d\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e   ','   \u2502 \u2716   \u2716 \u2502   ','   \u2502  \u2322\u2322\u2322  \u2502   ','   \u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f   ','   \u256f\u2502     \u2502\u2572  '],
+  warn:  ['   \u256d\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e   ','   \u2502 \u25d4   \u25c9 \u2502   ','   \u2502  ...  \u2502   ','   \u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f   ','   \u256f\u2502     \u2502\u2572  '],
+};
+const STEP_MASCOTS = {
+  'sync:start':'check','bridge:start':'work','architect:start':'work',
+  'checkpoint:waiting':'warn','checkpoint:confirmed':'happy','checkpoint:rejected':'sad',
+  'governance:start':'check','coherence:start':'check','handoff:start':'work',
+  'pipeline:done':'win',
+};
+function renderMascot(state, msg) {
+  const lines = MASCOTS[state] || MASCOTS.idle;
+  const color = state==='happy'||state==='win' ? 'var(--grn)'
+    : state==='sad' ? 'var(--red)' : state==='warn' ? 'var(--amb)' : 'var(--c)';
+  const ascii = lines.map(l => `<span style="color:${color}">${l}</span>`).join('\n');
+  const el = document.createElement('div');
+  el.className = 'log-mascot';
+  el.innerHTML = `<pre class="log-mascot-pre">${ascii}</pre><div class="log-mascot-msg">${msg}</div>`;
+  return el;
+}
+
+function log(event, message, status = 'info') {
+  const stream = document.getElementById('log-stream');
+  stream.querySelectorAll('.empty').forEach(e => e.remove());
+  if (STEP_MASCOTS[event]) stream.appendChild(renderMascot(STEP_MASCOTS[event], message));
+  const now = new Date();
+  const t = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+  const line = document.createElement('div');
+  line.className = `log-line ${status}`;
+  line.innerHTML = `
+    <span class="log-time">${t}</span>
+    <span class="log-event">${event}</span>
+    <span class="log-msg">${message}</span>
+  `;
+  stream.appendChild(line);
+  stream.scrollTop = stream.scrollHeight;
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ============================================================
+// BOOT
+// ============================================================
+init();
+</script>
+</body>
+</html>
+</body>
+</html>
+</body>
+</html>
+
+</body>
+</html>
