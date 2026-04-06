@@ -1,7 +1,7 @@
 .btn {
+  font-family: 'Satoshi', sans-serif;
   font-size: var(--text-sm);
   letter-spacing: var(--ls-widest);
-  text-transform: uppercase;
   padding: var(--space-md) var(--space-lg);
   text-decoration: none;
   border: 1px solid var(--border-active);
@@ -18,4 +18,17 @@
   font-weight: var(--weight-medium); 
 }
 .btn-primary:hover { background: var(--accent-hover); }
-.btn:not(.btn-primary):hover { border-color: var(--accent); color: var(--accent); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-muted);
+  border-color: var(--border-default);
+  font-weight: var(--weight-normal);
+  padding: var(--space-sm) var(--space-md);
+}
+.btn-secondary:hover { 
+  border-color: var(--border-accent); 
+  color: var(--text-secondary); 
+}
+
+.btn:not(.btn-primary):not(.btn-secondary):hover { border-color: var(--accent); color: var(--accent); }

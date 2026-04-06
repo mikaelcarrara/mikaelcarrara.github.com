@@ -1,29 +1,64 @@
 :root {
-  /* Colors - Background */
-  --bg: #111418;
+  /* Core Palette - Semantic naming based on usage */
+  --color-sky-light: #A8C5D1;      /* Lightest - Accents, highlights */
+  --color-slate-medium: #7A9AAD;   /* Light-medium - Hover states, secondary elements */
+  --color-blue-muted: #5B7A8E;     /* Medium - Interactive elements, borders active */
+  --color-navy-soft: #2C3E50;      /* Medium-dark - Cards, elevated surfaces */
+  --color-navy-deep: #1A2332;      /* Dark - Secondary backgrounds */
+  --color-navy-darkest: #0D1117;   /* Darkest - Primary background */
   
-  /* Colors - Borders */
-  --border: rgba(255,255,255,0.07);
-  --border-active: rgba(255,255,255,0.18);
+  /* Semantic Color Assignments */
   
-  /* Colors - Text */
-  --text: #D8DCE4;
-  --text-bright: #EDF0F5;
-  --muted: #7A8494;
+  /* Backgrounds */
+  --bg-primary: var(--color-navy-darkest);
+  --bg-secondary: var(--color-navy-deep);
+  --bg-elevated: var(--color-navy-soft);
+  --bg-overlay: rgba(13, 17, 23, 0.95);
   
-  /* Colors - Accent */
-  --accent: #48CBCF;
-  --accent-hover: #48CBCF;
-  --accent-dim: rgba(200,255,0,0.07);
-  --accent-glow: rgba(200,255,0,0.6);
+  /* Borders */
+  --border-subtle: rgba(91, 122, 142, 0.15);
+  --border-default: rgba(91, 122, 142, 0.3);
+  --border-strong: var(--color-blue-muted);
+  --border-accent: var(--color-slate-medium);
   
-  /* Colors - Secondary */
-  --secondary: #00D4FF;
-  --secondary-dim: rgba(0,212,255,0.4);
+  /* Text */
+  --text-primary: #E8EEF2;
+  --text-secondary: var(--color-sky-light);
+  --text-muted: var(--color-slate-medium);
+  --text-on-accent: var(--color-navy-darkest);
   
-  /* Colors - Neutral */
-  --neutral-dark: #3A4252;
-  --neutral-medium: #4A5568;
+  /* Interactive Elements */
+  --accent-primary: var(--color-sky-light);
+  --accent-hover: #C2D9E3;
+  --accent-active: var(--color-slate-medium);
+  --accent-subtle: rgba(168, 197, 209, 0.1);
+  --accent-glow: rgba(168, 197, 209, 0.4);
+  
+  /* Secondary Actions */
+  --secondary: var(--color-blue-muted);
+  --secondary-hover: var(--color-slate-medium);
+  --secondary-subtle: rgba(91, 122, 142, 0.15);
+  
+  /* Neutral Elements */
+  --neutral-light: var(--color-navy-soft);
+  --neutral-medium: var(--color-navy-deep);
+  --neutral-dark: var(--color-navy-darkest);
+  
+  /* Legacy compatibility - keeping old variable names mapped to new system */
+  --bg: var(--bg-primary);
+  --border: var(--border-subtle);
+  --border-active: var(--border-strong);
+  --text: var(--text-secondary);
+  --text-bright: var(--text-primary);
+  --muted: var(--text-muted);
+  --accent: var(--accent-primary);
+  --accent-hover: var(--accent-hover);
+  --accent-dim: var(--accent-subtle);
+  --accent-glow: var(--accent-glow);
+  --secondary: var(--secondary);
+  --secondary-dim: var(--secondary-subtle);
+  --neutral-dark: var(--neutral-light);
+  --neutral-medium: var(--neutral-medium);
   
   /* Spacing */
   --space-xs: 4px;
@@ -39,7 +74,7 @@
   --space-7xl: 180px;
   
   /* Typography - Font Families */
-  --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-system: 'Satoshi', sans-serif;
   
   /* Typography - Font Sizes */
   --text-xs: 10px;
@@ -93,8 +128,8 @@
   --blur-sm: 20px;
   --blur-md: 24px;
   --blur-lg: 120px;
-  --overlay-light: rgba(255,255,255,0.05);
-  --overlay-dark: rgba(10,12,16,0.8);
+  --overlay-light: rgba(168, 197, 209, 0.08);
+  --overlay-dark: var(--bg-overlay);
   
   /* Animations */
   --anim-duration-fast: 0.8s;
